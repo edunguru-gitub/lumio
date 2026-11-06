@@ -23,6 +23,7 @@ Matter.js licence check at source; Zoom recordings need transcript; Darius OK on
 NEXT: galaxy home organic scattered placement (seeded random, no overlap, varied size+tilt; after manifests). Then: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-06 designer: spec-tactile-light.md (warm Light + tactile system + segmented nav)
 - 2026-11-06 manager: handoff pack, MAP, psychologist agent, skills mirrored (0b7a425)
 - 2026-11-06 david: Swiss lab grid, visible answer field (184b18d); nav+Light theme in progress
 - 2026-11-06 david: terminal + ratings (3a53e70); rating accuracy fix; wordmark (a2e9caf)
