@@ -66,3 +66,8 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 .dots i.cur{border-color:var(--ink)}.dots i.ok{background:var(--c);border-color:var(--c)}.dots i.no{background:var(--spanish);border-color:var(--spanish)}
 .ans{display:flex;gap:8px}.ans input{flex:1;min-width:0;height:48px;padding:0 14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r2);color:var(--ink);font:500 18px var(--mono)}
 .fb{min-height:1.5em}.fb.ok{color:var(--c)}.fb.no{color:var(--spanish)}
+@font-face{font-family:Caladea;src:url(../fonts/Caladea-Regular.ttf);font-weight:400;font-display:swap}
+@font-face{font-family:Caladea;src:url(../fonts/Caladea-Bold.ttf);font-weight:700;font-display:swap}
+@font-face{font-family:Inter;src:url(../fonts/Inter-Regular.woff2);font-weight:400;font-display:swap}
+@font-face{font-family:Inter;src:url(../fonts/Inter-Medium.woff2);font-weight:500;font-display:swap}
+@font-face{font-family:Inter;src:url(../fonts/Inter-SemiBold.woff2);font-weight:600;font-display:swap}
