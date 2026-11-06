@@ -5,25 +5,28 @@ var S={cv:['Right triangle with squares on each side. Drag the corners to change
  qg:['Quest: find 3 different Pythagorean triples ({n}/3)','Misiune: găsește 3 triplete pitagorice diferite ({n}/3)'],qg_done:['Quest complete','Misiune îndeplinită'],
  triple:['Pythagorean triple. All sides are whole numbers.','Triplet pitagoric. Toate laturile sunt numere întregi.'],
  gh_45:['Equal legs → a 45° isosceles right triangle.','Catete egale → triunghi dreptunghic isoscel de 45°.'],
- gh_gen:['Drag a and b: the big square on c always equals the two small squares together.','Trage a și b: pătratul mare de pe c este mereu egal cu cele două pătrate mici.']};
+ gh_gen:['Drag a and b: the big square on c always equals the two small squares together.','Trage a și b: pătratul mare de pe c este mereu egal cu cele două pătrate mici.'],
+ title:['Right Triangle Lab','Laboratorul triunghiului dreptunghic']};
 var clamp=function(v,a,b){return Math.min(b,Math.max(a,v))};
 // manifest: shell builds subjects, planets, rows and cards from this (id = progress key part)
 (window.LumioModules=window.LumioModules||{})['math/pythagoras']={manifest:{id:'geometry',subject:'math',subjectName:['Math','Matematică'],color:'--math',title:['Geometry','Geometrie'],order:3,tags:['lab'],orbit:[1.9,60]},
 render:function(el,ctx){
   var U=ctx.ui,n2=U.n2,t=function(k,n){return ctx.n(S[k]).replace('{n}',n)},G={a:3,b:4,seen:new Set(),done:false,live:false},drag=null,
-      C={ink:U.col('--ink'),card:U.col('--card'),mono:U.col('--mono')},
+      C={ink:U.col('--ink'),card:U.col('--card'),mono:U.col('--mono'),tan:U.col('--tan'),rose:U.col('--bad')},fx=ctx.fx,
       cv=U.canvas(t('cv'),draw),fo=U.el('div',null,'formula'),big=U.el('div',null,'big'),bd=U.el('div',null,'badge'),ti=U.el('div',null,'tiles'),hi=U.el('p'),qu=U.el('div',null,'quest'),
       sa=U.slider('a',1,12,.5,G.a,n2,function(v){G.a=v;upd()}),sb=U.slider('b',1,12,.5,G.b,n2,function(v){G.b=v;upd()}),
-      ch=U.chips([[3,4],[5,12],[6,8],[1,1]].map(function(p){return[p[0]+' · '+p[1]]}),function(i){var p=[[3,4],[5,12],[6,8],[1,1]][i];U.tween(G,{a:p[0],b:p[1]},function(end){sa.set(n2r(G.a));sb.set(n2r(G.b));end?upd():draw()})});
+      ch=U.chips([[3,4],[5,12],[6,8],[1,1]].map(function(p,i){return[p[0]+' · '+p[1],[null,ctx.color,C.rose,C.tan][i]]}),function(i){var p=[[3,4],[5,12],[6,8],[1,1]][i];fx.pop();U.tween(G,{a:p[0],b:p[1]},function(end){sa.set(n2r(G.a));sb.set(n2r(G.b));end?upd():draw()})});
   function n2r(v){return Math.round(v*2)/2}
   el.style.setProperty('--c',ctx.color);bd.setAttribute('aria-live','polite');ctx.report({qt:3});qu.setAttribute('aria-live','polite');
-  el.classList.add('lab-2');el.append(U.el('h1',ctx.n(ctx.lesson.name)),cv,big,sa,sb,ch,fo,bd,ti,hi,qu,U.cont(ctx));
+  el.classList.add('lab-2');el.append(U.el('h1',t('title')),cv,big,sa,sb,ch,fo,bd,ti,hi,qu,U.cont(ctx));
   function upd(){var a=G.a,b=G.b,c=Math.hypot(a,b),tri=Number.isInteger(a)&&Number.isInteger(b)&&Number.isInteger(c),al=Math.atan2(b,a)*180/Math.PI;
     sa.set(a);sb.set(b);
     big.textContent='c = '+c.toFixed(2);fo.textContent=n2(a)+'² + '+n2(b)+'² = '+n2(a*a+b*b)+'  →  c = '+n2(c);
     bd.textContent=tri?Math.min(a,b)+'-'+Math.max(a,b)+'-'+c:'';
     U.tiles(ti,[[t('hyp')+' c',n2(c)],[t('area')+' ab/2',n2(a*b/2)],[t('perim'),n2(a+b+c)],[t('angles'),al.toFixed(1)+'° / '+(90-al).toFixed(1)+'°']]);
-    if(tri&&G.live){var k=Math.min(a,b)+'-'+Math.max(a,b);if(!G.seen.has(k)){G.seen.add(k);if(G.seen.size>=3)G.done=true;if(ctx.report({qd:Math.min(3,G.seen.size)}))ctx.award(20)}}
+    if(tri&&G.live){var k=Math.min(a,b)+'-'+Math.max(a,b);if(!G.seen.has(k)){G.seen.add(k);var third=G.seen.size>=3&&!G.done;fx.ok();fx.burst(70);if(third){G.done=true;fx.burst(160)}
+      // v1: +10 per new triple, +30 more on the third (Lumens only when the quest step is new)
+      if(ctx.report({qd:Math.min(3,G.seen.size)}))ctx.award(third?40:10)}}
     qu.classList.toggle('done',G.done);qu.textContent=G.done?t('qg_done'):t('qg',Math.min(3,G.seen.size));
     hi.textContent=tri?t('triple'):(a===b?t('gh_45'):t('gh_gen'));
     draw();}
@@ -40,7 +43,8 @@ render:function(el,ctx){
     var r=Math.min(.8,a/3,b/3),R1=W(r,0),R2=W(r,r),R3=W(0,r);c.strokeStyle=C.ink;c.lineWidth=1.5;c.beginPath();c.moveTo(R1[0],R1[1]);c.lineTo(R2[0],R2[1]);c.lineTo(R3[0],R3[1]);c.stroke();
     [B,Cc].forEach(function(p){c.fillStyle=ctx.color;c.beginPath();c.arc(p[0],p[1],6,0,7);c.fill()});
     var lab=function(txt,p,dx,dy){c.font='500 '+clamp(s*1.1,11,15)+'px '+C.mono;var tw=c.measureText(txt).width+10;c.fillStyle=C.card;c.fillRect(p[0]+dx-tw/2,p[1]+dy-10,tw,20);c.fillStyle=C.ink;c.textAlign='center';c.textBaseline='middle';c.fillText(txt,p[0]+dx,p[1]+dy)};
-    lab('a = '+n2(a),W(a/2,0),0,16);lab('b = '+n2(b),W(0,b/2),-34,0);lab('c = '+n2(cc),W(a/2,b/2),0,0);}
+    lab('a = '+n2(a),W(a/2,0),0,16);lab('b = '+n2(b),W(0,b/2),-34,0);lab('c = '+n2(cc),W(a/2,b/2),0,0);
+    var al=Math.atan2(b,a)*180/Math.PI;c.fillStyle=C.ink;c.font='500 12px '+C.mono;c.textAlign='right';c.fillText('α '+al.toFixed(1)+'°',B[0]-8,B[1]-8);c.textAlign='left';c.fillText('β '+(90-al).toFixed(1)+'°',Cc[0]+8,Cc[1]+18);}
   // drag corner B (changes a) or C (changes b); scale frozen while dragging
   function pt(e){var r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]}
   cv.onpointerdown=function(e){var p=pt(e),g=geom(cv.clientWidth,cv.clientHeight),B=g.W(G.a,0),Cc=g.W(0,G.b),dB=Math.hypot(p[0]-B[0],p[1]-B[1]),dC=Math.hypot(p[0]-Cc[0],p[1]-Cc[1]);

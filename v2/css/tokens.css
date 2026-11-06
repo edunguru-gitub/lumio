@@ -290,3 +290,9 @@ body[data-tab=ranks] #ranks{display:block}
 #gain.on{animation:gain 1.6s ease-out}
 @keyframes gain{0%{opacity:0;transform:translate(-50%,12px)}20%{opacity:1;transform:translate(-50%,0)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-8px)}}
 @media (prefers-reduced-motion:reduce){@keyframes gain{0%,100%{opacity:0}15%,75%{opacity:1}}}
+
+/* v1 parity: answer jump / shake, confetti layer (sfx.js) */
+.jump{animation:jump .5s}@keyframes jump{40%{transform:translateY(-14px) scale(1.04)}}
+.shake{animation:shake .4s}@keyframes shake{25%{transform:translateX(-8px) rotate(-1deg)}75%{transform:translateX(8px) rotate(1deg)}}
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+@media (prefers-reduced-motion:reduce){.jump,.shake{animation:none}}

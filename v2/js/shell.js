@@ -12,6 +12,8 @@ L.S={back:['Back','Înapoi'],lum:['Lumens','Lumeni'],light:['Light','Luminos'],d
 L.t=function(k,o){var s=L.n(L.S[k]);for(var p in o)s=s.replace('{'+p+'}',o[p]);return s};
 // features (js/<id>.js) register in window.LumioFeatures; missing = skipped
 L.has=function(id){return !!(window.LumioFeatures||{})[id]};
+// fx stub; js/sfx.js replaces it (sounds, confetti, jump/shake, read aloud)
+var nop=function(){};L.fx={canSay:false,ok:nop,bad:nop,streak:nop,pop:nop,jump:nop,shake:nop,burst:nop,say:nop};
 L.tabOk=function(t){return t==='subjects'||L.has(t==='home'?'terminal':'ranks')};
 // boot queue: runs after DOM + every registry file (loader.js); shell's own boot is first
 var bq=[];L.boot=function(f){bq?bq.push(f):f()};L.boot.run=function(){var q=bq;bq=null;q.forEach(function(f){f()})};
@@ -95,7 +97,7 @@ function lesson(){
   timer=setTimeout(function(){
     if(t!==tok)return;
     var ctx={subject:s,lesson:l,color:s.color,S:L.S,n:L.n,ui:L.ui,done:function(){L.setP(key,1);if(L.note)L.note(key,0);L.out()},
-      report:function(o){return L.report?L.report(key,o):false},award:function(n){n=L.award?L.award(key,n):0;gain(n);return n}};
+      report:function(o){return L.report?L.report(key,o):false},award:function(n){n=L.award?L.award(key,n):0;gain(n);return n},fx:L.fx,streak:function(){return L.stats?L.stats.streak:0}};
     el.innerHTML='';
     var box=document.createElement('div');box.className='lesson-in';el.appendChild(box);
     var soon=function(){var h=document.createElement('h1');h.textContent=L.n(l.name);var p=document.createElement('p');p.textContent=L.n(L.S.soon);box.append(h,p)};
