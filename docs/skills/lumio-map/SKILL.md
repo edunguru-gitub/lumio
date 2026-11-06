@@ -5,7 +5,7 @@ description: "Gives the essential Lumio project context and points to the shared
 
 # Lumio map
 
-Read claude/lumio-todo.md first (status and to-do, Manager + David). Read other docs only if needed. Never re-read old chats. Status lives in the to-do doc, not here.
+Read docs/MAP.md first (where everything is, open items, dated log). Read other docs only if needed. Never re-read old chats. When you finish a task add ONE line to the LOG in docs/MAP.md (date, who, what, commit).
 
 - Lumio: gamified physics tutor, lumio.html + local server.js (QR phone mode). Competition: https://liceeni-ura.igodemy.ai/structura-programului/
 - People: Eduard (user), Darius, Stefan. David builds in a separate chat. Manager = Claude, never edits app code.

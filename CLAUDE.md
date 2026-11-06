@@ -10,3 +10,4 @@
 - Manager owns effort choice; tokens first. Always tell Eduard when effort changes ("EFFORT: low->high, reason").
 - Before design work: Manager scans free animation libs and free website designs (license-checked, free only), shortlists, discusses with designer, then presents to Eduard.
 - Team audit: if an agent has no purpose, Manager tells Eduard; then merge/remove/add agents together. Priority: process efficiency.
+- After every finished task add one line to the LOG in docs/MAP.md (date, who, what, commit). Read docs/MAP.md first in any session; do not re-read old chats.
