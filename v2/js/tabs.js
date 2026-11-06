@@ -1,6 +1,6 @@
 (function(){
 var L=Lumio;
-var SP='<svg viewBox="-1 -1 2 2" aria-hidden="true"><path d="M0-1L.35-.35 1 0 .35.35 0 1-.35.35-1 0-.35-.35Z"/></svg>';
+var SP='<svg viewBox="0 0 64 70" aria-hidden="true"><path d="M32 4 C34 22 41 29 60 35 C41 41 34 48 32 66 C30 48 23 41 4 35 C23 29 30 22 32 4 Z"/></svg>';
 function row(i,name,val,fn,dim){
   var b=document.createElement('button');b.type='button';b.className='row'+(dim?' dim':'');
   b.innerHTML='<span class="ix"></span><span class="n"></span><span class="v"></span>';

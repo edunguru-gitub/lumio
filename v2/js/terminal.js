@@ -4,7 +4,7 @@ var L=Lumio,E=function(t,x,c){return L.ui.el(t,x,c)},st=L.stats;
 Object.assign(L.S,{you:['You','Tu'],rated:['{a} of {b} rated','{a} din {b} evaluate'],start:['Start a lesson','Începe o lecție'],nost:['Not started','Neînceput'],
  lum:['Lumens','Lumeni'],lum_s:['All time','În total'],moon:['Moon','Luna'],noch:['No challenges yet','Încă nicio provocare'],streak:['Streak','Serie'],best:['Best {n}','Record {n}'],
  days:['Days left','Zile rămase'],month:['This month','Luna aceasta'],lessons:['Lessons','Lecții'],name:['Name','Nume'],ovr:['Overall','General'],week:['This week','Săptămâna asta'],
- addf:['Add friends','Adaugă prieteni'],nof:['No friends yet. Ratings come only from real play.','Încă niciun prieten. Notele vin doar din joc real.'],
+ addf:['Add friends','Adaugă prieteni'],nof:['No friends yet.','Încă niciun prieten.'],contl:['Continue learning','Continuă să înveți'],
  recent:['Recent','Recente'],noact:['No activity yet','Nicio activitate încă']});
 var CODE={physics:'PHY',math:'MAT',spanish:'SPA',life:'LIF'};
 function t(k,o){var s=L.n(L.S[k]);for(var p in o)s=s.replace('{'+p+'}',o[p]);return s}
@@ -62,6 +62,8 @@ function render(){
   L.subjects.forEach(function(s){var g=E('div',null,'lgrid');ls.appendChild(E('h4',L.n(s.name)));
     L.lessons().filter(function(x){return x.s===s}).forEach(function(x){g.appendChild(lcard(x))});ls.appendChild(g)});
   var tm=tk.cloneNode(true);tm.classList.add('tick-m');
+  var cs=L.subjects.filter(function(x){return L.cur(x)})[0];
+  if(cs){var cb=E('button',t('contl')+' →','btn-primary');cb.type='button';cb.style.setProperty('--c','var(--tan)');cb.onclick=function(){L.go('planet',cs.id,L.cur(cs).id)};rt.appendChild(cb)}
   rt.append(me,tm,E('h2',L.n(L.S.ranks)),ranks(),ls);o.append(player(),rt);
   el.replaceChildren(o,tk);el.scrollTop=y;
   var f=L.fresh,c;

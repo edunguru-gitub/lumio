@@ -14,7 +14,8 @@ body{background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--ui);display:f
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--tan);outline-offset:2px}
 #bar{height:56px;flex:none;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid var(--line);position:relative;z-index:3;background:var(--bg)}
-.word{font:700 22px var(--head);margin-right:4px}
+.word{font:400 64px/1 var(--head);margin-right:4px;white-space:nowrap}
+.word svg{display:inline-block;width:.256em;height:.28em;vertical-align:.483em;margin:0 -.27em 0 .014em;fill:var(--tan)}
 #back,#toggle button{height:36px;padding:0 14px;background:transparent;border:1px solid var(--line);border-radius:var(--r1);color:var(--ink);transition:opacity var(--t)}
 #back:disabled{opacity:.35;cursor:default}
 #crumb{flex:1;min-width:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -48,7 +49,7 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 .row{display:flex;align-items:center;gap:14px;height:48px;padding:0 4px;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;text-align:left;width:100%}
 .row.dim{opacity:.4}.row .ix{width:20px;color:var(--muted);font-size:14px}
 .row .n{flex:1;font-weight:500;font-size:16px}.row .v{font-size:13px;color:var(--muted)}
-.spk{display:flex;gap:3px}.spk svg{width:10px;height:10px;fill:none;stroke:var(--tan);stroke-width:.12}.spk svg.on{fill:var(--tan)}
+.spk{display:flex;gap:3px}.spk svg{width:10px;height:11px;fill:none;stroke:var(--tan);stroke-width:4}.spk svg.on{fill:var(--tan)}
 .list .btn-primary{width:100%;margin-top:20px}
 #tabbar{display:none;flex:none;height:56px;padding:6px 8px;gap:4px;border-top:1px solid var(--line)}
 #tabbar button{flex:1;background:none;border:0;border-radius:10px;color:var(--muted);font-size:13px}
@@ -62,7 +63,7 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 .btn-primary:focus-visible{outline-color:var(--c)}
 @media (hover:hover){.btn-primary:hover{opacity:.8}}
 .btn-primary:active{transform:scale(.98)}
-@media (max-width:699px){.word{display:none}.lesson-in h1{font-size:32px}#tabbar{display:flex}#ghead{left:16px;right:16px;flex-direction:column}.head h2{font-size:40px}#hint{font-size:16px;bottom:72px}}
+@media (max-width:699px){.word{font-size:36px}.lesson-in h1{font-size:32px}#tabbar{display:flex}#ghead{left:16px;right:16px;flex-direction:column}.head h2{font-size:40px}#hint{font-size:16px;bottom:72px}}
 @media (prefers-reduced-motion:reduce){.btn-primary:active{transform:none}}
 .lab-cv{display:block;width:100%;height:300px;border:1px solid var(--line);border-radius:var(--r2);background:var(--card);touch-action:none}
 .formula{font:700 24px/1.3 var(--head);text-align:center;overflow-wrap:anywhere}
@@ -92,7 +93,7 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 @font-face{font-family:Inter;src:url(../fonts/Inter-SemiBold.woff2);font-weight:600;font-display:swap}
 /* ===== open: borderless chrome, 8/16/24/32/48 scale, hairlines, softer secondary (AA >=4.7:1) ===== */
 :root{--s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:48px;--muted:#958C7B}
-#bar{height:64px;gap:var(--s3);padding:0 var(--s4);border-bottom:0}
+#bar{height:96px;gap:var(--s3);padding:0 var(--s4);border-bottom:0}
 #back,#toggle button,#ctl button,#tabbar button{height:44px;padding:0;background:none;border:0;border-radius:0;color:var(--muted);transition:color var(--t)}
 #toggle{gap:var(--s3)}
 #toggle button[aria-pressed=true],#tabbar [aria-current=page]{background:none;color:var(--ink);text-decoration:underline 1px var(--tan);text-underline-offset:8px}
@@ -119,10 +120,12 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 .quest{padding:var(--s1) 0 var(--s1) var(--s2);border:0;border-left:1px solid var(--line);border-radius:0}
 .quest.done{border-left-color:var(--c)}
 .badge{padding:0;border:0}
+.btn-primary{height:48px;border-color:color-mix(in srgb,var(--c) 40%,transparent)}
+.t-right>.btn-primary{margin-bottom:var(--s4)}
 .eq{padding:var(--s4) 0;background:none;border:0}
 .ans{gap:var(--s2)}.ans input{padding:0 var(--s1);background:none;border:0;border-bottom:1px solid var(--line);border-radius:0}
 .ans input:focus{border-bottom-color:var(--tan)}
-@media (max-width:699px){#bar{padding:0 var(--s2);gap:var(--s2)}#ghead{top:var(--s3)}#ctl{right:var(--s2);bottom:var(--s2)}#tabs{padding:var(--s4) var(--s2)}.lesson-in{padding:var(--s4) var(--s2) var(--s5)}.row{height:56px}}
+@media (max-width:699px){#bar{height:64px;padding:0 var(--s2);gap:var(--s2)}#ghead{top:var(--s3)}#ctl{right:var(--s2);bottom:var(--s2)}#tabs{padding:var(--s4) var(--s2)}.lesson-in{padding:var(--s4) var(--s2) var(--s5)}.row{height:56px}}
 @media (prefers-reduced-motion:reduce){#back,#toggle button,#ctl button,#tabbar button{transition:none}}
 /* ===== terminal: player card, meters, rankings, lesson cards, ticker ===== */
 #term{position:absolute;inset:0;display:none;overflow:auto;flex-direction:column;background:var(--bg);padding:var(--s5) 80px 0}
@@ -155,7 +158,7 @@ body[data-view=terminal] #stage,body[data-view=terminal] #tabs{display:none}
 .lcard{aspect-ratio:200/280;padding:var(--s2);overflow:hidden;cursor:pointer;transition:opacity var(--t),transform .4s}
 .lcard .ov b{font-size:56px}.lcard canvas{width:36px;height:36px;margin:4px auto}
 .lcard h3{font-size:17px}.lcard .csub{font-size:12px}.lcard.lock .ov b,.lcard.lock h3{color:var(--muted)}
-.lcard .cstats{margin-top:4px}.lcard .spk svg{width:9px;height:9px}
+.lcard .cstats{margin-top:4px}.lcard .spk svg{width:9px;height:10px}
 @media (hover:hover){.lcard:hover{opacity:.85}}
 .lcard.pop{animation:pop 1.2s ease-out}
 @keyframes pop{0%{opacity:.4;transform:translateY(8px)}30%{opacity:1;transform:none}}
