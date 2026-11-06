@@ -20,7 +20,7 @@ shell.js (views, ctx, nav), galaxy.js, camera.js, tabs.js, terminal.js, rating.j
 ## Blocked / waiting on Eduard
 Matter.js licence check at source; Zoom recordings need transcript; Darius OK on Lumi unlock rule; Windows (Rainmeter) 4 questions.
 ## Open (order)
-NEXT after nav pass: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
+NEXT: galaxy home organic scattered placement (seeded random, no overlap, varied size+tilt; after manifests). Then: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
 - 2026-11-06 manager: handoff pack, MAP, psychologist agent, skills mirrored (0b7a425)
