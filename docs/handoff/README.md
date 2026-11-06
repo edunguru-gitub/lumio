@@ -39,3 +39,6 @@ Spanish verbs + vocab, podcast mode, Lumens/Moon + XP, ink practice, settings, s
 
 ## Files in this folder and elsewhere
 docs/handoff/competition.md, docs/handoff/old-manager-notes.md (v1 Manager rules, deck/video history, kit), docs/brief-design-v5.md, docs/HANDOFF-claude-code.md, CLAUDE.md, docs/skills/*. The claude.ai Project "eduard proiect lumio app" still holds the original docs (claude/to-david.md, to-manager.md, manager-hold.md, handoff-manager3.md, incognia-kit.md, pitch-script.md, shots-*.md, lumio-todo.md, incognia-codemap.md).
+
+## Skills (auto-loaded in Claude Code)
+.claude/skills/* mirrors docs/skills/* (adhd-mode, skill-router, lumio-taste, lumio-lean-code, lumio-map, david-build, designer-review, tester-verify, psychologist-review). Edit both when you change one. Agents: .claude/agents/{david,designer,tester,psychologist}.md.
