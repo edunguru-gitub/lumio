@@ -30,6 +30,7 @@ P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 algebra h
 NEXT: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-06 david: tactile + warm Light (spec-tactile-light): raised/inset/press tokens both themes, 1px edges >=3:1, segmented capsules (nav, Galaxy/Tabs, Light/Dark, RO/EN, phone tabbar; L.seg), detent sliders, aurora + warm-glow core + light planets, AA light colours (tools/contrast.py), RO 'Taburi', first-run card ends at first answer, Galaxy/Tabs on phone (saved choice wins), pythagoras +10 every new triple (commit 'v2 tactile light'). Not built: Launch cover (no Launch in v2), ON/OFF switches (no boolean settings in v2)
 - 2026-11-06 david: parity P1 (rewards gas 25/pyth 10+30/algebra streak XP, sfx.js sounds+confetti+jump/shake, gas 4th tile+degC+flames/ice/ramp/overpressure flash, alpha/beta, v1 titles, parabola icons+chip colours, Read aloud en-AU) (commit 'v2 parity P1')
 - 2026-11-06 david: galaxy home organic seeded layout (74fa6df)
 - 2026-11-06 david: v2 modular: manifests + modules/registry.js + LumioFeatures (ranks.js, ticker.js split from terminal), tools/build-hosted.py; visuals pixel-identical, delete-any-file tested (commit 'v2 modular registry')

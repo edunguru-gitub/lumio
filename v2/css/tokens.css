@@ -273,13 +273,13 @@ body[data-tab=ranks] #ranks{display:block}
 }
 @media (max-width:359px){#gtheme button[aria-pressed=true]{display:none}}
 @media (prefers-color-scheme:light){:root:not([data-theme=dark]){
-  --bg:#F6F0E6;--card:#FFFBF4;--line:#DDD0BC;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#6E6253;--tan:#7A5A2E;
-  --physics:#2F6F86;--math:#4A7550;--spanish:#A25A5A;--life:#7A5A2E;--good:#2F7D55;--bad:#C4383D;
-  --lumens-text:#B84700;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}}
+  --bg:#F6F0E6;--card:#FFFBF4;--line:#D3C5AE;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#5E5242;--tan:#816034;
+  --physics:#2F6B7D;--math:#447046;--spanish:#9E4E56;--life:#816034;--good:#2B724D;--bad:#BA353A;
+  --lumens-text:#B04400;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}}
 [data-theme=light]{
-  --bg:#F6F0E6;--card:#FFFBF4;--line:#DDD0BC;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#6E6253;--tan:#7A5A2E;
-  --physics:#2F6F86;--math:#4A7550;--spanish:#A25A5A;--life:#7A5A2E;--good:#2F7D55;--bad:#C4383D;
-  --lumens-text:#B84700;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}
+  --bg:#F6F0E6;--card:#FFFBF4;--line:#D3C5AE;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#5E5242;--tan:#816034;
+  --physics:#2F6B7D;--math:#447046;--spanish:#9E4E56;--life:#816034;--good:#2B724D;--bad:#BA353A;
+  --lumens-text:#B04400;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}
 
 /* ===== first run + rewards (docs/review-v2-psych.md) ===== */
 .ccard{width:100%;min-height:140px;margin-bottom:var(--s4);border-color:color-mix(in srgb,var(--c) 40%,var(--line));cursor:pointer}
@@ -296,3 +296,76 @@ body[data-tab=ranks] #ranks{display:block}
 .shake{animation:shake .4s}@keyframes shake{25%{transform:translateX(-8px) rotate(-1deg)}75%{transform:translateX(8px) rotate(1deg)}}
 #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
 @media (prefers-reduced-motion:reduce){.jump,.shake{animation:none}}
+
+/* ===== tactile system + warm Light (docs/spec-tactile-light.md). One light source top-left; every control has a 1px edge >=3:1 ===== */
+:root{--edge:#746B5A;--raise-bg:linear-gradient(#2A2620,#211E1A);--inset-bg:#171513;--wt:400;--wt-h:400;
+  --raise:0 1px 0 rgba(237,227,208,.08) inset,0 -2px 0 rgba(0,0,0,.35) inset,0 4px 8px rgba(0,0,0,.45),0 1px 1px rgba(0,0,0,.5);
+  --press:0 2px 4px rgba(0,0,0,.5) inset,0 1px 1px rgba(0,0,0,.5);
+  --inset:0 2px 5px rgba(0,0,0,.6) inset,0 -1px 0 rgba(237,227,208,.06) inset;
+  --stage:radial-gradient(circle at 88% 92%,color-mix(in srgb,var(--glow) 25%,transparent),transparent 45%),radial-gradient(ellipse at 30% 0%,var(--bg-hi),var(--bg) 60%)}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]){--edge:#8F7E62;--raise-bg:linear-gradient(#FFFFFF,#F3EADB);--inset-bg:#E8DDCA;--wt:500;--wt-h:600;
+  --raise:0 1px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(43,32,24,.10) inset,0 3px 6px rgba(43,32,24,.18),0 1px 1px rgba(43,32,24,.20);
+  --press:0 2px 4px rgba(43,32,24,.22) inset,0 1px 1px rgba(43,32,24,.2);
+  --inset:0 2px 4px rgba(43,32,24,.22) inset,0 -1px 0 rgba(255,255,255,.8) inset;
+  --stage:radial-gradient(circle at 60% 40%,rgba(217,195,160,.55),transparent 65%),radial-gradient(circle at 20% 85%,rgba(140,104,56,.14),transparent 55%),radial-gradient(circle at 85% 15%,rgba(127,176,192,.16),transparent 50%),#EFE6D6;
+  --core-a:rgba(255,236,200,.95);--core-b:rgba(217,160,90,.45);--core-c:rgba(217,160,90,0);--planet-sh:rgba(43,32,24,.25);--planet-edge:rgba(43,32,24,.35);--locked:#8F7E62}
+  :root:not([data-theme=dark]) #main :is(.k,small,h4,th,.tile small){font-weight:600}}
+[data-theme=light]{--edge:#8F7E62;--raise-bg:linear-gradient(#FFFFFF,#F3EADB);--inset-bg:#E8DDCA;--wt:500;--wt-h:600;
+  --raise:0 1px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(43,32,24,.10) inset,0 3px 6px rgba(43,32,24,.18),0 1px 1px rgba(43,32,24,.20);
+  --press:0 2px 4px rgba(43,32,24,.22) inset,0 1px 1px rgba(43,32,24,.2);
+  --inset:0 2px 4px rgba(43,32,24,.22) inset,0 -1px 0 rgba(255,255,255,.8) inset;
+  --stage:radial-gradient(circle at 60% 40%,rgba(217,195,160,.55),transparent 65%),radial-gradient(circle at 20% 85%,rgba(140,104,56,.14),transparent 55%),radial-gradient(circle at 85% 15%,rgba(127,176,192,.16),transparent 50%),#EFE6D6;
+  --core-a:rgba(255,236,200,.95);--core-b:rgba(217,160,90,.45);--core-c:rgba(217,160,90,0);--planet-sh:rgba(43,32,24,.25);--planet-edge:rgba(43,32,24,.35);--locked:#8F7E62}
+[data-theme=light] #main :is(.k,small,h4,th,.tile small){font-weight:600}
+body{font-weight:var(--wt)}
+#main :is(h1,h2,h3){font-weight:var(--wt-h)}
+#stage{background:var(--stage)}
+/* raised: buttons, keys */
+#back,.btn-primary,.btn-check,.chip,#ctl #cback,#ctl #zin,#ctl #zout,.outline{background:var(--raise-bg);border:1px solid var(--edge);border-radius:var(--r2);box-shadow:var(--raise);text-decoration:none;transition:transform .16s ease-out,box-shadow .16s ease-out,filter .16s}
+.btn-primary{border-color:var(--c)}
+#back{padding:0 14px;color:var(--ink)}
+.chip{padding:0 14px;border-radius:var(--r1)}
+#ctl{gap:var(--s1);text-shadow:none}
+#ctl #cback{padding:0 14px;font-size:15px;color:var(--ink)}#ctl #zin,#ctl #zout{width:44px;color:var(--ink)}
+:is(#back,.btn-primary,.btn-check,.chip,#ctl button,.outline):not(:disabled):active{transform:translateY(2px);box-shadow:var(--press);transition-duration:.09s}
+.btn-primary:not(:disabled):active{transform:translateY(3px)}
+@media (hover:hover){:is(#back,.btn-primary,.btn-check,.chip,#ctl button,.outline):not(:disabled):hover{opacity:1;filter:brightness(1.03)}}
+/* inset: answer field, progress bars */
+.ans input{padding:0 14px;background:var(--inset-bg);border:1px solid var(--edge);border-radius:var(--r2);box-shadow:var(--inset)}
+.ans input:focus{border-color:var(--tan);box-shadow:var(--inset);outline:2px solid var(--tan);outline-offset:2px}
+.fld.ok input{border-color:var(--good);box-shadow:var(--inset)}.fld.no input{border-color:var(--bad);box-shadow:var(--inset)}
+.pbar{height:8px;padding:1px;background:var(--inset-bg);border:1px solid var(--edge);border-radius:4px;box-shadow:var(--inset)}.pbar i{border-radius:3px}
+/* segmented controls: inset capsule well + raised sliding thumb (--i/--n from L.seg) */
+#top,#bar .grp,#tabbar{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;align-items:stretch;gap:0;height:36px;padding:3px;background:var(--inset-bg);border:1px solid var(--edge);border-radius:18px;box-shadow:var(--inset)}
+#bar #gview{display:none}body[data-tab=subjects] #bar #gview{display:grid}
+#gview::after{display:none}
+:is(#top,#bar .grp,#tabbar)::before{content:'';position:absolute;top:3px;bottom:3px;left:3px;height:auto;margin:0;box-sizing:border-box;width:calc((100% - 6px)/var(--n,2));transform:translateX(calc(var(--i,0)*100%));background:var(--raise-bg);border:1px solid var(--tan);border-radius:14px;box-shadow:var(--raise);transition:transform .2s ease-out}
+:is(#top,#bar .grp,#tabbar).noth::before{display:none}
+#top button,#bar .grp button,#tabbar button{position:relative;z-index:1;height:auto;min-width:44px;padding:0 14px;background:none;border:0;border-radius:14px;color:var(--muted);font:500 13px var(--ui);text-decoration:none;white-space:nowrap}
+#top button{font-size:14px;padding:0 18px}
+:is(#top,#bar .grp,#tabbar) button:is([aria-pressed=true],[aria-current=page]){color:var(--ink);font-weight:600;text-decoration:none}
+#tabbar{display:none}
+@media (max-width:699px){
+ #top{display:none}
+ #tabbar{display:grid;flex:none;height:48px;margin:8px var(--s2);border-radius:24px}#tabbar::before{border-radius:20px}#tabbar button{font-size:14px;border-radius:20px}
+ #bar .grp{height:44px;border-radius:22px}#bar .grp::before{border-radius:18px}
+}
+@media (max-width:599px){
+ #bar{flex-wrap:wrap;height:auto;min-height:64px;padding:10px var(--s2);row-gap:var(--s1)}
+ #bar .grp button{padding:0 8px;font-size:12px}
+ body[data-tab=subjects] #bar #gview{order:9;flex:1 0 100%}
+}
+/* detent slider: inset track, raised 24px thumb, ticks under the track, value above the thumb */
+.sl{grid-template-columns:24px 1fr;padding:22px 0 16px}
+.sl output{position:absolute;top:0;left:calc(52px + var(--p,0)*(100% - 64px));transform:translateX(-50%);text-align:center;color:var(--ink);white-space:nowrap}
+.sl::after{right:0}
+.sl input{background:linear-gradient(90deg,var(--tk) 1px,transparent 0) 12px 30px/calc((100% - 24px)/var(--n,10)) 8px repeat-x,linear-gradient(90deg,var(--tr) 1px,transparent 0) 12px 30px/calc((100% - 24px)/var(--n,10)*5) 12px repeat-x}
+.sl input::-webkit-slider-runnable-track{box-sizing:border-box;height:8px;background:var(--inset-bg);border:1px solid var(--edge);border-radius:4px;box-shadow:var(--inset)}
+.sl input::-moz-range-track{box-sizing:border-box;height:8px;background:var(--inset-bg);border:1px solid var(--edge);border-radius:4px;box-shadow:var(--inset)}
+.sl input::-webkit-slider-thumb{box-sizing:border-box;width:24px;height:24px;margin-top:-9px;background:radial-gradient(circle,var(--c) 0 4px,transparent 4.5px),var(--raise-bg);border:1px solid var(--edge);box-shadow:var(--raise);transition:box-shadow .16s}
+.sl input::-moz-range-thumb{box-sizing:border-box;width:24px;height:24px;background:radial-gradient(circle,var(--c) 0 4px,transparent 4.5px),var(--raise-bg);border:1px solid var(--edge);box-shadow:var(--raise)}
+.sl input:active::-webkit-slider-thumb{box-shadow:var(--press)}.sl input:active::-moz-range-thumb{box-shadow:var(--press)}
+@media (prefers-reduced-motion:reduce){
+ :is(#back,.btn-primary,.btn-check,.chip,#ctl button,.outline,#top,#bar .grp,#tabbar),:is(#top,#bar .grp,#tabbar)::before{transition:none}
+ :is(#back,.btn-primary,.btn-check,.chip,#ctl button,.outline):not(:disabled):active{transform:none}
+}

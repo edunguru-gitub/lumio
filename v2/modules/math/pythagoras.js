@@ -25,8 +25,8 @@ render:function(el,ctx){
     bd.textContent=tri?Math.min(a,b)+'-'+Math.max(a,b)+'-'+c:'';
     U.tiles(ti,[[t('hyp')+' c',n2(c)],[t('area')+' ab/2',n2(a*b/2)],[t('perim'),n2(a+b+c)],[t('angles'),al.toFixed(1)+'° / '+(90-al).toFixed(1)+'°']]);
     if(tri&&G.live){var k=Math.min(a,b)+'-'+Math.max(a,b);if(!G.seen.has(k)){G.seen.add(k);var third=G.seen.size>=3&&!G.done;fx.ok();fx.burst(70);if(third){G.done=true;fx.burst(160)}
-      // v1: +10 per new triple, +30 more on the third (Lumens only when the quest step is new)
-      if(ctx.report({qd:Math.min(3,G.seen.size)}))ctx.award(third?40:10)}}
+      // v1: +10 per new triple, +30 more on the third
+      ctx.report({qd:Math.min(3,G.seen.size)});ctx.award(third?40:10)}}
     qu.classList.toggle('done',G.done);qu.textContent=G.done?t('qg_done'):t('qg',Math.min(3,G.seen.size));
     hi.textContent=tri?t('triple'):(a===b?t('gh_45'):t('gh_gen'));
     draw();}

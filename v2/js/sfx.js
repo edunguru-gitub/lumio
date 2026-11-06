@@ -24,6 +24,7 @@ var F=L.fx={canSay:!!syn,
   bad:function(){tone(220,0,.25,'sawtooth',.18,110);tone(165,.2,.35,'sawtooth',.18,70)},
   streak:function(){[523,659,784,1047,1319,1568,2093].forEach(function(f,i){tone(f,i*.07,.25,'square',.1)});tone(1047,.55,.5,'triangle',.2)},
   pop:function(){tone(300,0,.12,'sine',.2,700)},
+  tick:function(){tone(1600,0,.03,'sine',.05)}, // slider detent
   jump:function(el){anim(el,'jump')},shake:function(el){anim(el,'shake')},
   // confetti in subject + tan + ink tokens (no Lumens orange / Moon purple)
   burst:function(n){if(rm.matches)return;n=n||140;

@@ -7,6 +7,9 @@ var dust=[],sky=[];
 function spiral(c,x,y,i,rd,rot,a,z,cs,col,tl){
   tl=tl==null?TL:tl;var TC=Math.cos(tl),TS=Math.sin(tl);c.fillStyle=col;
   dust[i].forEach(function(d){var an=d.a+d.u*2.6+rot,r=d.u*rd,u=r*Math.cos(an),v=r*Math.sin(an)*.5;c.globalAlpha=d.al*a;c.beginPath();c.arc(x+u*TC-v*TS,y+u*TS+v*TC,d.s/Math.sqrt(z),0,6.2832);c.fill()});
+  // Light: warm glow core (radial, ~1.6x), never a solid shape; Dark: glowing ink core
+  if(C.coreA){var R=cs*1.6/z,g=c.createRadialGradient(0,0,0,0,0,R);g.addColorStop(0,C.coreA);g.addColorStop(.35,C.coreB);g.addColorStop(.7,C.coreC);
+    c.save();c.translate(x,y);c.rotate(tl);c.scale(1,.5);c.globalAlpha=a;c.fillStyle=g;c.beginPath();c.arc(0,0,R,0,6.2832);c.fill();c.restore();return}
   c.globalAlpha=a;c.fillStyle=C.ink;c.shadowColor=C.glow;c.shadowBlur=14;c.beginPath();c.ellipse(x,y,cs/z,cs/2/z,tl,0,6.2832);c.fill();c.shadowBlur=0;
 }
 function spark(c,x,y,r,on){c.beginPath();for(var j=0;j<8;j++){var q=j*.7854,rr=j%2?r*.35:r;c.lineTo(x+rr*Math.sin(q),y-rr*Math.cos(q))}c.closePath();on?c.fill():c.stroke()}
@@ -59,7 +62,10 @@ G.draw=function(){
     spiral(cx,s.x,s.y,i,rd,rot,a,z,14,s.color,s.tl);
     s.lessons.forEach(function(l){
       var p=G.ppos(s,l),pr=PR*(.45+.55*f),k=L.getP(L.key(s,l)),hv=hover&&hover.sid===s.id&&hover.lid===l.id,lk=!l.mod,now=l===cur,ia=a*(lk?.35:1),lx=p.x+pr+10/z;
-      cx.globalAlpha=ia;cx.fillStyle=cx.strokeStyle=s.color;cx.lineWidth=1.5/z;cx.beginPath();cx.arc(p.x,p.y,pr,0,6.2832);lk||now?cx.stroke():cx.fill();
+      cx.globalAlpha=ia;cx.fillStyle=cx.strokeStyle=s.color;cx.lineWidth=1.5/z;cx.beginPath();cx.arc(p.x,p.y,pr,0,6.2832);
+      // Light planets: filled = shadow + darker 1px edge, current = 2px ring, locked = solid outline (>=3:1)
+      if(C.psh){if(lk){cx.globalAlpha=a;cx.strokeStyle=C.locked;cx.stroke()}else if(now){cx.lineWidth=2/z;cx.stroke()}else{cx.shadowColor=C.psh;cx.shadowBlur=6*dpr;cx.shadowOffsetY=2*dpr;cx.fill();cx.shadowBlur=cx.shadowOffsetY=0;cx.strokeStyle=C.pedge;cx.lineWidth=1/z;cx.stroke()}}
+      else lk||now?cx.stroke():cx.fill();
       if(now||hv){cx.globalAlpha=ia*(hv?.8:.35);cx.beginPath();cx.arc(p.x,p.y,pr*20/13,0,6.2832);cx.stroke()}
       if(f>0&&s===near){
         cx.globalAlpha=f*(lk?.35:1);cx.textAlign='left';cx.fillStyle=C.ink;cx.font='500 '+17/z+'px '+C.ui;cx.fillText(L.n(l.name),lx,p.y-2/z);
@@ -88,7 +94,7 @@ L.boot(function(){
   cv=document.getElementById('cv');cx=cv.getContext('2d');
   // canvas colours from tokens; re-read on theme change ('skin')
   var read=function(){var cs=getComputedStyle(document.documentElement),g=function(n){return cs.getPropertyValue(n).trim()};
-    C={ink:g('--ink'),muted:g('--muted'),tan:g('--tan'),ui:g('--ui'),head:g('--head'),mono:g('--mono'),sky:g('--sky'),skyA:+g('--sky-a')||1,glow:g('--core-glow')}};
+    C={ink:g('--ink'),muted:g('--muted'),tan:g('--tan'),ui:g('--ui'),head:g('--head'),mono:g('--mono'),sky:g('--sky'),skyA:+g('--sky-a')||1,glow:g('--core-glow'),coreA:g('--core-a'),coreB:g('--core-b'),coreC:g('--core-c'),psh:g('--planet-sh'),pedge:g('--planet-edge'),locked:g('--locked')}};
   read();
   new ResizeObserver(resize).observe(cv.parentNode);
   if(document.fonts)document.fonts.ready.then(function(){hc={};resize()});

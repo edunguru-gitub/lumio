@@ -43,7 +43,7 @@ function render(){
   me.append(meter(t('lum'),String(st.lum),t('lum_s'),'lum'),meter(t('streak'),String(st.streak),t('best',{n:st.best})),meter(t('moon'),'1000',t('noch'),'moon',phase()));
   var tm=tk&&tk.cloneNode(true);if(tm)tm.classList.add('tick-m');
   // one Continue card; first run = lesson tagged 'first' (algebra), else the first unfinished lesson
-  var first=!st.log.length&&L.lessons().every(function(x){return !L.getP(x.k)}),
+  var first=!st.log.length&&L.lessons().every(function(x){var v=st.les[x.k]||{};return !L.getP(x.k)&&!v.ok&&!v.bad}),
       fx=first&&L.lessons().filter(function(x){return x.l.mod&&x.l.tags.indexOf('first')>=0})[0],
       cs=fx?fx.s:L.subjects.filter(function(x){return L.cur(x)})[0],cl=fx?fx.l:cs&&L.cur(cs);
   if(cl){var cc=E('button',null,'card ccard');cc.type='button';cc.style.setProperty('--c',cs.color);

@@ -5,15 +5,15 @@ var K='lumio2_progress';
 L.pref=function(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
 var ro=/^ro/i.test(L.pref('lumio2_lang')||navigator.language||''),pv=L.pref('lumio2_view')==='tabs'?'tabs':'galaxy',sysL=matchMedia('(prefers-color-scheme: light)');
 L.n=function(a){return a[ro?1:0]};
-L.S={back:['Back','Înapoi'],lum:['Lumens','Lumeni'],light:['Light','Luminos'],dark:['Dark','Întunecat'],galaxy:['Galaxy','Galaxie'],tabs:['Tabs','File'],cont:['Continue','Continuă'],subjects:['Subjects','Materii'],
+L.S={back:['Back','Înapoi'],lum:['Lumens','Lumeni'],light:['Light','Luminos'],dark:['Dark','Întunecat'],galaxy:['Galaxy','Galaxie'],tabs:['Tabs','Taburi'],cont:['Continue','Continuă'],subjects:['Subjects','Materii'],
  hint:['Click: go in. Right click: go out','Click: intri. Click dreapta: ieși'],soon:['Coming soon','În curând'],of:['{a} of {b} lessons','{a} din {b} lecții'],subject:['Subject','Materie'],now:['Now','Acum'],
  home:['Home','Acasă'],missions:['Missions','Misiuni'],ranks:['Ranks','Clasament'],zin:['Go in','Intră'],zout:['Go out','Ieși'],
- alt:['Lumio galaxies. Use Tabs for keyboard navigation.','Galaxiile Lumio. Folosește File pentru tastatură.']};
+ alt:['Lumio galaxies. Use Tabs for keyboard navigation.','Galaxiile Lumio. Folosește Taburi pentru tastatură.']};
 L.t=function(k,o){var s=L.n(L.S[k]);for(var p in o)s=s.replace('{'+p+'}',o[p]);return s};
 // features (js/<id>.js) register in window.LumioFeatures; missing = skipped
 L.has=function(id){return !!(window.LumioFeatures||{})[id]};
 // fx stub; js/sfx.js replaces it (sounds, confetti, jump/shake, read aloud)
-var nop=function(){};L.fx={canSay:false,ok:nop,bad:nop,streak:nop,pop:nop,jump:nop,shake:nop,burst:nop,say:nop};
+var nop=function(){};L.fx={canSay:false,ok:nop,bad:nop,streak:nop,pop:nop,jump:nop,shake:nop,burst:nop,say:nop,tick:nop};
 L.tabOk=function(t){return t==='subjects'||L.has(t==='home'?'terminal':'ranks')};
 // boot queue: runs after DOM + every registry file (loader.js); shell's own boot is first
 var bq=[];L.boot=function(f){bq?bq.push(f):f()};L.boot.run=function(){var q=bq;bq=null;q.forEach(function(f){f()})};
@@ -71,7 +71,7 @@ L.contBtn=function(s){
   b.onclick=function(){L.go('planet',s.id,l.id)};return b;
 };
 L.sp=function(s){var t=0;s.lessons.forEach(function(l){t+=L.getP(L.key(s,l))});return t/s.lessons.length};
-function eff(){return innerWidth<900?'tabs':pv}
+function eff(){return innerWidth<900&&!L.pref('lumio2_view')?'tabs':pv}
 var st=L.state={level:'home',sid:null,lid:null,view:eff(),tab:'home'},subs=[];
 L.on=function(f){subs.push(f)};
 function emit(kind){subs.forEach(function(f){f(st,kind)})}
@@ -119,7 +119,11 @@ function chrome(){
   document.querySelectorAll('#gtheme button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.th===L.theme())});
   document.querySelectorAll('#glang button').forEach(function(b){b.setAttribute('aria-pressed',(b.dataset.lg==='ro')===ro)});
   document.querySelectorAll('#top button').forEach(function(b){if(b.dataset.t===st.tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+  ['top','gview','gtheme','glang'].forEach(function(i){L.seg($(i))});
 }
+// segmented control: --i/--n place the raised thumb under the pressed/current segment (CSS)
+L.seg=function(el){var b=[].filter.call(el.children,function(x){return !x.hidden}),i=b.findIndex(function(x){return x.matches('[aria-pressed=true],[aria-current=page]')});
+  el.style.setProperty('--n',b.length||1);el.style.setProperty('--i',Math.max(0,i));el.classList.toggle('noth',i<0)};
 function labels(){
   document.documentElement.lang=ro?'ro':'en';
   var bk=$('back');bk.replaceChildren('← ',L.ui.el('span',L.n(L.S.back)));bk.setAttribute('aria-label',L.n(L.S.back));$('cback').textContent=L.n(L.S.back);

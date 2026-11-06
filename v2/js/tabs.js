@@ -16,6 +16,7 @@ function bar(st){
     var b=L.ui.el('button',L.n(L.S[t]));b.type='button';b.onclick=function(){L.setTab(t)};
     if(st.tab===t)b.setAttribute('aria-current','page');el.appendChild(b);
   });
+  L.seg(el);
 }
 function render(st){
   var el=document.getElementById('tabs'),box=document.createElement('div'),h=document.createElement('h2'),s=L.subject();
