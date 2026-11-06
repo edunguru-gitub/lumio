@@ -36,8 +36,9 @@ function Loop(step,draw){
   self.stop=function(){cancelAnimationFrame(raf);raf=0;};
   self.redraw=draw;
   function vis(){document.hidden?self.stop():self.start();}
-  document.addEventListener('visibilitychange',vis);
-  self.destroy=function(){self.stop();document.removeEventListener('visibilitychange',vis);};
+  function rmc(){self.stop();self.start();}
+  document.addEventListener('visibilitychange',vis);rm.addEventListener('change',rmc);
+  self.destroy=function(){self.stop();document.removeEventListener('visibilitychange',vis);rm.removeEventListener('change',rmc);};
   return self;
 }
 window.LumioPhysics={DT:DT,spring:spring,Ball:Ball,Piston:Piston,Emitter:Emitter,Loop:Loop};
