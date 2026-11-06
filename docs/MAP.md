@@ -15,7 +15,7 @@
 | Team Board source | tools/board/team-board.html (artifact on claude.ai) |
 | Original docs | claude.ai Project "eduard proiect lumio app" (claude/*) |
 ## Agents
-david (opus, builds), designer (spec/review), tester (verifies, low/medium), psychologist (jury). Flow: designer -> david -> tester -> psychologist -> manager.
+david (opus, builds), designer (spec/review), tester (verifies, low/medium), Boyle (psychologist) (jury). Flow: designer -> david -> tester -> psychologist -> manager.
 ## v2 modules
 Shell (static in index.html): physics.js, shell.js (L.build: subjects/planets/rows/cards from manifests; L.boot queue; L.has/L.tabOk), ui.js, galaxy.js, camera.js, modules/registry.js, loader.js (loads every registry file, then runs boot), tabs.js.
 Registry v2/modules/registry.js (strict JSON after '='): features [rating, terminal, ranks, ticker, sfx] = js/<id>.js, each registers window.LumioFeatures[id] and is skipped if absent (no rating = no terminal/ranks/ticker; no terminal = no Home tab; no ranks = no Ranks tab). lessons = 'subject/file' (module with manifest {id, subject, subjectName, color, title [EN,RO], order, tags, orbit [a,r]}) or a placeholder object (Coming soon). Subjects in first-seen order; tag 'first' = first-run lesson.
@@ -34,7 +34,7 @@ Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS
 - 2026-11-06 david: galaxy home organic seeded layout (74fa6df)
 - 2026-11-06 david: v2 modular: manifests + modules/registry.js + LumioFeatures (ranks.js, ticker.js split from terminal), tools/build-hosted.py; visuals pixel-identical, delete-any-file tested (commit 'v2 modular registry')
 - 2026-11-06 designer: spec-tactile-light.md (warm Light + tactile system + segmented nav)
-- 2026-11-06 manager: handoff pack, MAP, psychologist agent, skills mirrored (0b7a425)
+- 2026-11-06 manager: handoff pack, MAP, Boyle (psychologist) agent, skills mirrored (0b7a425)
 - 2026-11-06 david: Swiss lab grid, visible answer field (184b18d); nav+Light theme in progress
 - 2026-11-06 david: terminal + ratings (3a53e70); rating accuracy fix; wordmark (a2e9caf)
 - 2026-11-06 david: open design layer (7d99797); video-match galaxy/tabs (c0ade32); 4 lessons ported (7e05470)
