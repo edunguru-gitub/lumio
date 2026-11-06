@@ -5,7 +5,7 @@ Object.assign(L.S,{you:['You','Tu'],rated:['{a} of {b} rated','{a} din {b} evalu
  lum:['Lumens','Lumeni'],lum_s:['All time','În total'],moon:['Moon','Luna'],noch:['No challenges yet','Încă nicio provocare'],streak:['Streak','Serie'],best:['Best {n}','Record {n}'],
  days:['Days left','Zile rămase'],month:['This month','Luna aceasta'],lessons:['Lessons','Lecții'],name:['Name','Nume'],ovr:['Overall','General'],week:['This week','Săptămâna asta'],
  addf:['Add friends','Adaugă prieteni'],nof:['No friends yet.','Încă niciun prieten.'],contl:['Continue learning','Continuă să înveți'],
- recent:['Recent','Recente'],noact:['No activity yet','Nicio activitate încă']});
+ recent:['Recent','Recente'],noact:['No activity yet','Nicio activitate încă'],all:['See all','Vezi tot']});
 var CODE={physics:'PHY',math:'MAT',spanish:'SPA',life:'LIF'};
 function t(k,o){var s=L.n(L.S[k]);for(var p in o)s=s.replace('{'+p+'}',o[p]);return s}
 function num(r){return r==null?'--':String(r)}
@@ -42,36 +42,37 @@ function ticker(){
     u.appendChild(E('li',(x?x.l.name[0].slice(0,3).toUpperCase():e.k)+'  '+(e.lum?'+'+e.lum+' '+t('lum'):'')+(e.d?'  '+sgn(e.d):'')))});
   return u;
 }
-function ranks(){
+// real data only: one You row; full page adds Moon (1000 base) and the Add friends empty state
+function ranks(full){
   var o=L.overall(),tb=E('table',null,'ranks'),h=E('tr'),r=E('tr',null,'me'),f=E('tr',null,'nof'),td=E('td'),btn=E('button',t('addf'),'outline');
-  ['#',t('name'),t('ovr'),t('lum'),t('week')].forEach(function(x){h.appendChild(E('th',x))});
-  ['1',t('you'),num(o.r),String(st.lum),sgn(L.week())].forEach(function(x){r.appendChild(E('td',x))});
-  btn.type='button';btn.disabled=true;btn.title=L.n(L.S.soon);td.colSpan=5;td.append(E('span',t('nof')),btn);f.appendChild(td);
-  var th=E('thead'),bd=E('tbody');th.appendChild(h);bd.append(r,f);tb.append(th,bd);return tb;
+  ['#',t('name'),t('ovr'),t('lum')].concat(full?[t('moon'),t('week')]:[t('week')]).forEach(function(x){h.appendChild(E('th',x))});
+  ['1',t('you'),num(o.r),String(st.lum)].concat(full?['1000',sgn(L.week())]:[sgn(L.week())]).forEach(function(x){r.appendChild(E('td',x))});
+  if(full)r.children[4].className='moon';
+  var th=E('thead'),bd=E('tbody');th.appendChild(h);bd.appendChild(r);
+  if(full){btn.type='button';btn.disabled=true;btn.title=L.n(L.S.soon);td.colSpan=6;td.append(E('span',t('nof')),btn,E('p',t('moon')+' 1000 · '+t('noch')));f.appendChild(td);bd.appendChild(f)}
+  tb.append(th,bd);return tb;
 }
-function count(el,from,to){
-  if(L.reduced()){el.textContent=to;return}
-  var t0=performance.now();el.parentNode.parentNode.parentNode.classList.add('pop');
-  (function f(now){var u=Math.min(1,(now-t0)/1200);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-u,3)));if(u<1)requestAnimationFrame(f)})(t0);
-}
-function render(){
-  var el=document.getElementById('term'),y=el.scrollTop,o=E('div',null,'t-in'),rt=E('div',null,'t-right'),me=E('div',null,'meters'),ls=E('div',null,'t-les'),tk=ticker();
-  me.append(meter(t('lum'),String(st.lum),t('lum_s'),'lum'),meter(t('moon'),'1000',t('noch'),'moon',phase()),
-    meter(t('streak'),String(st.streak),t('best',{n:st.best})),meter(t('days'),String(daysLeft()),t('month')));
-  ls.appendChild(E('h2',t('lessons')));
+// lesson cards grouped by subject (shown in Subjects > Tabs)
+L.lessonGrid=function(){
+  var ls=E('div',null,'lgw');ls.appendChild(E('h2',t('lessons')));
   L.subjects.forEach(function(s){var g=E('div',null,'lgrid');ls.appendChild(E('h4',L.n(s.name)));
     L.lessons().filter(function(x){return x.s===s}).forEach(function(x){g.appendChild(lcard(x))});ls.appendChild(g)});
+  return ls;
+};
+function render(){
+  var el=document.getElementById('term'),y=el.scrollTop,o=E('div',null,'t-in'),rt=E('div',null,'t-right'),me=E('div',null,'meters'),tk=ticker(),all=E('button',t('all')+' →','see'),rp=E('div',null,'r-in');
+  me.append(meter(t('lum'),String(st.lum),t('lum_s'),'lum'),meter(t('moon'),'1000',t('noch'),'moon',phase()),
+    meter(t('streak'),String(st.streak),t('best',{n:st.best})),meter(t('days'),String(daysLeft()),t('month')));
   var tm=tk.cloneNode(true);tm.classList.add('tick-m');
   var cs=L.subjects.filter(function(x){return L.cur(x)})[0];
   if(cs){var cb=E('button',t('contl')+' →','btn-primary');cb.type='button';cb.style.setProperty('--c','var(--tan)');cb.onclick=function(){L.go('planet',cs.id,L.cur(cs).id)};rt.appendChild(cb)}
-  rt.append(me,tm,E('h2',L.n(L.S.ranks)),ranks(),ls);o.append(player(),rt);
+  all.type='button';all.onclick=function(){L.setTab('ranks')};
+  rt.append(me,tm,E('h2',L.n(L.S.ranks)),ranks(false),all);o.append(player(),rt);
   el.replaceChildren(o,tk);el.scrollTop=y;
-  var f=L.fresh,c;
-  if(f&&L.state.level!=='planet'){L.fresh=null;c=el.querySelector('[data-k="'+f.k+'"]');
-    if(c){var tr=el.getBoundingClientRect(),cr=c.getBoundingClientRect();if(cr.top<tr.top||cr.bottom>tr.bottom)el.scrollTo({top:el.scrollTop+cr.top-tr.top-24,behavior:L.reduced()?'auto':'smooth'});var r=L.rate(f.k);if(r!=null)count(c.querySelector('.ov b'),f.from||0,r)}}
+  rp.append(E('h2',L.n(L.S.ranks)),ranks(true));document.getElementById('ranks').replaceChildren(rp);
 }
 document.addEventListener('DOMContentLoaded',function(){
   render();
-  L.on(function(s,k){if(s.view==='terminal'&&s.level!=='planet'||k==='stats'||k==='progress')render()});
+  L.on(function(s,k){if(s.tab!=='subjects'||k==='stats'||k==='progress'||k==='skin')render()});
 });
 })();

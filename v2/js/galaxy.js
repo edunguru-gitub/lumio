@@ -8,7 +8,7 @@ var sky=[];for(var k=0;k<120;k++)sky.push({x:rnd(),y:rnd(),al:.15+rnd()*.35});
 function spiral(c,x,y,i,rd,rot,a,z,cs,col){
   c.fillStyle=col;
   dust[i].forEach(function(d){var an=d.a+d.u*2.6+rot,r=d.u*rd,u=r*Math.cos(an),v=r*Math.sin(an)*.5;c.globalAlpha=d.al*a;c.beginPath();c.arc(x+u*TC-v*TS,y+u*TS+v*TC,d.s/Math.sqrt(z),0,6.2832);c.fill()});
-  c.globalAlpha=a;c.fillStyle=c.shadowColor=C.ink;c.shadowBlur=14;c.beginPath();c.ellipse(x,y,cs/z,cs/2/z,TL,0,6.2832);c.fill();c.shadowBlur=0;
+  c.globalAlpha=a;c.fillStyle=C.ink;c.shadowColor=C.glow;c.shadowBlur=14;c.beginPath();c.ellipse(x,y,cs/z,cs/2/z,TL,0,6.2832);c.fill();c.shadowBlur=0;
 }
 function spark(c,x,y,r,on){c.beginPath();for(var j=0;j<8;j++){var q=j*.7854,rr=j%2?r*.35:r;c.lineTo(x+rr*Math.sin(q),y-rr*Math.cos(q))}c.closePath();on?c.fill():c.stroke()}
 G.mini=function(el,s){
@@ -34,7 +34,7 @@ G.hit=function(sx,sy,near){
 G.setHover=function(h){var k=h&&h.sid+'/'+h.lid,o=hover;hover=h;if(o!==h&&(o&&o.sid+'/'+o.lid)!==k)G.requestDraw()};
 G.draw=function(){
   if(!cx||!W)return;
-  cx.setTransform(dpr,0,0,dpr,0,0);cx.clearRect(0,0,W,H);cx.fillStyle=C.ink;sky.forEach(function(p){cx.globalAlpha=p.al;cx.fillRect(p.x*W,p.y*H,1,1)});
+  cx.setTransform(dpr,0,0,dpr,0,0);cx.clearRect(0,0,W,H);cx.fillStyle=C.sky;var ds=C.skyA>1?1.5:1;sky.forEach(function(p){cx.globalAlpha=Math.min(.6,p.al*C.skyA);cx.fillRect(p.x*W,p.y*H,ds,ds)});
   var z=cam.z,f=cl((z/G.homeZ()-1)/1.2),rot=L.reduced()?0:performance.now()%240000/240000*6.2832,near=null,nd=1e9;
   L.subjects.forEach(function(s){var d=Math.hypot(cam.x-s.x,cam.y-s.y);if(d<nd){nd=d;near=s}});
   cx.translate(W/2,H/2);cx.scale(z,z);cx.translate(-cam.x,-cam.y);
@@ -60,7 +60,7 @@ G.draw=function(){
 };
 function tick(){raf=0;if(document.hidden)return;G.draw();if(run)G.requestDraw()}
 G.requestDraw=function(){if(!raf)raf=requestAnimationFrame(tick)};
-G.sync=function(){run=L.state.view==='galaxy'&&!document.hidden&&!L.reduced()&&L.state.level!=='planet';G.requestDraw()};
+G.sync=function(){run=L.gal()&&!document.hidden&&!L.reduced()&&L.state.level!=='planet';G.requestDraw()};
 function resize(){
   var r=cv.parentNode.getBoundingClientRect();if(!r.width)return;
   dpr=window.devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;
@@ -68,12 +68,14 @@ function resize(){
 }
 document.addEventListener('DOMContentLoaded',function(){
   cv=document.getElementById('cv');cx=cv.getContext('2d');
-  var cs=getComputedStyle(document.documentElement),g=function(n){return cs.getPropertyValue(n).trim()};
-  C={ink:g('--ink'),muted:g('--muted'),tan:g('--tan'),ui:g('--ui'),head:g('--head'),mono:g('--mono')};
+  // canvas colours from tokens; re-read on theme change ('skin')
+  var read=function(){var cs=getComputedStyle(document.documentElement),g=function(n){return cs.getPropertyValue(n).trim()};
+    C={ink:g('--ink'),muted:g('--muted'),tan:g('--tan'),ui:g('--ui'),head:g('--head'),mono:g('--mono'),sky:g('--sky'),skyA:+g('--sky-a')||1,glow:g('--core-glow')}};
+  read();
   new ResizeObserver(resize).observe(cv.parentNode);
   document.addEventListener('visibilitychange',G.sync);
   matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',G.sync);
-  L.on(function(s,kind){if(kind==='stats')return;if(kind==='progress')G.requestDraw();else G.sync()});
+  L.on(function(s,kind){if(kind==='stats')return;if(kind==='skin')read();if(kind==='progress'||kind==='skin')G.requestDraw();else G.sync()});
   G.sync();
 });
 })();

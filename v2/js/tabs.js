@@ -12,10 +12,9 @@ function spk(n){var e=document.createElement('span');e.className='spk';e.setAttr
 L.spk=spk;
 function bar(st){
   var el=document.getElementById('tabbar');el.replaceChildren();
-  [['home',function(){L.go('home');L.setView('terminal')},st.view==='terminal'],['subjects',function(){if(st.view==='terminal')L.setView('tabs');L.go('galaxy',st.sid||L.subjects[0].id)},st.view!=='terminal'],['missions'],['ranks']].forEach(function(t){
-    var b=L.ui.el('button',L.n(L.S[t[0]]));b.type='button';
-    if(t[1])b.onclick=t[1];else{b.disabled=true;b.title=L.n(L.S.soon)}
-    if(t[2])b.setAttribute('aria-current','page');el.appendChild(b);
+  ['home','subjects','ranks'].forEach(function(t){
+    var b=L.ui.el('button',L.n(L.S[t]));b.type='button';b.onclick=function(){L.setTab(t)};
+    if(st.tab===t)b.setAttribute('aria-current','page');el.appendChild(b);
   });
 }
 function render(st){
@@ -23,7 +22,8 @@ function render(st){
   box.className='list';box.appendChild(h);
   if(st.level==='home'){
     h.textContent=L.n(L.S.subjects);
-    L.subjects.forEach(function(x,i){box.appendChild(row(i+1,L.n(x.name),L.count(x),function(){L.go('galaxy',x.id)}))});
+    box.classList.add('wide');L.subjects.forEach(function(x,i){box.appendChild(row(i+1,L.n(x.name),L.count(x),function(){L.go('galaxy',x.id)}))});
+    box.appendChild(L.lessonGrid());
   }else{
     var top=L.ui.el('div',null,'thead'),mc=L.ui.el('canvas');mc.setAttribute('aria-hidden','true');
     top.append(L.head(s,L.n(L.S.subject)),mc);box.replaceChild(top,h);L.Galaxy.mini(mc,s);

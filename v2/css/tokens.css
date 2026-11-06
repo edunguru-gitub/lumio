@@ -1,6 +1,7 @@
 :root{
   --bg:#171513;--card:#211E1A;--line:#2E2A24;--ink:#EDE3D0;--muted:#A89F8E;--tan:#D9C3A0;
-  --lumens:#FF6A13;--moon:#A78BFA;
+  --lumens:#FF6A13;--moon:#A78BFA;--lumens-text:#FF6A13;--moon-text:#A78BFA;
+  --sky:#EDE3D0;--sky-a:1;--core-glow:#EDE3D0;
   --bg-hi:#2A2219;--glow:#3A2C1C;
   --physics:#7FB0C0;--math:#9DBF9E;--spanish:#C98B8B;--life:#D9C3A0;
   --r1:8px;--r2:12px;--r3:20px;--t:.3s;
@@ -16,14 +17,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 #bar{height:56px;flex:none;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid var(--line);position:relative;z-index:3;background:var(--bg)}
 .word{font:400 64px/1 var(--head);margin-right:4px;white-space:nowrap}
 .word svg{display:inline-block;width:.256em;height:.28em;vertical-align:.483em;margin:0 -.27em 0 .014em;fill:var(--tan)}
-#back,#toggle button{height:36px;padding:0 14px;background:transparent;border:1px solid var(--line);border-radius:var(--r1);color:var(--ink);transition:opacity var(--t)}
+#back{height:36px;padding:0 14px;background:transparent;border:1px solid var(--line);border-radius:var(--r1);color:var(--ink);transition:opacity var(--t)}
 #back:disabled{opacity:.35;cursor:default}
 #crumb{flex:1;min-width:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#toggle{display:flex}
-#toggle button:first-child{border-radius:var(--r1) 0 0 var(--r1)}
-#toggle button:last-child{border-radius:0 var(--r1) var(--r1) 0;border-left:0}
-#toggle button[aria-pressed=true]{background:var(--card);color:var(--tan);border-color:var(--tan)}
-#toggle button[aria-pressed=true]+button{border-left:0}
 #main{flex:1;position:relative;min-height:0}
 #stage,#tabs,#lesson{position:absolute;inset:0}
 #stage{background:radial-gradient(circle at 88% 92%,color-mix(in srgb,var(--glow) 25%,transparent),transparent 45%),radial-gradient(ellipse at 30% 0%,var(--bg-hi),var(--bg) 60%)}
@@ -94,10 +90,9 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 /* ===== open: borderless chrome, 8/16/24/32/48 scale, hairlines, softer secondary (AA >=4.7:1) ===== */
 :root{--s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:48px;--muted:#958C7B}
 #bar{height:96px;gap:var(--s3);padding:0 var(--s4);border-bottom:0}
-#back,#toggle button,#ctl button,#tabbar button{height:44px;padding:0;background:none;border:0;border-radius:0;color:var(--muted);transition:color var(--t)}
-#toggle{gap:var(--s3)}
-#toggle button[aria-pressed=true],#tabbar [aria-current=page]{background:none;color:var(--ink);text-decoration:underline 1px var(--tan);text-underline-offset:8px}
-@media (hover:hover){#back:not(:disabled):hover,#toggle button:hover,#ctl button:not(:disabled):hover,#tabbar button:not(:disabled):hover{color:var(--ink)}}
+#back,#bar .grp button,#top button,#ctl button,#tabbar button{height:44px;padding:0;background:none;border:0;border-radius:0;color:var(--muted);transition:color var(--t)}
+#bar .grp button[aria-pressed=true],#top [aria-current=page],#tabbar [aria-current=page]{background:none;color:var(--ink);text-decoration:underline 1px var(--tan);text-underline-offset:8px}
+@media (hover:hover){#back:not(:disabled):hover,#bar .grp button:hover,#top button:hover,#ctl button:not(:disabled):hover,#tabbar button:not(:disabled):hover{color:var(--ink)}}
 #ghead{top:var(--s5)}
 .pbar{margin-top:var(--s2)}.cnt{margin-top:var(--s1)}
 #ctl{right:var(--s4);bottom:var(--s4);gap:var(--s3);padding:0;background:none;border:0;border-radius:0;text-shadow:0 0 12px var(--bg)}
@@ -116,11 +111,11 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 .btn-primary{height:48px;border-color:color-mix(in srgb,var(--c) 40%,transparent)}
 .t-right>.btn-primary{margin-bottom:var(--s4)}
 @media (max-width:699px){#bar{height:64px;padding:0 var(--s2);gap:var(--s2)}#ghead{top:var(--s3)}#ctl{right:var(--s2);bottom:var(--s2)}#tabs{padding:var(--s4) var(--s2)}.lesson-in{padding:var(--s4) var(--s2) var(--s5)}.row{height:56px}}
-@media (prefers-reduced-motion:reduce){#back,#toggle button,#ctl button,#tabbar button{transition:none}}
+@media (prefers-reduced-motion:reduce){#back,#bar .grp button,#top button,#ctl button,#tabbar button{transition:none}}
 /* ===== terminal: player card, meters, rankings, lesson cards, ticker ===== */
 #term{position:absolute;inset:0;display:none;overflow:auto;flex-direction:column;background:var(--bg);padding:var(--s5) 80px 0}
-body[data-view=terminal] #term{display:flex}
-body[data-view=terminal] #stage,body[data-view=terminal] #tabs{display:none}
+body[data-tab=home] #term{display:flex}
+body:not([data-tab=subjects]) #stage,body:not([data-tab=subjects]) #tabs{display:none}
 .t-in{width:100%;max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--s3);padding-bottom:var(--s5)}
 .pcard{grid-column:1/5;align-self:start;max-width:320px;height:440px}
 .t-right{grid-column:5/13;min-width:0}
@@ -150,8 +145,6 @@ body[data-view=terminal] #stage,body[data-view=terminal] #tabs{display:none}
 .lcard h3{font-size:17px}.lcard .csub{font-size:12px}.lcard.lock .ov b,.lcard.lock h3{color:var(--muted)}
 .lcard .cstats{margin-top:4px}.lcard .spk svg{width:9px;height:10px}
 @media (hover:hover){.lcard:hover{opacity:.85}}
-.lcard.pop{animation:pop 1.2s ease-out}
-@keyframes pop{0%{opacity:.4;transform:translateY(8px)}30%{opacity:1;transform:none}}
 .ranks{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 .ranks th,.ranks td{text-align:left;padding:0 var(--s1) 0 0;height:48px;border-bottom:1px solid var(--line);white-space:nowrap}
 .ranks td{font:400 14px var(--mono)}.ranks td:nth-child(2){font:500 15px var(--ui)}
@@ -164,7 +157,6 @@ body[data-view=terminal] #stage,body[data-view=terminal] #tabs{display:none}
 #term>.tick li{flex:none;max-width:40%;overflow:hidden;text-overflow:ellipsis}
 .tick-m{display:none}
 @media (max-width:699px){
- #toggle [data-v=galaxy]{display:none}
  #term{padding:var(--s3) var(--s2) 96px}
  .t-in{display:flex;flex-direction:column;padding-bottom:0}
  .pcard{align-self:stretch;max-width:none;height:200px;display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:var(--s2);padding:var(--s2)}
@@ -178,7 +170,7 @@ body[data-view=terminal] #stage,body[data-view=terminal] #tabs{display:none}
  .ranks th,.ranks td{height:56px}.ranks th{font-size:11px}
  .lgrid{grid-template-columns:1fr 1fr}
 }
-@media (prefers-reduced-motion:reduce){.lcard{transition:none}.lcard.pop{animation:none}}
+@media (prefers-reduced-motion:reduce){.lcard{transition:none}}
 
 /* ===== lab: Swiss grid (docs/spec-lab-swiss.md). Rules, not cards; visible answer rule ===== */
 :root{--good:#9DBF9E;--bad:#C98B8B}
@@ -251,3 +243,41 @@ body[data-view=terminal] #stage,body[data-view=terminal] #tabs{display:none}
  .lesson-in>.btn-primary{align-self:flex-start}
 }
 @media (prefers-reduced-motion:reduce){.btn-check,.ans input,.fld>.k{transition:none}.btn-check:active{transform:none}}
+
+/* ===== nav + themes (docs/spec-nav-themes.md): Home | Subjects | Ranks, text toggles, light tokens ===== */
+#bar{gap:var(--s2)}
+#bar .sp{flex:1}
+#crumb{flex:0 1 auto}
+#top{display:flex;gap:var(--s3)}#top button{font:500 14px var(--ui);padding:0 4px}
+.grp{display:flex;gap:4px;align-items:center}
+#bar .grp button{height:36px;min-width:44px;padding:0 8px;font:500 13px var(--ui);text-underline-offset:6px}
+#gview{display:none}body[data-tab=subjects] #gview{display:flex}
+#gview::after,#glang::before{content:'';width:1px;height:16px;background:var(--line);margin:0 8px}
+#back[hidden]{display:none}
+#ranks{position:absolute;inset:0;display:none;overflow:auto;background:var(--bg);padding:var(--s5) 80px}
+body[data-tab=ranks] #ranks{display:block}
+.r-in{max-width:1120px;margin:0 auto}
+.r-in h2{font:400 44px/1.2 var(--head);margin-bottom:var(--s4)}
+.ranks th{font:500 12px var(--ui);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.ranks .moon{color:var(--moon-text)}
+.see{display:inline-flex;align-items:center;min-height:44px;margin-top:var(--s1);padding:0;background:none;border:0;color:var(--muted);text-decoration:underline;text-underline-offset:4px;font-size:13px}
+.list.wide{max-width:1120px}
+.lgw h2{font:400 28px/1.2 var(--head);margin:var(--s5) 0 var(--s3)}
+.lgw h4{font:500 12px var(--ui);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:var(--s3) 0 var(--s2)}
+.meter b.lum{color:var(--lumens-text)}.meter b.moon{color:var(--moon-text)}
+@media (max-width:899px){body[data-tab=subjects] #gview{display:none}}
+@media (max-width:699px){#top{display:none}#ranks{padding:var(--s3) var(--s2) 96px}.ranks th:nth-child(n+4),.ranks td:nth-child(n+4){display:none}.r-in h2{font-size:32px}}
+@media (max-width:599px){
+ #bar{gap:var(--s1)}.word{font-size:18px}#crumb{display:none}#back span{display:none}#back{padding:0 8px}
+ #bar .grp{gap:0}#bar .grp button{padding:0 6px;min-width:36px}
+ #gview::after,#glang::before{height:12px;margin:0 4px}
+}
+@media (max-width:359px){#gtheme button[aria-pressed=true]{display:none}}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]){
+  --bg:#F6F0E6;--card:#FFFBF4;--line:#DDD0BC;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#6E6253;--tan:#7A5A2E;
+  --physics:#2F6F86;--math:#4A7550;--spanish:#A25A5A;--life:#7A5A2E;--good:#2F7D55;--bad:#C4383D;
+  --lumens-text:#B84700;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}}
+[data-theme=light]{
+  --bg:#F6F0E6;--card:#FFFBF4;--line:#DDD0BC;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#6E6253;--tan:#7A5A2E;
+  --physics:#2F6F86;--math:#4A7550;--spanish:#A25A5A;--life:#7A5A2E;--good:#2F7D55;--bad:#C4383D;
+  --lumens-text:#B84700;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}
