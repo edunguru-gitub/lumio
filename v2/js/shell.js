@@ -7,9 +7,9 @@ L.S={back:['Back','Înapoi'],galaxy:['Galaxy','Galaxie'],tabs:['Tabs','File'],co
  alt:['Lumio galaxies. Use Tabs for keyboard navigation.','Galaxiile Lumio. Folosește File pentru tastatură.']};
 L.subjects=[
  {id:'physics',name:['Physics','Fizică'],v:'--physics',x:-300,y:-200,lessons:[
-  {id:'optics',name:['Optics','Optică'],mod:'physics/optics',a:-.6,r:62},{id:'waves',name:['Waves','Unde'],a:1.4,r:80},{id:'mechanics',name:['Mechanics','Mecanică'],a:3.4,r:55}]},
+  {id:'optics',name:['Optics','Optică'],mod:'physics/optics',a:-.6,r:62},{id:'waves',name:['Waves','Unde'],a:1.4,r:80},{id:'mechanics',name:['Mechanics','Mecanică'],a:3.4,r:55},{id:'gas',name:['Gas & piston','Gaz și piston'],mod:'physics/gas',a:2.4,r:100}]},
  {id:'math',name:['Math','Matematică'],v:'--math',x:300,y:-200,lessons:[
-  {id:'algebra',name:['Algebra','Algebră'],a:-.4,r:70},{id:'geometry',name:['Geometry','Geometrie'],a:1.9,r:60},{id:'fractions',name:['Fractions','Fracții'],a:3.8,r:82}]},
+  {id:'algebra',name:['Algebra','Algebră'],mod:'math/algebra',a:-.4,r:70},{id:'parabola',name:['Parabola','Parabola'],mod:'math/parabola',a:.75,r:95},{id:'geometry',name:['Geometry','Geometrie'],mod:'math/pythagoras',a:1.9,r:60},{id:'fractions',name:['Fractions','Fracții'],a:3.8,r:82}]},
  {id:'spanish',name:['Spanish','Spaniolă'],v:'--spanish',x:-300,y:200,lessons:[
   {id:'greetings',name:['Greetings','Salutări'],a:-1,r:66},{id:'verbs',name:['Verbs','Verbe'],a:1.1,r:78},{id:'numbers',name:['Numbers','Numere'],a:3.3,r:58}]},
  {id:'life',name:['Life skills','Abilități de viață'],v:'--life',x:300,y:200,lessons:[
@@ -34,11 +34,11 @@ L.setView=function(v){st.view=v;emit('view')};
 var $=function(i){return document.getElementById(i)},tok=0,timer=0;
 function lesson(){
   var el=$('lesson'),t=++tok;clearTimeout(timer);
-  if(st.level!=='planet'){el.classList.remove('on');return}
+  if(st.level!=='planet'){el.classList.remove('on');timer=setTimeout(function(){if(t===tok)el.innerHTML=''},400);return}
   var s=L.subject(),l=L.lesson(),key=L.key(s,l);
   timer=setTimeout(function(){
     if(t!==tok)return;
-    var ctx={subject:s,lesson:l,color:s.color,S:L.S,n:L.n,done:function(){L.setP(key,1);L.out()}};
+    var ctx={subject:s,lesson:l,color:s.color,S:L.S,n:L.n,ui:L.ui,done:function(){L.setP(key,1);L.out()}};
     el.innerHTML='';
     var box=document.createElement('div');box.className='lesson-in';el.appendChild(box);
     var soon=function(){var h=document.createElement('h1');h.textContent=L.n(l.name);var p=document.createElement('p');p.textContent=L.n(L.S.soon);box.append(h,p)};

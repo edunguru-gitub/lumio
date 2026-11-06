@@ -45,3 +45,24 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 .btn-primary:active{transform:scale(.98)}
 @media (max-width:699px){.word{display:none}.lesson-in h1{font-size:32px}}
 @media (prefers-reduced-motion:reduce){.btn-primary:active{transform:none}}
+.lab-cv{display:block;width:100%;height:300px;border:1px solid var(--line);border-radius:var(--r2);background:var(--card);touch-action:none}
+.formula{font:700 24px/1.3 var(--head);text-align:center;overflow-wrap:anywhere}
+.sl{display:grid;grid-template-columns:24px 1fr 64px;align-items:center;gap:12px;min-height:44px}
+.sl b{font:600 15px var(--mono)}.sl output{font:13px var(--mono);color:var(--muted);text-align:right}
+.sl input{width:100%;accent-color:var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{height:40px;padding:0 14px;background:transparent;border:1px solid var(--line);border-radius:var(--r1);color:var(--ink);transition:opacity .25s}
+@media (hover:hover){.chip:hover{opacity:.75}}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);padding:10px 12px;min-width:0}
+.tile small{display:block;color:var(--muted);font-size:12px}.tile b{font:500 14px var(--mono);overflow-wrap:anywhere}
+.quest{padding:12px 14px;border:1px solid var(--line);border-radius:var(--r2);color:var(--muted);transition:color .3s,border-color .3s}
+.quest.done{border-color:var(--c);color:var(--c)}
+.badge{align-self:center;padding:4px 12px;border:1px solid var(--c);border-radius:var(--r1);color:var(--c);font:500 14px var(--mono);transition:opacity .3s}
+.badge:empty{opacity:0}
+.eq{font:700 36px/1.2 var(--head);text-align:center;padding:28px 12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r3);overflow-wrap:anywhere}
+.eq small{display:block;font:400 15px var(--ui);color:var(--muted);margin-top:10px}
+.dots{display:flex;gap:8px;justify-content:center}.dots i{width:10px;height:10px;border-radius:50%;border:1px solid var(--line)}
+.dots i.cur{border-color:var(--ink)}.dots i.ok{background:var(--c);border-color:var(--c)}.dots i.no{background:var(--spanish);border-color:var(--spanish)}
+.ans{display:flex;gap:8px}.ans input{flex:1;min-width:0;height:48px;padding:0 14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r2);color:var(--ink);font:500 18px var(--mono)}
+.fb{min-height:1.5em}.fb.ok{color:var(--c)}.fb.no{color:var(--spanish)}
