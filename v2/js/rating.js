@@ -2,7 +2,9 @@
 // lumio2_stats: lifetime Lumens, answer streak, per-lesson quests/accuracy, gain log (ticker). Ratings 0-99 from real play.
 var L=Lumio,K='lumio2_stats',st={v:1,lum:0,streak:0,best:0,les:{},log:[],o:0};
 try{var o=JSON.parse(localStorage.getItem(K));if(o&&o.v===1&&o.les&&typeof o.les==='object'){for(var k in st)if(o[k]!=null)st[k]=o[k];if(!Array.isArray(st.log))st.log=[]}}catch(e){}
-L.stats=st;
+L.stats=st;(window.LumioFeatures=window.LumioFeatures||{}).rating={};
+Object.assign(L.S,{you:['You','Tu'],new:['NEW','NOU'],moon:['Moon','Luna'],noch:['No challenges yet','Încă nicio provocare']});
+L.sgn=function(n){return n>0?'+'+n:n<0?'−'+-n:'0'};
 function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
 function les(k){return st.les[k]||(st.les[k]={qd:0,qt:0,ok:0,bad:0,ts:0})}
 L.lessons=function(){var a=[];L.subjects.forEach(function(s){s.lessons.forEach(function(l){a.push({s:s,l:l,k:L.key(s,l)})})});return a};

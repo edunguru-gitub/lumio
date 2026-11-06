@@ -7,7 +7,9 @@ var S={cv:['Right triangle with squares on each side. Drag the corners to change
  gh_45:['Equal legs → a 45° isosceles right triangle.','Catete egale → triunghi dreptunghic isoscel de 45°.'],
  gh_gen:['Drag a and b: the big square on c always equals the two small squares together.','Trage a și b: pătratul mare de pe c este mereu egal cu cele două pătrate mici.']};
 var clamp=function(v,a,b){return Math.min(b,Math.max(a,v))};
-(window.LumioModules=window.LumioModules||{})['math/pythagoras']={render:function(el,ctx){
+// manifest: shell builds subjects, planets, rows and cards from this (id = progress key part)
+(window.LumioModules=window.LumioModules||{})['math/pythagoras']={manifest:{id:'geometry',subject:'math',subjectName:['Math','Matematică'],color:'--math',title:['Geometry','Geometrie'],order:3,tags:['lab'],orbit:[1.9,60]},
+render:function(el,ctx){
   var U=ctx.ui,n2=U.n2,t=function(k,n){return ctx.n(S[k]).replace('{n}',n)},G={a:3,b:4,seen:new Set(),done:false,live:false},drag=null,
       C={ink:U.col('--ink'),card:U.col('--card'),mono:U.col('--mono')},
       cv=U.canvas(t('cv'),draw),fo=U.el('div',null,'formula'),big=U.el('div',null,'big'),bd=U.el('div',null,'badge'),ti=U.el('div',null,'tiles'),hi=U.el('p'),qu=U.el('div',null,'quest'),

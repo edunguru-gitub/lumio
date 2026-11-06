@@ -1,5 +1,7 @@
 (function(){
-(window.LumioModules=window.LumioModules||{})['physics/optics']={
+// manifest: shell builds subjects, planets, rows and cards from this (id = progress key part)
+(window.LumioModules=window.LumioModules||{})['physics/optics']={manifest:{id:'optics',subject:'physics',subjectName:['Physics','Fizică'],color:'--physics',title:['Optics','Optică'],order:1,tags:['lab'],orbit:[-.6,62]},
+
   render:function(el,ctx){
     var h=document.createElement('h1'),p=document.createElement('p'),b=document.createElement('button');
     h.textContent=ctx.n(ctx.lesson.name);p.textContent=ctx.n(ctx.subject.name);

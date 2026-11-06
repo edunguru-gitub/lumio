@@ -9,7 +9,9 @@ var S={cv:['Parabola graph','Graficul parabolei'],p_frown:['Frown','Tristă'],de
  smile:['a > 0: opens up ∪','a > 0: deschisă în sus ∪'],frown:['a < 0: opens down ∩','a < 0: deschisă în jos ∩'],
  quest:['Quest: make Δ = 0 (a ≠ 0)','Misiune: fă Δ = 0 (a ≠ 0)'],quest_done:['Quest complete','Misiune îndeplinită']};
 function poly(a,b,c){var ps=[],add=function(co,v){if(co===0)return;var ab=Math.abs(co);ps.push({neg:co<0,body:(ab===1&&v)?v:String(ab)+v})};add(a,'x²');add(b,'x');add(c,'');if(!ps.length)return'0';return ps.map(function(p,i){return(i===0?(p.neg?'−':''):(p.neg?' − ':' + '))+p.body}).join('')}
-(window.LumioModules=window.LumioModules||{})['math/parabola']={render:function(el,ctx){
+// manifest: shell builds subjects, planets, rows and cards from this (id = progress key part)
+(window.LumioModules=window.LumioModules||{})['math/parabola']={manifest:{id:'parabola',subject:'math',subjectName:['Math','Matematică'],color:'--math',title:['Parabola','Parabola'],order:2,tags:['lab','quest'],orbit:[.75,95]},
+render:function(el,ctx){
   var U=ctx.ui,n2=U.n2,t=function(k){return ctx.n(S[k])},L={a:1,b:-4,c:3,quest:false},
       C={line:U.col('--line'),ink:U.col('--ink'),muted:U.col('--muted'),card:U.col('--card'),mono:U.col('--mono')},
       cv=U.canvas(t('cv'),draw),fo=U.el('div',null,'formula'),ti=U.el('div',null,'tiles'),hi=U.el('p'),qu=U.el('div',null,'quest'),

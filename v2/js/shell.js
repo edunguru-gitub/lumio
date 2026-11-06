@@ -9,16 +9,25 @@ L.S={back:['Back','Înapoi'],lum:['Lumens','Lumeni'],light:['Light','Luminos'],d
  hint:['Click: go in. Right click: go out','Click: intri. Click dreapta: ieși'],soon:['Coming soon','În curând'],of:['{a} of {b} lessons','{a} din {b} lecții'],subject:['Subject','Materie'],now:['Now','Acum'],
  home:['Home','Acasă'],missions:['Missions','Misiuni'],ranks:['Ranks','Clasament'],zin:['Go in','Intră'],zout:['Go out','Ieși'],
  alt:['Lumio galaxies. Use Tabs for keyboard navigation.','Galaxiile Lumio. Folosește File pentru tastatură.']};
-L.subjects=[
- {id:'physics',name:['Physics','Fizică'],v:'--physics',x:-300,y:-200,lessons:[
-  {id:'optics',name:['Optics','Optică'],mod:'physics/optics',a:-.6,r:62},{id:'waves',name:['Waves','Unde'],a:1.4,r:80},{id:'mechanics',name:['Mechanics','Mecanică'],a:3.4,r:55},{id:'gas',name:['Gas & piston','Gaz și piston'],mod:'physics/gas',a:2.4,r:100}]},
- {id:'math',name:['Math','Matematică'],v:'--math',x:300,y:-200,lessons:[
-  {id:'algebra',name:['Algebra','Algebră'],mod:'math/algebra',a:-.4,r:70},{id:'parabola',name:['Parabola','Parabola'],mod:'math/parabola',a:.75,r:95},{id:'geometry',name:['Geometry','Geometrie'],mod:'math/pythagoras',a:1.9,r:60},{id:'fractions',name:['Fractions','Fracții'],a:3.8,r:82}]},
- {id:'spanish',name:['Spanish','Spaniolă'],v:'--spanish',x:-300,y:200,lessons:[
-  {id:'greetings',name:['Greetings','Salutări'],a:-1,r:66},{id:'verbs',name:['Verbs','Verbe'],a:1.1,r:78},{id:'numbers',name:['Numbers','Numere'],a:3.3,r:58}]},
- {id:'life',name:['Life skills','Abilități de viață'],v:'--life',x:300,y:200,lessons:[
-  {id:'budgeting',name:['Budgeting','Buget'],a:-.8,r:60},{id:'focus',name:['Focus','Concentrare'],a:1.5,r:80},{id:'sleep',name:['Sleep','Somn'],a:3.6,r:64}]}
-];
+L.t=function(k,o){var s=L.n(L.S[k]);for(var p in o)s=s.replace('{'+p+'}',o[p]);return s};
+// features (js/<id>.js) register in window.LumioFeatures; missing = skipped
+L.has=function(id){return !!(window.LumioFeatures||{})[id]};
+L.tabOk=function(t){return t==='subjects'||L.has(t==='home'?'terminal':'ranks')};
+// boot queue: runs after DOM + every registry file (loader.js); shell's own boot is first
+var bq=[];L.boot=function(f){bq?bq.push(f):f()};L.boot.run=function(){var q=bq;bq=null;q.forEach(function(f){f()})};
+// subjects + lessons from LumioRegistry: "subject/file" = module manifest, object = placeholder (Coming soon)
+L.subjects=[];
+L.build=function(){
+  var R=window.LumioRegistry||{},M=window.LumioModules,by={},out=[];
+  (R.lessons||[]).forEach(function(e){
+    var k=typeof e==='string'?e:null,m=k?M[k]&&M[k].manifest:e;if(!m||!m.id||!m.subject)return;
+    var s=by[m.subject],o=m.orbit||[(m.order||0)*1.3,70];
+    if(!s){s=by[m.subject]={id:m.subject,name:m.subjectName||[m.subject,m.subject],v:m.color,lessons:[]};out.push(s)}
+    s.lessons.push({id:m.id,name:m.title,mod:k&&M[k].render?k:undefined,order:m.order||0,tags:m.tags||[],a:o[0],r:o[1]});
+  });
+  out.forEach(function(s,i){s.x=i%2?300:-300;s.y=-200+400*(i>>1);s.lessons.sort(function(a,b){return a.order-b.order})});
+  L.subjects=out;
+};
 L.reduced=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches};
 var prog={};
 try{var p=JSON.parse(localStorage.getItem(K));if(p&&typeof p==='object')prog=p}catch(e){}
@@ -65,8 +74,8 @@ function lesson(){
   var s=L.subject(),l=L.lesson(),key=L.key(s,l);
   timer=setTimeout(function(){
     if(t!==tok)return;
-    var ctx={subject:s,lesson:l,color:s.color,S:L.S,n:L.n,ui:L.ui,done:function(){L.setP(key,1);L.note(key,0);L.out()},
-      report:function(o){return L.report(key,o)},award:function(n){n=L.award(key,n);gain(n);return n}};
+    var ctx={subject:s,lesson:l,color:s.color,S:L.S,n:L.n,ui:L.ui,done:function(){L.setP(key,1);if(L.note)L.note(key,0);L.out()},
+      report:function(o){return L.report?L.report(key,o):false},award:function(n){n=L.award?L.award(key,n):0;gain(n);return n}};
     el.innerHTML='';
     var box=document.createElement('div');box.className='lesson-in';el.appendChild(box);
     var soon=function(){var h=document.createElement('h1');h.textContent=L.n(l.name);var p=document.createElement('p');p.textContent=L.n(L.S.soon);box.append(h,p)};
@@ -99,7 +108,9 @@ function labels(){
   $('cv').setAttribute('aria-label',L.n(L.S.alt));
 }
 L.on(function(s,kind){if(kind==='stats')return;if(kind!=='progress'&&kind!=='view')lesson();chrome()});
-document.addEventListener('DOMContentLoaded',function(){
+L.boot(function(){
+  L.build();if(!L.tabOk(st.tab))st.tab='subjects';
+  document.querySelectorAll('#top button').forEach(function(b){b.hidden=!L.tabOk(b.dataset.t)});
   var cs=getComputedStyle(document.documentElement);
   L.subjects.forEach(function(s){s.color=cs.getPropertyValue(s.v).trim()});
   labels();$('back').onclick=$('cback').onclick=$('zout').onclick=L.out;

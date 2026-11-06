@@ -13,7 +13,7 @@ K.go=function(){
   })(t0);
 };
 function hintOff(){var h=document.getElementById('hint');h.classList.remove('on');try{localStorage.setItem(HK,'1')}catch(e){}}
-document.addEventListener('DOMContentLoaded',function(){
+L.boot(function(){
   cv=document.getElementById('cv');
   var G=L.Galaxy,main=document.getElementById('main'),pos=function(e){var r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]};
   var into=function(h){if(h)L.into(h.sid,h.lid)};

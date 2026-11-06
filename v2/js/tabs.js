@@ -12,7 +12,7 @@ function spk(n){var e=document.createElement('span');e.className='spk';e.setAttr
 L.spk=spk;
 function bar(st){
   var el=document.getElementById('tabbar');el.replaceChildren();
-  ['home','subjects','ranks'].forEach(function(t){
+  ['home','subjects','ranks'].filter(L.tabOk).forEach(function(t){
     var b=L.ui.el('button',L.n(L.S[t]));b.type='button';b.onclick=function(){L.setTab(t)};
     if(st.tab===t)b.setAttribute('aria-current','page');el.appendChild(b);
   });
@@ -23,7 +23,7 @@ function render(st){
   if(st.level==='home'){
     h.textContent=L.n(L.S.subjects);
     box.classList.add('wide');L.subjects.forEach(function(x,i){box.appendChild(row(i+1,L.n(x.name),L.count(x),function(){L.go('galaxy',x.id)}))});
-    box.appendChild(L.lessonGrid());
+    if(L.lessonGrid)box.appendChild(L.lessonGrid());
   }else{
     var top=L.ui.el('div',null,'thead'),mc=L.ui.el('canvas');mc.setAttribute('aria-hidden','true');
     top.append(L.head(s,L.n(L.S.subject)),mc);box.replaceChild(top,h);L.Galaxy.mini(mc,s);
@@ -33,5 +33,5 @@ function render(st){
   }
   el.innerHTML='';el.appendChild(box);bar(st);
 }
-document.addEventListener('DOMContentLoaded',function(){L.on(function(s,k){if(k!=='stats')render(s)});render(L.state)});
+L.boot(function(){L.on(function(s,k){if(k!=='stats')render(s)});render(L.state)});
 })();

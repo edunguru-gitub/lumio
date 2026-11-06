@@ -16,7 +16,9 @@ function genQ(){var k=pk(['delta','xv','f0','f1','root','delta']),a,b,c,ans,x,r1
   else if(k==='f1'){a=pk([1,2,-1,-2]);b=ri(-5,5);c=ri(-6,6);ans=a+b+c}
   else{r1=ri(-4,2);r2=r1+ri(1,4);a=1;b=-(r1+r2);c=r1*r2;ans=r2}
   return{k:k,a:a,b:b,c:c,ans:ans}}
-(window.LumioModules=window.LumioModules||{})['math/algebra']={render:function(el,ctx){
+// manifest: shell builds subjects, planets, rows and cards from this (id = progress key part)
+(window.LumioModules=window.LumioModules||{})['math/algebra']={manifest:{id:'algebra',subject:'math',subjectName:['Math','Matematică'],color:'--math',title:['Algebra','Algebră'],order:1,tags:['quiz','first'],orbit:[-.4,70]},
+render:function(el,ctx){
   var U=ctx.ui,Q={cur:null,i:0,res:[],score:0,done:false,busy:false},
       t=function(k,o){return ctx.n(S[k]).replace(/\{(\w+)\}/g,function(m,p){return o?String(o[p]).replace('-','−'):m})},
       eq=U.el('div',null,'eq'),dots=U.el('div',null,'dots'),fb=U.el('p',null,'fb'),fld=U.el('div',null,'fld'),lb=U.el('label',t('ans'),'k'),row=U.el('div',null,'ans'),inp=U.el('input'),

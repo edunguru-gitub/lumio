@@ -2,8 +2,7 @@
 var L=Lumio,G=L.Galaxy={},cv,cx,W=0,H=0,dpr=1,raf=0,run=false,hover=null,C={},PR=13,N=650,seed=7,TL=-.26,TC=Math.cos(TL),TS=Math.sin(TL);
 var cam=L.cam={x:0,y:0,z:1};
 function rnd(){seed=seed*16807%2147483647;return seed/2147483647}
-var dust=L.subjects.map(function(){var a=[];for(var k=0;k<N;k++)a.push({u:Math.sqrt(rnd()),a:k%3*2.094+(rnd()-.5)*.9,s:.6+rnd()*.7,al:.15+rnd()*.55});return a});
-var sky=[];for(var k=0;k<120;k++)sky.push({x:rnd(),y:rnd(),al:.15+rnd()*.35});
+var dust=[],sky=[];
 // spiral dust (y-squash .5, tilt TL) + glowing ink core; z keeps specks/core a fixed screen size
 function spiral(c,x,y,i,rd,rot,a,z,cs,col){
   c.fillStyle=col;
@@ -66,7 +65,10 @@ function resize(){
   dpr=window.devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;
   var t=G.focus(L.state);cam.x=t.x;cam.y=t.y;cam.z=t.z;G.requestDraw();
 }
-document.addEventListener('DOMContentLoaded',function(){
+L.boot(function(){
+  // dust per subject (built from manifests), then sky: same seed order as before
+  dust=L.subjects.map(function(){var a=[];for(var k=0;k<N;k++)a.push({u:Math.sqrt(rnd()),a:k%3*2.094+(rnd()-.5)*.9,s:.6+rnd()*.7,al:.15+rnd()*.55});return a});
+  for(var k=0;k<120;k++)sky.push({x:rnd(),y:rnd(),al:.15+rnd()*.35});
   cv=document.getElementById('cv');cx=cv.getContext('2d');
   // canvas colours from tokens; re-read on theme change ('skin')
   var read=function(){var cs=getComputedStyle(document.documentElement),g=function(n){return cs.getPropertyValue(n).trim()};

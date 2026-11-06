@@ -9,8 +9,14 @@ Ld.load=function(key){
     document.head.appendChild(s);
   }));
 };
-L.on(function(st,kind){
-  if(kind!=='nav'||st.level==='home')return;
-  L.subject().lessons.forEach(function(l){if(l.mod)Ld.load(l.mod).catch(function(){})});
+// boot: load every registry feature + lesson file (in order; missing file = skipped), then run L.boot queue.
+// Hosted build inlines them all and sets LumioRegistry.inline, so nothing is fetched.
+document.addEventListener('DOMContentLoaded',function(){
+  var R=window.LumioRegistry||{},F=window.LumioFeatures=window.LumioFeatures||{},M=window.LumioModules,src=[];
+  if(!R.inline){
+    (R.features||[]).forEach(function(f){if(!F[f])src.push('js/'+f+'.js')});
+    (R.lessons||[]).forEach(function(k){if(typeof k==='string'&&!M[k])src.push('modules/'+k+'.js')});
+  }
+  Promise.all(src.map(function(u){return new Promise(function(res){var s=document.createElement('script');s.src=u;s.async=false;s.onload=s.onerror=res;document.head.appendChild(s)})})).then(L.boot.run);
 });
 })();
