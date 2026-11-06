@@ -109,7 +109,6 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 .chip{padding:0;border:0;border-bottom:1px solid var(--line);border-radius:0}
 .chips{gap:var(--s1) var(--s3)}
 .btn-primary{height:48px;border-color:color-mix(in srgb,var(--c) 40%,transparent)}
-.t-right>.btn-primary{margin-bottom:var(--s4)}
 @media (max-width:699px){#bar{height:64px;padding:0 var(--s2);gap:var(--s2)}#ghead{top:var(--s3)}#ctl{right:var(--s2);bottom:var(--s2)}#tabs{padding:var(--s4) var(--s2)}.lesson-in{padding:var(--s4) var(--s2) var(--s5)}.row{height:56px}}
 @media (prefers-reduced-motion:reduce){#back,#bar .grp button,#top button,#ctl button,#tabbar button{transition:none}}
 /* ===== terminal: player card, meters, rankings, lesson cards, ticker ===== */
@@ -122,7 +121,7 @@ body:not([data-tab=subjects]) #stage,body:not([data-tab=subjects]) #tabs{display
 #term h2{font:400 28px/1.2 var(--head);margin:var(--s5) 0 var(--s3)}
 #term h4,#term small,.ranks th{font:500 12px var(--ui);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 #term h4{margin:var(--s3) 0 var(--s2)}
-.meters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s3)}
+.meters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
 .meter{border-top:1px solid var(--line);padding-top:var(--s1);min-width:0}
 .meter b{display:flex;align-items:center;gap:6px;font:500 20px var(--mono);font-variant-numeric:tabular-nums}
 .meter b.lum{color:var(--lumens)}.meter b.moon{color:var(--moon)}
@@ -164,7 +163,7 @@ body:not([data-tab=subjects]) #stage,body:not([data-tab=subjects]) #tabs{display
  .pcard .mono{display:none}.pcard h3{grid-column:2;grid-row:1;margin:0;align-self:end}.pcard .csub{grid-column:2/4;grid-row:2}
  .pcard .cstats{grid-column:1/4;grid-row:4}
  #term h2{font-size:24px}
- .meters{grid-template-columns:1fr 1fr;gap:var(--s2) var(--s3)}
+ .meters{gap:var(--s2)}
  .tick-m{display:block;margin-top:var(--s3)}.tick-m li{height:40px;line-height:40px;border-bottom:1px solid var(--line);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
  #term>.tick{display:none}
  .ranks th,.ranks td{height:56px}.ranks th{font-size:11px}
@@ -281,3 +280,13 @@ body[data-tab=ranks] #ranks{display:block}
   --bg:#F6F0E6;--card:#FFFBF4;--line:#DDD0BC;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#6E6253;--tan:#7A5A2E;
   --physics:#2F6F86;--math:#4A7550;--spanish:#A25A5A;--life:#7A5A2E;--good:#2F7D55;--bad:#C4383D;
   --lumens-text:#B84700;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}
+
+/* ===== first run + rewards (docs/review-v2-psych.md) ===== */
+.ccard{width:100%;min-height:140px;margin-bottom:var(--s4);border-color:color-mix(in srgb,var(--c) 40%,var(--line));cursor:pointer}
+.ccard h3{margin:var(--s1) 0 4px}.ccard .lum{color:var(--lumens-text);font:500 14px var(--mono)}
+@media (hover:hover){.ccard:hover{border-color:var(--c)}}
+.ov b.new{display:inline-block;padding:6px 10px;border:1px solid var(--tan);border-radius:var(--r1);color:var(--tan);font:500 13px/1 var(--mono);letter-spacing:.08em}
+#gain{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:5;pointer-events:none;font:500 20px var(--mono);color:var(--lumens-text);opacity:0}
+#gain.on{animation:gain 1.6s ease-out}
+@keyframes gain{0%{opacity:0;transform:translate(-50%,12px)}20%{opacity:1;transform:translate(-50%,0)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-8px)}}
+@media (prefers-reduced-motion:reduce){@keyframes gain{0%,100%{opacity:0}15%,75%{opacity:1}}}

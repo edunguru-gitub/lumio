@@ -5,7 +5,7 @@ var K='lumio2_progress';
 L.pref=function(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
 var ro=/^ro/i.test(L.pref('lumio2_lang')||navigator.language||''),pv=L.pref('lumio2_view')==='tabs'?'tabs':'galaxy',sysL=matchMedia('(prefers-color-scheme: light)');
 L.n=function(a){return a[ro?1:0]};
-L.S={back:['Back','Înapoi'],light:['Light','Luminos'],dark:['Dark','Întunecat'],galaxy:['Galaxy','Galaxie'],tabs:['Tabs','File'],cont:['Continue','Continuă'],subjects:['Subjects','Materii'],
+L.S={back:['Back','Înapoi'],lum:['Lumens','Lumeni'],light:['Light','Luminos'],dark:['Dark','Întunecat'],galaxy:['Galaxy','Galaxie'],tabs:['Tabs','File'],cont:['Continue','Continuă'],subjects:['Subjects','Materii'],
  hint:['Click: go in. Right click: go out','Click: intri. Click dreapta: ieși'],soon:['Coming soon','În curând'],of:['{a} of {b} lessons','{a} din {b} lecții'],subject:['Subject','Materie'],now:['Now','Acum'],
  home:['Home','Acasă'],missions:['Missions','Misiuni'],ranks:['Ranks','Clasament'],zin:['Go in','Intră'],zout:['Go out','Ieși'],
  alt:['Lumio galaxies. Use Tabs for keyboard navigation.','Galaxiile Lumio. Folosește File pentru tastatură.']};
@@ -66,7 +66,7 @@ function lesson(){
   timer=setTimeout(function(){
     if(t!==tok)return;
     var ctx={subject:s,lesson:l,color:s.color,S:L.S,n:L.n,ui:L.ui,done:function(){L.setP(key,1);L.note(key,0);L.out()},
-      report:function(o){return L.report(key,o)},award:function(n){return L.award(key,n)}};
+      report:function(o){return L.report(key,o)},award:function(n){n=L.award(key,n);gain(n);return n}};
     el.innerHTML='';
     var box=document.createElement('div');box.className='lesson-in';el.appendChild(box);
     var soon=function(){var h=document.createElement('h1');h.textContent=L.n(l.name);var p=document.createElement('p');p.textContent=L.n(L.S.soon);box.append(h,p)};
@@ -74,6 +74,8 @@ function lesson(){
     el.classList.add('on');el.scrollTop=0;
   },L.gal()&&!L.reduced()?600:0);
 }
+// reward pop: '+N Lumens' (Lumens colour), fades; Reduce motion = no movement
+function gain(n){var g=$('gain');if(!n)return;g.textContent='+'+n+' '+L.n(L.S.lum);g.classList.remove('on');void g.offsetWidth;g.classList.add('on')}
 function chrome(){
   var s=L.subject(),l=L.lesson();
   $('crumb').textContent=st.tab!=='subjects'||st.level==='home'?'':L.n(s.name)+(l?' / '+L.n(l.name):'');
