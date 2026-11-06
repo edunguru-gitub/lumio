@@ -1,26 +1,42 @@
 (function(){
-var L=Lumio,G=L.Galaxy={},cv,cx,W=0,H=0,dpr=1,raf=0,run=false,hover=null,C={},PR=13,N=650,seed=7,TL=-.26,TC=Math.cos(TL),TS=Math.sin(TL);
+var L=Lumio,G=L.Galaxy={},cv,cx,W=0,H=0,dpr=1,raf=0,run=false,hover=null,C={},PR=13,N=650,seed=7,TL=-.26;
 var cam=L.cam={x:0,y:0,z:1};
 function rnd(){seed=seed*16807%2147483647;return seed/2147483647}
 var dust=[],sky=[];
 // spiral dust (y-squash .5, tilt TL) + glowing ink core; z keeps specks/core a fixed screen size
-function spiral(c,x,y,i,rd,rot,a,z,cs,col){
-  c.fillStyle=col;
+function spiral(c,x,y,i,rd,rot,a,z,cs,col,tl){
+  tl=tl==null?TL:tl;var TC=Math.cos(tl),TS=Math.sin(tl);c.fillStyle=col;
   dust[i].forEach(function(d){var an=d.a+d.u*2.6+rot,r=d.u*rd,u=r*Math.cos(an),v=r*Math.sin(an)*.5;c.globalAlpha=d.al*a;c.beginPath();c.arc(x+u*TC-v*TS,y+u*TS+v*TC,d.s/Math.sqrt(z),0,6.2832);c.fill()});
-  c.globalAlpha=a;c.fillStyle=C.ink;c.shadowColor=C.glow;c.shadowBlur=14;c.beginPath();c.ellipse(x,y,cs/z,cs/2/z,TL,0,6.2832);c.fill();c.shadowBlur=0;
+  c.globalAlpha=a;c.fillStyle=C.ink;c.shadowColor=C.glow;c.shadowBlur=14;c.beginPath();c.ellipse(x,y,cs/z,cs/2/z,tl,0,6.2832);c.fill();c.shadowBlur=0;
 }
 function spark(c,x,y,r,on){c.beginPath();for(var j=0;j<8;j++){var q=j*.7854,rr=j%2?r*.35:r;c.lineTo(x+rr*Math.sin(q),y-rr*Math.cos(q))}c.closePath();on?c.fill():c.stroke()}
 G.mini=function(el,s){
   var d=window.devicePixelRatio||1,c=el.getContext('2d'),i=L.subjects.indexOf(s),rd=G.rad(s),k=50/rd;el.width=el.height=110*d;
-  c.setTransform(d*k,0,0,d*k,55*d,55*d);spiral(c,0,0,i,rd,0,1,k,8,s.color);c.globalAlpha=1;
+  c.setTransform(d*k,0,0,d*k,55*d,55*d);spiral(c,0,0,i,rd,0,1,k,8,s.color,s.tl);c.globalAlpha=1;
 };
 var cl=function(v){return Math.max(0,Math.min(1,v))};
-G.rad=function(s){return 120+90*L.sp(s)};
+G.rad=function(s){return(120+90*L.sp(s))*(s.k||1)};
 G.ppos=function(s,l){return{x:s.x+l.r*Math.cos(l.a),y:s.y+l.r*Math.sin(l.a)}};
-G.homeZ=function(){return Math.min(W/1160,H/960)||1};
+// home framing: fit every galaxy (max size) + its label (screen px) inside the canvas with margins; cached per size+lang
+var hc={};
+G.home=function(){
+  if(!W||!H||!L.subjects.length)return{x:0,y:0,z:1};var key=W+'x'+H+document.documentElement.lang;if(hc.k===key)return hc;
+  var z=1,b,mx=48,my=56;
+  for(var it=0;it<5;it++){
+    b=[1e9,1e9,-1e9,-1e9];
+    L.subjects.forEach(function(s){
+      var R=210*(s.k||1);cx.font='400 22px '+C.head;var lw=cx.measureText(L.n(s.name)).width/2/z;
+      b[0]=Math.min(b[0],s.x-Math.max(R,lw));b[2]=Math.max(b[2],s.x+Math.max(R,lw));b[1]=Math.min(b[1],s.y-R*.6);b[3]=Math.max(b[3],s.y+R*.6+62/z);
+    });
+    z=Math.min((W-2*mx)/(b[2]-b[0]),(H-2*my)/(b[3]-b[1]))||1;
+  }
+  return hc={k:key,x:(b[0]+b[2])/2,y:(b[1]+b[3])/2,z:z};
+};
+G.homeZ=function(){return G.home().z};
 G.focus=function(st){
+  if(cv&&cv.parentNode.clientWidth!==W)resize(); // stage just shown (tab switch): size before framing
   var m=Math.min(W,H),s=L.subject();
-  if(st.level==='home')return{x:0,y:0,z:G.homeZ()};
+  if(st.level==='home'){var h=G.home();return{x:h.x,y:h.y,z:h.z}}
   if(st.level==='galaxy')return{x:s.x,y:s.y,z:m*.4/G.rad(s)};
   var p=G.ppos(s,L.lesson());return{x:p.x,y:p.y,z:m*.2/PR};
 };
@@ -40,7 +56,7 @@ G.draw=function(){
   cx.textBaseline='middle';
   L.subjects.forEach(function(s,i){
     var rd=G.rad(s),a=s===near?1:1-.7*f,cur=L.cur(s);
-    spiral(cx,s.x,s.y,i,rd,rot,a,z,14,s.color);
+    spiral(cx,s.x,s.y,i,rd,rot,a,z,14,s.color,s.tl);
     s.lessons.forEach(function(l){
       var p=G.ppos(s,l),pr=PR*(.45+.55*f),k=L.getP(L.key(s,l)),hv=hover&&hover.sid===s.id&&hover.lid===l.id,lk=!l.mod,now=l===cur,ia=a*(lk?.35:1),lx=p.x+pr+10/z;
       cx.globalAlpha=ia;cx.fillStyle=cx.strokeStyle=s.color;cx.lineWidth=1.5/z;cx.beginPath();cx.arc(p.x,p.y,pr,0,6.2832);lk||now?cx.stroke():cx.fill();
@@ -75,9 +91,10 @@ L.boot(function(){
     C={ink:g('--ink'),muted:g('--muted'),tan:g('--tan'),ui:g('--ui'),head:g('--head'),mono:g('--mono'),sky:g('--sky'),skyA:+g('--sky-a')||1,glow:g('--core-glow')}};
   read();
   new ResizeObserver(resize).observe(cv.parentNode);
+  if(document.fonts)document.fonts.ready.then(function(){hc={};resize()});
   document.addEventListener('visibilitychange',G.sync);
   matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',G.sync);
-  L.on(function(s,kind){if(kind==='stats')return;if(kind==='skin')read();if(kind==='progress'||kind==='skin')G.requestDraw();else G.sync()});
+  L.on(function(s,kind){if(kind==='stats')return;if(kind==='skin'){read();hc={}}if(kind==='progress'||kind==='skin')G.requestDraw();else G.sync()});
   G.sync();
 });
 })();
