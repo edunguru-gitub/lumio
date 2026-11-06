@@ -7,3 +7,6 @@
 - Commits end with the Co-Authored-By / Claude-Session lines.
 - Effort policy (Manager sets per call): LOW = typo/CSS tweak, fast, few tokens. MEDIUM = normal feature (default). HIGH = new architecture, hard bug, v2 shell/galaxy engine. MAX only for irreversible/critical work. Pick the lowest that works; the tester always runs at LOW/MEDIUM.
 - Agent skills: david -> docs/skills/david-build + lumio-lean-code; designer -> designer-review + lumio-taste; tester -> tester-verify.
+- Manager owns effort choice; tokens first. Always tell Eduard when effort changes ("EFFORT: low->high, reason").
+- Before design work: Manager scans free animation libs and free website designs (license-checked, free only), shortlists, discusses with designer, then presents to Eduard.
+- Team audit: if an agent has no purpose, Manager tells Eduard; then merge/remove/add agents together. Priority: process efficiency.
