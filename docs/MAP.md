@@ -20,6 +20,8 @@ david (opus, builds), designer (spec/review), tester (verifies, low/medium), psy
 shell.js (views, ctx, nav), galaxy.js, camera.js, tabs.js, terminal.js, rating.js (lumio2_stats), loader.js, ui.js, physics.js. Lessons: math/parabola, math/algebra, math/pythagoras, physics/gas, physics/optics. Storage keys: lumio2_progress, lumio2_stats, lumio2_view, lumio2_theme, lumio2_lang.
 ## Blocked / waiting on Eduard
 Matter.js licence check at source; Zoom recordings need transcript; Darius OK on Lumi unlock rule; Windows (Rainmeter) 4 questions.
+## PARITY GAPS (Tester audit 6 Nov, restore all; Eduard rule)
+P1 rewards/sound/confetti/streak XP, gas 4th tile + degC + flames/ice/thermometer + overpressure flash, pythagoras angle labels, titles, Read aloud (TTS) parabola/algebra/hints. P2 algebra handwriting pad + OCR. P3 phone controller (knob, sliders, tilt, Motion, hybrid; needs relay). Optics has NO v1 source: ask Eduard keep or remove.
 ## Open (order)
 NEXT: galaxy home organic scattered placement (seeded random, no overlap, varied size+tilt; after manifests). Then: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
