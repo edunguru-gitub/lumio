@@ -148,7 +148,7 @@ L.boot(function(){
   addEventListener('resize',function(){if(eff()!==st.view){st.view=eff();emit('view')}});
   document.addEventListener('keydown',function(e){
     var t=e.target;if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable)return;
-    if(e.key==='Escape'||e.key==='Backspace'){e.preventDefault();L.out()}
+    if(e.key==='Escape'||e.key==='Backspace'&&st.level!=='planet'){e.preventDefault();L.out()}
   });
   chrome();
 });
