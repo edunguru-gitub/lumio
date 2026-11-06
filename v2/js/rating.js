@@ -6,11 +6,11 @@ L.stats=st;
 function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
 function les(k){return st.les[k]||(st.les[k]={qd:0,qt:0,ok:0,bad:0,ts:0})}
 L.lessons=function(){var a=[];L.subjects.forEach(function(s){s.lessons.forEach(function(l){a.push({s:s,l:l,k:L.key(s,l)})})});return a};
-// rating = round(99*(.5P+.3Q+.2A)); A=.5 under 5 attempts; null = unrated
+// rating = round(99*(.5P+.3Q+.2A)); A=0 under 5 attempts (no free accuracy points); null = unrated
 L.rate=function(k){
   var s=st.les[k]||{},P=L.getP(k),n=(s.ok||0)+(s.bad||0);
   if(!P&&!n&&!s.qd)return null;
-  return Math.round(99*(.5*P+.3*(s.qt?Math.min(1,s.qd/s.qt):0)+.2*(n>=5?s.ok/n:.5)));
+  return Math.round(99*(.5*P+.3*(s.qt?Math.min(1,s.qd/s.qt):0)+.2*(n>=5?s.ok/n:0)));
 };
 function mean(a){a=a.filter(function(r){return r!=null});return a.length?Math.round(a.reduce(function(x,y){return x+y},0)/a.length):null}
 L.overall=function(){var r=L.lessons().map(function(x){return L.rate(x.k)});return{r:mean(r),n:r.filter(function(v){return v!=null}).length,of:r.length}};
