@@ -15,7 +15,7 @@ function demo(ctx){
       ball=new P.Ball({e:par.e,r:12}),pis=new P.Piston({k:par.k,c:par.c}),em=new P.Emitter({drag:3,life:.7}),
       rm=matchMedia('(prefers-reduced-motion: reduce)'),loop;
   cv.setAttribute('role','img');cv.setAttribute('aria-label','Bouncing ball and spring piston');
-  cv.style.cssText='display:block;width:100%;height:200px;margin:24px 0;touch-action:none;border:1px solid '+col('--line')+';border-radius:'+col('--r2')+';background:'+col('--card');
+  cv.className='lab-cv';cv.style.height='200px';
   function reset(){ball.x=W*.3;ball.y=24;ball.vx=60;ball.vy=0;}
   function size(){var d=devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;g.setTransform(d,0,0,d,0,0);
     ball.w=W*.6;ball.h=H;pis.len=W*.3;if(!ball.x)reset();loop&&loop.redraw();}

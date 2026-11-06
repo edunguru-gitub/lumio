@@ -90,3 +90,37 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 @font-face{font-family:Inter;src:url(../fonts/Inter-Regular.woff2);font-weight:400;font-display:swap}
 @font-face{font-family:Inter;src:url(../fonts/Inter-Medium.woff2);font-weight:500;font-display:swap}
 @font-face{font-family:Inter;src:url(../fonts/Inter-SemiBold.woff2);font-weight:600;font-display:swap}
+/* ===== open: borderless chrome, 8/16/24/32/48 scale, hairlines, softer secondary (AA >=4.7:1) ===== */
+:root{--s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:48px;--muted:#958C7B}
+#bar{height:64px;gap:var(--s3);padding:0 var(--s4);border-bottom:0}
+#back,#toggle button,#ctl button,#tabbar button{height:44px;padding:0;background:none;border:0;border-radius:0;color:var(--muted);transition:color var(--t)}
+#toggle{gap:var(--s3)}
+#toggle button[aria-pressed=true],#tabbar [aria-current=page]{background:none;color:var(--ink);text-decoration:underline 1px var(--tan);text-underline-offset:8px}
+@media (hover:hover){#back:not(:disabled):hover,#toggle button:hover,#ctl button:not(:disabled):hover,#tabbar button:not(:disabled):hover{color:var(--ink)}}
+#ghead{top:var(--s5)}
+.pbar{margin-top:var(--s2)}.cnt{margin-top:var(--s1)}
+#ctl{right:var(--s4);bottom:var(--s4);gap:var(--s3);padding:0;background:none;border:0;border-radius:0;text-shadow:0 0 12px var(--bg)}
+#ctl button{min-width:24px;font-size:20px}#ctl #cback{padding:0;font-size:15px}
+#tabs{padding:var(--s5) var(--s3)}
+.list,.lesson-in{max-width:62ch}
+.list>h2{margin-bottom:var(--s4)}
+.thead{gap:var(--s3);margin-bottom:var(--s4)}
+.row{height:64px;gap:var(--s3);padding:0}
+.row.dim{opacity:1}.row.dim .n{color:var(--muted);font-weight:400}
+.list .btn-primary{margin-top:var(--s5)}
+#tabbar{height:64px;padding:0 var(--s2);gap:var(--s2);border-top:0}
+.lesson-in{padding:var(--s5) var(--s3) 96px;gap:var(--s4)}
+.lab-cv{margin:var(--s2) 0;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;background:none}
+.sl{gap:var(--s2);min-height:48px}
+.chip{padding:0;border:0;border-bottom:1px solid var(--line);border-radius:0}
+.chips{gap:var(--s1) var(--s3)}
+.tiles{gap:var(--s3) var(--s4)}
+.tile{padding:var(--s1) 0 0;background:none;border:0;border-top:1px solid var(--line);border-radius:0}
+.quest{padding:var(--s1) 0 var(--s1) var(--s2);border:0;border-left:1px solid var(--line);border-radius:0}
+.quest.done{border-left-color:var(--c)}
+.badge{padding:0;border:0}
+.eq{padding:var(--s4) 0;background:none;border:0}
+.ans{gap:var(--s2)}.ans input{padding:0 var(--s1);background:none;border:0;border-bottom:1px solid var(--line);border-radius:0}
+.ans input:focus{border-bottom-color:var(--tan)}
+@media (max-width:699px){#bar{padding:0 var(--s2);gap:var(--s2)}#ghead{top:var(--s3)}#ctl{right:var(--s2);bottom:var(--s2)}#tabs{padding:var(--s4) var(--s2)}.lesson-in{padding:var(--s4) var(--s2) var(--s5)}.row{height:56px}}
+@media (prefers-reduced-motion:reduce){#back,#toggle button,#ctl button,#tabbar button{transition:none}}
