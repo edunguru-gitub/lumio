@@ -15,7 +15,7 @@ function poly(a,b,c){var ps=[],add=function(co,v){if(co===0)return;var ab=Math.a
       cv=U.canvas(t('cv'),draw),fo=U.el('div',null,'formula'),ti=U.el('div',null,'tiles'),hi=U.el('p'),qu=U.el('div',null,'quest'),
       sl=[['a',-5,5,.5],['b',-10,10,1],['c',-8,8,1]].map(function(d){return U.slider(d[0],d[1],d[2],d[3],L[d[0]],n2,function(v){L[d[0]]=v;upd()})}),
       ch=U.chips([['Δ > 0'],['Δ = 0'],['Δ < 0'],[t('p_frown')]],function(i){var p=[[1,-4,3],[1,2,1],[1,0,2],[-1,2,3]][i];L.a=p[0];L.b=p[1];L.c=p[2];sl.forEach(function(s,j){s.set(p[j])});upd()});
-  el.style.setProperty('--c',ctx.color);qu.setAttribute('aria-live','polite');
+  el.style.setProperty('--c',ctx.color);qu.setAttribute('aria-live','polite');ctx.report({qt:1});
   el.append(U.el('h1',ctx.n(ctx.lesson.name)),cv,fo,sl[0],sl[1],sl[2],ch,ti,hi,qu,U.cont(ctx));
   function upd(){var a=L.a,b=L.b,c=L.c,D=b*b-4*a*c,rt='—',vx='—',ax='—',ht;
     fo.textContent='f(x) = '+poly(a,b,c);
@@ -25,7 +25,7 @@ function poly(a,b,c){var ps=[],add=function(co,v){if(co===0)return;var ab=Math.a
     else{rt=t('line_only');ht=t('h_line')}
     U.tiles(ti,[[t('delta')+' = b²−4ac',n2(D)],[t('vertex'),vx],[t('roots'),rt],[t('axis'),ax]]);
     hi.textContent=ht+(a>0?' · '+t('smile'):a<0?' · '+t('frown'):'');
-    L.quest=a!==0&&D===0;qu.classList.toggle('done',L.quest);qu.textContent=t(L.quest?'quest_done':'quest');
+    var was=L.quest;L.quest=a!==0&&D===0;if(L.quest&&!was&&ctx.report({qd:1}))ctx.award(20);qu.classList.toggle('done',L.quest);qu.textContent=t(L.quest?'quest_done':'quest');
     draw();}
   function draw(){var f=cv.fit();if(!f)return;var c=f.c,w=f.w,h=f.h,s=Math.min(w/20,h/13),ox=w/2,oy=h/2,X=function(x){return ox+x*s},Y=function(y){return oy-y*s},x,y;
     c.lineWidth=1;c.strokeStyle=C.line;c.beginPath();for(x=-Math.ceil(ox/s);x<=Math.ceil(ox/s);x++){c.moveTo(X(x),0);c.lineTo(X(x),h)}for(y=-Math.ceil(oy/s);y<=Math.ceil(oy/s);y++){c.moveTo(0,Y(y));c.lineTo(w,Y(y))}c.stroke();

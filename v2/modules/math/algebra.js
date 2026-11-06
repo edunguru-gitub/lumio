@@ -21,7 +21,7 @@ function genQ(){var k=pk(['delta','xv','f0','f1','root','delta']),a,b,c,ans,x,r1
       t=function(k,o){return ctx.n(S[k]).replace(/\{(\w+)\}/g,function(m,p){return o?String(o[p]).replace('-','−'):m})},
       eq=U.el('div',null,'eq'),dots=U.el('div',null,'dots'),fb=U.el('p',null,'fb'),row=U.el('div',null,'ans'),inp=U.el('input'),
       ck=U.el('button',t('check'),'chip'),hb=U.el('button',t('hint'),'chip');
-  el.style.setProperty('--c',ctx.color);
+  el.style.setProperty('--c',ctx.color);ctx.report({qt:1});
   inp.inputMode='decimal';inp.autocomplete='off';inp.setAttribute('aria-label',t('ans'));ck.type=hb.type='button';fb.setAttribute('aria-live','polite');
   row.append(inp,ck);el.append(U.el('h1',ctx.n(ctx.lesson.name)),eq,dots,row,hb,fb,U.cont(ctx));
   function render(){var q=Q.cur;eq.textContent='f(x) = '+poly(q.a,q.b,q.c);eq.appendChild(U.el('small',t('q_'+q.k)));
@@ -32,11 +32,11 @@ function genQ(){var k=pk(['delta','xv','f0','f1','root','delta']),a,b,c,ans,x,r1
     var raw=inp.value.replace('−','-').replace(',','.').trim();
     if(raw===''||isNaN(+raw)){fb.className='fb no';fb.textContent=t('write_first');return}
     var ok=+raw===Q.cur.ans;
-    if(ok){Q.score++;Q.res[Q.i]=true;fb.className='fb ok';fb.textContent=t(pk(['ok1','ok2','ok3']))}
-    else{Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans})}
+    if(ok){ctx.award();ctx.report({ok:1});Q.score++;Q.res[Q.i]=true;fb.className='fb ok';fb.textContent=t(pk(['ok1','ok2','ok3']))}
+    else{ctx.report({bad:1});Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans})}
     Q.i++;render();Q.busy=true;
     setTimeout(function(){Q.busy=false;if(!el.isConnected)return;
-      if(Q.i>=5){Q.done=true;fb.className='fb ok';fb.textContent=t('round_done',{s:Q.score});ck.textContent=t('new_round')}else next()},ok?1100:1900)}
+      if(Q.i>=5){Q.done=true;if(ctx.report({qd:1}))ctx.award(20);fb.className='fb ok';fb.textContent=t('round_done',{s:Q.score});ck.textContent=t('new_round')}else next()},ok?1100:1900)}
   ck.onclick=check;inp.onkeydown=function(e){if(e.key==='Enter')check()};
   hb.onclick=function(){var q=Q.cur;if(Q.done)return;fb.className='fb';fb.textContent=t('h_'+q.k,q)};
   round();

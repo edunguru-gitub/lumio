@@ -14,14 +14,14 @@ var clamp=function(v,a,b){return Math.min(b,Math.max(a,v))};
       sa=U.slider('a',1,12,.5,G.a,n2,function(v){G.a=v;upd()}),sb=U.slider('b',1,12,.5,G.b,n2,function(v){G.b=v;upd()}),
       ch=U.chips([[3,4],[5,12],[6,8],[1,1]].map(function(p){return[p[0]+' · '+p[1]]}),function(i){var p=[[3,4],[5,12],[6,8],[1,1]][i];U.tween(G,{a:p[0],b:p[1]},function(end){sa.set(n2r(G.a));sb.set(n2r(G.b));end?upd():draw()})});
   function n2r(v){return Math.round(v*2)/2}
-  el.style.setProperty('--c',ctx.color);bd.setAttribute('aria-live','polite');qu.setAttribute('aria-live','polite');
+  el.style.setProperty('--c',ctx.color);bd.setAttribute('aria-live','polite');ctx.report({qt:3});qu.setAttribute('aria-live','polite');
   el.append(U.el('h1',ctx.n(ctx.lesson.name)),cv,fo,bd,sa,sb,ch,ti,hi,qu,U.cont(ctx));
   function upd(){var a=G.a,b=G.b,c=Math.hypot(a,b),tri=Number.isInteger(a)&&Number.isInteger(b)&&Number.isInteger(c),al=Math.atan2(b,a)*180/Math.PI;
     sa.set(a);sb.set(b);
     fo.textContent=n2(a)+'² + '+n2(b)+'² = '+n2(a*a+b*b)+'  →  c = '+n2(c);
     bd.textContent=tri?Math.min(a,b)+'-'+Math.max(a,b)+'-'+c:'';
     U.tiles(ti,[[t('hyp')+' c',n2(c)],[t('area')+' ab/2',n2(a*b/2)],[t('perim'),n2(a+b+c)],[t('angles'),al.toFixed(1)+'° / '+(90-al).toFixed(1)+'°']]);
-    if(tri&&G.live){var k=Math.min(a,b)+'-'+Math.max(a,b);if(!G.seen.has(k)){G.seen.add(k);if(G.seen.size>=3)G.done=true}}
+    if(tri&&G.live){var k=Math.min(a,b)+'-'+Math.max(a,b);if(!G.seen.has(k)){G.seen.add(k);if(G.seen.size>=3)G.done=true;if(ctx.report({qd:Math.min(3,G.seen.size)}))ctx.award(20)}}
     qu.classList.toggle('done',G.done);qu.textContent=G.done?t('qg_done'):t('qg',Math.min(3,G.seen.size));
     hi.textContent=tri?t('triple'):(a===b?t('gh_45'):t('gh_gen'));
     draw();}

@@ -5,10 +5,13 @@
     h.textContent=ctx.n(ctx.lesson.name);p.textContent=ctx.n(ctx.subject.name);
     b.type='button';b.className='btn-primary';b.style.setProperty('--c',ctx.color);
     b.textContent=ctx.n(ctx.S.cont)+' →';b.onclick=ctx.done;
-    el.append(h,p,demo(ctx),b);
+    var q=document.createElement('div');q.className='quest';q.setAttribute('aria-live','polite');el.style.setProperty('--c',ctx.color);
+    ctx.report({qt:1});q.textContent=ctx.n(Q[0]);
+    el.append(h,p,demo(ctx,function(){if(q.classList.contains('done'))return;if(ctx.report({qd:1}))ctx.award(20);q.classList.add('done');q.textContent=ctx.n(Q[1])}),q,b);
   }
 };
-function demo(ctx){
+var Q=[['Quest: pull the spring past halfway and let go','Misiune: trage arcul peste jumătate și dă-i drumul'],['Quest complete','Misiune îndeplinită']];
+function demo(ctx,win){
   var P=window.LumioPhysics,cv=document.createElement('canvas'),g=cv.getContext('2d'),W=1,H=1,drag=false,pull=0,
       cs=getComputedStyle(document.documentElement),col=function(n){return cs.getPropertyValue(n).trim();},
       par=ctx.lesson.physics||{e:.8,k:60,c:4},
@@ -33,7 +36,7 @@ function demo(ctx){
   function pt(e){var r=cv.getBoundingClientRect();return e.clientX-r.left;}
   cv.onpointerdown=function(e){if(pt(e)<ball.w){reset();loop.redraw();return;}drag=true;cv.setPointerCapture(e.pointerId);cv.onpointermove(e);};
   cv.onpointermove=function(e){if(!drag)return;pull=Math.min(pis.len,Math.max(0,W*.97-pt(e)));if(rm.matches){pis.x=pull;loop.redraw();}};
-  cv.onpointerup=cv.onpointercancel=function(){drag=false;if(rm.matches){pis.x=0;loop.redraw();}};
+  cv.onpointerup=cv.onpointercancel=function(){if(drag&&pull>pis.len*.5)win();drag=false;if(rm.matches){pis.x=0;loop.redraw();}};
   loop=P.Loop(step,draw);
   new ResizeObserver(size).observe(cv);
   var mo=new MutationObserver(function(){if(!cv.isConnected){loop.destroy();mo.disconnect();}});

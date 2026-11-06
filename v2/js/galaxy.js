@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded',function(){
   new ResizeObserver(resize).observe(cv.parentNode);
   document.addEventListener('visibilitychange',G.sync);
   matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',G.sync);
-  L.on(function(s,kind){if(kind==='progress')G.requestDraw();else G.sync()});
+  L.on(function(s,kind){if(kind==='stats')return;if(kind==='progress')G.requestDraw();else G.sync()});
   G.sync();
 });
 })();

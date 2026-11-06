@@ -9,9 +9,10 @@ function row(i,name,val,fn,dim){
 }
 function spk(n){var e=document.createElement('span');e.className='spk';e.setAttribute('role','img');e.setAttribute('aria-label',n+'/3');
   e.innerHTML=SP+SP+SP;for(var j=0;j<n;j++)e.children[j].classList.add('on');return e}
+L.spk=spk;
 function bar(st){
   var el=document.getElementById('tabbar');el.replaceChildren();
-  [['home',function(){L.go('home')},st.level==='home'],['subjects',function(){L.go('galaxy',st.sid||L.subjects[0].id)},st.level!=='home'],['missions'],['ranks']].forEach(function(t){
+  [['home',function(){L.go('home');L.setView('terminal')},st.view==='terminal'],['subjects',function(){if(st.view==='terminal')L.setView('tabs');L.go('galaxy',st.sid||L.subjects[0].id)},st.view!=='terminal'],['missions'],['ranks']].forEach(function(t){
     var b=L.ui.el('button',L.n(L.S[t[0]]));b.type='button';
     if(t[1])b.onclick=t[1];else{b.disabled=true;b.title=L.n(L.S.soon)}
     if(t[2])b.setAttribute('aria-current','page');el.appendChild(b);
@@ -32,5 +33,5 @@ function render(st){
   }
   el.innerHTML='';el.appendChild(box);bar(st);
 }
-document.addEventListener('DOMContentLoaded',function(){L.on(render);render(L.state)});
+document.addEventListener('DOMContentLoaded',function(){L.on(function(s,k){if(k!=='stats')render(s)});render(L.state)});
 })();
