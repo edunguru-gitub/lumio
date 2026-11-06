@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+</head>
+<body data-view="galaxy">
+<header id="bar">
+  <span class="word">Lumio</span>
+  <button id="back" type="button"></button>
+  <span id="crumb"></span>
+  <div id="toggle" role="group"><button type="button" data-v="galaxy"></button><button type="button" data-v="tabs"></button></div>
+</header>
+<main id="main">
+  <div id="stage"><canvas id="cv" role="img"></canvas><div id="hint"></div></div>
+  <nav id="tabs"></nav>
+  <section id="lesson"></section>
+</main>
+<script src="js/shell.js"></script>
+<script src="js/galaxy.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/tabs.js"></script>
+</body>
+</html>

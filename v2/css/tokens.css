@@ -1,0 +1,47 @@
+:root{
+  --bg:#171513;--card:#211E1A;--line:#2E2A24;--ink:#EDE3D0;--muted:#A89F8E;--tan:#D9C3A0;
+  --lumens:#FF6A13;--moon:#A78BFA;
+  --physics:#7FB0C0;--math:#9DBF9E;--spanish:#C98B8B;--life:#D9C3A0;
+  --r1:8px;--r2:12px;--r3:20px;--t:.3s;
+  --head:'Caladea',Georgia,serif;--ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--ui);display:flex;flex-direction:column;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--tan);outline-offset:2px}
+#bar{height:56px;flex:none;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid var(--line);position:relative;z-index:3;background:var(--bg)}
+.word{font:700 22px var(--head);margin-right:4px}
+#back,#toggle button{height:36px;padding:0 14px;background:transparent;border:1px solid var(--line);border-radius:var(--r1);color:var(--ink);transition:opacity var(--t)}
+#back:disabled{opacity:.35;cursor:default}
+#crumb{flex:1;min-width:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toggle{display:flex}
+#toggle button:first-child{border-radius:var(--r1) 0 0 var(--r1)}
+#toggle button:last-child{border-radius:0 var(--r1) var(--r1) 0;border-left:0}
+#toggle button[aria-pressed=true]{background:var(--card);color:var(--tan);border-color:var(--tan)}
+#toggle button[aria-pressed=true]+button{border-left:0}
+#main{flex:1;position:relative;min-height:0}
+#stage,#tabs,#lesson{position:absolute;inset:0}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity .25s}
+#hint{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:var(--muted);font-size:13px;opacity:0;pointer-events:none;transition:opacity var(--t)}
+#hint.on{opacity:1}
+body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
+#tabs{overflow:auto;padding:24px 16px}
+.list{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.list h2{font:700 28px var(--head);margin-bottom:6px}
+.row{display:flex;align-items:center;gap:14px;height:60px;padding:0 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r2);text-align:left;width:100%}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
+.row .n{flex:1}.row .v{font:13px var(--mono);color:var(--muted)}
+#lesson{background:var(--bg);overflow:auto;opacity:0;visibility:hidden;transition:opacity var(--t),visibility 0s var(--t)}
+#lesson.on{opacity:1;visibility:visible;transition:opacity var(--t)}
+.lesson-in{max-width:560px;margin:0 auto;padding:48px 16px;display:flex;flex-direction:column;gap:20px}
+.lesson-in h1{font:700 40px/1.15 var(--head)}
+.lesson-in p{color:var(--muted)}
+.btn-primary{height:60px;padding:0 28px;background:transparent;border:1px solid var(--c);border-radius:var(--r2);color:var(--c);font-weight:500;font-size:16px;transition:transform .25s,opacity .25s}
+.btn-primary:focus-visible{outline-color:var(--c)}
+@media (hover:hover){.btn-primary:hover{opacity:.8}}
+.btn-primary:active{transform:scale(.98)}
+@media (max-width:699px){.word{display:none}.lesson-in h1{font-size:32px}}
+@media (prefers-reduced-motion:reduce){.btn-primary:active{transform:none}}
