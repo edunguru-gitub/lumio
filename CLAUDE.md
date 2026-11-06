@@ -11,3 +11,4 @@
 - Before design work: Manager scans free animation libs and free website designs (license-checked, free only), shortlists, discusses with designer, then presents to Eduard.
 - Team audit: if an agent has no purpose, Manager tells Eduard; then merge/remove/add agents together. Priority: process efficiency.
 - After every finished task add one line to the LOG in docs/MAP.md (date, who, what, commit). Read docs/MAP.md first in any session; do not re-read old chats.
+- PARITY RULE (Eduard, 6 Nov): never remove or change anything from v1 or from earlier v2 work unless Eduard asks explicitly. Porting means same features. Any drop, merge or simplification must be asked first. Tester runs a v1-vs-v2 parity check after every port.

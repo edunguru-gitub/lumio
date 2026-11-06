@@ -1,4 +1,5 @@
 # LUMIO MAP (read this first, never re-read old chats). Update the LOG at the bottom when you finish.
+## PARITY RULE: do not change or remove past features unless Eduard asks. Port = same features.
 ## Where is what
 | Need | File |
 |---|---|
