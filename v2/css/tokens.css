@@ -111,20 +111,10 @@ body[data-view=galaxy] #tabs,body[data-view=tabs] #stage{display:none}
 .list .btn-primary{margin-top:var(--s5)}
 #tabbar{height:64px;padding:0 var(--s2);gap:var(--s2);border-top:0}
 .lesson-in{padding:var(--s5) var(--s3) 96px;gap:var(--s4)}
-.lab-cv{margin:var(--s2) 0;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;background:none}
-.sl{gap:var(--s2);min-height:48px}
 .chip{padding:0;border:0;border-bottom:1px solid var(--line);border-radius:0}
 .chips{gap:var(--s1) var(--s3)}
-.tiles{gap:var(--s3) var(--s4)}
-.tile{padding:var(--s1) 0 0;background:none;border:0;border-top:1px solid var(--line);border-radius:0}
-.quest{padding:var(--s1) 0 var(--s1) var(--s2);border:0;border-left:1px solid var(--line);border-radius:0}
-.quest.done{border-left-color:var(--c)}
-.badge{padding:0;border:0}
 .btn-primary{height:48px;border-color:color-mix(in srgb,var(--c) 40%,transparent)}
 .t-right>.btn-primary{margin-bottom:var(--s4)}
-.eq{padding:var(--s4) 0;background:none;border:0}
-.ans{gap:var(--s2)}.ans input{padding:0 var(--s1);background:none;border:0;border-bottom:1px solid var(--line);border-radius:0}
-.ans input:focus{border-bottom-color:var(--tan)}
 @media (max-width:699px){#bar{height:64px;padding:0 var(--s2);gap:var(--s2)}#ghead{top:var(--s3)}#ctl{right:var(--s2);bottom:var(--s2)}#tabs{padding:var(--s4) var(--s2)}.lesson-in{padding:var(--s4) var(--s2) var(--s5)}.row{height:56px}}
 @media (prefers-reduced-motion:reduce){#back,#toggle button,#ctl button,#tabbar button{transition:none}}
 /* ===== terminal: player card, meters, rankings, lesson cards, ticker ===== */
@@ -189,3 +179,75 @@ body[data-view=terminal] #stage,body[data-view=terminal] #tabs{display:none}
  .lgrid{grid-template-columns:1fr 1fr}
 }
 @media (prefers-reduced-motion:reduce){.lcard{transition:none}.lcard.pop{animation:none}}
+
+/* ===== lab: Swiss grid (docs/spec-lab-swiss.md). Rules, not cards; visible answer rule ===== */
+:root{--good:#9DBF9E;--bad:#C98B8B}
+.lesson-in{max-width:1120px;padding:var(--s5) var(--s3) 96px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 var(--s3);grid-auto-flow:row dense;align-items:start}
+.lesson-in>*{grid-column:4/13;min-width:0}
+.lesson-in>h1,.lesson-in>.dots{grid-column:1/4}
+.lesson-in>h1{padding-top:var(--s3)}
+.lesson-in>p,.eq,.formula,.big,.fld,.chips,.tiles,.quest,.badge{border-top:1px solid var(--line);padding:var(--s3) 0}
+.lesson-in>.btn-primary{justify-self:start;margin-top:var(--s4)}
+.lesson-in>p.fb,.lesson-in>p.cap{border-top:0}
+.k,.eq small,.cap{font:400 11px var(--mono);letter-spacing:.08em;color:var(--muted)}
+.k{display:block;text-transform:uppercase}
+.eq{font:400 56px/1.15 var(--head);text-align:left;background:none;border-radius:0;border-width:1px 0 0}
+.eq small{display:block;font-size:13px;letter-spacing:0;margin-top:var(--s2)}
+.dots{justify-content:flex-start;align-items:center;padding-top:var(--s3)}
+.dots i{width:8px;height:8px;border:1px solid color-mix(in srgb,var(--ink) 30%,transparent)}
+.dots i.cur{border-color:var(--ink)}.dots i.ok{background:var(--good);border-color:var(--good)}.dots i.no{background:var(--bad);border-color:var(--bad)}
+.dots span{font:400 11px var(--mono);color:var(--muted);margin-left:var(--s1)}
+.fld>.k{margin-bottom:var(--s1);transition:color .25s ease-out}
+.fld:focus-within>.k:first-child{color:var(--tan)}
+.ans{display:flex;gap:var(--s2);align-items:flex-end}
+.ans input{flex:0 1 320px;min-width:160px;height:56px;padding:0 4px;background:transparent;border:0;border-bottom:1px solid color-mix(in srgb,var(--ink) 40%,transparent);border-radius:0;color:var(--ink);font:500 36px/1 var(--head);font-variant-numeric:tabular-nums;caret-color:var(--tan);outline:0;transition:border-color .25s ease-out,box-shadow .25s ease-out}
+.ans input::placeholder{color:color-mix(in srgb,var(--ink) 25%,transparent)}
+.ans input:focus{border-bottom-color:var(--tan);box-shadow:0 1px 0 var(--tan)}
+.fld.ok input{border-bottom-color:var(--good);box-shadow:0 1px 0 var(--good)}.fld.no input{border-bottom-color:var(--bad);box-shadow:0 1px 0 var(--bad)}
+.fld>.k:last-child{margin:var(--s1) 0 0;text-transform:none}
+.btn-check{flex:none;height:44px;padding:0 var(--s3);background:transparent;border:1px solid var(--tan);border-radius:var(--r2);color:var(--tan);font:500 15px var(--ui);transition:background-color .25s,transform .25s}
+@media (hover:hover){.btn-check:hover{background:color-mix(in srgb,var(--tan) 10%,transparent)}}
+.btn-check:active{transform:scale(.98)}
+.hint-link{justify-self:start;min-height:44px;margin-top:var(--s2);padding:0;background:none;border:0;font:400 12px var(--mono);color:var(--muted);text-decoration:underline;text-underline-offset:4px}
+.fb{min-height:24px;font:400 15px/1.5 var(--ui)}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.fb.ok::before,.fb.no::before{font:500 12px var(--mono);letter-spacing:.08em;margin-right:var(--s1)}
+.fb.ok::before{content:'OK'}.fb.no::before{content:'MISS'}
+.sl{position:relative;grid-template-columns:24px 1fr 72px;gap:var(--s2);min-height:48px;--tk:color-mix(in srgb,var(--ink) 25%,transparent);--tr:color-mix(in srgb,var(--ink) 40%,transparent)}
+.sl output{font-variant-numeric:tabular-nums}
+.sl input{-webkit-appearance:none;appearance:none;height:44px;margin:0;background:linear-gradient(var(--tr),var(--tr)) 0 50%/100% 1px no-repeat,linear-gradient(90deg,var(--tk) 1px,transparent 0) 8px 26px/calc((100% - 16px)/var(--n,10)) 6px repeat-x,linear-gradient(90deg,var(--tk) 1px,transparent 0) 8px 26px/calc((100% - 16px)/var(--n,10)*5) 10px repeat-x}
+.sl input::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border:0;border-radius:50%;background:var(--c)}
+.sl input::-moz-range-thumb{width:16px;height:16px;border:0;border-radius:50%;background:var(--c)}
+.sl input::-moz-range-track{background:none}
+.sl::before,.sl::after{position:absolute;bottom:0;font:400 11px/11px var(--mono);color:var(--muted);pointer-events:none}
+.sl::before{content:attr(data-min);left:40px}.sl::after{content:attr(data-max);right:88px}
+.chip{height:44px}
+.lab-cv{height:360px;margin:0;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;background:none}
+.cap{padding:var(--s1) 0 var(--s3)}
+.formula{font:400 32px/1.3 var(--head);text-align:left}
+.big{font:400 48px/1.1 var(--head);font-variant-numeric:tabular-nums}
+.tiles{display:block}
+.tile{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s2);padding:12px 0;background:none;border:0;border-top:1px solid var(--line);border-radius:0}
+.tiles>.tile:first-child{border-top:0;padding-top:0}
+.tile small,.tiles.big small{font:400 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.tile b{font:500 15px var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.tiles.big{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.tiles.big .tile{display:block;padding:0 var(--s3);border-top:0;border-left:1px solid var(--line)}
+.tiles.big .tile:first-child{padding-left:0;border-left:0}
+.tiles.big b{display:block;font:400 40px/1.1 var(--head);text-align:left}
+.quest{border:0;border-top:1px solid var(--line);border-radius:0;padding:var(--s3) 0}
+.quest.done{color:var(--c)}
+.badge{align-self:auto;justify-self:start;border:0;border-top:1px solid var(--line);border-radius:0;padding:var(--s2) 0 0;font:400 12px var(--mono)}
+.lab-2>.lab-cv{grid-column:4/9;grid-row:span 5}
+.lab-2>.big,.lab-2>.sl,.lab-2>.chips{grid-column:9/13}
+@media (max-width:899px){
+ .lesson-in{display:flex;flex-direction:column;align-items:stretch;padding:var(--s4) var(--s2) var(--s5)}
+ .hint-link,.badge{align-self:flex-start}
+ .lesson-in>h1{font-size:32px;padding:0 0 var(--s3)}
+ .eq{font-size:36px}
+ .ans{flex-direction:column;align-items:stretch}.ans input{flex:none;width:100%}.btn-check{width:100%}
+ .lab-cv{height:280px}
+ .tiles.big{grid-template-columns:1fr}.tiles.big .tile{padding:var(--s2) 0;border-left:0;border-top:1px solid var(--line)}.tiles.big .tile:first-child{border-top:0}
+ .lesson-in>.btn-primary{align-self:flex-start}
+}
+@media (prefers-reduced-motion:reduce){.btn-check,.ans input,.fld>.k{transition:none}.btn-check:active{transform:none}}

@@ -13,13 +13,13 @@ function newPart(yp){var a=Math.random()*6.283;while(Math.abs(Math.sin(a))<.3)a=
 (window.LumioModules=window.LumioModules||{})['physics/gas']={render:function(el,ctx){
   var U=ctx.ui,P=window.LumioPhysics,t=function(k){return ctx.n(S[k])},rm=matchMedia('(prefers-reduced-motion: reduce)'),
       PH={T:300,V:1,Vd:1,vV:0,N:30,parts:[],hitsAcc:0,rate:0,rateT:0,needle:1,quest:false,P:function(){return(this.N/30)*(this.T/300)/this.V}},
-      C={ink:U.col('--ink'),muted:U.col('--muted'),line:U.col('--line'),tan:U.col('--tan'),rose:U.col('--spanish'),mono:U.col('--mono')},
-      cv=U.canvas(t('cv'),function(){loop&&loop.redraw()}),ti=U.el('div',null,'tiles'),hi=U.el('p'),qu=U.el('div',null,'quest'),loop,
+      C={ink:U.col('--ink'),muted:U.col('--muted'),line:U.col('--line'),tan:U.col('--tan'),rose:U.col('--bad'),mono:U.col('--mono')},
+      cv=U.canvas(t('cv'),function(){loop&&loop.redraw()}),ti=U.el('div',null,'tiles big'),hi=U.el('p'),qu=U.el('div',null,'quest'),loop,
       sl={T:U.slider('T',200,500,10,300,function(v){return v+' K'},set('T')),V:U.slider('V',.3,1.2,.05,1,function(v){return(+v).toFixed(2)+' L'},set('V')),N:U.slider('N',10,50,5,30,String,set('N'))},
       ch=U.chips([[t('cool')],[t('heat'),C.tan],[t('sq')],[t('rel')],[t('reset')]],function(i){U.tween(PH,[{T:200},{T:450},{V:.4},{V:1.2},{T:300,V:1,N:30}][i],function(){PH.N=Math.round(PH.N/5)*5;PH.T=Math.round(PH.T);upd()})});
   function set(k){return function(v){PH[k]=v;upd()}}
   el.style.setProperty('--c',ctx.color);qu.setAttribute('aria-live','polite');ctx.report({qt:1});
-  el.append(U.el('h1',ctx.n(ctx.lesson.name)),cv,sl.T,sl.V,sl.N,ch,ti,hi,qu,U.cont(ctx));
+  el.append(U.el('h1',ctx.n(ctx.lesson.name)),cv,sl.T,sl.V,ch,ti,hi,qu,U.cont(ctx));
   function step(dt){var yp=PH.Vd/1.2;while(PH.parts.length<PH.N)PH.parts.push(newPart(yp));PH.parts.length=PH.N;
     var sv=P.spring(PH.Vd,PH.vV,PH.V,90,12,1,dt);PH.Vd=Math.max(.1,sv[0]);PH.vV=sv[1];
     var yp2=PH.Vd/1.2,sp0=.55*Math.sqrt(PH.T/300),hits=0;
@@ -30,7 +30,7 @@ function newPart(yp){var a=Math.random()*6.283;while(Math.abs(Math.sin(a))<.3)a=
     PH.hitsAcc+=hits;PH.rateT+=dt;if(PH.rateT>=.5){PH.rate=PH.hitsAcc/PH.rateT;PH.hitsAcc=0;PH.rateT=0}
     PH.needle+=(PH.P()-PH.needle)*Math.min(1,dt*6)}
   function upd(){var Pr=PH.P(),T=PH.T;sl.T.set(T);sl.V.set(PH.V);sl.N.set(PH.N);
-    U.tiles(ti,[['P · '+t('pressure'),Pr.toFixed(2)+' atm'],['T · '+t('temperature'),T+' K · '+Math.round(T-273.15)+' °C'],['V · '+t('volume'),PH.V.toFixed(2)+' L'],['N',String(PH.N)]]);
+    U.tiles(ti,[['P · '+t('pressure'),Pr.toFixed(2)+' atm'],['V · '+t('volume'),PH.V.toFixed(2)+' L'],['T · '+t('temperature'),T+' K']]);
     hi.textContent=Pr>8?t('phh_over'):T>400?t('phh_hot'):PH.V<.5?t('phh_sq'):t('phh_gen');
     if(Pr>=3&&T<=300){if(!PH.quest&&ctx.report({qd:1}))ctx.award(20);PH.quest=true}else if(Pr<2.5)PH.quest=false;
     qu.classList.toggle('done',PH.quest);qu.textContent=t(PH.quest?'q_done':'q_phys');

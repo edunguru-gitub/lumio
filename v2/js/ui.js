@@ -5,7 +5,7 @@ U.col=function(n){return getComputedStyle(document.documentElement).getPropertyV
 U.n2=function(x){return(Math.round(x*100)/100).toString().replace('-','−')};
 U.slider=function(lab,min,max,step,val,fmt,on){
   var w=U.el('label',null,'sl'),i=U.el('input'),o=U.el('output');i.type='range';i.min=min;i.max=max;i.step=step;
-  w.append(U.el('b',lab),i,o);w.set=function(v){i.value=v;o.textContent=fmt(v)};
+  w.append(U.el('b',lab),i,o);w.style.setProperty('--n',Math.round((max-min)/step));w.dataset.min=fmt(min);w.dataset.max=fmt(max);w.set=function(v){i.value=v;o.textContent=fmt(v)};
   i.oninput=function(){o.textContent=fmt(+i.value);on(+i.value)};w.set(val);return w;
 };
 U.chips=function(list,on){var d=U.el('div',null,'chips');list.forEach(function(p,i){var b=U.el('button',p[0],'chip');b.type='button';if(p[1])b.style.color=p[1];b.onclick=function(){on(i)};d.appendChild(b)});return d};
