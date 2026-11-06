@@ -17,10 +17,12 @@
   <div id="toggle" role="group"><button type="button" data-v="galaxy"></button><button type="button" data-v="tabs"></button></div>
 </header>
 <main id="main">
-  <div id="stage"><canvas id="cv" role="img"></canvas><div id="hint"></div></div>
+  <div id="stage"><canvas id="cv" role="img"></canvas><div id="ghead" hidden></div>
+    <div id="ctl"><button id="cback" type="button"></button><button id="zout" type="button">−</button><button id="zin" type="button">+</button></div><div id="hint"></div></div>
   <nav id="tabs"></nav>
   <section id="lesson"></section>
 </main>
+<nav id="tabbar"></nav>
 <script src="js/physics.js"></script>
 <script src="js/shell.js"></script>
 <script src="js/ui.js"></script>

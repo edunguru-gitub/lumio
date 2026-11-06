@@ -3,7 +3,8 @@ var L=window.Lumio={};window.LumioModules=window.LumioModules||{};
 var K='lumio2_progress',ro=/^ro/i.test(navigator.language||'');
 L.n=function(a){return a[ro?1:0]};
 L.S={back:['Back','Înapoi'],galaxy:['Galaxy','Galaxie'],tabs:['Tabs','File'],cont:['Continue','Continuă'],subjects:['Subjects','Materii'],
- hint:['Click: go in. Right click: go out','Click: intri. Click dreapta: ieși'],soon:['Coming soon','În curând'],
+ hint:['Click: go in. Right click: go out','Click: intri. Click dreapta: ieși'],soon:['Coming soon','În curând'],of:['{a} of {b} lessons','{a} din {b} lecții'],subject:['Subject','Materie'],now:['Now','Acum'],
+ home:['Home','Acasă'],missions:['Missions','Misiuni'],ranks:['Ranks','Clasament'],zin:['Go in','Intră'],zout:['Go out','Ieși'],
  alt:['Lumio galaxies. Use Tabs for keyboard navigation.','Galaxiile Lumio. Folosește File pentru tastatură.']};
 L.subjects=[
  {id:'physics',name:['Physics','Fizică'],v:'--physics',x:-300,y:-200,lessons:[
@@ -21,6 +22,20 @@ try{var p=JSON.parse(localStorage.getItem(K));if(p&&typeof p==='object')prog=p}c
 L.key=function(s,l){return s.id+'/'+l.id};
 L.getP=function(k){return Math.max(0,Math.min(1,+prog[k]||0))};
 L.setP=function(k,v){prog[k]=v;try{localStorage.setItem(K,JSON.stringify(prog))}catch(e){}emit('progress')};
+L.done=function(s){return s.lessons.filter(function(l){return L.getP(L.key(s,l))>=1}).length};
+L.count=function(s){return L.n(L.S.of).replace('{a}',L.done(s)).replace('{b}',s.lessons.length)};
+L.cur=function(s){return s.lessons.filter(function(l){return l.mod&&L.getP(L.key(s,l))<1})[0]};
+// subject header: eyebrow, tinted title, progress bar, count
+L.head=function(s,eye){
+  var U=L.ui,d=U.el('div',null,'head'),bar=U.el('div',null,'pbar'),b=U.el('i');
+  d.style.setProperty('--c',s.color);b.style.width=L.done(s)/s.lessons.length*100+'%';bar.appendChild(b);
+  d.append(U.el('small',eye),U.el('h2',L.n(s.name)),bar,U.el('p',L.count(s),'cnt'));return d;
+};
+L.contBtn=function(s){
+  var l=L.cur(s);if(!l)return null;
+  var b=L.ui.el('button',L.n(L.S.cont)+' '+L.n(l.name)+' →','btn-primary sm');b.type='button';b.style.setProperty('--c',s.color);
+  b.onclick=function(){L.go('planet',s.id,l.id)};return b;
+};
 L.sp=function(s){var t=0;s.lessons.forEach(function(l){t+=L.getP(L.key(s,l))});return t/s.lessons.length};
 var st=L.state={level:'home',sid:null,lid:null,view:'galaxy'},subs=[];
 L.on=function(f){subs.push(f)};
@@ -50,7 +65,10 @@ function chrome(){
   var s=L.subject(),l=L.lesson();
   $('crumb').textContent=st.level==='home'?L.n(L.S.subjects):L.n(s.name)+(l?' / '+L.n(l.name):'');
   $('back').disabled=st.level==='home';
-  document.body.dataset.view=st.view;
+  document.body.dataset.view=st.view;document.body.dataset.level=st.level;
+  var gh=$('ghead'),c;gh.replaceChildren();gh.hidden=st.level!=='galaxy';
+  if(st.level==='galaxy'){gh.append(L.head(s,L.n(L.S.galaxy)));if(c=L.contBtn(s))gh.append(c)}
+  $('cback').disabled=st.level==='home';
   document.querySelectorAll('#toggle button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===st.view)});
 }
 L.on(function(s,kind){if(kind!=='progress')lesson();chrome()});
@@ -58,7 +76,8 @@ document.addEventListener('DOMContentLoaded',function(){
   var cs=getComputedStyle(document.documentElement);
   L.subjects.forEach(function(s){s.color=cs.getPropertyValue(s.v).trim()});
   document.documentElement.lang=ro?'ro':'en';
-  $('back').textContent='← '+L.n(L.S.back);$('back').onclick=L.out;
+  $('back').textContent='← '+L.n(L.S.back);$('back').onclick=$('cback').onclick=$('zout').onclick=L.out;$('cback').textContent=L.n(L.S.back);
+  $('zin').setAttribute('aria-label',L.n(L.S.zin));$('zout').setAttribute('aria-label',L.n(L.S.zout));
   document.querySelectorAll('#toggle button').forEach(function(b){b.textContent=L.n(L.S[b.dataset.v]);b.onclick=function(){L.setView(b.dataset.v)}});
   $('cv').setAttribute('aria-label',L.n(L.S.alt));
   st.view=innerWidth<700?'tabs':'galaxy';
