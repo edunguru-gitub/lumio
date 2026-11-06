@@ -3,7 +3,7 @@
 var S={cv:['Gas in a cylinder with a piston, a pressure gauge and a thermometer.','Gaz într-un cilindru cu piston, manometru și termometru.'],
  cool:['Cool down','Răcește'],heat:['Heat up','Încălzește'],sq:['Squeeze','Comprimă'],rel:['Release','Eliberează'],reset:['Reset','Reset'],
  pressure:['Pressure','Presiune'],temperature:['Temperature','Temperatură'],volume:['Volume','Volum'],collisions:['Piston hits','Ciocniri piston'],
- phh_over:['Overpressure. Release the piston or cool the gas.','Suprapresiune. Eliberează pistonul sau răcește gazul.'],
+ phh_over:['Overpressure! Release the piston or cool the gas.','Suprapresiune! Eliberează pistonul sau răcește gazul.'],
  phh_hot:['Hot gas: fast molecules hit harder and more often → pressure rises.','Gaz fierbinte: molecule rapide lovesc mai tare și mai des → presiunea crește.'],
  phh_sq:['Less room → more hits per second → pressure rises (Boyle).','Mai puțin loc → mai multe lovituri pe secundă → presiunea crește (Boyle).'],
  phh_gen:['Molecules bounce off the piston: pressure = hits per area. Change T, V or N and watch the gauge.','Moleculele lovesc pistonul: presiune = lovituri pe arie. Schimbă T, V sau N și urmărește manometrul.'],
@@ -36,7 +36,7 @@ render:function(el,ctx){
     PH.needle+=(PH.P()-PH.needle)*Math.min(1,dt*6)}
   function upd(){var Pr=PH.P(),T=PH.T;sl.T.set(T);sl.V.set(PH.V);sl.N.set(PH.N);
     U.tiles(ti,[['P · '+t('pressure'),Pr.toFixed(2)+' atm'],['T · '+t('temperature'),T+' K · '+Math.round(T-273.15)+' °C'],['V · '+t('volume'),PH.V.toFixed(2)+' L'],[t('collisions'),Math.round(PH.rate)+' /s']]);rb=ti.lastChild.lastChild;
-    hi.textContent=Pr>8?t('phh_over'):T>400?t('phh_hot'):PH.V<.5?t('phh_sq'):t('phh_gen');
+    hi.className=Pr>8?'hint-orange':'';hi.textContent=Pr>8?t('phh_over'):T>400?t('phh_hot'):PH.V<.5?t('phh_sq'):t('phh_gen');
     if(Pr>=3&&T<=300){if(!PH.quest){fx.ok();fx.burst(120);if(ctx.report({qd:1}))ctx.award(25)}PH.quest=true}else if(Pr<2.5)PH.quest=false;
     qu.classList.toggle('done',PH.quest);qu.textContent=t(PH.quest?'q_done':'q_phys');
     if(rm.matches){PH.Vd=PH.V;PH.vV=0;PH.needle=Pr;step(0)}loop&&loop.redraw()}

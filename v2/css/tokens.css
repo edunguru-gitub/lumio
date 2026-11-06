@@ -1,6 +1,6 @@
 :root{
   --bg:#171513;--card:#211E1A;--line:#2E2A24;--ink:#EDE3D0;--muted:#A89F8E;--tan:#D9C3A0;
-  --lumens:#FF6A13;--moon:#A78BFA;--lumens-text:#FF6A13;--moon-text:#A78BFA;
+  --hint-orange:#E8A33D;--lumens:#FF6A13;--moon:#A78BFA;--lumens-text:#FF6A13;--moon-text:#A78BFA;
   --sky:#EDE3D0;--sky-a:1;--core-glow:#EDE3D0;
   --bg-hi:#2A2219;--glow:#3A2C1C;
   --physics:#7FB0C0;--math:#9DBF9E;--spanish:#C98B8B;--life:#D9C3A0;
@@ -10,6 +10,7 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0}
+#main .hint-orange,.hint-orange{color:var(--hint-orange)}
 html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--ui);display:flex;flex-direction:column;overflow:hidden}
 button{font:inherit;color:inherit;cursor:pointer}
@@ -275,11 +276,11 @@ body[data-tab=ranks] #ranks{display:block}
 @media (prefers-color-scheme:light){:root:not([data-theme=dark]){
   --bg:#F6F0E6;--card:#FFFBF4;--line:#D3C5AE;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#5E5242;--tan:#816034;
   --physics:#2F6B7D;--math:#447046;--spanish:#9E4E56;--life:#816034;--good:#2B724D;--bad:#BA353A;
-  --lumens-text:#B04400;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}}
+  --hint-orange:#8A4B00;--lumens-text:#B04400;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}}
 [data-theme=light]{
   --bg:#F6F0E6;--card:#FFFBF4;--line:#D3C5AE;--bg-hi:#FBF7EF;--glow:#EBDCC0;--ink:#2B2018;--muted:#5E5242;--tan:#816034;
   --physics:#2F6B7D;--math:#447046;--spanish:#9E4E56;--life:#816034;--good:#2B724D;--bad:#BA353A;
-  --lumens-text:#B04400;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}
+  --hint-orange:#8A4B00;--lumens-text:#B04400;--moon-text:#6A4BD0;--sky:#2B2018;--sky-a:1.6;--core-glow:#FFFBF4;color-scheme:light}
 
 /* ===== first run + rewards (docs/review-v2-psych.md) ===== */
 .ccard{width:100%;min-height:140px;margin-bottom:var(--s4);border-color:color-mix(in srgb,var(--c) 40%,var(--line));cursor:pointer}

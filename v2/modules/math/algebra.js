@@ -40,8 +40,8 @@ render:function(el,ctx){
     // v1: +10+min(streak,5)*2 Lumens (ctx.award default), streak ×n at 3,5,7…, sounds, confetti, jump / shake
     if(ok){ctx.award();ctx.report({ok:1});Q.score++;Q.res[Q.i]=true;fb.className='fb ok';fb.textContent=t(pk(['ok1','ok2','ok3']));fx.ok();fx.burst(60);fx.jump(eq);
       var sk=ctx.streak();if(sk>=3&&sk%2===1){fx.streak();fx.burst(90);fb.textContent+=' '+t('streak_t',{n:sk})}}
-    else{ctx.report({bad:1});Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans});fx.bad();fx.shake(fld)}
-    fld.className='fld '+(ok?'ok':'no');Q.i++;render();Q.busy=true;
+    else{ctx.report({bad:1});Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans});fx.bad()}
+    fld.className='fld '+(ok?'ok':'no');if(!ok)fx.shake(fld);Q.i++;render();Q.busy=true;
     setTimeout(function(){Q.busy=false;if(!el.isConnected)return;
       fld.className='fld';if(Q.i>=5){Q.done=true;if(ctx.report({qd:1}))ctx.award(20);fb.className='fb ok';fb.textContent=t('round_done',{s:Q.score});ck.textContent=t('new_round');if(Q.score>=4){fx.streak();fx.burst(180)}}else next()},ok?1100:1900)}
   ck.onclick=check;inp.onkeydown=function(e){if(e.key==='Enter')check()};
