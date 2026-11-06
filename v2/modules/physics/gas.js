@@ -10,7 +10,9 @@ var S={cv:['Gas in a cylinder with a piston, a pressure gauge and a thermometer.
  q_phys:['Quest: reach 3 atm without heating above 300 K','Misiune: ajunge la 3 atm fără să încălzești peste 300 K'],q_done:['Quest complete. Boyle would be proud.','Misiune îndeplinită. Boyle ar fi mândru.']};
 var clamp=function(v,a,b){return Math.min(b,Math.max(a,v))};
 function newPart(yp){var a=Math.random()*6.283;while(Math.abs(Math.sin(a))<.3)a=Math.random()*6.283;return{x:Math.random(),y:Math.random()*yp,dx:Math.cos(a),dy:Math.sin(a),f:.6+Math.random()*.8,flash:0}}
-(window.LumioModules=window.LumioModules||{})['physics/gas']={render:function(el,ctx){
+// manifest: shell builds subjects, planets, rows and cards from this (id = progress key part)
+(window.LumioModules=window.LumioModules||{})['physics/gas']={manifest:{id:'gas',subject:'physics',subjectName:['Physics','Fizică'],color:'--physics',title:['Gas & piston','Gaz și piston'],order:4,tags:['lab','quest'],orbit:[2.4,100]},
+render:function(el,ctx){
   var U=ctx.ui,P=window.LumioPhysics,t=function(k){return ctx.n(S[k])},rm=matchMedia('(prefers-reduced-motion: reduce)'),
       PH={T:300,V:1,Vd:1,vV:0,N:30,parts:[],hitsAcc:0,rate:0,rateT:0,needle:1,quest:false,P:function(){return(this.N/30)*(this.T/300)/this.V}},
       C={ink:U.col('--ink'),muted:U.col('--muted'),line:U.col('--line'),tan:U.col('--tan'),rose:U.col('--bad'),mono:U.col('--mono')},
@@ -19,7 +21,7 @@ function newPart(yp){var a=Math.random()*6.283;while(Math.abs(Math.sin(a))<.3)a=
       ch=U.chips([[t('cool')],[t('heat'),C.tan],[t('sq')],[t('rel')],[t('reset')]],function(i){U.tween(PH,[{T:200},{T:450},{V:.4},{V:1.2},{T:300,V:1,N:30}][i],function(){PH.N=Math.round(PH.N/5)*5;PH.T=Math.round(PH.T);upd()})});
   function set(k){return function(v){PH[k]=v;upd()}}
   el.style.setProperty('--c',ctx.color);qu.setAttribute('aria-live','polite');ctx.report({qt:1});
-  el.append(U.el('h1',ctx.n(ctx.lesson.name)),cv,sl.T,sl.V,ch,ti,hi,qu,U.cont(ctx));
+  el.append(U.el('h1',ctx.n(ctx.lesson.name)),cv,sl.T,sl.V,sl.N,ch,ti,hi,qu,U.cont(ctx));
   function step(dt){var yp=PH.Vd/1.2;while(PH.parts.length<PH.N)PH.parts.push(newPart(yp));PH.parts.length=PH.N;
     var sv=P.spring(PH.Vd,PH.vV,PH.V,90,12,1,dt);PH.Vd=Math.max(.1,sv[0]);PH.vV=sv[1];
     var yp2=PH.Vd/1.2,sp0=.55*Math.sqrt(PH.T/300),hits=0;
