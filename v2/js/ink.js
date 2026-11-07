@@ -4,7 +4,7 @@
 var L=Lumio,pads=new Set(),
 S={write:['Write','Scrie'],type:['Type','Tastează'],mode:['Answer by','Răspunde prin'],here:['Write your answer by hand…','Scrie răspunsul de mână…'],pad:['Handwriting pad','Zonă de scris de mână'],
  pen:['Pen','Creion'],eraser:['Eraser','Radieră'],undo:['Undo','Anulează'],clear:['Clear','Șterge'],size:['size','grosime'],strokes:['strokes','trăsături'],conf:['Read confidence','Încredere la citire'],
- auto:['Auto colour','Culoare auto'],red:['Red','Roșu'],green:['Green','Verde'],tan:['Tan','Bej']};
+ auto:['Auto colour','Culoare auto'],red:['Red','Roșu'],green:['Green','Verde'],steel:['Steel','Oțel']};
 function tok(k){return getComputedStyle(document.documentElement).getPropertyValue(k).trim()}
 /* recognizer (v1 REC, verbatim; 'Patrick Hand' not shipped in v2, falls back silently) */
 const REC={tpl:null,N:16,tmp:null,
@@ -60,8 +60,8 @@ function mount(ctx,inp){
   ink=new Ink(pad,{w:6,onChange:function(e){hint.hidden=ink.strokes.length>0;st();clearTimeout(tm);if(e==='clear'){inp.value='';conf.textContent='';return}if(e==='end')tm=setTimeout(read,650)}});
   ink.cv.setAttribute('aria-label',t('pad'));pads.add(ink);
   var pen=btn(t('pen'),'chip',function(){ink.setTool('pen');press(tb,pen);st()}),er=btn(t('eraser'),'chip',function(){ink.setTool('eraser');press(tb,er);st()}),tb=[pen,er];press(tb,pen);
-  // 4 swatches: auto (ink, flips with theme) + bad / good / tan (v1 amber -> tan: orange is reserved for Lumens)
-  var cw=U.el('span',null,'ink-sw'),cb=[[null,'auto'],['--bad','red'],['--good','green'],['--tan','tan']].map(function(c){var b=btn('','',function(){ink.color=c[0];press(cb,b);pen.onclick()});
+  // 4 swatches: auto (ink, flips with theme) + bad / good / steel (v1 amber -> steel --physics: orange is reserved for Lumens)
+  var cw=U.el('span',null,'ink-sw'),cb=[[null,'auto'],['--bad','red'],['--good','green'],['--physics','steel']].map(function(c){var b=btn('','',function(){ink.color=c[0];press(cb,b);pen.onclick()});
     b.setAttribute('aria-label',t(c[1]));b.appendChild(U.el('i')).style.setProperty('--sw','var('+(c[0]||'--ink')+')');return b});
   var sw=U.el('span',null,'ink-sw ink-sz'),sb=[3,6,10].map(function(w,i){var b=btn('','',function(){ink.w=w;press(sb,b);st()});
     b.setAttribute('aria-label',t('size')+' '+'SML'[i]);b.appendChild(U.el('i')).style.setProperty('--d',(8+i*5)+'px');return b});

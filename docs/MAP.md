@@ -23,13 +23,14 @@ Add a lesson: modules/<subject>/<file>.js + one registry line. Remove: delete th
 Lessons: math/algebra, math/parabola, math/pythagoras (id geometry), physics/optics, physics/gas. Storage keys: lumio2_progress, lumio2_stats, lumio2_view, lumio2_theme, lumio2_lang, lumio2_seed (home layout), lumio2_io (algebra Write/Type).
 Home layout: shell.js place() seeded per device; galaxy.js G.home() fits all galaxies + labels with margins. ctx.fx (sfx) + ctx.streak() for lessons.
 ## Blocked / waiting on Eduard
-Ink pad swatch: v1 amber was replaced by tan (a842004); designer suggests steel --physics (tan looks like auto-ink in Dark); Manager/Eduard decide. Matter.js licence check at source; Zoom recordings need transcript; Darius OK on Lumi unlock rule; Windows (Rainmeter) 4 questions.
+Matter.js licence check at source; Zoom recordings need transcript; Darius OK on Lumi unlock rule; Windows (Rainmeter) 4 questions.
 ## PARITY GAPS (Tester audit 6 Nov, restore all; Eduard rule)
 P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 DONE 7 Nov (ink.js = v1 Ink pad + REC offline OCR in algebra; amber swatch -> tan). P3 phone controller (knob, sliders, tilt, Motion, hybrid; needs relay). Optics has NO v1 source: ask Eduard keep or remove.
 ## Open (order)
 NEXT: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-07 david: ink pad 4th swatch tan -> steel --physics (Eduard approved; ring/check unchanged, CSS untouched) (commit 'v2 ink swatch steel')
 - 2026-11-07 manager: P2 ink pad verified by tester (PASS all 5); ruled lines now ink 14% (visible in Dark) (commit 'v2 ink lines dark')
 - 2026-11-07 david: parity P2 ink pad (spec-ink-pad): new js/ink.js feature (v1 Ink + REC verbatim, pen/eraser/undo/clear, 4 swatches auto/bad/good/tan, S/M/L, status, conf %, Write/Type saved lumio2_io) mounted in algebra above #ans-in; skipped if absent (typing only) (commit 'v2 parity P2 ink pad')
 - 2026-11-06 david: bug 'kicked out of next exercise': global Backspace shortcut (shell.js) left the lesson when focus was on the Check button/body after an answer; Backspace now only goes out above lesson level (Escape unchanged); regression tools/test-lesson-stay.py (all 5 lessons) (commit 'v2 fix lesson kick-out')
