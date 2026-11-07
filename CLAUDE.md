@@ -13,3 +13,4 @@
 - After every finished task add one line to the LOG in docs/MAP.md (date, who, what, commit). Read docs/MAP.md first in any session; do not re-read old chats.
 - PARITY RULE (Eduard, 6 Nov): never remove or change anything from v1 or from earlier v2 work unless Eduard asks explicitly. Porting means same features. Any drop, merge or simplification must be asked first. Tester runs a v1-vs-v2 parity check after every port.
 - COMMUNICATION (Eduard, 7 Nov): Eduard does NOT talk to David or any subagent. David speaks to Eduard only through Manager. David reports to Manager, never asks Eduard anything directly; questions go to Manager, who relays them.
+- Channel: docs/comms/README.md (to-david.md / to-manager.md in the repo). David pulls, does OPEN tasks, replies in to-manager.md, pushes. No human relay.
