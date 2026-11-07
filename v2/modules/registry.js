@@ -3,7 +3,7 @@
 // an object = placeholder lesson (Coming soon) with the same manifest shape. Subjects appear in first-seen order.
 // Add a lesson: new module file + one line here. Remove a line: lesson gone everywhere.
 window.LumioRegistry={
-"features":["rating","terminal","ranks","ticker","sfx"],
+"features":["rating","terminal","ranks","ticker","sfx","ink"],
 "lessons":[
 "physics/optics",
 {"id":"waves","subject":"physics","subjectName":["Physics","Fizică"],"color":"--physics","title":["Waves","Unde"],"order":2,"tags":[],"orbit":[1.4,80]},

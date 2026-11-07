@@ -1,5 +1,5 @@
 (function(){
-// ported from app/lumio.html PRACTICE: genQ, checkAns, hintQ, poly (handwriting pad replaced by typed answer)
+// ported from app/lumio.html PRACTICE: genQ, checkAns, hintQ, poly; handwriting pad from feature js/ink.js (absent = typing only)
 var S={q_delta:['Compute Δ = b² − 4ac','Calculează Δ = b² − 4ac'],q_xv:['Find the x of the vertex: x_V = −b / 2a','Află abscisa vârfului: x_V = −b / 2a'],
  q_f0:['Compute f(0)','Calculează f(0)'],q_f1:['Compute f(1)','Calculează f(1)'],q_root:['Find the LARGER root','Află rădăcina MAI MARE'],
  h_delta:['Δ = b² − 4·a·c = {b}² − 4·({a})·({c})','Δ = b² − 4·a·c = {b}² − 4·({a})·({c})'],h_xv:['x_V = −({b}) / (2·{a})','x_V = −({b}) / (2·{a})'],
@@ -23,15 +23,15 @@ render:function(el,ctx){
   var U=ctx.ui,Q={cur:null,i:0,res:[],score:0,done:false,busy:false},
       t=function(k,o){return ctx.n(S[k]).replace(/\{(\w+)\}/g,function(m,p){return o?String(o[p]).replace('-','−'):m})},
       eq=U.el('div',null,'eq'),dots=U.el('div',null,'dots'),fb=U.el('p',null,'fb'),fld=U.el('div',null,'fld'),lb=U.el('label',t('ans'),'k'),row=U.el('div',null,'ans'),inp=U.el('input'),
-      ck=U.el('button',t('check'),'btn-check'),hb=U.el('button',t('hint'),'hint-link'),rd=U.el('button',t('read'),'hint-link'),tl=U.el('div',null,'chips'),fx=ctx.fx,hint='';
+      ck=U.el('button',t('check'),'btn-check'),hb=U.el('button',t('hint'),'hint-link'),rd=U.el('button',t('read'),'hint-link'),tl=U.el('div',null,'chips'),fx=ctx.fx,hint='',ink=window.LumioInk?LumioInk.mount(ctx,inp):null;
   el.style.setProperty('--c',ctx.color);ctx.report({qt:1});
   inp.inputMode='decimal';inp.autocomplete='off';inp.id='ans-in';inp.placeholder='0';lb.htmlFor='ans-in';ck.type=hb.type=rd.type='button';rd.hidden=!fx.canSay;tl.style.border='0';tl.style.padding='0';tl.append(hb,rd);
   // v1 Read aloud: question + a b c (+ the hint once shown)
   rd.onclick=function(){var q=Q.cur;fx.say(t('q_'+q.k)+'. '+ctx.n(S.sp_abc).replace(/\{(\w)\}/g,function(m,p){return q[p]})+(hint?'. '+hint:''))};fb.setAttribute('aria-live','polite');
-  row.append(inp,ck);fld.append(lb,row,U.el('p',t('enter'),'k'));el.append(U.el('h1',t('title')),eq,dots,fld,tl,fb,U.cont(ctx));
+  row.append(inp,ck);if(ink)inp.after(ink.conf);fld.append(lb,row,U.el('p',t('enter'),'k'));el.append(U.el('h1',t('title')),eq,dots);if(ink)el.append(ink.el);el.append(fld,tl,fb,U.cont(ctx));
   function render(){var q=Q.cur;eq.textContent='f(x) = '+poly(q.a,q.b,q.c);eq.appendChild(U.el('small',t('q_'+q.k)));
     dots.replaceChildren.apply(dots,[0,1,2,3,4].map(function(i){return U.el('i',null,Q.res[i]===true?'ok':Q.res[i]===false?'no':i===Q.i?'cur':'')}).concat(U.el('span',Math.min(Q.i+1,5)+' / 5')))}
-  function next(){Q.cur=genQ();hint='';fb.textContent='';fb.className='fb';fld.className='fld';inp.value='';render()}
+  function next(){Q.cur=genQ();hint='';fb.textContent='';fb.className='fb';fld.className='fld';inp.value='';if(ink)ink.clear();render()}
   function round(){Q.i=0;Q.res=[];Q.score=0;Q.done=false;ck.textContent=t('check');next()}
   function check(){if(Q.busy)return;if(Q.done){round();inp.focus();return}
     var raw=inp.value.replace('−','-').replace(',','.').trim();
