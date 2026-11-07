@@ -44,6 +44,10 @@ render:function(el,ctx){
       if(lab){c.fillStyle=C.ink;c.font='500 12px '+C.mono;c.textAlign='left';c.fillText(lab,X(x)+r+4,Y(y)-r)}};
     dot(0,cc,C.card,5,'c');
     if(a!==0){var yv=fn(xv);dot(xv,yv,ctx.color,7,'V('+n2(xv)+', '+n2(yv)+')');if(D>=0){var q=Math.sqrt(D);dot((-b-q)/(2*a),0,C.ink,5);if(D>0)dot((-b+q)/(2*a),0,C.ink,5)}}}
+  // phone controller (v1 LAB.learn)
+  U.gone(cv,ctx.controls({knob:'a',sliders:['b','c'],tilt:['b','c'],
+    params:{a:{min:-5,max:5,step:.5,label:'a',fmt:n2},b:{min:-10,max:10,step:1,label:'b',fmt:n2},c:{min:-8,max:8,step:1,label:'c',fmt:n2}},
+    get:function(k){return L[k]},set:function(k,v){L[k]=v;sl['abc'.indexOf(k)].set(v);upd()},ro:function(){return'f(x) = '+poly(L.a,L.b,L.c)+'  ·  Δ = '+n2(L.b*L.b-4*L.a*L.c)}}));
   upd();
 }};
 })();

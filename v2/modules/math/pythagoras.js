@@ -52,5 +52,8 @@ render:function(el,ctx){
   cv.onpointermove=function(e){if(!drag)return;var g=geom(cv.clientWidth,cv.clientHeight),q=g.inv.apply(null,pt(e)),v=n2r(clamp(drag.k==='a'?q[0]:q[1],1,12));if(v!==G[drag.k]){G[drag.k]=v;upd()}};
   cv.onpointerup=cv.onpointercancel=function(){if(drag){drag=null;draw()}};
   upd();G.live=true;
+  // phone controller (v1 LAB.geometry)
+  U.gone(cv,ctx.controls({knob:'a',sliders:['b'],tilt:['a','b'],params:{a:{min:1,max:12,step:.5,label:'a',fmt:n2},b:{min:1,max:12,step:.5,label:'b',fmt:n2}},
+    get:function(k){return G[k]},set:function(k,v){G[k]=v;upd()},ro:function(){return'c = √('+n2(G.a)+'² + '+n2(G.b)+'²) = '+n2(Math.hypot(G.a,G.b))}}));
 }};
 })();

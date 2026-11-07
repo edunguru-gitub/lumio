@@ -74,6 +74,10 @@ render:function(el,ctx){
     c.fillStyle=C.muted;c.font=fs+'px '+F;c.fillText('V = '+PH.V.toFixed(2)+' L · N = '+PH.N,bx,by+bh+fs*1.5);c.fillText(t('collisions')+': '+Math.round(PH.rate)+'/s',bx,by+bh+fs*3);
     c.font='600 '+fs+'px '+F;c.fillText('PV = nRT',x0,Math.min(h-fs,bot+fs*2.6))}
   loop=P.Loop(step,draw);upd();step(0);
+  // phone controller (v1 LAB.physics + PCN names)
+  U.gone(cv,ctx.controls({knob:'T',sliders:['V','N'],tilt:['T','V'],
+    params:{T:{min:200,max:500,step:10,label:S.temperature,fmt:function(v){return Math.round(v)+' K'}},V:{min:.3,max:1.2,step:.05,label:S.volume,fmt:function(v){return(+v).toFixed(2)+' L'}},N:{min:10,max:50,step:5,label:['Particles','Particule'],fmt:function(v){return String(Math.round(v))}}},
+    get:function(k){return PH[k]},set:function(k,v){PH[k]=v;upd()},ro:function(){return'P = '+PH.P().toFixed(2)+' atm · T = '+Math.round(PH.T)+' K'}}));
   requestAnimationFrame(function(){loop.start()});U.gone(cv,loop.destroy);
 }};
 })();

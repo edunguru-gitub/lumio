@@ -97,7 +97,8 @@ function lesson(){
   timer=setTimeout(function(){
     if(t!==tok)return;
     var ctx={subject:s,lesson:l,color:s.color,S:L.S,n:L.n,ui:L.ui,done:function(){L.setP(key,1);if(L.note)L.note(key,0);L.out()},
-      report:function(o){return L.report?L.report(key,o):false},award:function(n){n=L.award?L.award(key,n):0;gain(n);return n},fx:L.fx,streak:function(){return L.stats?L.stats.streak:0}};
+      report:function(o){return L.report?L.report(key,o):false},award:function(n){n=L.award?L.award(key,n):0;gain(n);return n},fx:L.fx,streak:function(){return L.stats?L.stats.streak:0},
+      controls:function(d){return L.controls?L.controls(key,d,ctx):nop}}; // js/phone.js: lab controls (v1 LAB shape), returns unregister
     el.innerHTML='';
     var box=document.createElement('div');box.className='lesson-in';el.appendChild(box);
     var soon=function(){var h=document.createElement('h1');h.textContent=L.n(l.name);var p=document.createElement('p');p.textContent=L.n(L.S.soon);box.append(h,p)};
