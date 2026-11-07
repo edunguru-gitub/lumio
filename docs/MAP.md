@@ -23,7 +23,7 @@ Add a lesson: modules/<subject>/<file>.js + one registry line. Remove: delete th
 Lessons: math/algebra, math/parabola, math/pythagoras (id geometry), physics/optics, physics/gas. Storage keys: lumio2_progress, lumio2_stats, lumio2_view, lumio2_theme, lumio2_lang, lumio2_seed (home layout), lumio2_io (algebra Write/Type).
 Home layout: shell.js place() seeded per device; galaxy.js G.home() fits all galaxies + labels with margins. ctx.fx (sfx) + ctx.streak() for lessons.
 ## Blocked / waiting on Eduard
-Matter.js licence check at source; Zoom recordings need transcript; Darius OK on Lumi unlock rule; Windows (Rainmeter) 4 questions.
+Ink pad swatch: v1 amber was replaced by tan (a842004); designer suggests steel --physics (tan looks like auto-ink in Dark); Manager/Eduard decide. Matter.js licence check at source; Zoom recordings need transcript; Darius OK on Lumi unlock rule; Windows (Rainmeter) 4 questions.
 ## PARITY GAPS (Tester audit 6 Nov, restore all; Eduard rule)
 P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 DONE 7 Nov (ink.js = v1 Ink pad + REC offline OCR in algebra; amber swatch -> tan). P3 phone controller (knob, sliders, tilt, Motion, hybrid; needs relay). Optics has NO v1 source: ask Eduard keep or remove.
 ## Open (order)
