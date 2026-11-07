@@ -11,3 +11,9 @@ Nav tabs Home|Subjects|Ranks, header toggles Galaxy/Tabs, Light/Dark, RO/EN, Lig
 Eduard talks Romanian, replies very short (adhd-mode). Ask before changing anything unlisted. Orange only Lumens, violet only Moon. No emojis. Do not invent ranking names. Design: docs/brief-design-v5.md, docs/skills/lumio-taste.
 ## Team Board
 tools/board/team-board.html is the board source (artifact with db collections agents, todos, questions, config, usage, files, messages, health). It lives on claude.ai as an artifact; Claude Code sessions that have the Artifact tool can update it by publishing to the same URL. Without it, the board stays in claude.ai chat Manager.
+
+## State 7 Nov 2026 (supersedes "In progress")
+Done and pushed on v2 (afe2567): nav tabs, header toggles, tactile Light + Dark (AA), Swiss lab, parity P1 fixes, Backspace-exit fix (tools/test-lesson-stay.py). Agents: david, designer, tester, boyle (psychologist, renamed). Mouse wheel down exits a lesson on purpose (Eduard confirmed), keep it.
+Open decision: algebra gives +20 Lumens at round end, v1 does not; ask Eduard.
+Open parity: P2 algebra handwriting pad + OCR; P3 phone controller (needs a relay design; v1 used a local server).
+Hosted preview: python3 tools/build-hosted.py OUT.html (single file, fonts inlined). Board artifact stays on claude.ai.
