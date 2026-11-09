@@ -30,6 +30,7 @@ P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 DONE 7 No
 NEXT: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-09 manager: HSIC preselection result: Lumio QUALIFIED (team Flow, Suceava, rank 18 of 30, 93 pts); semifinal pitch next (docs/handoff/competition.md)
 - 2026-11-07 david: parity P3 phone controller (spec-phone-controller): js/phone.js feature (v1 Ctl knob/sliders/tilt/Motion/Center, Hybrid dock side/float, Phone mode under lab canvas, Link pill + Connect dialog with layout/Live tab/QR/steps/copy/other IP/Quit, BC 'incognia-sync' + Lumio.cmd relay unchanged) + js/qr.js (v1 offline QR); shell ctx.controls; gas/parabola/pythagoras pass v1 LAB tables (commit 'v2 parity P3 phone controller')
 - 2026-11-07 david: ink pad 4th swatch tan -> steel --physics (Eduard approved; ring/check unchanged, CSS untouched) (commit 'v2 ink swatch steel')
 - 2026-11-07 manager: P2 ink pad verified by tester (PASS all 5); ruled lines now ink 14% (visible in Dark) (commit 'v2 ink lines dark')
