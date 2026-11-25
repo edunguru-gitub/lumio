@@ -1,6 +1,9 @@
 # Teacher knowledge: HSIC 2026 (Zoom + WhatsApp + official site). Newest facts first. Updated 25 Nov 2026 20:55.
 No passcodes stored here (Eduard has them in the chat). Sources: official page liceeni-ura.igodemy.ai/semifinala-2 (read 25 Nov), WhatsApp group "HSIC | Etapa a II-a" (read by Eduard's Claude in Chrome, 25 Nov 20:40; group starts 16 Nov), Zoom transcripts 17 and 19 Nov, brief PDF.
 
+## CORRECTION (Eduard, 25 Nov 21:30)
+The deck, video, script and Lumio.cmd/lumio.html (v1) Eduard shared were ALREADY submitted in stage I and scored (93 pts). Stage II = IMPROVE them with progress since then (v2 work with Manager/David) and cover the grid gaps (tech+AI, business, costs/KPI). Demo footage stays v1 (full features); v2 shown as the new foundation. Per-criterion stage I scores/comments: not yet received from Eduard (ask; they show where to improve).
+
 ## STATUS
 Lumio (team Flow, Suceava) is IN the 36 qualified semifinal teams (rank 18, 93 pts; 30 qualified + 6 after re-evaluation; threshold 92). 10 teams reach the Final.
 
