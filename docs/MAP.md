@@ -30,6 +30,7 @@ P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 DONE 7 No
 NEXT: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-25 teacher: docs/teacher/zoom-summary.md (RO chronological summary of 4 Zoom sessions, all actions by criterion, missing sessions, conflicts) + knowledge.md corrections (commit 'teacher: zoom summary')
 - 2026-11-25 designer: spec-port-wave2.md (A projectile lab, B Lumens/Moon/Challenge/Ranks, C Settings, D-F deferred, 10-item polish, 10 questions) + design/wave2-projectile-levels mockup (commit 'spec port wave2')
 - 2026-11-25 david: stage II deck tooling tools/deck (6 new slides HTML, overlays renumber 18 old pages to NN / 24 + spec text edits, merge.py, --final refuses open ASSUMPTION/TO VERIFY tags) + docs/pitch-stage2.md; PDFs only in scratchpad, not in repo (commit 'stage2 deck tooling and slides')
 - 2026-11-25 teacher: mentor advice by grid criterion + 15-item jury checklist in docs/teacher/knowledge.md; docs/teacher/lumio-jury-lens.md (4 Zoom transcripts) (commit 'teacher: mentor advice from zoom')
