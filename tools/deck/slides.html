@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Lumio stage II new slides</title>
+<link rel="stylesheet" href="deck.css">
+<style>
+/* slide-local layout only; look comes from deck.css */
+.c2{grid-template-columns:1fr 1fr}
+.sm p,.sm li{font-size:10.5pt;line-height:1.36}
+.sm h3{font-size:15pt;margin-bottom:4pt}
+.sm.row{gap:12pt}.sm .tile{padding:14pt 15pt 13pt}.sm li+li{margin-top:5pt;padding-top:5pt}
+ul{list-style:none}
+li+li{margin-top:7pt}
+li b,p b{color:var(--tan);font-weight:500}
+.tile.t{background:var(--tan);border-color:var(--tan);color:#2B2018}.tile.t h3{color:#2B2018}
+.mt{margin-top:6pt}
+/* BMC: classic 5 columns, bottom row split in two */
+.bmc{display:grid;grid-template-columns:repeat(10,1fr);grid-template-rows:1fr 1fr .7fr;gap:8pt;height:262pt}
+.bmc .tile{padding:10pt 11pt;border-radius:5pt}
+.bmc h3{font:500 9pt/1.2 var(--mono);text-transform:uppercase;color:var(--tan);margin-bottom:5pt}
+.bmc p{font-size:10.5pt;line-height:1.38}
+.bmc .t h3{color:#2B2018}
+.kp{grid-area:1/1/3/3}.ka{grid-area:1/3/2/5}.kr{grid-area:2/3/3/5}.vp{grid-area:1/5/3/7}.cr{grid-area:1/7/2/9}.ch{grid-area:2/7/3/9}.cs{grid-area:1/9/3/11}.co{grid-area:3/1/4/6}.rv{grid-area:3/6/4/11}
+.vp p{font-size:11.5pt}
+#s17 .tile p{font-size:12.5pt;line-height:1.4}#s17 .tile h3{font-size:19pt}
+.calc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:6pt;margin-top:12pt}
+.calc .tile{padding:9pt 10pt}.calc h3{font:500 8.5pt/1.25 var(--mono);text-transform:uppercase;color:var(--tan);margin-bottom:4pt}.calc p{font-size:13pt}
+.calc i{font:400 22pt/1 var(--head);font-style:normal;color:var(--muted);align-self:center}
+.kpi th,.kpi td{padding:4.5pt 10pt;font-size:10.5pt}.kpi th{padding:6pt 10pt;font-size:9pt}
+.kpi .grp td{background:var(--card);color:var(--tan);font:500 8.5pt/1.2 var(--mono);text-transform:uppercase;padding:4pt 10pt}
+/* KPI table, same style as the competitor table (slide 5) */
+table{width:100%;border-collapse:collapse;border:1pt solid #494745}
+th,td{border:.75pt solid #494745;padding:9pt 12pt;text-align:left;vertical-align:top;font-size:12pt;line-height:1.38}
+th{background:#292725;color:var(--tan);font:600 10pt/1.3 var(--ui);text-transform:uppercase;letter-spacing:.02em;padding:11pt 12pt}
+td:first-child{color:var(--ink)}td{color:var(--muted)}
+.tiles4 li{padding-top:7pt;border-top:.75pt solid var(--line)}.tiles4 li:first-child{border-top:0;padding-top:0}
+.sus{font:400 19pt/1.2 var(--head);color:var(--tan);margin-top:12pt}
+</style></head><body>
+
+<!-- NEW 8 · Validation upgrade -->
+<section class="slide" id="s08">
+ <div class="k">Validation · what we did, what we did not</div>
+ <h1>We tested early. Now we test in a classroom.</h1>
+ <div class="row c3" style="min-height:252pt">
+  <div class="tile"><h3>Done</h3><p>Anonymous student survey, 13 responses. 5 students tried the live app; 4 of 5 would use it again next week.</p><div class="f">Survey + live test, 2026</div></div>
+  <div class="tile"><h3>Honest limits</h3><p>Small sample, one town. No paying customer yet. Testers were friends of the team. <span class="tag">Assumption: Eduard to confirm who the 5 testers were</span></p><div class="f">What we do not claim</div></div>
+  <div class="tile"><h3>Pilot plan</h3><p>One real class, one school in Suceava, 4 weeks, 2 lessons a week. We measure return rate and lessons finished. Teacher and parents informed first.</p><p class="mt muted" style="font-size:12pt">Pilot class being agreed. <span class="tag">Assumption: school, teacher, class size, start date</span></p><div class="f">See KPI slide</div></div>
+ </div>
+ <div class="strip">Pilot rules · written parental consent for under 18 · no names collected · data stays on the device</div>
+</section>
+
+<!-- NEW 15 · Tech and AI + New since round 1 -->
+<section class="slide" id="s15">
+ <div class="k">How it works</div>
+ <h1 style="margin-bottom:14pt">Light and offline. Built with AI, not sold as AI.</h1>
+ <div class="row sm" style="grid-template-columns:1.12fr 1fr 1fr;min-height:0">
+  <div class="tile"><h3>How it works</h3><ul class="tiles4">
+   <li><b>Modular.</b> A permanent shell (galaxies, camera, zoom) plus one small module per lesson. Add a lesson = one file and one registry line.</li>
+   <li><b>Runs offline.</b> v1 is one HTML file (about 0.9 MB). No account, no cloud. Progress stays on the device.</li>
+   <li><b>Phone as controller.</b> QR code on the local network; sliders and tilt drive the lab live. Hosted relay is next.</li>
+   <li><b>Handwriting, in-house.</b> Write a number with your finger; our own template matching reads it, offline. Digits only today.</li></ul></div>
+  <div class="tile"><h3>AI, honestly</h3><ul class="tiles4">
+   <li><b>In the product today:</b> read-aloud voice (the browser's built-in text-to-speech). No cloud AI. No student data leaves the device.</li>
+   <li><b>In how we built it:</b> a team of Claude agents (builder, designer, tester, reviewer) wrote and checked the code. The three of us set the goals, review every result and decide.</li>
+   <li><b>Next:</b> a hint tutor that tells a stuck student what to try next. Only with parental consent. <span class="tag">Assumption: state as a plan</span></li></ul></div>
+  <div class="tile"><h3>New since round 1</h3><ul class="tiles4">
+   <li><b>v2, the new foundation.</b> Shell + one module per lesson; delete any module file, nothing else breaks.</li>
+   <li><b>5 lessons</b> on the new modules; each port checked against v1.</li>
+   <li><b>Kept from v1:</b> handwriting pad (Algebra); phone controller with the same QR pairing, relay and tab sync.</li>
+   <li><b>Tactile Light and Dark</b> at AA contrast; automated contrast and lesson-flow checks.</li>
+   <li><b>Live:</b> edunguru-gitub.github.io/lumio <span class="tag">To verify</span></li></ul>
+   <div class="f" style="font-size:8.5pt;margin-top:auto;padding-top:5pt">Not in v2 yet: Spanish, podcast, Lumens, Moon, settings. Demo = v1</div></div>
+ </div>
+ <div class="strip" style="margin-top:8pt">What works today: 8 lessons · phone control · OCR · EN/RO</div>
+</section>
+
+<!-- NEW 16 · Business Model Canvas (client pays, consumer uses) -->
+<section class="slide" id="s16">
+ <div class="k">Business model</div>
+ <h1 style="margin-bottom:16pt">Free to learn. Schools and parents pay.</h1>
+ <div class="bmc">
+  <div class="tile kp"><h3>Key partners</h3><p>Teachers and school administration (pilot). No signed partners yet. Hosting provider. <span class="tag">Assumption: no partner named</span></p></div>
+  <div class="tile ka"><h3>Key activities</h3><p>Build lessons, pilot with classes, teacher feedback loop.</p></div>
+  <div class="tile kr"><h3>Key resources</h3><p>The app and lesson modules; the team; AI-assisted build pipeline.</p></div>
+  <div class="tile t vp"><h3>Value proposition</h3><p>Learn by doing: 3 minute hands-on labs, instant feedback, EN and RO. Unlike PhET, Brilliant or Khan Academy, your phone controls the experiment (as far as we found).</p></div>
+  <div class="tile cr"><h3>Customer relationships</h3><p>Students: free self-serve. Schools: onboarding call, class dashboard. Parents: progress ring, updates.</p></div>
+  <div class="tile ch"><h3>Channels</h3><p>Students, parents: social media, teachers. Schools: direct, with a warm introduction.</p></div>
+  <div class="tile cs"><h3>Customer segments</h3><p><b>Uses:</b> high school students, grades 9 to 12 first.<br><b>Pays:</b> private schools (client); parents of under-18s.</p></div>
+  <div class="tile co"><h3>Cost structure</h3><p>Hosting and relay, domain, AI tooling, lesson content time, school support (slide 18).</p></div>
+  <div class="tile rv"><h3>Revenue streams</h3><p>Class licence (private schools), premium (parents). Students always free. No sponsors counted as revenue.</p></div>
+ </div>
+ <div class="strip" style="margin-top:10pt">The school pays, the student uses · three paths like Khan Academy: individual, family, school</div>
+</section>
+
+<!-- NEW 17 · Go to market -->
+<section class="slide" id="s17">
+ <div class="k">Go to market</div>
+ <h1 style="margin-bottom:18pt">Start where we can reach: Suceava, then Romania.</h1>
+ <div class="row c3" style="min-height:0">
+  <div class="tile"><h3>Students</h3><p><b>Message:</b> "Try it, don't read it. 3 minutes, on your phone."</p><p class="mt"><b>Channel:</b> social media: school Instagram and TikTok clips, class challenge links.</p></div>
+  <div class="tile"><h3>Parents</h3><p><b>Message:</b> "Short sessions, visible progress."</p><p class="mt"><b>Channel:</b> social media and parent WhatsApp groups via the teacher; progress ring screenshot.</p></div>
+  <div class="tile"><h3>Private schools</h3><p><b>Message:</b> "Hands-on practice your students enjoy; you see class progress."</p><p class="mt"><b>Channel:</b> direct, with a warm introduction. The school pays; the teacher or director who adopts it needs a personal benefit. Free pilot first.</p><div class="f" style="margin-top:8pt">To validate in the pilot</div></div>
+ </div>
+ <div class="strip">Step 1 pilot one class · step 2 one school · step 3 school network</div>
+ <p class="muted" style="font-size:12pt;margin-top:8pt">Targets: pilot 1 class by end of Dec 2026 · 3 private schools approached by Mar 2027 · 1 paying class licence by Jun 2027 <span class="tag">Assumption</span></p>
+</section>
+
+<!-- NEW 18 · Costs and revenue: arithmetic a juror can check -->
+<section class="slide" id="s18">
+ <div class="k">Costs and revenue</div>
+ <h1 style="margin-bottom:20pt">Cheap to run. Paid by schools and parents.</h1>
+ <div class="row c3 sm" style="min-height:0;gap:12pt">
+  <div class="tile"><h3>Start-up (one time)</h3><p>Domain and brand check, hosting setup, consent and privacy paperwork, pilot printing.<br>Total: __ RON <span class="tag">Assumption</span></p><div class="f" style="font-size:9pt;padding-top:6pt">Team time not charged</div></div>
+  <div class="tile"><h3>Running (monthly)</h3><p>Hosting and phone relay: __ RON <span class="tag">Assumption</span><br>AI tooling for building: __ RON <span class="tag">Assumption</span><br>Domain: __ RON <span class="tag">Assumption</span></p><div class="f" style="font-size:9pt;padding-top:6pt">One static file: an extra student costs almost nothing</div></div>
+  <div class="tile"><h3>Revenue</h3><p>Students: free.<br>Private schools: class licence, __ RON per class per year <span class="tag">Assumption</span><br>Parents: premium, __ RON a month <span class="tag">Assumption</span></p><div class="f" style="font-size:9pt;padding-top:6pt">No sponsors counted as revenue</div></div>
+ </div>
+ <div class="calc">
+  <div class="tile"><h3>Customers, quarter 1</h3><p>__ classes <span class="tag">Assumption</span></p></div><i>×</i>
+  <div class="tile"><h3>Average ticket</h3><p>__ RON <span class="tag">Assumption</span></p></div><i>=</i>
+  <div class="tile"><h3>Revenue, quarter 1</h3><p>__ RON</p></div><i>−</i>
+  <div class="tile"><h3>Cost to serve, quarter 1</h3><p>__ RON <span class="tag">Assumption</span></p></div><i>=</i>
+  <div class="tile"><h3>Margin</h3><p>__ RON</p></div>
+ </div>
+ <div class="strip" style="margin-top:10pt">Break-even = monthly running cost ÷ licence price per month = __ classes <span class="tag">Assumption: from the figures above</span></div>
+ <div class="sus" style="font-size:17pt;margin-top:8pt">Free tier keeps students; schools pay for the class view; costs stay flat as users grow.</div>
+</section>
+
+<!-- NEW 19 · KPIs and impact (learning + business) -->
+<section class="slide" id="s19">
+ <div class="k">KPIs and impact</div>
+ <h1 style="margin-bottom:14pt">We measure learning, not just clicks.</h1>
+ <table class="kpi">
+  <tr><th style="width:24%">Metric</th><th style="width:36%">How we measure</th><th style="width:18%">Baseline</th><th>Pilot target</th></tr>
+  <tr class="grp"><td colspan="4">Learning</td></tr>
+  <tr><td>Weekly active learners</td><td>Distinct devices a week</td><td>5 testers so far</td><td>20 in a class of __ <span class="tag">Assumption</span></td></tr>
+  <tr><td>Lessons completed</td><td>Lessons finished per learner a week</td><td>Not measured</td><td>3 <span class="tag">Assumption</span></td></tr>
+  <tr><td>Retention (return rate)</td><td>Share who come back next week</td><td>4 of 5 said they would</td><td>60% <span class="tag">Assumption</span></td></tr>
+  <tr><td>Test-to-use</td><td>Of those who try once, share who finish a lesson</td><td>Not measured</td><td>70% <span class="tag">Assumption</span></td></tr>
+  <tr><td>Education impact</td><td>Before/after 5-question quiz, same class</td><td>Not measured</td><td>+20% score <span class="tag">Assumption</span></td></tr>
+  <tr class="grp"><td colspan="4">Business</td></tr>
+  <tr><td>User acquisition cost</td><td>Outreach spend ÷ new learners</td><td>Not measured</td><td>__ RON <span class="tag">Assumption</span></td></tr>
+  <tr><td>Free-to-paid conversion</td><td>Share of free users whose school or parent pays</td><td>0, no paying customer yet</td><td>__% <span class="tag">Assumption</span></td></tr>
+  <tr><td>Margin</td><td>(Revenue − cost to serve) ÷ revenue</td><td>No revenue yet</td><td>__% <span class="tag">Assumption</span></td></tr>
+ </table>
+ <div class="strip" style="margin-top:10pt">Measured by the pilot · targets, not results · no personal data</div>
+</section>
+</body></html>

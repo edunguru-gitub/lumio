@@ -30,6 +30,7 @@ P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 DONE 7 No
 NEXT: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-25 david: stage II deck tooling tools/deck (6 new slides HTML, overlays renumber 18 old pages to NN / 24 + spec text edits, merge.py, --final refuses open ASSUMPTION/TO VERIFY tags) + docs/pitch-stage2.md; PDFs only in scratchpad, not in repo (commit 'stage2 deck tooling and slides')
 - 2026-11-25 teacher: mentor advice by grid criterion + 15-item jury checklist in docs/teacher/knowledge.md; docs/teacher/lumio-jury-lens.md (4 Zoom transcripts) (commit 'teacher: mentor advice from zoom')
 - 2026-11-09 manager: HSIC preselection result: Lumio QUALIFIED (team Flow, Suceava, rank 18 of 30, 93 pts); semifinal pitch next (docs/handoff/competition.md)
 - 2026-11-07 david: parity P3 phone controller (spec-phone-controller): js/phone.js feature (v1 Ctl knob/sliders/tilt/Motion/Center, Hybrid dock side/float, Phone mode under lab canvas, Link pill + Connect dialog with layout/Live tab/QR/steps/copy/other IP/Quit, BC 'incognia-sync' + Lumio.cmd relay unchanged) + js/qr.js (v1 offline QR); shell ctx.controls; gas/parabola/pythagoras pass v1 LAB tables (commit 'v2 parity P3 phone controller')
