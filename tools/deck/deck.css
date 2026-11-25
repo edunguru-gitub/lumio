@@ -21,9 +21,9 @@ h1{font:400 48pt/1.1 var(--head);color:var(--ink);margin:20pt 0 28pt}
 .tile{background:var(--card);border:.75pt solid var(--line);border-radius:6pt;padding:19pt 20pt 20pt;display:flex;flex-direction:column;min-width:0}
 .tile h3{font:500 21.5pt/1.25 var(--ui);color:var(--tan);margin-bottom:8.5pt}
 .tile p,.tile li{font-size:15pt;line-height:1.5}
-.tile .f{margin-top:auto;font:500 12pt/1.45 var(--mono);color:var(--tan);text-transform:uppercase}
+.tile .f{margin-top:auto;padding-top:10pt;font:500 12pt/1.45 var(--mono);color:var(--tan);text-transform:uppercase}
 .strip{font:500 13pt/1.4 var(--mono);color:var(--tan);text-transform:uppercase;margin-top:14pt}
 .muted{color:var(--muted)}
 b{font-weight:600}
 /* ASSUMPTION tag: visible in DRAFT only; build.js --final refuses to export while any .tag exists */
-.tag{display:inline;font:500 8pt/1 var(--mono);letter-spacing:.02em;text-transform:uppercase;color:var(--bg);background:var(--tan);padding:1.5pt 4pt;border-radius:2pt;margin:0 2pt;line-height:1.6;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.tag{display:inline;font:500 8pt/1 var(--mono);letter-spacing:.02em;text-transform:uppercase;color:var(--bg);background:var(--tan);padding:1.5pt 4pt;border-radius:2pt;margin:0 2pt;line-height:1.6;white-space:nowrap}
