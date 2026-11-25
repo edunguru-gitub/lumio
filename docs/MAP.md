@@ -7,7 +7,7 @@
 | Eduard's rules, decisions, history | docs/handoff/README.md (+ competition.md, old-manager-notes.md) |
 | Run v2, open items | docs/HANDOFF-claude-code.md |
 | Design tokens and look | docs/brief-design-v5.md, docs/skills/lumio-taste |
-| Specs (done or in build) | docs/spec-lessons-port.md, spec-video-match.md, spec-terminal-ratings.md, spec-nav-themes.md, spec-lab-swiss.md |
+| Specs (done or in build) | docs/spec-lessons-port.md, spec-video-match.md, spec-terminal-ratings.md, spec-nav-themes.md, spec-lab-swiss.md, spec-port-wave2.md (projectile, Moon/Challenge/Ranks, Settings, polish; deadline plan) |
 | UX review | docs/review-v2-psych.md |
 | Free libs and licences | docs/free-resources.md (branch design-resources) |
 | v1 app (reference only) | app/lumio.html (do not edit) |
@@ -30,6 +30,7 @@ P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 DONE 7 No
 NEXT: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-25 designer: spec-port-wave2.md (A projectile lab, B Lumens/Moon/Challenge/Ranks, C Settings, D-F deferred, 10-item polish, 10 questions) + design/wave2-projectile-levels mockup (commit 'spec port wave2')
 - 2026-11-25 david: stage II deck tooling tools/deck (6 new slides HTML, overlays renumber 18 old pages to NN / 24 + spec text edits, merge.py, --final refuses open ASSUMPTION/TO VERIFY tags) + docs/pitch-stage2.md; PDFs only in scratchpad, not in repo (commit 'stage2 deck tooling and slides')
 - 2026-11-25 teacher: mentor advice by grid criterion + 15-item jury checklist in docs/teacher/knowledge.md; docs/teacher/lumio-jury-lens.md (4 Zoom transcripts) (commit 'teacher: mentor advice from zoom')
 - 2026-11-09 manager: HSIC preselection result: Lumio QUALIFIED (team Flow, Suceava, rank 18 of 30, 93 pts); semifinal pitch next (docs/handoff/competition.md)

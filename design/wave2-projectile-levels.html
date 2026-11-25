@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wave 2 mockup: Projectile Levels</title>
+<!-- Designer mockup for docs/spec-port-wave2.md section A. Static, not the app. Uses v2/css/tokens.css; the <style> below is the PROPOSED new CSS (tokens only) David moves into the appended layer.
+     Open as is (system theme) or add ?theme=light / ?theme=dark; ?mode=free shows Free play. Level 4 shown: one miss made, 2 hearts left, hint 1 open. -->
+<link rel="stylesheet" href="../v2/css/tokens.css">
+<script>
+var q=new URLSearchParams(location.search),th=q.get('theme');if(th==='light'||th==='dark')document.documentElement.dataset.theme=th;
+</script>
+<style>
+/* proposed layer: lab mode capsule, level dots, hearts, result, disclosure, exercise list */
+.lesson-in>.left{grid-column:4/9;display:flex;flex-direction:column;gap:var(--s3);min-width:0}.seg{display:inline-flex;position:relative;height:36px;padding:2px;background:var(--inset-bg);border:1px solid var(--edge);border-radius:18px;box-shadow:var(--inset);--n:2;--i:1;justify-self:start;align-self:start}
+.seg::before{content:'';position:absolute;top:2px;bottom:2px;left:2px;width:calc((100% - 4px)/var(--n));transform:translateX(calc(100%*var(--i)));background:var(--raise-bg);border:1px solid var(--tan);border-radius:16px;box-shadow:var(--raise);transition:transform .2s ease-out}
+.seg button{position:relative;z-index:1;min-width:96px;padding:0 16px;background:none;border:0;color:var(--muted);font:500 13px var(--ui)}
+.seg button[aria-pressed=true]{color:var(--ink);font-weight:600}
+.lesson-in>.panel{grid-column:9/13;grid-row:1;display:flex;flex-direction:column;gap:var(--s3);min-width:0}
+.panel[hidden]{display:none}
+.lv-dots{display:flex;gap:var(--s2)}
+.lv-dot{width:44px;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;background:none;border:0;color:var(--muted);font:500 14px var(--mono)}
+.lv-dot i{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--edge);border-radius:50%;font-style:normal}
+.lv-dot.done i{border-color:var(--tan);color:var(--ink)}
+.lv-dot.cur i{border:2px solid var(--ink);color:var(--ink)}
+.lv-dot:disabled{opacity:.55;cursor:not-allowed}
+.lv-dot .spk svg{width:8px;height:9px}
+.lv-t{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s2);border-top:1px solid var(--line);padding-top:var(--s3)}
+.lv-t h3{font:400 28px/1.2 var(--head)}
+.hearts{display:inline-flex;align-items:center;gap:6px;font:400 12px var(--mono);color:var(--muted)}
+.hearts svg{width:16px;height:16px;fill:none;stroke:var(--muted);stroke-width:1.4}
+.hearts svg.on{fill:var(--ink);stroke:var(--ink)}
+.lv-q{font:400 15px/1.5 var(--ui);color:var(--ink)}
+.lv-g{font:400 13px var(--mono);color:var(--muted)}
+.lv-f{display:grid;gap:var(--s1)}
+.lv-f label,.k2{font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lv-in{display:flex;align-items:center;gap:var(--s2);height:56px;padding:0 var(--s2);background:var(--inset-bg);border:1px solid var(--edge);border-radius:var(--r2);box-shadow:var(--inset)}
+.lv-in input{flex:1;min-width:0;height:100%;background:none;border:0;color:var(--ink);font:500 20px var(--mono);outline:0}
+.lv-in span{font:400 13px var(--mono);color:var(--muted)}
+.lv-in:focus-within{border-color:var(--tan)}
+.lv-f .btn-primary{margin-top:var(--s2);box-shadow:var(--raise);background:var(--raise-bg)}
+.lv-res{border-top:1px solid var(--line);padding-top:var(--s2);font:400 15px/1.5 var(--ui)}
+.lv-res.no{color:var(--bad)}
+.lv-res.no::before{content:'MISS';font:500 12px var(--mono);letter-spacing:.08em;margin-right:var(--s1)}
+.lum{font:500 14px var(--mono);color:var(--lumens-text)}
+details.how{border-top:1px solid var(--line)}
+details.how summary{display:flex;align-items:center;justify-content:space-between;min-height:48px;cursor:pointer;font:500 15px var(--ui);list-style:none}
+details.how summary::-webkit-details-marker{display:none}
+details.how summary::after{content:'Open';font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+details.how[open] summary::after{content:'Close'}
+.how .card2{padding:var(--s2) 0;border-top:1px solid var(--line)}
+.how .card2 code{display:block;margin-top:4px;font:400 13px/1.5 var(--mono);color:var(--ink)}
+.how .card2 p{margin-top:4px;font:400 14px/1.5 var(--ui);color:var(--muted)}
+.how .chip{margin-top:var(--s1);padding:0 var(--s2);border:1px solid var(--edge);border-radius:var(--r1);background:var(--raise-bg);box-shadow:var(--raise);font:500 13px var(--ui);color:var(--ink)}
+.exl{list-style:none;padding:0;display:flex;flex-direction:column}
+.exl li{display:flex;align-items:center;gap:var(--s2);min-height:48px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.exl li span{flex:1}.exl li small{font:400 11px var(--mono);color:var(--muted)}
+.exl li.cur{color:var(--ink)}
+.exl li.done{color:var(--c)}
+.exl li::before{content:'';width:14px;height:14px;border:1px solid var(--edge);border-radius:50%}
+.exl li.done::before{background:var(--c);border-color:var(--c);box-shadow:inset 0 0 0 3px var(--card)}
+.note{font:400 12px var(--ui);color:var(--muted)}
+.svgcv{display:block;width:100%;height:360px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tag{font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media (max-width:899px){.lesson-in>.panel,.lesson-in>.left{grid-column:auto;grid-row:auto}.svgcv{height:280px}.seg{width:100%}.seg button{flex:1}.lv-dots{justify-content:space-between}}
+</style>
+</head>
+<body data-tab="subjects" data-view="tabs" data-level="planet">
+<header id="bar">
+  <span class="word" role="img" aria-label="Lumio"><span aria-hidden="true">Lum<svg viewBox="0 0 64 70"><path d="M32 4 C34 22 41 29 60 35 C41 41 34 48 32 66 C30 48 23 41 4 35 C23 29 30 22 32 4 Z"/></svg>ıo</span></span>
+  <button id="back" type="button">← <span>Back</span></button>
+  <span id="crumb">Physics / Projectile motion</span>
+  <nav id="top" style="--n:3;--i:1"><button type="button" data-t="home">Home</button><button type="button" data-t="subjects" aria-current="page">Subjects</button><button type="button" data-t="ranks">Ranks</button></nav>
+  <span class="sp"></span>
+  <div id="gtheme" class="grp" role="group" style="--n:2;--i:0"><button type="button" aria-pressed="true">Light</button><button type="button" aria-pressed="false">Dark</button></div>
+  <div id="glang" class="grp" role="group" style="--n:2;--i:1"><button type="button" aria-pressed="false">RO</button><button type="button" aria-pressed="true">EN</button></div>
+</header>
+<main id="main">
+<section id="lesson" class="on">
+<div class="lesson-in lab-2" style="--c:var(--physics)">
+  <h1>Projectile motion</h1>
+  <div class="left">
+  <div class="seg" id="mode" role="group" aria-label="Mode" style="--i:1"><button type="button" data-m="free" aria-pressed="false">Free play</button><button type="button" data-m="lv" aria-pressed="true">Levels</button></div>
+
+  <svg class="svgcv" id="labcv" viewBox="0 0 520 360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Launch lab: grid of distance and height with the target and the shot"></svg>
+  </div>
+
+  <!-- LEVELS panel -->
+  <div class="panel" id="lv">
+    <div class="lv-dots" role="group" aria-label="Levels">
+      <button class="lv-dot done" type="button" aria-label="Level 1, 3 of 3 sparkles"><i>1</i><span class="spk" data-n="3"></span></button>
+      <button class="lv-dot done" type="button" aria-label="Level 2, 2 of 3 sparkles"><i>2</i><span class="spk" data-n="2"></span></button>
+      <button class="lv-dot done" type="button" aria-label="Level 3, 3 of 3 sparkles"><i>3</i><span class="spk" data-n="3"></span></button>
+      <button class="lv-dot cur" type="button" aria-label="Level 4, current" aria-current="true"><i>4</i></button>
+      <button class="lv-dot" type="button" disabled title="Finish the level before to unlock" aria-label="Level 5, locked"><i>5</i></button>
+    </div>
+    <div class="lv-t"><h3>Level 4</h3><span class="hearts" role="img" aria-label="2 hearts left">
+      <svg viewBox="0 0 16 16" class="on"><path d="M8 13.5C3 10 1.5 7.5 1.5 5.5 1.5 3.6 3 2.5 4.5 2.5 6 2.5 7.2 3.4 8 4.8 8.8 3.4 10 2.5 11.5 2.5 13 2.5 14.5 3.6 14.5 5.5 14.5 7.5 13 10 8 13.5Z"/></svg>
+      <svg viewBox="0 0 16 16" class="on"><path d="M8 13.5C3 10 1.5 7.5 1.5 5.5 1.5 3.6 3 2.5 4.5 2.5 6 2.5 7.2 3.4 8 4.8 8.8 3.4 10 2.5 11.5 2.5 13 2.5 14.5 3.6 14.5 5.5 14.5 7.5 13 10 8 13.5Z"/></svg>
+      <svg viewBox="0 0 16 16"><path d="M8 13.5C3 10 1.5 7.5 1.5 5.5 1.5 3.6 3 2.5 4.5 2.5 6 2.5 7.2 3.4 8 4.8 8.8 3.4 10 2.5 11.5 2.5 13 2.5 14.5 3.6 14.5 5.5 14.5 7.5 13 10 8 13.5Z"/></svg>2 / 3</span></div>
+    <p class="lv-q">The target sits on a 5 m high platform, 30 m away. Launch at 45°. What speed lands on it?</p>
+    <p class="lv-g">θ = 45° · R = 30 m · h = 5 m · g = 9.8 m/s²</p>
+    <form class="lv-f" onsubmit="return false">
+      <label for="a">Your answer</label>
+      <div class="lv-in"><input id="a" inputmode="decimal" autocomplete="off" value="17"><span>m/s</span></div>
+      <button class="btn-primary" type="submit">Fire</button>
+    </form>
+    <p class="lv-res no" role="status">Missed: landed at 23.1 m. Check your numbers.</p>
+    <details class="how" open>
+      <summary>Show me how</summary>
+      <div class="card2"><span class="k2">Formula</span><code>y = x · tan θ − g · x² / (2 v² cos² θ)<br>at 45°: y = x − g · x² / v²</code></div>
+      <div class="card2"><span class="k2">Worked example</span><p>x = 20 m, y = 4 m at 45°: v² = g · x² / (x − y) = 9.8 · 400 / 16 = 245 → v ≈ 15.7 m/s.</p></div>
+      <div class="card2"><span class="k2">Hint 1</span><p>Use the path equation y = x · tan θ − g · x² / (2 v² cos² θ).</p><button class="chip" type="button">Hint 2</button></div>
+    </details>
+    <p class="note">Phone controls work in Free play.</p>
+  </div>
+
+  <!-- FREE PLAY panel -->
+  <div class="panel" id="free" hidden>
+    <label class="sl" style="--n:70;--p:.5" data-min="10°" data-max="80°"><b>θ</b><input type="range" min="10" max="80" step="1" value="45"><output>45°</output></label>
+    <label class="sl" style="--n:25;--p:.6" data-min="5 m/s" data-max="30 m/s"><b>v</b><input type="range" min="5" max="30" step="1" value="20"><output>20 m/s</output></label>
+    <div class="tiles">
+      <div class="tile"><small>Range</small><b>40.8 m</b></div><div class="tile"><small>Max height</small><b>10.2 m</b></div>
+      <div class="tile"><small>Flight time</small><b>2.88 s</b></div><div class="tile"><small>vx · vy</small><b>14.1 · 14.1</b></div>
+    </div>
+    <ul class="exl" aria-label="Exercises">
+      <li class="done"><span>Land beyond 40 m</span><small>+10 Lumens</small></li>
+      <li class="cur"><span>Reach a max height above 15 m</span><small>+10 Lumens</small></li>
+      <li><span>Hit the flag at 30 m (±1 m)</span><small>+10 Lumens</small></li>
+      <li><span>At v = 20 m/s, find the max-range angle</span><small>+10 Lumens</small></li>
+    </ul>
+    <p class="note">Aim steeper: a high angle puts more speed into going up.</p>
+    <button class="btn-primary" type="button">Continue →</button>
+  </div>
+</div>
+</section>
+</main>
+<script>
+// static drawing only: grid, shot and target built from tokens so Light and Dark both work
+var NS='http://www.w3.org/2000/svg',cv=document.getElementById("labcv"),W=520,H=360,pl=34,pr=12,pt=12,pb=26;
+var cs=getComputedStyle(document.documentElement);function tok(n){return cs.getPropertyValue(n).trim()}
+function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;cv.appendChild(e);return e}
+function draw(free){
+  cv.replaceChildren();var xm=70,ym=35,X=function(x){return pl+x/xm*(W-pl-pr)},Y=function(y){return H-pb-y/ym*(H-pt-pb)},g=free?9.81:9.8;
+  for(var x=0;x<=xm;x+=10){el('line',{x1:X(x),y1:Y(0),x2:X(x),y2:Y(ym),stroke:tok('--line'),'stroke-width':1});el('text',{x:X(x),y:H-8,'text-anchor':'middle',fill:tok('--muted'),'font-size':11,'font-family':'ui-monospace,monospace'},x)}
+  for(var y=0;y<=ym;y+=10){el('line',{x1:X(0),y1:Y(y),x2:X(xm),y2:Y(y),stroke:tok('--line'),'stroke-width':1});el('text',{x:pl-6,y:Y(y)+4,'text-anchor':'end',fill:tok('--muted'),'font-size':11,'font-family':'ui-monospace,monospace'},y)}
+  el('line',{x1:X(0),y1:Y(0),x2:X(xm),y2:Y(0),stroke:tok('--muted'),'stroke-width':1.5});el('line',{x1:X(0),y1:Y(0),x2:X(0),y2:Y(ym),stroke:tok('--muted'),'stroke-width':1.5});
+  var a=45*Math.PI/180,v=free?20:17,h=free?0:5,vx=v*Math.cos(a),vy=v*Math.sin(a),T=(vy+Math.sqrt(vy*vy-2*g*h))/g,d='';
+  if(!free){el('rect',{x:X(27),y:Y(5),width:X(33)-X(27),height:Y(0)-Y(5),fill:tok('--line')});
+    el('circle',{cx:X(30),cy:Y(5),r:7,fill:'none',stroke:tok('--ink'),'stroke-width':2});el('circle',{cx:X(30),cy:Y(5),r:2.5,fill:tok('--ink')});
+    el('line',{x1:X(30),y1:Y(5),x2:X(30),y2:Y(11),stroke:tok('--ink'),'stroke-width':2});el('path',{d:'M'+X(30)+' '+Y(11)+'L'+(X(30)+12)+' '+Y(10)+'L'+X(30)+' '+Y(9)+'Z',fill:tok('--ink')})}
+  else{el('line',{x1:X(0),y1:Y(vy*vy/2/g),x2:X(vx*T/2),y2:Y(vy*vy/2/g),stroke:tok('--muted'),'stroke-width':1,'stroke-dasharray':'5 5'});}
+  for(var i=0;i<=60;i++){var t=T*i/60,px=vx*t,py=vy*t-g*t*t/2;d+=(i?'L':'M')+X(px).toFixed(1)+' '+Y(py).toFixed(1)}
+  el('path',{d:d,fill:'none',stroke:tok('--physics'),'stroke-width':2.5});
+  el('line',{x1:X(0),y1:Y(0),x2:X(0)+28*Math.cos(a),y2:Y(0)-28*Math.sin(a),stroke:tok('--ink'),'stroke-width':3,'stroke-linecap':'round'});
+  el('circle',{cx:X(vx*T),cy:Y(h),r:6,fill:tok('--tan')});el('circle',{cx:X(vx*T),cy:Y(h),r:3,fill:tok('--ink'),opacity:0});
+}
+// sparkles under finished level dots (same path as the rating symbol)
+var SP='<svg viewBox="0 0 64 70" aria-hidden="true"><path d="M32 4 C34 22 41 29 60 35 C41 41 34 48 32 66 C30 48 23 41 4 35 C23 29 30 22 32 4 Z"/></svg>';
+document.querySelectorAll('.spk[data-n]').forEach(function(e){var n=+e.dataset.n;e.innerHTML=SP+SP+SP;for(var j=0;j<n;j++)e.children[j].classList.add('on')});
+function mode(m){var free=m==='free';document.getElementById('free').hidden=!free;document.getElementById('lv').hidden=free;
+  document.getElementById('mode').style.setProperty('--i',free?0:1);document.querySelectorAll('#mode button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.m===m)});draw(free)}
+document.querySelectorAll('#mode button').forEach(function(b){b.onclick=function(){mode(b.dataset.m)}});
+var dk=th?th==='dark':!matchMedia('(prefers-color-scheme: light)').matches;
+document.querySelectorAll('#gtheme button').forEach(function(b,i){b.setAttribute('aria-pressed',(i===1)===dk)});document.getElementById('gtheme').style.setProperty('--i',dk?1:0);
+mode(q.get('mode')==='free'?'free':'lv');
+</script>
+</body>
+</html>
