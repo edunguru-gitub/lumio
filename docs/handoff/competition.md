@@ -6,3 +6,6 @@ If we advance, decide: who pays (plan: free for students, school class licence, 
 
 ## RESULT (Eduard, 9 Nov 2026): QUALIFIED
 First preselection list "HSIC 2026 - Echipe calificate in prima preselectie": 30 teams qualify (6 tied at 92 on place 25, all included). Lumio = team "Flow", Suceava, rank 18, 93 points (top: UNIPATH 100; 24 teams at 93+). Next: Stage II (to 29 Nov), semifinal live on Teams = 5 min pitch + 5 min jury Q&A; finalists chosen there; final week 1-4 Dec; Grand Final 5 Dec URA Campus. Semifinal date not published on the site (checked 8 Nov). Note: site said upload 1-2 Nov, our notes say submitted 5 Nov; we are on the list, so it counted.
+
+## FORMAT CORRECTION (Manager, 25 Nov, from the official page and WhatsApp, see docs/teacher/knowledge.md)
+Stage II "semifinal" = ONLINE UPLOAD (deck max 25 slides + MP4 pitch max 5 min, whole team speaks), form open 26 Nov 08:00 to 27 Nov 24:00, jury 28-29 Nov, 10 finalists announced 30 Nov. The live 5 min pitch + 5 min jury Q&A is the GRAND FINAL (5 Dec, URA Campus, pitch in English). Older lines above that describe a live semifinal are superseded. 36 teams qualified (30 + 6 after re-evaluation); Lumio (Flow) was rank 18 in the first 30.
