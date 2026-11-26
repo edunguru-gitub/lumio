@@ -50,3 +50,6 @@ Source: Boyle 'mai intuitiv' review (scratchpad screenshots, report to Manager).
 10. 'Coming soon' placeholder cards: hide PRG/QST/ACC and the star, dim the card with the label 'Coming soon' (RO 'În curând'); the placeholder page says 'Coming soon. Meanwhile try Algebra or Gas' with a button to the recommended lesson; lesson count text 'N available' instead of '0 of 3'.
 11. 'Continue →' buttons say what follows: 'Next question (2/5)' and on the last step 'Finish: +10 Lumens' (use the real amount from the lesson); keep payouts unchanged.
 Verify: scripted checks for each item in EN and RO at 390 and 1273 px Light and Dark; scoring/payouts unchanged; 5 lessons open; Backspace/Enter stay; 0 page errors; build-hosted builds. Count checks honestly.
+
+## 2026-11-26 PAUSE (usage limit): ux-wave and everything polish are ON HOLD
+Manager stopped the ux-wave David (nothing was pushed). Priority order from now: (1) deck final pass + Tester + export (Fri, after Eduard's list), (2) upload by Sat 11:00, (3) then resume in this order: ux-wave (items 1-16 above incl. Tester's 4 header notes, still OPEN), premium Phase 2 + tactile motion (docs/spec-premium-pass.md, docs/spec-tactile-motion.md), wave 3 lessons and overview (docs/spec-port-wave3.md). Do not start any of these before Manager says go.
