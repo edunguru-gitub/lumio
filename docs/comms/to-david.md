@@ -8,3 +8,12 @@ Source: Tester report on DRAFT2 (f340b23), Manager decisions.
 3. Slide 19: grey formula boxes need more contrast; slide 20: do not show '5 testers so far' as a weekly-active baseline (they did not use it weekly), show it as 'tried it once'; p25 footer patch faintly visible.
 4. Only if Eduard says yes: old slide edits (survey statistics as real counts, fictional sample names on the leaderboard, one 'Why us' team slide, slogans to factual lines, neutral photo of Eduard). Otherwise leave original pages untouched.
 5. Costs slide: year 1 vs first quarter, as Manager says. Keep the deck at max 25 pages, footers NN / total.
+
+## 2026-11-26 wave2-fixes: OPEN (start only when Manager says Eduard decided)
+From Tester report on item C (cf2dd16):
+1. Gas h1 breaks mid-word at 1200 px ('Thermodynami / cs Lab', overflow-wrap:anywhere in a 250px column): fix without touching the canvas gap.
+2. RO with no Romanian voice installed shows the same 'Vocea română nu este instalată' twice: show once.
+3. Lesson header at 700-1000 px takes 3 rows (RO/EN wraps alone): tidy to 2 rows if possible without hiding anything else.
+4. ONLY IF Manager relays that Eduard said NO: restore the Galaxy/Tabs toggle inside lessons (and the crumb at 700-1279) exactly as in b846c02 while keeping the 4th Settings tab reachable. Parity rule: that hiding was not approved.
+5. Only if Eduard says yes: hide the inert phone controller in Levels at 390 px (answer field was 1.5 screens down).
+Self-check before ONE push; never push before the final post-rebase re-run.
