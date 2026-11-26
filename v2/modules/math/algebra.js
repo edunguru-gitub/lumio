@@ -27,19 +27,20 @@ render:function(el,ctx){
   el.style.setProperty('--c',ctx.color);ctx.report({qt:1});
   inp.inputMode='decimal';inp.autocomplete='off';inp.id='ans-in';inp.placeholder='0';lb.htmlFor='ans-in';ck.type=hb.type=rd.type='button';rd.hidden=!fx.canSay;tl.style.border='0';tl.style.padding='0';tl.append(hb,rd);
   // v1 Read aloud: question + a b c (+ the hint once shown)
-  rd.onclick=function(){var q=Q.cur;fx.say(t('q_'+q.k)+'. '+ctx.n(S.sp_abc).replace(/\{(\w)\}/g,function(m,p){return q[p]})+(hint?'. '+hint:''))};fb.setAttribute('aria-live','polite');
+  var said=function(){var q=Q.cur;return t('q_'+q.k)+'. '+ctx.n(S.sp_abc).replace(/\{(\w)\}/g,function(m,p){return q[p]})+(hint?'. '+hint:'')};
+  rd.onclick=function(){fx.say(said())};fb.setAttribute('aria-live','polite');
   row.append(inp,ck);if(ink)inp.after(ink.conf);fld.append(lb,row,U.el('p',t('enter'),'k'));el.append(U.el('h1',t('title')),eq,dots);if(ink)el.append(ink.el);el.append(fld,tl,fb,U.cont(ctx));
   function render(){var q=Q.cur;eq.textContent='f(x) = '+poly(q.a,q.b,q.c);eq.appendChild(U.el('small',t('q_'+q.k)));
     dots.replaceChildren.apply(dots,[0,1,2,3,4].map(function(i){return U.el('i',null,Q.res[i]===true?'ok':Q.res[i]===false?'no':i===Q.i?'cur':'')}).concat(U.el('span',Math.min(Q.i+1,5)+' / 5')))}
-  function next(){Q.cur=genQ();hint='';fb.textContent='';fb.className='fb';fld.className='fld';inp.value='';if(ink)ink.clear();render()}
+  function next(){Q.cur=genQ();hint='';fb.textContent='';fb.className='fb';fld.className='fld';inp.value='';if(ink)ink.clear();render();fx.auto&&fx.auto(said())} // v1 auto(): Settings 'Read aloud automatically'
   function round(){Q.i=0;Q.res=[];Q.score=0;Q.done=false;ck.textContent=t('check');next()}
   function check(){if(Q.busy)return;if(Q.done){round();inp.focus();return}
     var raw=inp.value.replace('−','-').replace(',','.').trim();
     if(raw===''||isNaN(+raw)){fb.className='fb';fb.textContent=t('write_first');fx.bad();return}
     var ok=+raw===Q.cur.ans;
     // v1: +10+min(streak,5)*2 Lumens (ctx.award default), sounds, confetti, jump / shake; streak ×n at 3,5,7… = rating.js report()
-    if(ok){ctx.award();ctx.report({ok:1});Q.score++;Q.res[Q.i]=true;fb.className='fb ok';fb.textContent=t(pk(['ok1','ok2','ok3']));fx.ok();fx.burst(60);fx.jump(eq)}
-    else{ctx.report({bad:1});Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans});fx.bad()}
+    if(ok){ctx.award();ctx.report({ok:1});Q.score++;Q.res[Q.i]=true;fb.className='fb ok';fb.textContent=t(pk(['ok1','ok2','ok3']));fx.ok();fx.burst(60);fx.jump(eq);fx.auto&&fx.auto(fb.textContent)}
+    else{ctx.report({bad:1});Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans});fx.bad();fx.auto&&fx.auto(fb.textContent)}
     fld.className='fld '+(ok?'ok':'no');if(!ok)fx.shake(fld);Q.i++;render();Q.busy=true;
     setTimeout(function(){Q.busy=false;if(!el.isConnected)return;
       fld.className='fld';if(Q.i>=5){Q.done=true;if(ctx.report({qd:1}))ctx.award(20);fb.className='fb ok';fb.textContent=t('round_done',{s:Q.score});ck.textContent=t('new_round');if(Q.score>=4){fx.streak();fx.burst(180)}}else next()},ok?1100:1900)}

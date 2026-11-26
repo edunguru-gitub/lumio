@@ -63,7 +63,7 @@ function render(){
     cc.append(E('small',t(first?'first':'contl')),E('h3',L.n(cl.name)+' →'),E('p',first?'+10 '+t('lum'):L.n(cs.name),first?'csub lum':'csub'));
     cc.onclick=function(){L.go('planet',cs.id,cl.id)};rt.appendChild(cc)}
   all.type='button';all.onclick=function(){L.setTab('ranks')};
-  rt.append(me);if(tm)rt.appendChild(tm);if(FT.ranks)rt.append(E('h2',L.n(L.S.ranks)),FT.ranks.table(false),all);o.append(player(),rt);
+  rt.append(me);if(tm)rt.appendChild(tm);if(FT.ranks){var mt=FT.ranks.mini&&FT.ranks.mini();rt.append(E('h2',L.n(L.S.ranks)));if(mt)rt.append(mt);rt.append(all)}o.append(player(),rt); // Ranks preview (spec P7): only with 3+ rows, else compact (title + See all)
   el.replaceChildren(o);if(tk)el.appendChild(tk);el.scrollTop=y;
 }
 L.boot(function(){

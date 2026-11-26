@@ -12,7 +12,7 @@ function spk(n){var e=document.createElement('span');e.className='spk';e.setAttr
 L.spk=spk;
 function bar(st){
   var el=document.getElementById('tabbar');el.replaceChildren();
-  ['home','subjects','ranks'].filter(L.tabOk).forEach(function(t){
+  ['home','subjects','ranks','settings'].filter(L.tabOk).forEach(function(t){
     var b=L.ui.el('button',L.n(L.S[t]));b.type='button';b.onclick=function(){L.setTab(t)};
     if(st.tab===t)b.setAttribute('aria-current','page');el.appendChild(b);
   });

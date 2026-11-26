@@ -7,14 +7,15 @@ var ro=/^ro/i.test(L.pref('lumio2_lang')||navigator.language||''),pv=L.pref('lum
 L.n=function(a){return a[ro?1:0]};
 L.S={back:['Back','Înapoi'],lum:['Lumens','Lumeni'],light:['Light','Luminos'],dark:['Dark','Întunecat'],galaxy:['Galaxy','Galaxie'],tabs:['Tabs','Taburi'],cont:['Continue','Continuă'],subjects:['Subjects','Materii'],
  hint:['Click: go in. Right click: go out','Click: intri. Click dreapta: ieși'],soon:['Coming soon','În curând'],of:['{a} of {b} lessons','{a} din {b} lecții'],subject:['Subject','Materie'],now:['Now','Acum'],
- home:['Home','Acasă'],missions:['Missions','Misiuni'],ranks:['Ranks','Clasament'],zin:['Go in','Intră'],zout:['Go out','Ieși'],
+ home:['Home','Acasă'],missions:['Missions','Misiuni'],ranks:['Ranks','Clasament'],zin:['Go in','Intră'],zout:['Go out','Ieși'],settings:['Settings','Setări'],
  alt:['Lumio galaxies. Use Tabs for keyboard navigation.','Galaxiile Lumio. Folosește Taburi pentru tastatură.']};
 L.t=function(k,o){var s=L.n(L.S[k]);for(var p in o)s=s.replace('{'+p+'}',o[p]);return s};
 // features (js/<id>.js) register in window.LumioFeatures; missing = skipped
 L.has=function(id){return !!(window.LumioFeatures||{})[id]};
 // fx stub; js/sfx.js replaces it (sounds, confetti, jump/shake, read aloud)
-var nop=function(){};L.fx={canSay:false,ok:nop,bad:nop,streak:nop,pop:nop,jump:nop,shake:nop,burst:nop,say:nop,tick:nop};
-L.tabOk=function(t){return t==='subjects'||L.has(t==='home'?'terminal':'ranks')};
+var nop=function(){};L.fx={canSay:false,ok:nop,bad:nop,streak:nop,pop:nop,jump:nop,shake:nop,burst:nop,say:nop,tick:nop,auto:nop};
+// tab -> feature id (home = terminal, ranks = ranks, settings = settings); feature absent = no tab
+L.tabOk=function(t){return t==='subjects'||L.has(t==='home'?'terminal':t)};
 // boot queue: runs after DOM + every registry file (loader.js); shell's own boot is first
 var bq=[];L.boot=function(f){bq?bq.push(f):f()};L.boot.run=function(){var q=bq;bq=null;q.forEach(function(f){f()})};
 // subjects + lessons from LumioRegistry: "subject/file" = module manifest, object = placeholder (Coming soon)

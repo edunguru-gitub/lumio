@@ -163,7 +163,7 @@ function lamp(){if(Ctl.live)Ctl.live.classList.toggle('on',Net.on||!!BC)}
 function pill(){lamp();if(!pl)return;var txt=t('link'),st='',tip=t('cd_t');
   if(phoneSide()&&http){if(Net.on){txt=t('ch_conn');st='on';tip=t('cn_to',{h:Net.host||'Lumio'})}else if(Net.old){txt=t('ch_not');st='err';tip=t('cn_old')}else if(Net.err){txt=t('ch_not');st='err';tip=t('cn_err')}else if(Net.info){txt=t('ch_re');tip=t('cn_off')}}
   else if(Net.phones>0){txt=t('ch_phone');st='on';tip=t('ch_full',{h:Net.host||'Lumio'})}else if(CD.re){txt=t('ch_re');tip=txt}else if(Net.on){txt='LAN · '+Math.max(1,Net.peers);st='on'}
-  pl.lastChild.textContent=txt;pl.className=st;pl.title=tip;pl.setAttribute('aria-label',tip)}
+  pl.lastChild.textContent=txt;pl.className=st;pl.title=tip;pl.setAttribute('aria-label',txt===tip?tip:txt+', '+tip)} // visible word first in the accessible name (also when only the dot shows)
 function info(){return http&&!/github\.io$/.test(location.hostname)?fetch('/api/info',{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(!j||j.app!=='incognia')return null;Net.info=j;if(j.token)Net.tok=j.token;return j}).catch(function(){return null}):Promise.resolve(null)}
 function open(){info().then(function(j){CD.open=true;render(j);if(!dlg.open)dlg.showModal()})}
 function drawQR(el,url){
@@ -208,5 +208,5 @@ L.boot(function(){
   syncOn();pill();mount();Net.init();
   document.addEventListener('visibilitychange',function(){if(!document.hidden&&Net.info&&(!Net.es||Net.es.readyState===2))Net.init()});
 });
-F.phone={Net:Net,setMode:setMode,setP:setP};
+F.phone={Net:Net,setMode:setMode,setP:setP,open:open}; // open = Connect dialog (Settings Phone link)
 })();

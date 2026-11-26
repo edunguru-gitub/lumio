@@ -42,6 +42,9 @@ function page(){
   el.replaceChildren(rp);rp.querySelectorAll('.pseg').forEach(L.seg);
   if(fk){var b=el.querySelector('.pseg [data-k="'+fk+'"]');if(b)b.focus()}
 }
-(window.LumioFeatures=window.LumioFeatures||{}).ranks={table:ranks};
+// Home preview (spec P7): only when 3+ rows exist (You + Sample players, by Moon): top 3 + You, no Challenge column; else null (compact)
+function mini(){if(!L.moon)return null;var p=RK.per;RK.per='rk_month';var tb=board(),rows=[].slice.call(tb.tBodies[0].rows);RK.per=p;if(rows.length<3)return null;
+  rows.forEach(function(r,i){if(i>=3&&!r.classList.contains('me'))r.remove()});[].forEach.call(tb.rows,function(r){if(r.cells[6])r.cells[6].remove()});return tb}
+(window.LumioFeatures=window.LumioFeatures||{}).ranks={table:ranks,mini:mini};
 L.boot(function(){page();L.on(function(s,k){if(s.tab!=='subjects'||k==='stats'||k==='progress'||k==='skin')page()})});
 })();
