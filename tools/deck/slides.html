@@ -24,8 +24,9 @@ li b,p b{color:var(--tan);font-weight:500}
 #s16 .tile p{font-size:14pt;line-height:1.45}
 #s18 .tile p{font-size:13pt;line-height:1.45}#s18 .tile h3{font-size:19pt}
 /* one break-even scenario: classes x licence = revenue - running cost = margin */
-.calc{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;align-items:stretch;gap:6pt;margin-top:10pt}
+.calc{display:grid;grid-template-columns:1fr auto 1.3fr auto 1fr;align-items:stretch;gap:6pt;margin-top:10pt}
 .calc .tile{padding:9pt 10pt}.calc h3{font:500 10pt/1.25 var(--mono);text-transform:uppercase;color:var(--tan);margin-bottom:4pt}.calc p{font-size:13pt;line-height:1.35}
+.calc p{color:var(--ink)}.calc .tile{background:#2B2720;border-color:#4A443A}
 .calc i{font:400 22pt/1 var(--head);font-style:normal;color:var(--muted);align-self:center}
 /* KPI table, same style as the competitor table (slide 5) */
 table{width:100%;border-collapse:collapse;border:1pt solid #494745}
@@ -33,6 +34,11 @@ th,td{border:.75pt solid #494745;padding:6pt 10pt;text-align:left;vertical-align
 th{background:#292725;color:var(--tan);font:600 10pt/1.3 var(--ui);text-transform:uppercase;letter-spacing:.02em;padding:7pt 10pt}
 td:first-child{color:var(--ink)}td{color:var(--muted)}
 .kpi .grp td{background:var(--card);color:var(--tan);font:500 10pt/1.2 var(--mono);text-transform:uppercase;padding:4pt 10pt}
+.nums span{float:right;color:var(--ink)}
+.src{font:400 10pt/1.4 var(--ui);color:var(--muted);margin-top:8pt}
+.scn td,.scn th{padding:4pt 10pt}.scn td{color:var(--ink)}.scn td+td{text-align:right}.scn th+th{text-align:right}
+#team .mono{width:46pt;height:46pt;border-radius:50%;border:1pt solid var(--tan);display:grid;place-items:center;font:400 26pt/1 var(--head);color:var(--tan);margin-bottom:14pt}
+#team .tile p{font-size:15pt}
 .sus{font:400 19pt/1.2 var(--head);color:var(--tan);margin-top:10pt}
 </style></head><body>
 
@@ -43,7 +49,7 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
  <div class="row c3" style="min-height:252pt">
   <div class="tile"><h3>Done</h3><p>Anonymous student survey, 13 responses. 5 students tried the live app; 4 of 5 would use it again next week.</p><div class="f">Survey + live test, 2026</div></div>
   <div class="tile"><h3>Honest limits</h3><p>Small sample, one town. No paying customer yet. Testers were friends of the team. <span class="tag">Assumption: who the 5 testers were</span></p><div class="f">What we do not claim</div></div>
-  <div class="tile"><h3>Pilot plan</h3><p>One real class in Suceava, 4 weeks, 2 lessons a week. The teacher keeps anonymous codes (Student 1 to N) on paper; app data stays on each device.</p><p class="mt muted" style="font-size:13pt">Pilot class being agreed. <span class="tag">Assumption: school, class, start date</span></p><div class="f">See KPI slide</div></div>
+  <div class="tile"><h3>Pilot plan</h3><p>One real class in Suceava, 4 weeks, 2 lessons a week. The teacher keeps anonymous codes (Student 1 to N) on paper; app data stays on each device.</p><p class="mt muted" style="font-size:13pt">Pilot class being agreed. <span class="tag">Assumption: school, teacher, size, date</span></p><div class="f">See KPI slide</div></div>
  </div>
  <div class="strip">Pilot rules · written parental consent for <span class="nw">under-18s</span> · anonymous codes · data stays on the device</div>
 </section>
@@ -90,8 +96,8 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
   <div class="tile t"><h3>Value proposition</h3><p>Learn by doing: 3 minute hands-on labs, instant feedback, EN and RO. Unlike PhET, Brilliant or Khan Academy, your phone controls the experiment (as far as we found).</p></div>
   <div class="tile"><h3>Channels, relationships</h3><p>Students and parents: social media and teachers; free, self-serve. Schools: direct, warm introduction, onboarding call.</p></div>
   <div class="tile"><h3>Customer segments</h3><p><b>Uses:</b> high school students, grades 9 to 12 first.<br><b>Pays:</b> private schools (client) and parents of <span class="nw">under-18s.</span></p></div>
-  <div class="tile wide"><h3>Cost structure</h3><p>AI tooling, domain, hosted relay (plan), lesson content time, school support. See slide 19.</p></div>
-  <div class="tile wide"><h3>Revenue streams</h3><p>Class licence (private schools), premium (parents). Students always free. No sponsors counted as revenue.</p></div>
+  <div class="tile wide"><h3>Cost structure</h3><p>AI tools, domains, small server, accountant, content time, support: about 511 RON a month (plan), slide 19.</p></div>
+  <div class="tile wide"><h3>Revenue streams</h3><p>Class licence (schools, plan 1,200 RON a year), pilot fee, parents’ premium. Students free; no sponsors as revenue.</p></div>
  </div>
  <div class="strip">The school pays, the student uses · students always free</div>
 </section>
@@ -103,47 +109,81 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
  <div class="row c3" style="min-height:0">
   <div class="tile"><h3>Students</h3><p><b>Message:</b> “Try it, don’t read it. 3 minutes, on your phone.”</p><p class="mt"><b>Channel:</b> social media: school Instagram and TikTok clips, class challenge links.</p></div>
   <div class="tile"><h3>Parents</h3><p><b>Message:</b> “Short sessions, visible progress.”</p><p class="mt"><b>Channel:</b> social media and parent WhatsApp groups via the teacher.</p></div>
-  <div class="tile"><h3>Private schools</h3><p><b>Message:</b> “Hands-on practice your students enjoy.”</p><p class="mt"><b>Channel:</b> direct, with a warm introduction; free pilot first. We will find who decides; the person who adopts it needs a benefit too.</p><div class="f" style="margin-top:8pt;padding-top:8pt">To validate in the pilot</div></div>
+  <div class="tile"><h3>Private schools</h3><p><b>Message:</b> “Hands-on practice your students enjoy.”</p><p class="mt"><b>Channel:</b> direct, with a warm introduction; a 4-week pilot first (symbolic fee in our plan). We will find who decides; the person who adopts it needs a benefit too.</p><div class="f" style="margin-top:8pt;padding-top:8pt">To validate in the pilot</div></div>
  </div>
  <div class="strip">Step 1 pilot one class · step 2 one school · step 3 school network</div>
- <p class="muted" style="font-size:13pt;margin-top:8pt">Targets: pilot 1 class by end of Dec 2026 · 3 private schools approached by Mar 2027 · 1 paying class licence by Jun 2027 <span class="tag">Assumption</span></p>
+ <p class="muted" style="font-size:13pt;margin-top:8pt">Plan: pilot class agreed by Dec 2026 · 3 schools approached by Mar 2027 · first licences Sep 2027</p>
 </section>
 
-<!-- NEW 19 · Costs and revenue: one scenario a juror can check -->
+<!-- NEW 19 · Costs and revenue (Researcher base scenario, docs/research/finance-pricing.md; PLAN, not revenue) -->
 <section class="slide" id="s19">
- <div class="k">Costs and revenue</div>
+ <div class="k">Costs and revenue · plan</div>
  <h1 style="margin-bottom:16pt">Cheap to run. Paid by schools and parents.</h1>
  <div class="row c3 sm" style="min-height:0">
-  <div class="tile"><h3>Start-up (one time)</h3><p>Domain and brand check, consent paperwork, pilot printing.<br>Total: <span class="tag">Assumption</span> RON</p><div class="f" style="font-size:10pt;padding-top:8pt">Team time not charged</div></div>
-  <div class="tile"><h3>Running (a month)</h3><p>Web page: 0 RON today (GitHub Pages).<br>AI tooling: <span class="tag">Assumption</span> RON<br>Domain: <span class="tag">Assumption</span> RON<br>Hosted relay (plan): <span class="tag">Assumption</span> RON</p></div>
-  <div class="tile"><h3>Revenue</h3><p>Students: free.<br>Class licence: <span class="tag">Assumption</span> RON per class a year.<br>Parents’ premium: <span class="tag">Assumption</span> RON a month (not counted below).</p></div>
+  <div class="tile"><h3>Start-up (one time, estimate)</h3><p>Company set-up, consent paperwork checked by a lawyer, pilot printing, brand check.</p><p class="mt"><b>About 3,000 RON</b> (range 2,000 to 5,000). Team time not charged.</p></div>
+  <div class="tile"><h3>Running (a month, plan)</h3><p class="nums">Accountant <span>265</span><br>AI build tools, estimate <span>200</span><br>Small server for the phone link <span>35</span><br>Domains .ro and .com <span>11</span><br><b>Total</b> <span><b>511 RON</b></span></p></div>
+  <div class="tile"><h3>Revenue (plan, excl. VAT)</h3><p>Students: free.<br>Class licence: <b>1,200 RON a year</b> (range 900 to 1,800).<br>Pilot class: 300 RON, symbolic.<br>Parents’ premium: about 100 RON a year, under 5% of year-1 revenue.</p></div>
  </div>
  <div class="calc">
-  <div class="tile"><h3>Classes, year 1</h3><p><span class="tag">Assumption</span></p></div><i>×</i>
-  <div class="tile"><h3>Licence a year</h3><p><span class="tag">Assumption</span> RON</p></div><i>=</i>
-  <div class="tile"><h3>Revenue a year</h3><p class="muted">classes × licence</p></div><i>−</i>
-  <div class="tile"><h3>Running a year</h3><p class="muted">month total × 12</p></div><i>=</i>
-  <div class="tile"><h3>Margin</h3><p class="muted">revenue − running</p></div>
+  <div class="tile"><h3>Running a year</h3><p>511 × 12 = 6,130 RON</p></div><i>÷</i>
+  <div class="tile"><h3>Left per class a year</h3><p>1,200 − 228 to serve = 972 RON</p></div><i>=</i>
+  <div class="tile"><h3>Break-even</h3><p>6.3, so <b>7 classes</b></p></div>
  </div>
- <div class="strip">Break-even: classes = running a year ÷ licence a year = <span class="tag">Assumption</span> classes</div>
- <div class="sus" style="font-size:17pt;margin-top:8pt">Free tier keeps students; schools pay for the class; costs stay flat as users grow.</div>
+ <div class="strip">With the 3,000 RON start-up: about 10 classes · to serve = AI, voice, tax, our time</div>
+ <p class="src">Hosting: free for the prototype; the paid version moves to static hosting plus a small server (about 35 RON a month, included in the 511). Prices from public pages (Bono, Hetzner, RoTLD), 26 Nov 2026.</p>
+</section>
+
+<!-- NEW 19b · Year 1 and first quarter side by side (same plan) -->
+<section class="slide" id="s19b">
+ <div class="k">Revenue plan · no paying client yet</div>
+ <h1 style="margin-bottom:12pt">Year 1 proves that schools pay.</h1>
+ <div class="row c2 sm" style="min-height:0">
+  <div class="tile"><h3>First quarter (Jan to Mar 2027), base, RON</h3><ul class="tiles4">
+   <li><b>Revenue</b> 1 pilot class × 300 = <b>300</b></li>
+   <li><b>Costs</b> 3 × 511 + 3,000 start-up + 131 use = <b>4,664</b></li>
+   <li><b>Result</b> 300 − 4,664 = <b>−4,364 RON</b></li></ul></div>
+  <div class="tile"><h3>Year 1 (2027), base, RON</h3><ul class="tiles4">
+   <li><b>Revenue</b> 6 × 1,200 + 300 pilot + 356 premium = <b>7,856</b></li>
+   <li><b>Costs</b> 6,130 running + 2,229 to serve + 3,000 = <b>11,359</b></li>
+   <li><b>Result</b> <b>−3,503 RON</b> (−503 before start-up)</li></ul></div>
+ </div>
+ <table class="scn" style="margin-top:10pt">
+  <tr><th style="width:34%">Scenario (plan)</th><th>Conservative</th><th>Base</th><th>Optimistic</th></tr>
+  <tr><td>Paying clients, first quarter</td><td>0</td><td>1</td><td>1</td></tr>
+  <tr><td>Revenue, first quarter</td><td>0 RON</td><td>300 RON</td><td>600 RON</td></tr>
+  <tr><td>Paying classes, year 1 (licence)</td><td>2 at 900</td><td>6 at 1,200</td><td>16 at 1,800</td></tr>
+  <tr><td>Revenue, year 1</td><td>1,845 RON</td><td>7,856 RON</td><td>32,370 RON</td></tr>
+ </table>
+ <p class="src">Full-price licences start with the school year, Sep 2027. Market: 631,500 high school students in Romania, 2025/26 (INS, via Edupedu); private schools first.</p>
 </section>
 
 <!-- NEW 20 · KPIs and impact (learning + business), pilot data rule: anonymous codes, teacher sheet -->
 <section class="slide" id="s20">
  <div class="k">KPIs and impact</div>
- <h1 style="margin-bottom:14pt">We measure learning, not just clicks.</h1>
+ <h1 style="margin-bottom:12pt">We measure learning, not just clicks.</h1>
  <table class="kpi">
-  <tr><th style="width:22%">Metric</th><th style="width:39%">How we measure</th><th style="width:19%">Baseline</th><th>Pilot target</th></tr>
+  <tr><th style="width:22%">Metric</th><th style="width:35%">How we measure</th><th style="width:20%">Baseline</th><th>Pilot target</th></tr>
   <tr class="grp"><td colspan="4">Learning</td></tr>
-  <tr><td>Weekly active students</td><td>Teacher’s weekly count, anonymous codes</td><td>5 testers so far</td><td><span class="tag">Assumption</span> of the class</td></tr>
-  <tr><td>Lessons completed</td><td>Teacher notes it from each student’s screen</td><td>Not measured</td><td>3 a week <span class="tag">Assumption</span></td></tr>
-  <tr><td>Return rate</td><td>Share of the class active again next week</td><td>4 of 5 said they would</td><td>60% <span class="tag">Assumption</span></td></tr>
-  <tr><td>Education impact</td><td>Teacher’s 5-question quiz, before and after</td><td>Not measured</td><td>+20% score <span class="tag">Assumption</span></td></tr>
+  <tr><td>Weekly active students</td><td>Teacher’s weekly count, by code</td><td>5 testers tried it once</td><td><span class="tag">Assumption: Eduard sets target</span></td></tr>
+  <tr><td>Lessons completed</td><td>Teacher notes it from the screen</td><td>Not measured</td><td>2 a week (the pilot plan)</td></tr>
+  <tr><td>Return rate</td><td>Share of the class active again next week</td><td>4 of 5 testers: yes</td><td>60% of the class</td></tr>
+  <tr><td>Education impact</td><td>5-question quiz, before and after</td><td>Not measured</td><td>+20% score</td></tr>
   <tr class="grp"><td colspan="4">Business</td></tr>
-  <tr><td>User acquisition cost</td><td>Outreach spend ÷ new students</td><td>Not measured</td><td><span class="tag">Assumption</span> RON</td></tr>
-  <tr><td>Free-to-paid conversion</td><td>Paying schools or parents ÷ those who tried</td><td>0, no paying customer</td><td><span class="tag">Assumption</span> %</td></tr>
+  <tr><td>User acquisition cost</td><td>Our time and travel ÷ schools signed</td><td>Not measured</td><td>≤ 1,500 RON a school</td></tr>
+  <tr><td>Free-to-paid conversion</td><td>Paying pilots ÷ pilots; premium ÷ free</td><td>0, no paying customer</td><td>1 of 2 pilots; 2% premium</td></tr>
  </table>
- <div class="strip" style="margin-top:10pt">Targets, not results · codes on the teacher’s sheet · app data stays on the device</div>
+ <div class="strip" style="margin-top:10pt">Targets, not results · anonymous codes · premium median 2.1% (RevenueCat)</div>
+</section>
+
+<!-- NEW · Why us (replaces the three team pages; roles only, initials, no photos; Eduard OK 26 Nov) -->
+<section class="slide" id="team">
+ <div class="k">Why us · the team</div>
+ <h1 style="margin-bottom:22pt">Three roles. We build, test and ask ourselves.</h1>
+ <div class="row c3" style="min-height:0">
+  <div class="tile"><div class="mono">E</div><h3>Eduard</h3><p>Design and the app. Designs every screen and builds the app with the AI agents he directs.</p><div class="f">Head of design and app</div></div>
+  <div class="tile"><div class="mono">D</div><h3>Darius</h3><p>Team lead. Ran the student survey and leads outreach to schools for the pilot.</p><div class="f">Survey and outreach</div></div>
+  <div class="tile"><div class="mono">S</div><h3>Stefan</h3><p>The technical side of Lumio: how it runs, testing and debugging.</p><div class="f">Lead technical and debugging</div></div>
+ </div>
+ <div class="strip">Team Flow · Suceava · stage I: 93 points · we review every change ourselves</div>
 </section>
 </body></html>

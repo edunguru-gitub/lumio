@@ -13,6 +13,15 @@ if sys.argv[1] == '--scan':  # gate helper: print original pages (final numberin
         if hit:
             print(f'page {i + 1}: {hit.group(0)}')
     sys.exit(0)
+if sys.argv[1] == '--px':  # build.js helper: colour of original page p at (x, y) pt, for patches with fill 'auto'
+    import json, subprocess, tempfile
+    from PIL import Image
+    out, tmp = [], tempfile.mkdtemp()
+    for p, x, y in json.loads(sys.argv[3]):
+        subprocess.run(['pdftoppm', '-r', '72', '-f', str(p), '-l', str(p), '-singlefile', '-png', sys.argv[2], f'{tmp}/p{p}'], check=True)
+        out.append('#%02X%02X%02X' % Image.open(f'{tmp}/p{p}.png').convert('RGB').getpixel((x, y))[:3])
+    print(json.dumps(out))
+    sys.exit(0)
 orig, new, ov, out, order = sys.argv[1:6]
 src = {'o': PdfReader(orig).pages, 'n': PdfReader(new).pages}
 ovp = PdfReader(ov).pages
