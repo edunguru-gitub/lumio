@@ -23,7 +23,7 @@ S={link:['Link','Link'],cd_t:['Connect your phone','Conectează telefonul'],cd_s
  tabsync:['Live tab sync (phone ↔ desktop)','Sincronizare live între file (telefon ↔ desktop)'],
  tabsync_h:['Open Lumio in a second tab or window, switch it to Phone mode: its controls, sliders and tilt pad now drive this tab in real time (same browser).','Deschide Lumio într-o a doua filă, treci-o în modul Telefon: butoanele, sliderele și padul ei controlează acum această filă în timp real (același browser).'],
  ctl:['Phone controller','Controler telefon'],motion:['Motion','Mișcare'],center:['Center','Centru'],tilt:['Tilt','Înclinare'],
- none:['Open a lab (Gas, Parabola or Geometry) to use the phone controller.','Deschide un laborator (Gaz, Parabolă sau Geometrie) ca să folosești controlerul.'],
+ none:['Open a lab (Gas, Projectile, Parabola or Geometry) to use the phone controller.','Deschide un laborator (Gaz, Proiectil, Parabolă sau Geometrie) ca să folosești controlerul.'],
  nosensor:['No motion sensor found — use the tilt pad.','Nu există senzor de mișcare — folosește padul.'],sensor:['Motion sensors on','Senzori de mișcare activi'],denied:['Motion permission denied','Permisiune refuzată']},
 t=function(k,o){var s=L.n(S[k]);for(var p in o)s=s.replace('{'+p+'}',o[p]);return s},
 clamp=function(v,a,b){return Math.min(b,Math.max(a,v))},
