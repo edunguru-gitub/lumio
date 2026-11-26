@@ -25,3 +25,12 @@ QUESTION: (1) rating: I report miss = bad:1, hit with no miss on that attempt = 
 ## 2026-11-26 wave2-A projectile fixes: DONE
 What: per Manager answers: all-4 bonus is now a separate +15 pop after the +10 (v1); field cleared after a miss (v1); Summary added to the wave 3 list in spec-port-wave2.md. (1)(3)(6) unchanged.
 Commit: v2 projectile: v1 bonus pop + clear field on miss. Check: finish exercise 4 -> "+10 Lumens" then "+15 Lumens"; Levels miss -> empty field. Self-check 65/65 (earlier "66" was a miscount: 63).
+
+## 2026-11-26 wave2-B Lumens/Moon/Challenge/Ranks: DONE + QUESTION
+What: NEW v2/js/moon.js, v2/js/challenge.js; PATCH rating.js (L.phase, L.saveStats, streak 3,5,7 celebration now in report() for every lesson; algebra's own call removed, text now a toast as v1), terminal.js (Lumens tile: number, 3px bar, "{p}% to {next}"; Moon tile: phase + number + "#a of 7 · Sample · n days left" + link to Ranks; ink until first gain/game; click/Enter explainer), ranks.js (Leaderboard | Friends[Coming soon], This week | This month, Everyone | Friends[Coming soon], rows # monogram name [Sample] Overall Lumens Moon This-week Challenge, lb_demo line, Challenge card), ui.js U.dialog, shell.js L.toast (queued) + Esc/Backspace ignored inside dialogs, index.html #toast, tokens.css appended layer, registry features += moon, challenge. Storage: lumio2_moon {season,r,n,best,last,wk}, lumio2_chal {id,name,sample,r,my0,op,t0}; lumio2_progress / lumio2_stats unchanged.
+Commits: 'v2 wave2 B: Moon Elo, Challenge, leaderboard, Home meters (not registered yet)', 'v2 register moon + challenge' (revert the second alone to hide B). Check: Ranks > Challenge on a Sample row > Send; Ctrl+Shift+D > End challenge (demo); first win 1000 vs 1000 = Moon +16; remove "moon" from registry = Home 1000 / No challenges yet as before.
+QUESTION 1 (Q2): Moon tier names New Moon..Blue Moon are not in v1 or repo; only the numeric Moon + v1 phase icon are shown. Need names + thresholds from Eduard.
+QUESTION 2 (Q3): Challenge never ends by itself (v1); end is dev-only (Ctrl+Shift+D). Auto end at 7 days, a visible "Finish now (Sample)", or keep dev-only?
+QUESTION 3: kept the old Ranks column "This week" (overall rating change, You only) next to the new "This week | This month" Moon capsule (parity); the labels overlap in meaning. Keep, rename, or drop?
+QUESTION 4: v1 draw (equal gains) shows the loss line "{n} won this one. Rematch?"; ported 1:1. Fix to a draw line?
+
