@@ -7,7 +7,7 @@ var num=function(x){return typeof x==='number'&&isFinite(x)?x:0};['lum','streak'
 for(var k in st.les){var r=st.les[k];if(!r||typeof r!=='object')delete st.les[k];else['qd','qt','ok','bad','ts'].forEach(function(f){r[f]=num(r[f])})}
 st.log=st.log.filter(function(e){return e&&typeof e==='object'});st.log.forEach(function(e){['ts','lum','d','od'].forEach(function(f){e[f]=num(e[f])})});
 L.stats=st;(window.LumioFeatures=window.LumioFeatures||{}).rating={};
-Object.assign(L.S,{streak_t:['Streak ×{n}!','Serie ×{n}!'],you:['You','Tu'],new:['NEW','NOU'],moon:['Moon','Luna'],noch:['No challenges yet','Încă nicio provocare']});
+Object.assign(L.S,{streak_t:['Streak ×{n}!','Serie ×{n}!'],you:['You','Tu'],new:['NEW','NOU'],moon:['Moon','Moon'],noch:['No challenges yet','Încă nicio provocare']});
 L.sgn=function(n){return n>0?'+'+n:n<0?'−'+-n:'0'};
 // v1 moonPhase: today's moon phase icon (currentColor)
 L.phase=function(){var d=new Date(),dim=new Date(d.getFullYear(),d.getMonth()+1,0).getDate(),f=Math.min(1,(d.getDate()-1)/(dim-1||1)),rx=(6*Math.abs(1-2*f)).toFixed(2);

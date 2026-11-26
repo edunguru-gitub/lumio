@@ -16,7 +16,7 @@ Object.assign(L.S,{
  set_apply:['Apply','Aplică'],bad_code:['That code does not work','Codul nu funcționează'],no_store:['Could not save on this device','Nu s-a putut salva pe acest dispozitiv'],
  imp_t:['Replace progress?','Înlocuiești progresul?'],imp_p:['The progress on this device will be replaced by the code.','Progresul de pe acest dispozitiv va fi înlocuit cu cel din cod.'],
  imp_ok:['Replace','Înlocuiește'],cancel:['Cancel','Anulează'],imported:['Progress imported','Progres importat'],
- reset:['Reset Lumens, best and streak','Resetează lumenii, recordul și seria'],reset_h:['Lessons and Moon stay.','Lecțiile și Luna rămân.'],reset_b:['Reset','Resetează'],
+ reset:['Reset Lumens, best and streak','Resetează lumenii, recordul și seria'],reset_h:['Lessons and Moon stay.','Lecțiile și Moon rămân.'],reset_b:['Reset','Resetează'],
  reset_t:['Reset Lumens?','Resetezi lumenii?'],reset_p:['Lumens, best streak and streak go back to 0.','Lumenii, recordul și seria revin la 0.'],reset_ok:['Progress reset','Progres resetat'],
  set_phone:['Phone as controller','Telefonul ca telecomandă'],set_phone_h:['Layout mode and live tab sync are inside.','Modul de afișare și sincronizarea live sunt aici.'],lan_open:['Connect phone','Conectează telefonul'],
  on:['On','Pornit'],off:['Off','Oprit']});

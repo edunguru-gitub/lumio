@@ -3,7 +3,7 @@
 var L=Lumio,E=function(t,x,c){return L.ui.el(t,x,c)},st=L.stats,FT=window.LumioFeatures;if(!st)return;FT.terminal={};
 Object.assign(L.S,{rated:['{a} of {b} rated','{a} din {b} evaluate'],goal_p:['Goal: finish a lesson to get your rating','Obiectiv: termină o lecție ca să primești nota'],goal_l:['Finish to get rated','Termină ca să primești nota'],
  first:['Play your first lesson','Joacă prima lecție'],lum_s:['All time','În total'],streak:['Streak','Serie'],best:['Best {n}','Record {n}'],
- lessons:['Lessons','Lecții'],ch_moon:['Win Challenges to raise Moon','Câștigă provocări ca să crești Luna'],contl:['Continue learning','Continuă să înveți'],all:['See all','Vezi tot']});
+ lessons:['Lessons','Lecții'],ch_moon:['Win Challenges to raise Moon','Câștigă provocări ca să crești Moon'],contl:['Continue learning','Continuă să înveți'],all:['See all','Vezi tot']});
 var t=L.t;
 function num(r){return r==null?'--':String(r)}
 function big(r){return r==null?E('b',t('new'),'new'):E('b',String(r))}

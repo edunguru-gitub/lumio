@@ -3,10 +3,10 @@
 // (lumio2_moon, changes only on Challenge results), labelled Sample players, Lumens chip in lessons. Needs rating.js.
 var L=Lumio,st=L.stats,t=L.t;if(!st)return;
 Object.assign(L.S,{lum_to:['{p}% to {n}','{p}% până la {n}'],lum_ex:['Lumens grow every time you learn. They never reset.','Lumenii cresc de fiecare dată când înveți. Nu se resetează niciodată.'],
- moon_ex:['Your Moon rating changes when you win or lose Challenges. It resets each month.','Ratingul Lunii se schimbă când câștigi sau pierzi provocări. Se resetează în fiecare lună.'],
+ moon_ex:['Your Moon rating changes when you win or lose Challenges. It resets each month.','Ratingul Moon se schimbă când câștigi sau pierzi provocări. Se resetează în fiecare lună.'],
  days_left:['{n} days left','{n} zile rămase'],ends_today:['Ends today','Se încheie azi'],of_n:['#{a} of {b}','#{a} din {b}'],top_p:['Top {p}%','Top {p}%'],
- best_moon:['Best Moon','Cea mai bună Lună'],last_month:['Last month','Luna trecută'],sample:['Sample','Exemplu'],lum_ms:['{n} Lumens reached','{n} lumeni atinși'],
- moon_up:['Moon +{d}','Luna +{d}'],moon_dn:['Moon {d}','Luna {d}']});
+ best_moon:['Best Moon','Cel mai bun Moon'],last_month:['Last month','Luna trecută'],sample:['Sample','Exemplu'],lum_ms:['{n} Lumens reached','{n} lumeni atinși'],
+ moon_up:['Moon +{d}','Moon +{d}'],moon_dn:['Moon {d}','Moon {d}']});
 // Sample players (v1 SAMPLE_P, seeded rng 4242). Names live only in this constant; every Sample row carries the Sample tag.
 var SAMPLE_NAMES=['Andrei Popescu','Maria Ionescu','Ioana Stan','Vlad Marin','Elena Rusu','Matei Toma'];
 function rng(seed){var a=seed>>>0;return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
@@ -40,9 +40,10 @@ M.sub=function(){var pl=M.pool(),s=pl.slice().sort(function(a,b){return b.r-a.r}
   return(real>=20?t('top_p',{p:Math.max(1,Math.round(n/pl.length*100))}):t('of_n',{a:n,b:pl.length})+(real<pl.length?' · '+t('sample'):''))+' · '+(dl===1?t('ends_today'):t('days_left',{n:dl}))};
 // Moon tiers (Manager 26 Nov, docs/spec-moon-tiers.md). ONE table: Eduard edits names / thresholds here. Display only, Elo unchanged.
 // [from Moon points, EN, RO]; no tier below the first. Remove this block = the app shows numbers only.
-var TIERS=[[0,'New Moon','Luna Nouă'],[1015,'Crescent','Semiluna'],[1050,'First Quarter','Primul pătrar'],[1100,'Gibbous','Luna gibboasă'],[1160,'Full Moon','Luna Plină'],[1250,'Blue Moon','Luna Albastră']];
+// Tier names: ONE table. RO column kept English by decision (rename here only).
+var TIERS=[[0,'New Moon','New Moon'],[1015,'Crescent','Crescent'],[1050,'First Quarter','First Quarter'],[1100,'Gibbous','Gibbous'],[1160,'Full Moon','Full Moon'],[1250,'Blue Moon','Blue Moon']];
 Object.assign(L.S,{tier_to:['{n} points to {name}','{n} puncte până la {name}'],tier_top:['Top rank','Rang maxim'],tier_new:['Win a Challenge to reach {name}.','Câștigă o provocare ca să ajungi la {name}.'],
- tier_up:['New rank: {name}','Rang nou: {name}'],tier_ex:['Moon ranks go from {a} to {b}. They follow your Moon rating.','Rangurile Lunii merg de la {a} la {b}. Urmează ratingul tău de Lună.'],
+ tier_up:['New rank: {name}','Rang nou: {name}'],tier_ex:['Moon ranks go from {a} to {b}. They follow your Moon rating.','Rangurile Moon merg de la {a} la {b}. Urmează ratingul tău Moon.'],
  reset_note:['New month. Last month: {name}.','Lună nouă de joc. Luna trecută: {name}.']});
 function tn(i){return L.n(TIERS[i].slice(1))}
 M.tier=function(r){r=Math.round(r);for(var i=TIERS.length-1;i>0&&r<TIERS[i][0];i--);return i};
