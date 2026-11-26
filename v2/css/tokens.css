@@ -590,3 +590,6 @@ body[data-level=planet] #bar #gview{display:none}
 @media (min-width:1100px) and (max-width:1199px){html[lang=ro] body[data-level=planet] #bar{row-gap:4px}html[lang=ro] body[data-level=planet] #bar::after{content:'';order:1;flex-basis:100%}html[lang=ro] body[data-level=planet] #bar>:not(.word):not(#top){order:2}}
 .race .fin{margin-top:var(--s2)}
 @media (max-width:899px){.proj.lv-on .pctl{display:none}}
+/* Moon tiers (moon.js tier table): name as text next to the Moon number; on Ranks the tier is the row headline, place secondary */
+.mt b{flex-wrap:wrap;row-gap:0}.meter b .tier{font:500 13px var(--ui);white-space:nowrap}
+.lb .moon .tier{display:block;font:600 14px var(--ui)}.lb td.pl{color:var(--muted);font-size:12px}

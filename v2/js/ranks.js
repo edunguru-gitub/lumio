@@ -26,9 +26,9 @@ function board(){
   list.forEach(function(p,i){
     var r=E('tr',null,p.me?'me':''),nm=E('span',null,'nm'),mg=E('span',p.name.charAt(0),'mg'),lu=E('td',null,'lu'),mo=E('td',null,'moon'),ch=E('td');
     mg.setAttribute('aria-hidden','true');nm.append(mg,E('b',p.name));if(p.sample)nm.append(E('span',t('sample'),'tag'));
-    lu.append(E('small',t('lum')+' ','lb-l'),M.fmt(p.lum));mo.innerHTML=L.phase();mo.append(wk?(p.wk>=0?'+':'')+Math.round(p.wk):M.fmt(p.r));
+    lu.append(E('small',t('lum')+' ','lb-l'),M.fmt(p.lum));mo.innerHTML=L.phase();mo.append(wk?(p.wk>=0?'+':'')+Math.round(p.wk):M.fmt(p.r));if(M.tname)mo.prepend(E('span',M.tname(p.r),'tier'));
     if(C&&!p.me)ch.append(C.btn(p));
-    var n=E('td'),c2=E('td');n.append(String(i+1));c2.append(nm);
+    var n=E('td',null,'pl'),c2=E('td');n.append(String(i+1));c2.append(nm);
     r.append(n,c2,E('td',p.me?(o.r==null?t('new'):String(o.r)):'-'),lu,mo,E('td',p.me?sgn(L.week()):'-'),ch);bd.appendChild(r);
   });
   th.appendChild(h);tb.append(th,bd);return tb;

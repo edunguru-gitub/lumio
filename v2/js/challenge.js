@@ -39,8 +39,9 @@ function card(){
 }
 // v1 chEnd (Elo override): win 1 / draw .5 / loss 0, Moon moves for both (Sample rating kept in memory, as v1)
 function end(){if(!c)return;var my=st.lum-c.my0,win=my>c.op?1:my===c.op?.5:0,x=c;c=null;save();
-  var res=M.apply(x.r||1000,win),sp=M.SP.filter(function(s){return s.id===x.id})[0];if(sp)sp.r=Math.round(res.oppNew);
-  if(win===1){L.fx.streak();L.fx.burst(180);L.toast(t('ch_win'))}else{L.fx.bad();L.toast(t('ch_lose',{n:x.name}))}L.emit('stats')}
+  var r0=M.m.r,res=M.apply(x.r||1000,win),sp=M.SP.filter(function(s){return s.id===x.id})[0];if(sp)sp.r=Math.round(res.oppNew);
+  if(win===1){L.fx.streak();L.fx.burst(180);L.toast(t('ch_win'))}else{L.fx.bad();L.toast(t('ch_lose',{n:x.name}))}
+  if(M.tier&&M.tier(M.m.r)>M.tier(r0))L.toast(t('tier_up',{name:M.tname(M.m.r)}),L.phase());L.emit('stats')}
 setInterval(function(){if(c&&Math.random()<.5){c.op+=1+Math.floor(Math.random()*4);save();var el=document.querySelector('#ranks .race');if(el)el.replaceWith(card())}},6500);
 // developer panel (v1 Ctrl+Shift+D): seed demo data, reset demo, end challenge
 function dev(){

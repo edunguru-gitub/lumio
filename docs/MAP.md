@@ -60,3 +60,4 @@ Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS
 - 2026-11-06 david: terminal + ratings (3a53e70); rating accuracy fix; wordmark (a2e9caf)
 - 2026-11-06 david: open design layer (7d99797); video-match galaxy/tabs (c0ade32); 4 lessons ported (7e05470)
 - 2026-11-06 david: v1 parity fixes: algebra shake, geometry +30 XP, gas Overpressure! + hint-orange (piston rate calc identical to v1, not a bug)
+- 2026-11-26 david: v2 Moon tiers as text (one EN/RO table in moon.js; Home tile, explainer, Ranks rows, rise-only New rank, month note) (commit "v2 moon tiers")

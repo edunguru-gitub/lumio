@@ -51,8 +51,11 @@ L.lessonGrid=function(){
 function render(){
   var el=document.getElementById('term'),y=el.scrollTop,o=E('div',null,'t-in'),rt=E('div',null,'t-right'),me=E('div',null,'meters'),tk=FT.ticker&&st.log.length?FT.ticker.el():null,all=E('button',t('all')+' →','see');
   var M=L.moon,mm=M&&M.m,sk=meter(t('streak'),String(st.streak),t('best',{n:st.best}));
-  if(M)me.append(mtile('lum',t('lum'),M.fmt(st.lum),st.lum>0,'',M.lumP(st.lum),t('lum_to',{p:M.lumP(st.lum),n:M.fmt(M.lumNext(st.lum).next)}),[t('lum_ex')]),sk,
-    mtile('moon',t('moon'),M.fmt(mm.r),M.played(),L.phase(),M.P(mm.r),M.sub(),[t('moon_ex'),t('best_moon')+' '+M.fmt(mm.best)+(mm.last!=null?' · '+t('last_month')+' '+M.fmt(mm.last):'')]));
+  // Moon tier (moon.js tier table, optional): name next to the number, next step + names in the explainer, reset note for this session
+  var T=M&&M.tname,tn=function(r){return T?' ('+T(r)+')':''},mo=M&&mtile('moon',t('moon'),M.fmt(mm.r),M.played(),L.phase(),M.P(mm.r),M.sub(),
+    [t('moon_ex')].concat(T?[M.tex(),M.tnext(mm.r)]:[],[t('best_moon')+' '+M.fmt(mm.best)+tn(mm.best)+(mm.last!=null?' · '+t('last_month')+' '+M.fmt(mm.last)+tn(mm.last):'')]));
+  if(T){mo.querySelector('.mt b').append(E('span',T(mm.r),'tier'));if(M.fresh!=null)mo.querySelector('.msub').after(E('span',t('reset_note',{name:T(M.fresh)}),'msub'))}
+  if(M)me.append(mtile('lum',t('lum'),M.fmt(st.lum),st.lum>0,'',M.lumP(st.lum),t('lum_to',{p:M.lumP(st.lum),n:M.fmt(M.lumNext(st.lum).next)}),[t('lum_ex')]),sk,mo);
   else me.append(meter(t('lum'),String(st.lum),t('lum_s'),'lum'),sk,meter(t('moon'),'1000',t('noch'),'moon',L.phase()));
   var tm=tk&&tk.cloneNode(true);if(tm)tm.classList.add('tick-m');
   // one Continue card; first run = lesson tagged 'first' (algebra), else the first unfinished lesson

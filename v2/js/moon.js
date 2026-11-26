@@ -24,7 +24,7 @@ function save(){try{localStorage.setItem(K,JSON.stringify(M.m))}catch(e){}}
 // v1 moonLoad: new month = soft reset half way to 1000, last month kept; new week = new weekly base
 M.load=function(now){now=now||new Date();var sid=monthId(now),m=null;try{m=JSON.parse(localStorage.getItem(K))}catch(e){}
   if(!(m&&typeof m.season==='string'&&isFinite(m.r)&&isFinite(m.n)&&isFinite(m.best)&&m.wk&&isFinite(m.wk.base)))m={season:sid,r:1000,n:0,best:1000,last:null,wk:{mon:mondayId(now),base:1000}};
-  if(m.season!==sid){m.last=Math.round(m.r);m.r=1000+(m.r-1000)*.5;m.n=0;m.season=sid;m.wk={mon:mondayId(now),base:m.r}}
+  if(m.season!==sid){M.fresh=m.last=Math.round(m.r);m.r=1000+(m.r-1000)*.5;m.n=0;m.season=sid;m.wk={mon:mondayId(now),base:m.r}}
   if(m.wk.mon!==mondayId(now))m.wk={mon:mondayId(now),base:m.r};
   M.m=m;save();return m};
 M.P=function(r){return Math.max(0,Math.min(100,Math.round((r-600)/1000*100)))};
@@ -38,6 +38,17 @@ M.fmt=function(n){return Math.round(n).toLocaleString(L.n(['en-US','ro-RO']))};
 M.pool=function(){var m=M.m;return[{id:'me',name:t('you'),me:true,r:m.r,wk:m.r-m.wk.base,lum:st.lum}].concat(SP)};
 M.sub=function(){var pl=M.pool(),s=pl.slice().sort(function(a,b){return b.r-a.r}),n=s.findIndex(function(x){return x.me})+1,real=pl.filter(function(x){return !x.sample}).length,dl=daysLeft();
   return(real>=20?t('top_p',{p:Math.max(1,Math.round(n/pl.length*100))}):t('of_n',{a:n,b:pl.length})+(real<pl.length?' · '+t('sample'):''))+' · '+(dl===1?t('ends_today'):t('days_left',{n:dl}))};
+// Moon tiers (Manager 26 Nov, docs/spec-moon-tiers.md). ONE table: Eduard edits names / thresholds here. Display only, Elo unchanged.
+// [from Moon points, EN, RO]; no tier below the first. Remove this block = the app shows numbers only.
+var TIERS=[[0,'New Moon','Luna Nouă'],[1015,'Crescent','Semiluna'],[1050,'First Quarter','Primul pătrar'],[1100,'Gibbous','Luna gibboasă'],[1160,'Full Moon','Luna Plină'],[1250,'Blue Moon','Luna Albastră']];
+Object.assign(L.S,{tier_to:['{n} points to {name}','{n} puncte până la {name}'],tier_top:['Top rank','Rang maxim'],tier_new:['Win a Challenge to reach {name}.','Câștigă o provocare ca să ajungi la {name}.'],
+ tier_up:['New rank: {name}','Rang nou: {name}'],tier_ex:['Moon ranks go from {a} to {b}. They follow your Moon rating.','Rangurile Lunii merg de la {a} la {b}. Urmează ratingul tău de Lună.'],
+ reset_note:['New month. Last month: {name}.','Lună nouă de joc. Luna trecută: {name}.']});
+function tn(i){return L.n(TIERS[i].slice(1))}
+M.tier=function(r){r=Math.round(r);for(var i=TIERS.length-1;i>0&&r<TIERS[i][0];i--);return i};
+M.tname=function(r){return tn(M.tier(r))};
+M.tnext=function(r){var i=M.tier(r),nx=TIERS[i+1];return !M.played()?t('tier_new',{name:tn(1)}):nx?t('tier_to',{n:nx[0]-Math.round(r),name:tn(i+1)}):t('tier_top')};
+M.tex=function(){return t('tier_ex',{a:tn(0),b:tn(TIERS.length-1)})};
 M.load();L.moon=M;(window.LumioFeatures=window.LumioFeatures||{}).moon=M;
 // milestone pop (once per crossing) after the '+N Lumens' pop; Lumens chip fixed top right of the lesson view
 var last=st.lum,chip;
