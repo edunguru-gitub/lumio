@@ -108,6 +108,10 @@ function lesson(){
 }
 // reward pop: '+N Lumens' (Lumens colour), fades; Reduce motion = no movement
 function gain(n){var g=$('gain');if(!n)return;g.textContent='+'+n+' '+L.n(L.S.lum);g.classList.remove('on');void g.offsetWidth;g.classList.add('on')}
+// status line: one at a time (queued), 2.6 s each, aria-live; icon = inline SVG from our own code
+var tq=[],tt=0;
+L.toast=function(msg,icon){tq.push([msg,icon]);if(!tt)toast()};
+function toast(){var x=tq.shift(),el=$('toast');tt=0;if(!el)return;el.classList.remove('on');if(!x)return;el.innerHTML=x[1]||'';el.append(x[0]);void el.offsetWidth;el.classList.add('on');tt=setTimeout(toast,2600)}
 function chrome(){
   var s=L.subject(),l=L.lesson();
   $('crumb').textContent=st.tab!=='subjects'||st.level==='home'?'':L.n(s.name)+(l?' / '+L.n(l.name):'');
@@ -148,7 +152,7 @@ L.boot(function(){
   sysL.addEventListener('change',function(){if(!document.documentElement.dataset.theme)skin()});
   addEventListener('resize',function(){if(eff()!==st.view){st.view=eff();emit('view')}});
   document.addEventListener('keydown',function(e){
-    var t=e.target;if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable)return;
+    var t=e.target;if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)||t.isContentEditable||t.closest&&t.closest('dialog'))return;
     if(e.key==='Escape'||e.key==='Backspace'&&st.level!=='planet'){e.preventDefault();L.out()}
   });
   chrome();

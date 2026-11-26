@@ -7,7 +7,7 @@ var S={q_delta:['Compute Δ = b² − 4ac','Calculează Δ = b² − 4ac'],q_xv:
  ok1:['Yes.','Da.'],ok2:['Nailed it.','Perfect.'],ok3:['Sharp.','Excelent.'],no1:['Not quite. The answer was {ans}','Aproape. Răspunsul era {ans}'],
  write_first:['Write an answer first','Scrie mai întâi un răspuns'],round_done:['Round done: {s}/5 correct','Rundă încheiată: {s}/5 corecte'],
  new_round:['New round','Rundă nouă'],check:['Check','Verifică'],hint:['Hint','Indiciu'],ans:['Your answer','Răspunsul tău'],enter:['Enter to check','Enter pentru verificare'],
- title:['Ink Practice','Exersare cu scris de mână'],read:['Read aloud','Citește'],streak_t:['Streak ×{n}!','Serie ×{n}!'],sp_abc:['a equals {a}, b equals {b}, c equals {c}','a egal {a}, b egal {b}, c egal {c}']};
+ title:['Ink Practice','Exersare cu scris de mână'],read:['Read aloud','Citește'],sp_abc:['a equals {a}, b equals {b}, c equals {c}','a egal {a}, b egal {b}, c egal {c}']};
 function poly(a,b,c){var ps=[],add=function(co,v){if(co===0)return;var ab=Math.abs(co);ps.push({neg:co<0,body:(ab===1&&v)?v:String(ab)+v})};add(a,'x²');add(b,'x');add(c,'');if(!ps.length)return'0';return ps.map(function(p,i){return(i===0?(p.neg?'−':''):(p.neg?' − ':' + '))+p.body}).join('')}
 var ri=function(a,b){return a+Math.floor(Math.random()*(b-a+1))},pk=function(a){return a[Math.floor(Math.random()*a.length)]};
 function genQ(){var k=pk(['delta','xv','f0','f1','root','delta']),a,b,c,ans,x,r1,r2;
@@ -37,9 +37,8 @@ render:function(el,ctx){
     var raw=inp.value.replace('−','-').replace(',','.').trim();
     if(raw===''||isNaN(+raw)){fb.className='fb';fb.textContent=t('write_first');fx.bad();return}
     var ok=+raw===Q.cur.ans;
-    // v1: +10+min(streak,5)*2 Lumens (ctx.award default), streak ×n at 3,5,7…, sounds, confetti, jump / shake
-    if(ok){ctx.award();ctx.report({ok:1});Q.score++;Q.res[Q.i]=true;fb.className='fb ok';fb.textContent=t(pk(['ok1','ok2','ok3']));fx.ok();fx.burst(60);fx.jump(eq);
-      var sk=ctx.streak();if(sk>=3&&sk%2===1){fx.streak();fx.burst(90);fb.textContent+=' '+t('streak_t',{n:sk})}}
+    // v1: +10+min(streak,5)*2 Lumens (ctx.award default), sounds, confetti, jump / shake; streak ×n at 3,5,7… = rating.js report()
+    if(ok){ctx.award();ctx.report({ok:1});Q.score++;Q.res[Q.i]=true;fb.className='fb ok';fb.textContent=t(pk(['ok1','ok2','ok3']));fx.ok();fx.burst(60);fx.jump(eq)}
     else{ctx.report({bad:1});Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans});fx.bad()}
     fld.className='fld '+(ok?'ok':'no');if(!ok)fx.shake(fld);Q.i++;render();Q.busy=true;
     setTimeout(function(){Q.busy=false;if(!el.isConnected)return;

@@ -3,9 +3,13 @@
 var L=Lumio,K='lumio2_stats',st={v:1,lum:0,streak:0,best:0,les:{},log:[],o:0};
 try{var o=JSON.parse(localStorage.getItem(K));if(o&&o.v===1&&o.les&&typeof o.les==='object'){for(var k in st)if(o[k]!=null)st[k]=o[k];if(!Array.isArray(st.log))st.log=[]}}catch(e){}
 L.stats=st;(window.LumioFeatures=window.LumioFeatures||{}).rating={};
-Object.assign(L.S,{you:['You','Tu'],new:['NEW','NOU'],moon:['Moon','Luna'],noch:['No challenges yet','Încă nicio provocare']});
+Object.assign(L.S,{streak_t:['Streak ×{n}!','Serie ×{n}!'],you:['You','Tu'],new:['NEW','NOU'],moon:['Moon','Luna'],noch:['No challenges yet','Încă nicio provocare']});
 L.sgn=function(n){return n>0?'+'+n:n<0?'−'+-n:'0'};
+// v1 moonPhase: today's moon phase icon (currentColor)
+L.phase=function(){var d=new Date(),dim=new Date(d.getFullYear(),d.getMonth()+1,0).getDate(),f=Math.min(1,(d.getDate()-1)/(dim-1||1)),rx=(6*Math.abs(1-2*f)).toFixed(2);
+  return'<svg class="mph" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/>'+(f>.02?'<path d="M8 2 A6 6 0 0 1 8 14 A'+rx+' 6 0 0 '+(f<.5?0:1)+' 8 2Z" fill="currentColor"/>':'')+'</svg>'};
 function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
+L.saveStats=function(){save();L.emit('stats')};
 function les(k){return st.les[k]||(st.les[k]={qd:0,qt:0,ok:0,bad:0,ts:0})}
 L.lessons=function(){var a=[];L.subjects.forEach(function(s){s.lessons.forEach(function(l){a.push({s:s,l:l,k:L.key(s,l)})})});return a};
 // rating = round(99*(.5P+.3Q+.2A)); A=0 under 5 attempts; null = unrated (shown as NEW) until 5 answers or lesson finished
@@ -33,7 +37,8 @@ L.report=function(k,o){
   var s=les(k),got=false;o=o||{};
   if(o.qt>=0)s.qt=o.qt;
   if(o.qd>s.qd){s.qd=s.qt?Math.min(s.qt,o.qd):o.qd;got=true}
-  if(o.ok>0){s.ok+=o.ok;st.streak+=o.ok;if(st.streak>st.best)st.best=st.streak}
+  // v1 bumpStreak celebration at streak 3,5,7… (sound + confetti 90 + status line), for every lesson
+  if(o.ok>0){s.ok+=o.ok;st.streak+=o.ok;if(st.streak>st.best)st.best=st.streak;if(st.streak>=3&&st.streak%2===1){L.fx.streak();L.fx.burst(90);L.toast(L.t('streak_t',{n:st.streak}))}}
   if(o.bad>0){s.bad+=o.bad;st.streak=0}
   L.note(k,0);return got;
 };
