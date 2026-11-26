@@ -47,11 +47,8 @@ render:function(el,ctx){
     if(rb&&rb.textContent!==rs)rb.textContent=rs;
     c.globalAlpha=.16;c.fillStyle=hc;c.fillRect(x0,yPix,Wd,bot-yPix);c.globalAlpha=1;
     var r=Math.max(3,Math.min(w,h)*.013);PH.parts.forEach(function(p){c.fillStyle=p.flash>0?mix(hc,C.ink,p.flash*.6):hc;c.beginPath();c.arc(x0+p.x*Wd,bot-p.y*Hh,r*(1+p.flash*.5),0,7);c.fill()});
-    // burner: v1 flames (rose base → tan tip, no orange) above 310 K, ice crystals below 260 K
+    // burner plate (ice/flame marks removed, Eduard 26 Nov)
     c.fillStyle=C.line;c.fillRect(x0-6,bot+8,Wd+12,6);
-    if(PH.T>310){var fl=clamp((PH.T-300)/200,0,1);for(i=0;i<5;i++){var fx0=x0+Wd*(.1+i*.2),fh=(.04+fl*.11)*h*(.8+.2*Math.sin(now/90+i*2)),fg=c.createLinearGradient(0,bot+6,0,bot+6-fh);fg.addColorStop(0,C.rose);fg.addColorStop(1,C.tan);c.fillStyle=fg;
-      c.beginPath();c.moveTo(fx0-Wd*.07,bot+4);c.bezierCurveTo(fx0-Wd*.06,bot-fh*.4,fx0,bot-fh*.5,fx0,bot+4-fh);c.bezierCurveTo(fx0,bot-fh*.5,fx0+Wd*.06,bot-fh*.4,fx0+Wd*.07,bot+4);c.closePath();c.fill()}}
-    else if(PH.T<260){var ir=Math.min(h*.03,Wd*.07);c.strokeStyle=ctx.color;c.lineWidth=1.5;c.lineCap='round';for(i=0;i<3;i++){var ix=x0+Wd*(.45+i*.23),iy=bot+h*.075;c.beginPath();for(var k=0;k<3;k++){var ia=k*Math.PI/3;c.moveTo(ix-Math.cos(ia)*ir,iy-Math.sin(ia)*ir);c.lineTo(ix+Math.cos(ia)*ir,iy+Math.sin(ia)*ir)}c.stroke()}}
     // cylinder + piston
     c.strokeStyle=C.ink;c.lineWidth=2;c.lineCap='round';c.lineJoin='round';c.beginPath();c.moveTo(x0,top-8);c.lineTo(x0,bot);c.lineTo(x1,bot);c.lineTo(x1,top-8);c.stroke();
     var rx=(x0+x1)/2,rt=top-.1*h;c.fillStyle=C.line;c.fillRect(rx-4,rt,8,yPix-rt);c.lineWidth=1;c.strokeRect(rx-4,rt,8,yPix-rt);

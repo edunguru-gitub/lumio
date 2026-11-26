@@ -1,8 +1,8 @@
 (function(){
 // ported from app/lumio.html D1 projectile (prj, miniLesson def, exercises, draw) + 5 LEVELS MODE (LVL, LV, lvShotPath, lvFire, lvGo, lvRender, lvDraw). docs/spec-port-wave2.md A
 var S={title:['Projectile Motion','Mișcarea proiectilului'],cv:['Launch lab: grid of distance and height with the shot path.','Laborator de lansare: grilă de distanță și înălțime cu traiectoria.'],
- mode:['Mode','Mod'],range:['Range','Bătaie'],maxh:['Max height','Înălțime max'],ft:['Flight time','Timp de zbor'],exl:['Exercises','Exerciții'],p10:['+10 Lumens','+10 Lumeni'],done:['Done','Gata'],
- ex_all:['All 4 exercises done · +15 Lumens bonus','Toate cele 4 exerciții gata · +15 Lumeni bonus'],
+ mode:['Mode','Mod'],range:['Range','Bătaie'],maxh:['Max height','Înălțime max'],ft:['Flight time','Timp de zbor'],exl:['Exercises','Exerciții'],p10:['practice','exercițiu de antrenament'],done:['Done','Gata'],
+ ex_all:['All 4 exercises done','Toate cele 4 exerciții gata'],
  lv_free:['Free play','Joc liber'],lv_lv:['Levels','Niveluri'],lv_n:['Level {n}','Nivelul {n}'],lv_fire:['Fire','Lansează'],lv_how:['Show me how','Arată-mi cum'],lv_formula:['Formula','Formula'],lv_example:['Worked example','Exemplu rezolvat'],
  lv_hint:['Hint {n}','Indiciul {n}'],lv_hit:['Hit! Level complete','Lovit! Nivel terminat'],lv_miss:['Missed: landed at {x} m. Check your numbers.','Ratat: a aterizat la {x} m. Verifică-ți calculele.'],
  lv_miss_r:['Not quite: you said {x} m (dashed line). Compare it with where the ball really lands.','Nu chiar: ai spus {x} m (linia punctată). Compară cu locul în care aterizează de fapt mingea.'],
@@ -92,8 +92,8 @@ render:function(el,ctx){
     var r=prj(ST),done=mem.ex,cur=-1;sa.set(ST.a);sv.set(ST.v);
     EX.some(function(e,i){if(done.indexOf(i)<0){cur=i;return true}});
     if(!silent&&cur>=0&&EX[cur].ok(ST)){
-      // v1 miniUpd: +10 per exercise in order, then a separate +15 bonus when all 4 are done (second pop after the first fades)
-      done.push(cur);save();fx.ok();ctx.report({qd:qd(),ok:1});ctx.award(10);if(done.length===EX.length)setTimeout(function(){ctx.award(15)},1700);return upd(true)}
+      // Free play is practice only (Eduard 26 Nov): exercises tick, 0 Lumens; Lumens only from Levels
+      done.push(cur);save();fx.ok();ctx.report({qd:qd(),ok:1});return upd(true)}
     U.tiles(ti,[[t('range'),r.R.toFixed(1)+' m'],[t('maxh'),r.H.toFixed(1)+' m'],[t('ft'),r.T.toFixed(2)+' s'],['vx · vy',r.vx.toFixed(1)+' · '+r.vy.toFixed(1)]]);
     exl.replaceChildren.apply(exl,EX.map(function(e,i){var li=E('li',null,done.indexOf(i)>=0?'done':i===cur?'cur':''),ck=E('i',done.indexOf(i)>=0?'✓':'');
       if(done.indexOf(i)>=0){ck.setAttribute('role','img');ck.setAttribute('aria-label',t('done'))}else ck.setAttribute('aria-hidden','true');

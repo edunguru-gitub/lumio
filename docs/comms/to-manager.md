@@ -74,3 +74,7 @@ Check: node playwright self-check 281/281 EN+RO, 0 page errors (same script on o
 Skipped: titles/obj lines, h_zero, quest/quest_done texts, gh_45, labels (not in the brief); "nenumărate molecule" (no v1 molecule text in v2 gas); ex1 start state, tolerances, directional lv_short/lv_long (more than 4 lines).
 ticker.js: 1 line skips log entries of lessons no longer in the registry (else Home showed the raw key "physics/optics" for returning users).
 Notes: tools/deck/slides.html still says "6 lessons ... Optics is new": now 5 lessons, deck needs Manager/Teacher.
+
+## 2026-11-26 free-play no Lumens + gas ice/flame off: DONE
+What: projectile.js Free play: ctx.award(10)/+15 bonus removed, label 'practice'/'exercițiu de antrenament', ex_all without bonus; lumio2_proj and stats unchanged (no subtraction). gas.js: flame + snowflake drawing removed, burner plate kept, canvas size unchanged.
+Check: node playwright 38/38, 0 page errors: 4 exercises tick, Lumens 0->0, no award call; Levels pay [20,15,20,20,20] then 0x5 on replay; gas quest 25 once; no ice/flame; phone controller set/readout ok; Backspace/Enter stay in all 5; 390/1200 Light/Dark no h-scroll, gas canvas fits; hosted build OK.
