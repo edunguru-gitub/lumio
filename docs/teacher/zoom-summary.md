@@ -1,3 +1,4 @@
+> NOTE 26 Nov: the upload deadline on the official page changed to SAT 28 NOV 14:00. Lines below that say 27 nov 24:00 are older; see docs/teacher/knowledge.md (DEADLINE CHANGE).
 # Zoom HSIC: rezumat cronologic pentru Lumio (25 nov 2026)
 
 Pentru Eduard. Scurt, pe numere. Sursa: cele 4 transcrieri Zoom citite integral (text automat, zgomotos) + docs/teacher/knowledge.md. Fără parole, fără date personale ale minorilor.

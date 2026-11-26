@@ -13,7 +13,7 @@ Lumio (team Flow, Suceava) is IN the 36 qualified semifinal teams (rank 18, 93 p
 ## DEADLINES / OPEN TO-DO (official page wins over chat)
 | Date | What | Source | Status |
 |---|---|---|---|
-| 26 Nov 08:00 to 27 Nov 24:00 | Upload form opens/closes. DECK (PPT/PPTX/PDF, max 25 slides) + PITCH VIDEO (MP4, max 5 min, whole team speaks, covers technical solution AND business). Both mandatory, over limits = may be ineligible. Official deadline Fri 27 Nov 24:00. | official page + Alexia 16 Nov | TO DO (reminders set) |
+| 26 Nov 08:00 to 27 Nov 24:00 (SUPERSEDED: official page now says Sat 28 Nov 14:00, see DEADLINE CHANGE above) | Upload form opens/closes. DECK (PPT/PPTX/PDF, max 25 slides) + PITCH VIDEO (MP4, max 5 min, whole team speaks, covers technical solution AND business). Both mandatory, over limits = may be ineligible. Official deadline Fri 27 Nov 24:00. | official page + Alexia 16 Nov | TO DO (reminders set) |
 | 28-29 Nov | Jury evaluation | official page | - |
 | 30 Nov | 10 finalist teams announced | official page | - |
 | 30 Nov | Optional gala teaser clip to liceeni@rau.ro (see below) | brief PDF | TO DO |
@@ -23,7 +23,7 @@ Lumio (team Flow, Suceava) is IN the 36 qualified semifinal teams (rank 18, 93 p
 | any time | Email the organizers to get stage I per-criterion feedback. Teams in the 92-point group were told on a Monday (9 Nov inferred) to email Adina, and the asking team mailed on the Tuesday; answer promised "by end of week". Eduard has not received Lumio's per-criterion comments yet | Q&A 00:03:17 to 00:05:10 | TO DO, check if already asked |
 | any time | Find in WhatsApp (a) the mentors' slides (Daniel Rukare agreed to share, Adina to post, Q&A 00:29:25 to 00:29:49) and (b) Stefan Iarca's EMPTY cost-structure Excel (offered 19 Nov 00:08:50, to be sent via Adina next day) | Q&A, 19 Nov | status not recorded |
 | any time | Get the missing transcript parts: Strategy masterclass min 25 to 87 (38-slide framework), 17 Nov min 25 to 72 (costs and KPIs, Excel example), 24 Nov pitch masterclass | file coverage | MISSING |
-Conflict: Adina (23 Nov) said "until Saturday" (28 Nov) with 3 days for corrections; official page and Alexia say Fri 27 Nov 24:00. USE 27 NOV 24:00.
+Conflict: Adina (23 Nov) said "until Saturday" (28 Nov) with 3 days for corrections; official page and Alexia say Fri 27 Nov 24:00. (SUPERSEDED 26 Nov: the official page now says Sat 28 Nov 14:00; the older WhatsApp messages by Alexia still say Fri 27 Nov 24:00, so aim for Friday night, hard limit Saturday 14:00.)
 Unclear / to confirm: is signed photo/video consent needed in stage II (form "Acord_foto-video_HSIC_URA" posted by Adina 23 Nov; stage I required it with upload on 30 Oct); recordings of 24 and 25 Nov sessions not posted yet (promised 25 Nov); Zoom invite of 25 Nov shows Pacific time but meeting was 19:30 Romania.
 
 ## JUDGING GRID, Semifinal II (100 pts, official page)
