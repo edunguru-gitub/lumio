@@ -8,7 +8,7 @@ Source: app/lumio.html (reference only): class Ink ~l.1772, REC ~l.1462, initPra
 - Patch: v1 lists 'Patrick Hand' in the template fonts; v2 does not ship it, so it falls back silently. Keep the list, no new font.
 
 ## Features to keep (all of v1)
-Pen and eraser, undo (pop last stroke), clear, 4 colours (auto + 3), 3 sizes S3/M6/L10 (default M), pressure width, coalesced pointer events, touch-action none, status line "Pen - size M - n strokes", hint text in empty pad, recognition 650 ms after last pen-up, recognised value in an editable field with confidence %, Check reads that field, hint, new question and Next clear the pad and the field. Write/Type toggle (v1 iotog) kept: choice persisted (add key lumio2_io).
+Pen and eraser, undo (pop last stroke), clear, 4 colours (auto + 3), 3 sizes S3/M6/L10 (default M), pressure width, coalesced pointer events, touch-action none, status line "Pen - size M - n strokes", hint text in empty pad, recognition 650 ms after last pen-up, recognised value in an editable field with confidence %, Check reads that field, hint, new question and Next clear the pad and the field. Write/Type toggle (v1 iotog) kept: choice persisted (add key lumio2_io). Default Type (Eduard 26 Nov): only a click on Write/Type saves lumio2_io, so an already saved choice is kept.
 
 ## Where in algebra.js
 In render(): between the .eq line and the existing .fld. New block .ink above the field:

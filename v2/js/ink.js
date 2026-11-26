@@ -67,11 +67,11 @@ function mount(ctx,inp){
     b.setAttribute('aria-label',t('size')+' '+'SML'[i]);b.appendChild(U.el('i')).style.setProperty('--d',(8+i*5)+'px');return b});
   press(cb,cb[0]);press(sb,sb[1]);cw.append.apply(cw,cb);sw.append.apply(sw,sb);
   tools.append(pen,er,btn(t('undo'),'chip',function(){ink.undo()}),btn(t('clear'),'chip',function(){ink.clear()}),cw,sw,stat);
-  // Write / Type (v1 iotog), saved in lumio2_io; typing works in both modes
-  var iob=['ink','type'].map(function(m){return btn(t(m==='ink'?'write':'type'),'',function(){set(m)})});
-  function set(m){L.pref('lumio2_io',m);pad.hidden=tools.hidden=m==='type';iob.forEach(function(b,i){b.setAttribute('aria-pressed',(i===1)===(m==='type'))});L.seg(io)}
+  // Write / Type (v1 iotog); default Type (Eduard 26 Nov); only a click saves lumio2_io, so a saved choice wins; typing works in both modes
+  var iob=['ink','type'].map(function(m){return btn(t(m==='ink'?'write':'type'),'',function(){L.pref('lumio2_io',m);set(m)})});
+  function set(m){pad.hidden=tools.hidden=m==='type';iob.forEach(function(b,i){b.setAttribute('aria-pressed',(i===1)===(m==='type'))});L.seg(io)}
   io.setAttribute('role','group');io.setAttribute('aria-label',t('mode'));io.append.apply(io,iob);
-  conf.title=t('conf');el.append(io,pad,tools);set(L.pref('lumio2_io')==='type'?'type':'ink');st();
+  conf.title=t('conf');el.append(io,pad,tools);set(L.pref('lumio2_io')==='ink'?'ink':'type');st();
   return{el:el,conf:conf,clear:function(){clearTimeout(tm);ink.clear()}};
 }
 window.LumioInk={REC:REC,Ink:Ink,mount:mount};

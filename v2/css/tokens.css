@@ -376,7 +376,7 @@ body{font-weight:var(--wt)}
 .ink-pad{position:relative;height:min(34vh,260px);overflow:hidden;background:repeating-linear-gradient(transparent 0 35px,color-mix(in srgb,var(--ink) 14%,transparent) 35px 36px),var(--card);border:1px solid var(--line);border-radius:var(--r2);box-shadow:var(--inset)}
 .ink-pad canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
 .ink-hint{position:absolute;left:16px;top:6px;font:italic 400 20px var(--head);color:var(--muted);pointer-events:none}
-.ink-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1)}
+.ink-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1)}.ink-tools[hidden]{display:none}
 .ink-tools .chip{height:44px;color:var(--ink);font:500 14px var(--ui)}
 .ink-tools .chip[aria-pressed=true]{border-color:var(--tan);box-shadow:var(--press)}
 .ink-sw{display:inline-flex}
@@ -593,3 +593,46 @@ body[data-level=planet] #bar #gview{display:none}
 /* Moon tiers (moon.js tier table): name as text next to the Moon number; on Ranks the tier is the row headline, place secondary */
 .mt b{flex-wrap:wrap;row-gap:0}.meter b .tier{font:500 13px var(--ui);white-space:nowrap}
 .lb .moon .tier{display:block;font:600 14px var(--ui)}.lb td.pl{color:var(--muted);font-size:12px}
+/* premium pass P1 (docs/spec-premium-pass.md §2, Designer b48b7d1): smaller, cleaner top bar + ghost galaxy controls; sizes by pointer type, width only for layout. Revert = delete this block */
+:root{--s0:4px;--ease:cubic-bezier(.2,.8,.2,1);--dur-1:120ms;--dur-2:200ms;--dur-3:320ms;--fs-cap:11px;--fs-lab:12px;--fs-ctl:13px;--fs-body:15px;--fs-sub:17px;--fs-title:22px;--fs-disp:32px;--fs-hero:40px}
+#bar :focus-visible,#ctl :focus-visible,.glab:focus-visible,.slink:focus-visible{outline:2px solid var(--tan);outline-offset:2px}
+/* header: solid band, hairline bottom, nav centred in the free space, utilities flat (only the nav keeps the raised thumb) */
+#bar .grp,#plink,#back{background:transparent;border-color:var(--line);box-shadow:none}
+#bar .grp::before{background:color-mix(in srgb,var(--ink) 8%,transparent);border:0;box-shadow:none}
+@media (min-width:700px){
+ #bar{height:auto;min-height:56px;padding:var(--s1) var(--s3);column-gap:var(--s1);row-gap:var(--s1);border-bottom:1px solid var(--line);background:var(--bg)}
+ .word{font-size:30px;letter-spacing:-.01em;margin-right:var(--s2);transform:translateY(-1px)}
+ #bar .sp{display:none}#top{margin-inline:auto}
+ #plink{position:relative;margin-right:var(--s2)}#plink::after{content:'';position:absolute;right:calc(-1*var(--s1) - 1px);top:50%;width:1px;height:16px;margin-top:-8px;background:var(--line)}
+}
+@media (min-width:700px) and (max-width:1099px){body[data-level=planet] #back{margin-right:auto}}
+@media (min-width:1100px) and (max-width:1199px){html[lang=ro] body[data-level=planet] #back{margin-right:auto}}
+@media (min-width:700px) and (pointer:fine){
+ #top{height:32px;border-radius:16px}#top::before{border-radius:13px}#top button{padding:0 var(--s2);font-size:13px}
+ #bar .grp,#plink{height:28px;border-radius:14px}#bar .grp::before{border-radius:11px}
+ #bar .grp button{min-width:0;padding:0 10px;font-size:12px}#plink{padding:0 12px;font-size:12px}
+ #back{height:32px;border-radius:16px;padding:0 var(--s2);font-size:13px}
+ :is(#top,#bar .grp) button::after{content:'';position:absolute;inset:-6px 0}
+}
+@media (hover:hover) and (pointer:fine){#bar .grp button:hover,#plink:hover,#back:not(:disabled):hover{color:var(--ink);filter:none}#bar .grp button:not([aria-pressed=true]):hover{background:color-mix(in srgb,var(--ink) 4%,transparent)}}
+@media (prefers-reduced-motion:no-preference){
+ #top::before{transition:transform 280ms var(--ease)}#bar .grp::before{transition:transform var(--dur-2) var(--ease)}
+ #bar .grp button,#top button,#plink{transition:color var(--dur-1) var(--ease),background-color var(--dur-1) var(--ease),transform 160ms var(--ease)}
+ :is(#top,#bar .grp) button:active{transform:scale(.97);transition-duration:90ms}
+}
+/* galaxy controls: ghost keys bottom-right, quiet until hover or focus; Back keeps its word with a chevron */
+#ctl{right:calc(var(--s3) + env(safe-area-inset-right));bottom:calc(var(--s3) + env(safe-area-inset-bottom));gap:var(--s1);opacity:.55;transition:opacity var(--dur-1) var(--ease)}
+#ctl:hover,#ctl:focus-within{opacity:1}
+#ctl :is(#cback,#zin,#zout){height:32px;background:transparent;border:1px solid var(--line);border-radius:16px;box-shadow:none;color:var(--ink);transition:background-color var(--dur-1) var(--ease),transform 160ms var(--ease)}
+#ctl :is(#zin,#zout){width:32px;min-width:0;padding:0;font-size:16px}#ctl #cback{padding:0 12px;font:500 12px var(--ui)}
+#ctl #cback::before{content:'\2190' / '';margin-right:6px}
+#ctl :is(#cback,#zin,#zout):not(:disabled):active{transform:scale(.94);box-shadow:none;transition-duration:90ms}
+@media (hover:hover) and (pointer:fine){#ctl :is(#cback,#zin,#zout):not(:disabled):hover{background:color-mix(in srgb,var(--ink) 8%,transparent);filter:none}}
+@media (pointer:coarse){#ctl{right:calc(var(--s2) + env(safe-area-inset-right));bottom:calc(var(--s2) + env(safe-area-inset-bottom));opacity:1}#ctl :is(#cback,#zin,#zout){height:44px;border-radius:22px}#ctl :is(#zin,#zout){width:44px;font-size:20px}}
+#hint{bottom:72px;font:400 13px/1.5 var(--ui);color:var(--muted)}
+/* subject names are links: galaxy labels (buttons over the canvas text, js/galaxy.js), crumb, lesson list headings */
+.glab{position:absolute;height:50px;padding:0;background:transparent;border:1px solid transparent;border-radius:var(--r1)}.glab[hidden]{display:none}
+.slink{padding:0;background:none;border:0;font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;text-decoration:underline 1px transparent;text-underline-offset:4px}
+@media (hover:hover){.glab:hover{background:color-mix(in srgb,var(--ink) 6%,transparent);border-color:var(--line)}.slink:hover{color:var(--ink);text-decoration-color:var(--tan)}}
+@media (pointer:coarse){.slink{display:inline-flex;align-items:center;min-height:44px}}
+@media (prefers-reduced-motion:no-preference){.glab,.slink{transition:background-color var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease),color var(--dur-1) var(--ease),text-decoration-color var(--dur-1) var(--ease)}}

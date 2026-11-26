@@ -44,7 +44,7 @@ function mtile(k,lab,val,on,html,p,sub,lines){
 // lesson cards grouped by subject (shown in Subjects > Tabs)
 L.lessonGrid=function(){
   var ls=E('div',null,'lgw');ls.appendChild(E('h2',t('lessons')));
-  L.subjects.forEach(function(s){var g=E('div',null,'lgrid');ls.appendChild(E('h4',L.n(s.name)));
+  L.subjects.forEach(function(s){var g=E('div',null,'lgrid'),h=E('h4'),a=E('button',L.n(s.name),'slink');a.type='button';a.onclick=function(){L.go('galaxy',s.id)};h.append(a);ls.appendChild(h);
     L.lessons().filter(function(x){return x.s===s}).forEach(function(x){g.appendChild(lcard(x))});ls.appendChild(g)});
   return ls;
 };

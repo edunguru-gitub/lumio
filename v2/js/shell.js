@@ -115,7 +115,9 @@ L.toast=function(msg,icon){tq.push([msg,icon]);if(!tt)toast()};
 function toast(){var x=tq.shift(),el=$('toast');tt=0;if(!el)return;el.classList.remove('on');if(!x)return;el.innerHTML=x[1]||'';el.append(x[0]);void el.offsetWidth;el.classList.add('on');tt=setTimeout(toast,2600)}
 function chrome(){
   var s=L.subject(),l=L.lesson();
-  $('crumb').textContent=st.tab!=='subjects'||st.level==='home'?'':L.n(s.name)+(l?' / '+L.n(l.name):'');
+  // crumb: subject name is a link to its galaxy / list
+  var cr=$('crumb'),a;cr.replaceChildren();
+  if(st.tab==='subjects'&&st.level!=='home'){a=L.ui.el('button',L.n(s.name),'slink');a.type='button';a.onclick=function(){L.go('galaxy',s.id)};cr.append(a);if(l)cr.append(' / '+L.n(l.name))}
   $('back').hidden=st.tab!=='subjects'||st.level==='home';
   var bd=document.body.dataset;bd.view=st.view;bd.level=st.level;bd.tab=st.tab;
   var gh=$('ghead'),c;gh.replaceChildren();gh.hidden=st.level!=='galaxy';

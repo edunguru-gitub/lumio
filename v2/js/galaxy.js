@@ -2,7 +2,7 @@
 var L=Lumio,G=L.Galaxy={},cv,cx,W=0,H=0,dpr=1,raf=0,run=false,hover=null,C={},PR=13,N=650,seed=7,TL=-.26;
 var cam=L.cam={x:0,y:0,z:1};
 function rnd(){seed=seed*16807%2147483647;return seed/2147483647}
-var dust=[],sky=[];
+var dust=[],sky=[],lab=[];
 // spiral dust (y-squash .5, tilt TL) + glowing ink core; z keeps specks/core a fixed screen size
 function spiral(c,x,y,i,rd,rot,a,z,cs,col,tl){
   tl=tl==null?TL:tl;var TC=Math.cos(tl),TS=Math.sin(tl);c.fillStyle=col;
@@ -76,9 +76,17 @@ G.draw=function(){
       cx.textAlign='center';cx.globalAlpha=(1-f)*(s===near?1:a);cx.fillStyle=C.ink;cx.font='400 '+22/z+'px '+C.head;cx.fillText(L.n(s.name),s.x,s.y+rd*.6+30/z);
       cx.fillStyle=C.muted;cx.font='400 '+12/z+'px '+C.ui;cx.fillText(L.count(s),s.x,s.y+rd*.6+52/z);
     }
+    label(lab[i],s,rd,f);
   });
   cx.globalAlpha=1;
 };
+// subject name = real button over the canvas label (name + count): click, Enter, Space zoom in like the disc; home level only
+function label(b,s,rd,f){
+  if(!b)return;var on=L.state.level==='home'&&f<.5;b.hidden=!on;if(!on)return;
+  var nm=L.n(s.name),ct=L.count(s),z=cam.z;if(b.dataset.t!==nm+ct){b.dataset.t=nm+ct;b.setAttribute('aria-label',nm+', '+ct)}
+  cx.font='400 22px '+C.head;var w=cx.measureText(nm).width;cx.font='400 12px '+C.ui;w=Math.max(w,cx.measureText(ct).width)+16;
+  var st=b.style;st.left=(W/2+(s.x-cam.x)*z-w/2)+'px';st.top=(H/2+(s.y+rd*.6-cam.y)*z+14)+'px';st.width=w+'px';
+}
 function tick(){raf=0;if(document.hidden)return;G.draw();if(run)G.requestDraw()}
 G.requestDraw=function(){if(!raf)raf=requestAnimationFrame(tick)};
 G.sync=function(){run=L.gal()&&!document.hidden&&!L.reduced()&&L.state.level!=='planet';G.requestDraw()};
@@ -92,6 +100,7 @@ L.boot(function(){
   dust=L.subjects.map(function(){var a=[];for(var k=0;k<N;k++)a.push({u:Math.sqrt(rnd()),a:k%3*2.094+(rnd()-.5)*.9,s:.6+rnd()*.7,al:.15+rnd()*.55});return a});
   for(var k=0;k<120;k++)sky.push({x:rnd(),y:rnd(),al:.15+rnd()*.35});
   cv=document.getElementById('cv');cx=cv.getContext('2d');
+  lab=L.subjects.map(function(s){var b=document.createElement('button');b.type='button';b.className='glab';b.hidden=true;b.onclick=function(){L.go('galaxy',s.id)};return b});cv.after.apply(cv,lab);
   // canvas colours from tokens; re-read on theme change ('skin')
   var read=function(){var cs=getComputedStyle(document.documentElement),g=function(n){return cs.getPropertyValue(n).trim()};
     C={ink:g('--ink'),muted:g('--muted'),tan:g('--tan'),ui:g('--ui'),head:g('--head'),mono:g('--mono'),sky:g('--sky'),skyA:+g('--sky-a')||1,glow:g('--core-glow'),coreA:g('--core-a'),coreB:g('--core-b'),coreC:g('--core-c'),psh:g('--planet-sh'),pedge:g('--planet-edge'),locked:g('--locked')}};
