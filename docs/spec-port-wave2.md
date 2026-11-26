@@ -12,7 +12,7 @@ Deadline Fri 27 Nov 24:00. Every push to v2 goes live (GitHub Pages), jurors may
 | Thu 26 pm / Fri 27 am | B4-B6: Ranks page + Sample pool, Challenge, Home Moon tile | B full |
 | Fri 27 am | C minimal: Settings tab, name, sound, voice, export/import, reset | C |
 | Fri 27 pm | Polish pass (section P, top 5), Tester full parity + psych review, FREEZE 20:00 | all |
-Recommend A, B, C-minimal (rough estimate 22-26 builder hours, tight). CUT to wave 3 (deferred, not dropped): palettes (6 themes), podcast prefs, progress-bar skins, voice pitch/style, colour-blind mode, haptics, D, E, F. If A+B finish Thu night, take D-linear first (cheapest lesson), then F-vocab. Never start E before the deadline.
+Recommend A, B, C-minimal (rough estimate 22-26 builder hours, tight). CUT to wave 3 (deferred, not dropped): palettes (6 themes), podcast prefs, progress-bar skins, voice pitch/style, colour-blind mode, haptics, projectile Summary (A-opt: v1 intro + 5 takeaways; Manager 26 Nov), D, E, F. If A+B finish Thu night, take D-linear first (cheapest lesson), then F-vocab. Never start E before the deadline.
 Effort suggestion (Manager decides): A MEDIUM, B MEDIUM (Challenge state: HIGH for that one step), C MEDIUM, polish LOW, D MEDIUM, E HIGH, F MEDIUM. Tester LOW/MEDIUM.
 
 ## A Projectile motion lab (physics/projectile) - PRIORITY 1

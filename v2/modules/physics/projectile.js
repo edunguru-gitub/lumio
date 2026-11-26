@@ -89,8 +89,8 @@ render:function(el,ctx){
     var r=prj(ST),done=mem.ex,cur=-1;sa.set(ST.a);sv.set(ST.v);
     EX.some(function(e,i){if(done.indexOf(i)<0){cur=i;return true}});
     if(!silent&&cur>=0&&EX[cur].ok(ST)){
-      // v1 miniUpd: +10 per exercise in order, +15 more when all 4 are done (one pop: 10 or 25)
-      done.push(cur);save();fx.ok();ctx.report({qd:qd(),ok:1});ctx.award(done.length===EX.length?25:10);return upd(true)}
+      // v1 miniUpd: +10 per exercise in order, then a separate +15 bonus when all 4 are done (second pop after the first fades)
+      done.push(cur);save();fx.ok();ctx.report({qd:qd(),ok:1});ctx.award(10);if(done.length===EX.length)setTimeout(function(){ctx.award(15)},1700);return upd(true)}
     U.tiles(ti,[[t('range'),r.R.toFixed(1)+' m'],[t('maxh'),r.H.toFixed(1)+' m'],[t('ft'),r.T.toFixed(2)+' s'],['vx · vy',r.vx.toFixed(1)+' · '+r.vy.toFixed(1)]]);
     exl.replaceChildren.apply(exl,EX.map(function(e,i){var li=E('li',null,done.indexOf(i)>=0?'done':i===cur?'cur':''),ck=E('i',done.indexOf(i)>=0?'✓':'');
       if(done.indexOf(i)>=0){ck.setAttribute('role','img');ck.setAttribute('aria-label',t('done'))}else ck.setAttribute('aria-hidden','true');
@@ -110,7 +110,7 @@ render:function(el,ctx){
       if(first)mem.stars[LV.i]=stars;else if(stars>mem.stars[LV.i])mem.stars[LV.i]=stars;save();
       ctx.report({qd:qd(),ok:LV.miss?0:1});if(paid)ctx.award(paid);
       LV.res={kind:'hit',stars:stars,paid:paid};setTimeout(function(){if(cv.isConnected){fx.ok();fx.burst(140)}},rm.matches?0:Math.min(1600,path.T*350))}
-    else{LV.hearts--;LV.miss++;fx.bad();ctx.report({bad:1});LV.res={kind:LV.hearts<=0?'lost':'miss',x:predict!=null?predict:path.X}}
+    else{LV.hearts--;LV.miss++;inp.value='';fx.bad();ctx.report({bad:1});LV.res={kind:LV.hearts<=0?'lost':'miss',x:predict!=null?predict:path.X}}
     lvRender('res');if(loop)loop.redraw()}
   // f: 'res' = focus the result action (or the field after a miss), 'in' = the field, else keep focus on the level dot
   function lvRender(f){
