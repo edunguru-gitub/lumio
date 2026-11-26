@@ -6,7 +6,7 @@ var L=Lumio,st=L.stats,M=L.moon,U=L.ui,E=U.el,t=L.t;if(!st||!M)return;
 Object.assign(L.S,{ch_title:['1v1 Challenge','Provocare 1v1'],ch_rules:['Whoever gains more Lumens in 7 days wins.','Câștigă cine adună mai mulți lumeni în 7 zile.'],
  ch_days:['days','zile'],ch_mode:['Lumens race','cursă de lumeni'],ch_vs:['1 v 1','1 la 1'],ch_send:['Send challenge','Trimite provocarea'],ch_sent:['Challenge sent to {n}','Provocare trimisă lui {n}'],
  ch_active:['Challenge','Provocare'],ch_left:['{d} days left','{d} zile rămase'],ch_win:['You won the challenge!','Ai câștigat provocarea!'],ch_lose:['{n} won this one. Rematch?','{n} a câștigat de data asta. Revanșă?'],
- ch_end:['End challenge (demo)','Încheie provocarea (demo)'],ch_busy:['Challenged','Provocat'],ch_none:['No active challenge. Pick someone on the board and tap Challenge.','Nicio provocare activă. Alege pe cineva din clasament și apasă Provoacă.'],
+ ch_end:['End challenge (demo)','Încheie provocarea (demo)'],ch_fin:['Finish now (Sample)','Încheie acum (Exemplu)'],ch_busy:['Challenged','Provocat'],ch_none:['No active challenge. Pick someone on the board and tap Challenge.','Nicio provocare activă. Alege pe cineva din clasament și apasă Provoacă.'],
  ch_gain:['Lumens gained','Lumeni câștigați'],ch_sim:['Sample opponent: simulated progress.','Adversar exemplu: progres simulat.'],rk_ch:['Challenge','Provoacă'],
  dev:['Developer','Dezvoltator'],dev_seed:['Seed demo data','Populează date demo'],dev_reset:['Reset demo','Resetează demo'],dev_seeded:['Demo data seeded','Date demo populate'],dev_wiped:['Demo reset','Demo resetat']});
 var K='lumio2_chal',c=null;
@@ -33,7 +33,9 @@ function card(){
   if(c.sample)h3.append(E('span',t('sample'),'tag'));h.append(h3,E('small',t('ch_left',{d:left})));r.append(h);
   [[t('you'),my,''],[c.name.split(' ')[0],c.op,' op']].forEach(function(x){var ln=E('div',null,'ln'),tr=E('span',null,'tr'+x[2]),i=E('i');
     i.style.width=Math.max(0,x[1])/mx*100+'%';tr.append(i);tr.setAttribute('aria-hidden','true');ln.append(E('span',x[0]),tr,E('b',(x[1]>=0?'+':'')+x[1]));r.append(ln)});
-  r.append(E('small',t('ch_gain')));if(c.sample)r.append(E('p',t('ch_sim')));return r;
+  r.append(E('small',t('ch_gain')));if(c.sample)r.append(E('p',t('ch_sim')));
+  // visible Sample shortcut for live demos: the same end as the developer panel (Elo, toasts, state cleared)
+  var f=E('button',t('ch_fin'),'outline fin');f.type='button';f.onclick=end;r.append(f);return r;
 }
 // v1 chEnd (Elo override): win 1 / draw .5 / loss 0, Moon moves for both (Sample rating kept in memory, as v1)
 function end(){if(!c)return;var my=st.lum-c.my0,win=my>c.op?1:my===c.op?.5:0,x=c;c=null;save();

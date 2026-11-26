@@ -584,3 +584,9 @@ body[data-tab=settings] #settings{display:block}
 /* header with the 4th tab: Galaxy/Tabs only outside lessons (it has no effect inside one); narrow desktops wrap instead of scrolling sideways */
 body[data-level=planet] #bar #gview{display:none}
 @media (min-width:700px) and (max-width:1279px){#bar{column-gap:12px}#crumb{display:none}#top button{padding:0 14px}#bar{flex-wrap:wrap;height:auto;min-height:96px;padding-top:var(--s2);padding-bottom:var(--s2);row-gap:var(--s1)}}
+/* wave2-fixes: lesson h1 sized so the longest title word fits its 1/4 column (no mid-word break); lesson header in 2 rows (logo + tabs, then Back + tools) where one row does not fit; challenge Finish now; inert phone controller hidden in Levels when stacked */
+@media (min-width:900px){.lesson-in>h1{font-size:clamp(22px,2.5vw,29px)}}
+@media (min-width:700px) and (max-width:1099px){body[data-level=planet] #bar{row-gap:4px}body[data-level=planet] #bar::after{content:'';order:1;flex-basis:100%}body[data-level=planet] #bar>:not(.word):not(#top){order:2}}
+@media (min-width:1100px) and (max-width:1199px){html[lang=ro] body[data-level=planet] #bar{row-gap:4px}html[lang=ro] body[data-level=planet] #bar::after{content:'';order:1;flex-basis:100%}html[lang=ro] body[data-level=planet] #bar>:not(.word):not(#top){order:2}}
+.race .fin{margin-top:var(--s2)}
+@media (max-width:899px){.proj.lv-on .pctl{display:none}}

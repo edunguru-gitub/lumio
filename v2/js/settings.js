@@ -75,7 +75,6 @@ function page(){
   vol.querySelector('input').setAttribute('aria-label',t('set_sfxv'));rate.querySelector('input').setAttribute('aria-label',t('set_rate'));
   sel.id='set-voice';sel.append(Object.assign(E('option',t('auto')+(ro?'':' · Australian')),{value:'auto'}));
   vs.forEach(function(v){sel.append(Object.assign(E('option',v.name),{value:v.name,selected:v.name===P.voice}))});
-  if(ro&&!vs.length){var o=E('option',t('ro_none'));o.disabled=true;sel.append(o)}
   sel.onchange=function(){set('voice',sel.value);F.say(t('test_t'))};
   var vl=row(t('set_voice'),ro&&!vs.length?t('ro_none'):null,sel);vl.firstChild.firstChild.replaceWith(Object.assign(E('label',t('set_voice')),{htmlFor:'set-voice'}));
   var tb=E('div',null,'s-act');tb.append(btn(t('test'),function(){F.say(t('test_t'))}),btn(t('t_ok'),function(){F.ok()}),btn(t('t_bad'),function(){F.bad()}),btn(t('t_st'),function(){F.streak();F.burst(100)}));

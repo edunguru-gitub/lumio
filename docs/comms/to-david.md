@@ -9,7 +9,7 @@ Source: Tester report on DRAFT2 (f340b23), Manager decisions.
 4. [x] (draft3; neutral photo pending, initials used) Only if Eduard says yes: old slide edits (survey statistics as real counts, fictional sample names on the leaderboard, one 'Why us' team slide, slogans to factual lines, neutral photo of Eduard). Otherwise leave original pages untouched.
 5. [x] Costs slide: year 1 vs first quarter, as Manager says. Keep the deck at max 25 pages, footers NN / total.
 
-## 2026-11-26 wave2-fixes: OPEN (start only when Manager says Eduard decided)
+## 2026-11-26 wave2-fixes: DONE (David, see to-manager.md; 4 not done: Eduard kept the toggle hidden)
 From Tester report on item C (cf2dd16):
 1. Gas h1 breaks mid-word at 1200 px ('Thermodynami / cs Lab', overflow-wrap:anywhere in a 250px column): fix without touching the canvas gap.
 2. RO with no Romanian voice installed shows the same 'Vocea română nu este instalată' twice: show once.

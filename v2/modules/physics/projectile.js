@@ -98,7 +98,7 @@ render:function(el,ctx){
     hi.textContent=cur>=0?loc(EX[cur].hint):t('ex_all');
     if(loop)loop.redraw()}
 
-  function setLv(on){LV.on=on;fr.hidden=on;lv.hidden=!on;
+  function setLv(on){LV.on=on;fr.hidden=on;lv.hidden=!on;el.classList.toggle('lv-on',on);
     [].forEach.call(mode.children,function(b){b.setAttribute('aria-pressed',(b.dataset.m==='lv')===on)});if(L.seg)L.seg(mode);
     if(on){if(!unl(LV.i))LV.i=0;lvRender()}else LV.shot=null;if(loop)loop.redraw()}
   function lvGo(i,f){if(!unl(i))return;LV.i=i;LV.hearts=3;LV.hints=0;LV.miss=0;LV.shot=null;LV.res=null;LV.how=false;inp.value='';lvRender(f);if(loop)loop.redraw()}
