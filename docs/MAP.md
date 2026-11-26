@@ -30,6 +30,7 @@ P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 DONE 7 No
 NEXT: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-26 designer: spec-port-wave3.md (A overview Podcast|Summary + Settings, B Spanish verbs, C vocab, D compound interest, E linear + quick check, F Limits NEW, G Romanian literature template NEW, builder split, 13 questions) (commit "spec port wave3")
 - 2026-11-26 david: projectile Free play pays 0 Lumens (practice label, no +15 bonus; Levels 20/15/20/20/20 unchanged, old Lumens kept); gas ice/flame marks under the chamber removed (commit 'v2 no lumens in projectile free play, gas ice/flame marks removed')
 - 2026-11-26 professor: lesson rubric (15 items) and audit of the 6 live v2 lessons, safe copy fixes with EN/RO text, jury evidence, 2 new-lesson plans (docs/professor/lesson-rubric.md, lesson-audit.md) (commit "professor: rubric and lesson audit")
 - 2026-11-26 david: stage II deck DRAFT4: Tester fixes (slide 15 v2 status, source wording, goal headline, 11pt notes, alternatives line, gitignore) (commit 'stage2 deck draft4')
