@@ -17,3 +17,6 @@ From Tester report on item C (cf2dd16):
 4. ONLY IF Manager relays that Eduard said NO: restore the Galaxy/Tabs toggle inside lessons (and the crumb at 700-1279) exactly as in b846c02 while keeping the 4th Settings tab reachable. Parity rule: that hiding was not approved.
 5. Only if Eduard says yes: hide the inert phone controller in Levels at 390 px (answer field was 1.5 screens down).
 Self-check before ONE push; never push before the final post-rebase re-run.
+
+## 2026-11-26 moon-tiers: OPEN (start only after your current wave2-fixes + QR task is pushed)
+Manager decision: build docs/spec-moon-tiers.md (Designer proposal, 6 tiers New Moon..Blue Moon, thresholds 0/1015/1050/1100/1160/1250). Differences from the spec: do NOT replace the existing v1/v2 moon-day icon (parity); show the tier as TEXT next to the number on the Home Moon tile, Ranks rows (tier headline, place secondary) and the Challenge result ('New rank: {name}' only on a rise, never on a drop); optional small SVG tier badge only if it does not replace the day icon. Reset copy 'New month. Last month: {name}.' with no loss words. Names in ONE constant table EN/RO so Eduard can edit. Engine unchanged. Same live-safety rules (single push after post-rebase re-run, registry-safe), own checks counted honestly, then Tester.
