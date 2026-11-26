@@ -48,3 +48,5 @@ What: 24 pages (o1-o7, validation, o8-o13, tech, AI, canvas, GTM, costs plan, ye
 Gate: script header lists open placeholders; build.js also fails on unbracketed ASSUMPTION / TO VERIFY in docs/pitch-stage2.md; --final exits 1 (10 tags + 7 script lines).
 Check: RANKS_PNG=<v2 Ranks png> node tools/deck/build.js <orig.pdf> <out.pdf>; python3 tools/deck/check.py <orig.pdf> <out.pdf> o1,o2,o3,o4,o5,o6,o7,n1,o8,o9,o10,o11,o12,o13,n2,n3,n4,n5,n6,n7,n8,o14,n9,o18 (15 original pages: identical outside footer and approved edits).
 QUESTION: (1) research pilot = 300 RON for one semester, deck pilot = 4 weeks: which length? (2) p24 ask stamp keeps its TO VERIFY tag as you listed, although Eduard approved the ask: remove it? (3) Themes line cut from the script to stay at 4:46 (slides 12-14 run under the Levels demo): OK?
+## 2026-11-26 deck draft3 fixes: DONE
+What: per Manager answers: '4-week pilot' with a 300 RON symbolic fee (slides 19, 20, script); p24 TO VERIFY tag removed; Why us lines only from the old deck roles (no AI-agents line); team script lines 6/6/5 s; script 4:43.

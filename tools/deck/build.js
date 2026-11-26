@@ -40,11 +40,11 @@ const EDITS={
   // Ranks screenshot retaken from live v2 (dark, Sample rows, You row, no real names), same box as the original
   o13:[{patch:[414,79,901,447],fill:'auto'},{image:SHOT,box:[417.5,82.5,480,361],r:8,stroke:'#3A352E'},
        {...FOOT,ref:['LUMIO · 02 / 17',65,62,171.25],text:'SAMPLE PLAYERS · NO REAL USERS YET',color:MUTED,anchor:'end',x:897}],
-  // the ask on the last slide (Manager fix list); a new line on an original slide, so it stays tagged until Eduard approves it
+  // the ask on the last slide (Manager fix list); a new line on an original slide, approved by Eduard 26 Nov
   o18:[{patch:[60,168,890,340],fill:'auto'},
        {font:SERIF,ref:['Learn by doing. Rank by',65,174,728],text:'Free labs for students.',color:INK},
        {font:SERIF,ref:['Learn by doing. Rank by',65,174,728],ybase:['growing.',258],text:'Give us one pilot class.',color:INK},
-       {font:MONO,ref:['LUMIO · EDUARD · DARIUS · STEFAN',65.5,461,332],y:426,text:'OUR ASK · ONE CLASS FOR A 4-WEEK PILOT',color:TAN,tag:'To verify: Eduard OK'}],
+       {font:MONO,ref:['LUMIO · EDUARD · DARIUS · STEFAN',65.5,461,332],y:426,text:'OUR ASK · ONE CLASS FOR A 4-WEEK PILOT',color:TAN}],
 };
 
 (async()=>{

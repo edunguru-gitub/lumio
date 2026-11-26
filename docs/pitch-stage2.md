@@ -1,14 +1,14 @@
 # Lumio pitch, HSIC stage II (print this)
-Upload by Fri 27 Nov 24:00. Video max 5:00 (never over 4:55); this script runs 4:46 with the film (4:38 of speech) at 130 words a minute. Whole team speaks and appears on camera. Demo footage = v1 (app/lumio.html), never v2.
+Upload by Fri 27 Nov 24:00. Video max 5:00 (never over 4:55); this script runs 4:43 with the film (4:35 of speech) at 130 words a minute. Whole team speaks and appears on camera. Demo footage = v1 (app/lumio.html), never v2.
 Source: docs/spec-stage2-slides.md, Manager fix lists of 25 and 26 Nov, docs/research/finance-pricing.md (base scenario), docs/teacher/lumio-jury-lens.md.
 Slide numbers = the 24-slide deck (HSIC maximum 25). Seconds = spoken words at 130 a minute, rounded up. Never say a number that is not on the slide.
 
 ## Open placeholders (the FINAL export refuses while any line below or any bracket in the table is left; delete each line once done)
-- ASSUMPTION: PLAN numbers on slides 19-21 (1,200 RON licence, 300 RON pilot, 511 RON a month, 7 / about 10 classes break-even, first quarter 0 / 1 / 1 clients, year 1 7,856 RON) are the Researcher base scenario, pending Eduard's approval; he also states the real AI tool subscription (200 RON a month in the plan) and start-up quote (3,000 RON estimate).
+- ASSUMPTION: PLAN numbers on slides 19-21 (1,200 RON licence, 300 RON symbolic fee for the 4-week pilot, 511 RON a month, 7 / about 10 classes break-even, first quarter 0 / 1 / 1 clients, year 1 7,856 RON) are the Researcher base scenario, pending Eduard's approval; he also states the real AI tool subscription (200 RON a month in the plan) and start-up quote (3,000 RON estimate).
 - ASSUMPTION: survey counts out of 13: lose focus under ten minutes (slide 2 and line 0:26), give up or re-read (slide 2), want to try it (slide 7 and line 1:02).
 - ASSUMPTION: who the 5 testers were (slide 8); pilot school, teacher, class size, start date (slide 8).
 - ASSUMPTION: weekly active students target (slide 21); hint tutor stated as a plan (slide 16); no partner yet (slide 17).
-- TO VERIFY: competitor check date (slide 5); Eduard OK for the ask stamp tag on slide 24.
+- TO VERIFY: competitor check date (slide 5).
 
 | Time | Slide / shot | Who | Say | ~Sec |
 |---|---|---|---|---|
@@ -25,15 +25,15 @@ Slide numbers = the 24-slide deck (HSIC maximum 25). Seconds = spoken words at 1
 | 2:27 | 16 AI and data | Stefan | There is no AI inside the app today, only the browser's read-aloud voice. AI helps us build: Claude agents write and test the code, and a human reviews every change. Progress stays in the browser on the device. A hint tutor is a plan, only with parental consent. | 23 |
 | 2:50 | 17+18 Canvas and go to market | Darius | The school is the client, the student is the user. Students learn free; private schools pay a class licence, parents can add premium. We reach students and parents on social media and through teachers; schools directly, with a warm introduction and a pilot first. | 21 |
 | 3:11 | 19 Costs, plan | Eduard | In our plan, running Lumio costs 511 lei a month: an accountant, AI tools, a small server and domains. A class licence is 1,200 lei a year. Each class leaves 972 after the cost to serve it, so 7 classes cover a year of running costs, about 10 with the start-up. | 24 |
-| 3:35 | 20 First quarter and year 1, plan | Eduard | No paying client yet. In our plan, one pilot class pays a symbolic 300 lei in the first quarter; in year one, six classes bring 7,856 lei. Year one proves that schools pay. | 16 |
+| 3:35 | 20 First quarter and year 1, plan | Eduard | No paying client yet. In our plan, one four-week pilot class pays a symbolic 300 lei in the first quarter; in year one, six classes bring 7,856 lei. Year one proves that schools pay. | 16 |
 | 3:51 | 21 KPIs | Darius | Each week the teacher reports active students, lessons finished and who came back. A five-question quiz, before and after, shows what they learned. Our targets: sixty percent of the class back each week, and one of two pilots paying. | 18 |
 | 4:09 | 22 Next | Eduard | Next: more labs and the pilot class. | 5 |
-| 4:14 | 23 Why us, on camera | Eduard | I lead design, and I build the app with the AI agents I direct. | 7 |
-| 4:21 | 23 Why us, on camera | Darius | I lead the team, I ran the student survey and I talk to schools. | 7 |
-| 4:28 | 23 Why us, on camera | Stefan | I lead the technical side: how it runs, testing and debugging. | 6 |
-| 4:34 | 24 Close + ask (ask is on the slide) | Eduard | Lumio is free for students. Our ask: if you are a teacher or a school, give us one class for a four week pilot. Thank you. | 12 |
+| 4:14 | 23 Why us, on camera | Eduard | I'm Eduard. I lead design and the app: how Lumio looks and works. | 6 |
+| 4:20 | 23 Why us, on camera | Darius | I'm Darius. I lead the team, the student survey and outreach. | 6 |
+| 4:26 | 23 Why us, on camera | Stefan | I'm Stefan. I lead the technical side and the debugging. | 5 |
+| 4:31 | 24 Close + ask (ask is on the slide) | Eduard | Lumio is free for students. Our ask: if you are a teacher or a school, give us one class for a four week pilot. Thank you. | 12 |
 
-Total 4:46 with the film (4:38 of speech blocks); limit 4:50. If a block runs long, cut in this order: the rivals line, the last KPI sentence, "Next".
+Total 4:43 with the film (4:35 of speech blocks); limit 4:50. If a block runs long, cut in this order: the rivals line, the last KPI sentence, "Next".
 Speaker balance: Eduard 7 blocks, Stefan 7, Darius 5. Each of the three speaks at least 3 times and appears on camera (cover, own line on slide 23, at least 5 s each).
 Opening answers who, what, for whom and since stage I in the first 20 s (Matei); the close says what we want (Matei); AI is shown as help, not magic (Stefan Iarca, Toni Ionescu). Money is said as plan, never as revenue we have.
 
