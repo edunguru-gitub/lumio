@@ -30,6 +30,7 @@ P1 DONE 6 Nov (sfx.js = sounds/confetti/jump/shake/TTS via ctx.fx). P2 DONE 7 No
 NEXT: module manifests (lesson + feature per file, shell reads them; hosted build lists modules automatically). Tester: removing any module breaks nothing.
 Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS, projectile/linear/interest, friends relay, Lenis/motion, Matter.js.
 ## LOG (newest first, one line each: date, who, what, commit)
+- 2026-11-26 professor: lesson rubric (15 items) and audit of the 6 live v2 lessons, safe copy fixes with EN/RO text, jury evidence, 2 new-lesson plans (docs/professor/lesson-rubric.md, lesson-audit.md) (commit "professor: rubric and lesson audit")
 - 2026-11-26 david: stage II deck DRAFT4: Tester fixes (slide 15 v2 status, source wording, goal headline, 11pt notes, alternatives line, gitignore) (commit 'stage2 deck draft4')
 - 2026-11-26 david: wave2-fixes: Challenge card 'Finish now (Sample)' (same end as dev panel), inert phone controller hidden in Levels below 900 px, lesson h1 sized to fit its column (no mid-word break), lesson header 2 rows at 700-1099 (RO to 1199), RO voice message once; tools/qr/make-sheet.js A4 QR sheet (commit 'v2 wave2-fixes + QR sheet')
 - 2026-11-26 david: deck draft3 fixes: 4-week pilot wording, p24 tag removed, Why us roles from old deck, script 4:43 (commit 'stage2 deck draft3 fixes')
