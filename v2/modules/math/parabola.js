@@ -2,9 +2,9 @@
 // ported from app/lumio.html: updLearn, drawParab, poly (v1 LEARN)
 var S={cv:['Parabola graph','Graficul parabolei'],p_frown:['Frown','Tristă'],delta:['Delta','Delta'],vertex:['Vertex','Vârf'],roots:['Roots','Rădăcini'],axis:['Axis','Axa'],
  no_roots:['no real roots','fără rădăcini reale'],line_only:['a = 0 → just a line','a = 0 → doar o dreaptă'],
- h_pos:['The curve cuts the x-axis twice. Slide c up and watch the roots merge.','Curba taie axa Ox de două ori. Urcă c și vezi cum se unesc rădăcinile.'],
+ h_pos:['The curve cuts the x-axis twice. Change c until Δ reaches 0 and watch the two roots merge.','Curba taie axa Ox de două ori. Schimbă c până când Δ devine 0 și vezi cum se unesc cele două rădăcini.'],
  h_zero:['Perfect square. The vertex touches the x-axis.','Pătrat perfect. Vârful atinge axa Ox.'],
- h_neg:['The parabola floats away from the x-axis. No real roots.','Parabola plutește deasupra axei Ox. Fără rădăcini reale.'],
+ h_neg:['The parabola never touches the x-axis. No real roots.','Parabola nu atinge axa Ox. Fără rădăcini reale.'],
  h_line:['Careful: with a = 0 there is no parabola.','Atenție: cu a = 0 nu există parabolă.'],
  smile:['a > 0: opens up ∪','a > 0: deschisă în sus ∪'],frown:['a < 0: opens down ∩','a < 0: deschisă în jos ∩'],
  quest:['Quest: make Δ = 0 (a ≠ 0)','Misiune: fă Δ = 0 (a ≠ 0)'],quest_done:['Quest complete','Misiune îndeplinită'],

@@ -2,8 +2,8 @@
 // ported from app/lumio.html geometry lab: GEO, updGeo, drawGeo
 var S={cv:['Right triangle with squares on each side. Drag the corners to change a and b.','Triunghi dreptunghic cu pătrate pe laturi. Trage colțurile pentru a schimba a și b.'],
  hyp:['Hypotenuse','Ipotenuza'],area:['Area','Aria'],perim:['Perimeter','Perimetru'],angles:['Angles','Unghiuri'],
- qg:['Quest: find 3 different Pythagorean triples ({n}/3)','Misiune: găsește 3 triplete pitagorice diferite ({n}/3)'],qg_done:['Quest complete! +30 XP','Misiune îndeplinită! +30 XP'],
- triple:['Pythagorean triple. All sides are whole numbers.','Triplet pitagoric. Toate laturile sunt numere întregi.'],
+ qg:['Quest: find 3 different Pythagorean triples ({n}/3)','Misiune: găsește 3 triplete pitagorice diferite ({n}/3)'],qg_done:['Quest complete: 3 different triples found','Misiune îndeplinită: ai găsit 3 triplete diferite'],
+ triple:['Pythagorean triple: all sides are whole numbers. Multiply all three sides by 2 or 3: is it still a triple?','Triplet pitagoric: toate laturile sunt numere întregi. Înmulțește toate cele trei laturi cu 2 sau 3: mai e triplet?'],
  gh_45:['Equal legs → a 45° isosceles right triangle.','Catete egale → triunghi dreptunghic isoscel de 45°.'],
  gh_gen:['Drag a and b: the big square on c always equals the two small squares together.','Trage a și b: pătratul mare de pe c este mereu egal cu cele două pătrate mici.'],
  title:['Right Triangle Lab','Laboratorul triunghiului dreptunghic']};

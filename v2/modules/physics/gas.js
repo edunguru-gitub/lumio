@@ -5,9 +5,11 @@ var S={cv:['Gas in a cylinder with a piston, a pressure gauge and a thermometer.
  pressure:['Pressure','Presiune'],temperature:['Temperature','Temperatură'],volume:['Volume','Volum'],collisions:['Piston hits','Ciocniri piston'],
  phh_over:['Overpressure! Release the piston or cool the gas.','Suprapresiune! Eliberează pistonul sau răcește gazul.'],
  phh_hot:['Hot gas: fast molecules hit harder and more often → pressure rises.','Gaz fierbinte: molecule rapide lovesc mai tare și mai des → presiunea crește.'],
- phh_sq:['Less room → more hits per second → pressure rises (Boyle).','Mai puțin loc → mai multe lovituri pe secundă → presiunea crește (Boyle).'],
- phh_gen:['Molecules bounce off the piston: pressure = hits per area. Change T, V or N and watch the gauge.','Moleculele lovesc pistonul: presiune = lovituri pe arie. Schimbă T, V sau N și urmărește manometrul.'],
- q_phys:['Quest: reach 3 atm without heating above 300 K','Misiune: ajunge la 3 atm fără să încălzești peste 300 K'],q_done:['Boyle would be proud! +25 XP','Boyle ar fi mândru! +25 XP'],title:['Piston & Thermodynamics Lab','Laboratorul piston și termodinamică']};
+ phh_sq:['Less room → more hits per second → pressure rises. At constant T and N, P · V stays the same (Boyle).','Mai puțin loc → mai multe lovituri pe secundă → presiunea crește. La T și N constante, P · V rămâne constant (Boyle).'],
+ phh_gen:['Molecules bounce off the piston: pressure is the force of the hits per unit of area. Change T (temperature), V (volume) or N (number of particles) and watch the gauge.','Moleculele lovesc pistonul: presiunea este forța loviturilor pe unitatea de arie. Schimbă T (temperatura), V (volumul) sau N (numărul de particule) și urmărește manometrul.'],
+ q_phys:['Quest: reach 3 atm without heating above 300 K','Misiune: ajunge la 3 atm fără să încălzești peste 300 K'],q_done:['Quest complete: 3 atm without heating above 300 K. A smaller V or a larger N both raise P.','Misiune îndeplinită: 3 atm fără încălzire peste 300 K. Un V mai mic sau un N mai mare ridică presiunea.'],
+ q_hot:['P is 3 atm or more, but T is above 300 K: that is heating. Squeeze the piston or add gas instead.','P e de cel puțin 3 atm, dar T e peste 300 K: asta înseamnă încălzire. Comprimă pistonul sau adaugă gaz.'],
+ model:['Simplified model: P is calculated as 1 atm × (N / 30) × (T / 300 K) ÷ V (V in litres). The moving dots only illustrate the hits. n in PV = nRT is the amount of gas in moles.','Model simplificat: P se calculează ca 1 atm × (N / 30) × (T / 300 K) ÷ V (V în litri). Punctele în mișcare ilustrează doar loviturile. n din PV = nRT este cantitatea de gaz în moli.'],title:['Piston & Thermodynamics Lab','Laboratorul piston și termodinamică']};
 // '#rrggbb' mix; v1 hue ramp (blue→red) rebuilt from tokens: subject blue → tan → rose (no orange)
 function mix(a,b,t){if(!/^#[0-9a-f]{6}$/i.test(a)||!/^#[0-9a-f]{6}$/i.test(b))return t<.5?a:b;var o='#';for(var i=1;i<7;i+=2){var x=parseInt(a.substr(i,2),16),y=parseInt(b.substr(i,2),16);o+=('0'+Math.round(x+(y-x)*t).toString(16)).slice(-2)}return o}
 var clamp=function(v,a,b){return Math.min(b,Math.max(a,v))};
@@ -24,7 +26,7 @@ render:function(el,ctx){
       ch=U.chips([[t('cool'),ctx.color],[t('heat'),C.tan],[t('sq'),C.rose],[t('rel')],[t('reset')]],function(i){fx.pop();U.tween(PH,[{T:200},{T:450},{V:.4},{V:1.2},{T:300,V:1,N:30}][i],function(){PH.N=Math.round(PH.N/5)*5;PH.T=Math.round(PH.T);upd()})});
   function set(k){return function(v){PH[k]=v;upd()}}
   el.style.setProperty('--c',ctx.color);qu.setAttribute('aria-live','polite');ctx.report({qt:1});
-  el.append(U.el('h1',t('title')),cv,sl.T,sl.V,sl.N,ch,ti,hi,qu,U.cont(ctx));
+  el.append(U.el('h1',t('title')),cv,sl.T,sl.V,sl.N,ch,ti,hi,qu,U.el('p',t('model'),'cap'),U.cont(ctx));
   function step(dt){var yp=PH.Vd/1.2;while(PH.parts.length<PH.N)PH.parts.push(newPart(yp));PH.parts.length=PH.N;
     var sv=P.spring(PH.Vd,PH.vV,PH.V,90,12,1,dt);PH.Vd=Math.max(.1,sv[0]);PH.vV=sv[1];
     var yp2=PH.Vd/1.2,sp0=.55*Math.sqrt(PH.T/300),hits=0;
@@ -38,7 +40,7 @@ render:function(el,ctx){
     U.tiles(ti,[['P · '+t('pressure'),Pr.toFixed(2)+' atm'],['T · '+t('temperature'),T+' K · '+Math.round(T-273.15)+' °C'],['V · '+t('volume'),PH.V.toFixed(2)+' L'],[t('collisions'),Math.round(PH.rate)+' /s']]);rb=ti.lastChild.lastChild;
     hi.className=Pr>8?'hint-orange':'';hi.textContent=Pr>8?t('phh_over'):T>400?t('phh_hot'):PH.V<.5?t('phh_sq'):t('phh_gen');
     if(Pr>=3&&T<=300){if(!PH.quest){fx.ok();fx.burst(120);if(ctx.report({qd:1}))ctx.award(25)}PH.quest=true}else if(Pr<2.5)PH.quest=false;
-    qu.classList.toggle('done',PH.quest);qu.textContent=t(PH.quest?'q_done':'q_phys');
+    qu.classList.toggle('done',PH.quest);qu.textContent=t(PH.quest?'q_done':Pr>=3&&T>300?'q_hot':'q_phys');
     if(rm.matches){PH.Vd=PH.V;PH.vV=0;PH.needle=Pr;step(0)}loop&&loop.redraw()}
   function draw(){var f=cv.fit();if(!f)return;var c=f.c,w=f.w,h=f.h,fs=clamp(w/34,10,14),F=C.mono,
       x0=.07*w,x1=.5*w,top=.2*h,bot=.78*h,Hh=bot-top,Wd=x1-x0,yPix=bot-(PH.Vd/1.2)*Hh,heat=clamp((PH.T-200)/300,0,1),hc=ramp(heat),now=rm.matches?0:performance.now(),rs=Math.round(PH.rate)+' /s',i;

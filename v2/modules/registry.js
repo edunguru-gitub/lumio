@@ -5,7 +5,6 @@
 window.LumioRegistry={
 "features":["rating","terminal","ranks","moon","challenge","ticker","sfx","ink","qr","phone","settings"],
 "lessons":[
-"physics/optics",
 {"id":"waves","subject":"physics","subjectName":["Physics","Fizică"],"color":"--physics","title":["Waves","Unde"],"order":2,"tags":[],"orbit":[1.4,80]},
 {"id":"mechanics","subject":"physics","subjectName":["Physics","Fizică"],"color":"--physics","title":["Mechanics","Mecanică"],"order":3,"tags":[],"orbit":[3.4,55]},
 "physics/gas",

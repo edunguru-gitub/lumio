@@ -2,9 +2,12 @@
 // ported from app/lumio.html PRACTICE: genQ, checkAns, hintQ, poly; handwriting pad from feature js/ink.js (absent = typing only)
 var S={q_delta:['Compute Δ = b² − 4ac','Calculează Δ = b² − 4ac'],q_xv:['Find the x of the vertex: x_V = −b / 2a','Află abscisa vârfului: x_V = −b / 2a'],
  q_f0:['Compute f(0)','Calculează f(0)'],q_f1:['Compute f(1)','Calculează f(1)'],q_root:['Find the LARGER root','Află rădăcina MAI MARE'],
- h_delta:['Δ = b² − 4·a·c = {b}² − 4·({a})·({c})','Δ = b² − 4·a·c = {b}² − 4·({a})·({c})'],h_xv:['x_V = −({b}) / (2·{a})','x_V = −({b}) / (2·{a})'],
- h_f0:['f(0) = c','f(0) = c'],h_f1:['f(1) = a + b + c = {a} + ({b}) + ({c})','f(1) = a + b + c = {a} + ({b}) + ({c})'],h_root:['(x − r₁)(x − r₂) = 0','(x − r₁)(x − r₂) = 0'],
- ok1:['Yes.','Da.'],ok2:['Nailed it.','Perfect.'],ok3:['Sharp.','Excelent.'],no1:['Not quite. The answer was {ans}','Aproape. Răspunsul era {ans}'],
+ h_delta:['Δ = b² − 4·a·c = ({b})² − 4·({a})·({c})','Δ = b² − 4·a·c = ({b})² − 4·({a})·({c})'],h_xv:['x_V = −({b}) / (2·{a})','x_V = −({b}) / (2·{a})'],
+ h_f0:['f(0) = c','f(0) = c'],h_f1:['f(1) = a + b + c = {a} + ({b}) + ({c})','f(1) = a + b + c = {a} + ({b}) + ({c})'],h_root:['For a = 1: r₁ + r₂ = −({b}) and r₁ · r₂ = {c}. Find two numbers with that sum and product.','Pentru a = 1: r₁ + r₂ = −({b}) și r₁ · r₂ = {c}. Găsește două numere cu această sumă și acest produs.'],
+ n_delta:['Check the signs: b² is never negative, and −4ac is positive only when a and c have opposite signs.','Verifică semnele: b² nu e niciodată negativ, iar −4ac este pozitiv doar când a și c au semne opuse.'],n_xv:['Do not forget the minus: x_V = −b / (2a).','Nu uita minusul: x_V = −b / (2a).'],
+ n_f0:['At x = 0 every term with x disappears, so f(0) = c.','La x = 0 dispar toți termenii cu x, deci f(0) = c.'],n_f1:['At x = 1 every power of x is 1, so f(1) = a + b + c. Add them with their signs.','La x = 1 orice putere a lui x este 1, deci f(1) = a + b + c. Adună-le cu semnele lor.'],
+ n_root:['Check your pair: the two roots add up to −b and multiply to c.','Verifică perechea: suma rădăcinilor este −b, iar produsul lor este c.'],
+ ok1:['Yes.','Da.'],ok2:['Nailed it.','Perfect.'],ok3:['Sharp.','Excelent.'],no1:['Not quite. The answer was {ans}','Nu e corect. Răspunsul era {ans}'],
  write_first:['Write an answer first','Scrie mai întâi un răspuns'],round_done:['Round done: {s}/5 correct','Rundă încheiată: {s}/5 corecte'],
  new_round:['New round','Rundă nouă'],check:['Check','Verifică'],hint:['Hint','Indiciu'],ans:['Your answer','Răspunsul tău'],enter:['Enter to check','Enter pentru verificare'],
  title:['Ink Practice','Exersare cu scris de mână'],read:['Read aloud','Citește'],sp_abc:['a equals {a}, b equals {b}, c equals {c}','a egal {a}, b egal {b}, c egal {c}']};
@@ -40,10 +43,10 @@ render:function(el,ctx){
     var ok=+raw===Q.cur.ans;
     // v1: +10+min(streak,5)*2 Lumens (ctx.award default), sounds, confetti, jump / shake; streak ×n at 3,5,7… = rating.js report()
     if(ok){ctx.award();ctx.report({ok:1});Q.score++;Q.res[Q.i]=true;fb.className='fb ok';fb.textContent=t(pk(['ok1','ok2','ok3']));fx.ok();fx.burst(60);fx.jump(eq);fx.auto&&fx.auto(fb.textContent)}
-    else{ctx.report({bad:1});Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans});fx.bad();fx.auto&&fx.auto(fb.textContent)}
+    else{ctx.report({bad:1});Q.res[Q.i]=false;fb.className='fb no';fb.textContent=t('no1',{ans:Q.cur.ans})+'. '+t('n_'+Q.cur.k);fx.bad();fx.auto&&fx.auto(fb.textContent)}
     fld.className='fld '+(ok?'ok':'no');if(!ok)fx.shake(fld);Q.i++;render();Q.busy=true;
     setTimeout(function(){Q.busy=false;if(!el.isConnected)return;
-      fld.className='fld';if(Q.i>=5){Q.done=true;if(ctx.report({qd:1}))ctx.award(20);fb.className='fb ok';fb.textContent=t('round_done',{s:Q.score});ck.textContent=t('new_round');if(Q.score>=4){fx.streak();fx.burst(180)}}else next()},ok?1100:1900)}
+      fld.className='fld';if(Q.i>=5){Q.done=true;if(ctx.report({qd:1}))ctx.award(20);fb.className='fb ok';fb.textContent=t('round_done',{s:Q.score});ck.textContent=t('new_round');if(Q.score>=4){fx.streak();fx.burst(180)}}else next()},ok?1100:3500)}
   ck.onclick=check;inp.onkeydown=function(e){if(e.key==='Enter')check()};
   hb.onclick=function(){var q=Q.cur;if(Q.done)return;fb.className='fb';fb.textContent=hint=t('h_'+q.k,q)};
   round();

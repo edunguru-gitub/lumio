@@ -5,16 +5,19 @@ var S={title:['Projectile Motion','Mișcarea proiectilului'],cv:['Launch lab: gr
  ex_all:['All 4 exercises done · +15 Lumens bonus','Toate cele 4 exerciții gata · +15 Lumeni bonus'],
  lv_free:['Free play','Joc liber'],lv_lv:['Levels','Niveluri'],lv_n:['Level {n}','Nivelul {n}'],lv_fire:['Fire','Lansează'],lv_how:['Show me how','Arată-mi cum'],lv_formula:['Formula','Formula'],lv_example:['Worked example','Exemplu rezolvat'],
  lv_hint:['Hint {n}','Indiciul {n}'],lv_hit:['Hit! Level complete','Lovit! Nivel terminat'],lv_miss:['Missed: landed at {x} m. Check your numbers.','Ratat: a aterizat la {x} m. Verifică-ți calculele.'],
+ lv_miss_r:['Not quite: you said {x} m (dashed line). Compare it with where the ball really lands.','Nu chiar: ai spus {x} m (linia punctată). Compară cu locul în care aterizează de fapt mingea.'],
+ lv_miss_h:["Missed: at the platform's height the ball was {x} m away. Check your numbers.",'Ratat: la înălțimea platformei mingea era la {x} m. Verifică-ți calculele.'],
+ tol:['A hit means within 3 % of the exact answer.','Un răspuns corect înseamnă o eroare de cel mult 3 % față de valoarea exactă.'],
  lv_lost:['Out of hearts. Try the level again.','Nu mai ai inimi. Încearcă nivelul din nou.'],lv_retry:['Try again','Încearcă din nou'],lv_next:['Next level','Nivelul următor'],
  lv_locked:['Finish the level before to unlock','Termină nivelul anterior ca să-l deblochezi'],lv_reward:['+{n} Lumens','+{n} Lumeni'],lv_replay:['Replay: no Lumens','Reluare: fără Lumeni'],
  lv_all:['All levels complete!','Toate nivelurile terminate!'],lv_ans:['Your answer','Răspunsul tău'],lv_nophone:['Phone controls work in Free play.','Controlul de pe telefon funcționează în Joc liber.'],
  lv_hearts:['{n} hearts left','{n} inimi rămase'],lv_stars:['{n} of 3 sparkles','{n} din 3 scântei'],lv_dot:['Level {n}, {s} of 3 sparkles','Nivelul {n}, {s} din 3 scântei'],lv_dlock:['Level {n}, locked','Nivelul {n}, blocat']};
 var GRV=9.81,G=9.8,rad=function(a){return a*Math.PI/180};
 var prj=function(s){var th=rad(s.a),vx=s.v*Math.cos(th),vy=s.v*Math.sin(th),T=2*vy/GRV;return{vx:vx,vy:vy,T:T,R:vx*T,H:vy*vy/(2*GRV)}};
-var EX=[{q:{en:'Land beyond 40 m',ro:'Aterizează dincolo de 40 m'},hint:{en:'More speed means more range. Try v above 21 m/s.',ro:'Mai multă viteză înseamnă bătaie mai mare. Încearcă v peste 21 m/s.'},ok:function(s){return prj(s).R>40}},
- {q:{en:'Reach a max height above 15 m',ro:'Urcă peste 15 m'},hint:{en:'Aim steeper: a high angle puts more speed into going up.',ro:'Țintește mai abrupt: un unghi mare pune mai multă viteză în urcare.'},ok:function(s){return prj(s).H>15}},
+var EX=[{q:{en:'Land beyond 40 m',ro:'Aterizează dincolo de 40 m'},hint:{en:'More speed means more range. At 45°, any v above 19.8 m/s lands beyond 40 m (R = v² / g).',ro:'Mai multă viteză înseamnă bătaie mai mare. La 45°, orice v peste 19,8 m/s aterizează dincolo de 40 m (R = v² / g).'},ok:function(s){return prj(s).R>40}},
+ {q:{en:'Reach a max height above 15 m',ro:'Urcă peste 15 m'},hint:{en:'Only the upward part of the speed, v · sin θ, lifts the ball. Raise θ or v.',ro:'Doar partea de viteză îndreptată în sus, v · sin θ, ridică mingea. Mărește θ sau v.'},ok:function(s){return prj(s).H>15}},
  {q:{en:'Hit the flag at 30 m (±1 m)',ro:'Lovește steagul de la 30 m (±1 m)'},hint:{en:'Fine-tune speed and angle until R reads 29–31 m.',ro:'Reglează viteza și unghiul până când R arată 29–31 m.'},ok:function(s){return Math.abs(prj(s).R-30)<=1}},
- {q:{en:'At v = 20 m/s, find the max-range angle',ro:'La v = 20 m/s, găsește unghiul de bătaie maximă'},hint:{en:'Set v to 20, then sweep the angle and watch R peak.',ro:'Pune v la 20, apoi variază unghiul și urmărește când R e maxim.'},ok:function(s){return s.v===20&&Math.abs(s.a-45)<=1}}];
+ {q:{en:'At v = 20 m/s, find the max-range angle',ro:'La v = 20 m/s, găsește unghiul de bătaie maximă'},hint:{en:'Set v to 20, then try 40°, 45° and 50° and compare R. The largest R marks the answer (R changes very little near the peak).',ro:'Pune v la 20, apoi încearcă 40°, 45° și 50° și compară R. Cel mai mare R indică răspunsul (lângă maxim, R se schimbă foarte puțin).'},ok:function(s){return s.v===20&&Math.abs(s.a-45)<=1}}];
 var LVL=[
  {a:45,R:40,h:0,ask:'v',unit:'m/s',
   q:{en:'The target is 40 m away. You launch at 45°. What speed hits it?',ro:'Ținta e la 40 m. Lansezi la 45°. Ce viteză o lovește?'},
@@ -41,7 +44,7 @@ var LVL=[
   ex:{en:'x = 20 m, y = 4 m at 45°: v² = g · x² / (x − y) = 9.8 · 400 / 16 = 245 → v ≈ 15.7 m/s.',ro:'x = 20 m, y = 4 m la 45°: v² = g · x² / (x − y) = 9,8 · 400 / 16 = 245 → v ≈ 15,7 m/s.'},
   hn:[{en:'Use the path equation y = x · tan θ − g · x² / (2 v² cos² θ).',ro:'Folosește ecuația traiectoriei y = x · tan θ − g · x² / (2 v² cos² θ).'},{en:'At 45° it becomes v² = g · x² / (x − y).',ro:'La 45° devine v² = g · x² / (x − y).'},{en:'v² = 9.8 · 900 / 25 = 352.8.',ro:'v² = 9,8 · 900 / 25 = 352,8.'}]},
  {a:45,v:30,h:0,ask:'R',unit:'m',
-  q:{en:'Rule: 45° always gives the longest throw. At 30 m/s, how far does it land? Put the target there.',ro:'Regula: 45° dă mereu cea mai lungă aruncare. La 30 m/s, unde aterizează? Pune ținta acolo.'},
+  q:{en:'At the same speed, from level ground, 45° gives the longest throw. At 30 m/s, how far does the ball land? Type the distance: the shot will show where it really lands.',ro:'La aceeași viteză, de pe teren plat, 45° dă cea mai lungă aruncare. La 30 m/s, cât de departe aterizează mingea? Scrie distanța: lansarea arată unde aterizează de fapt.'},
   ans:[900/G],
   f:{en:'At 45°: R = v² / g',ro:'La 45°: R = v² / g'},
   ex:{en:'At 20 m/s: R = 400 / 9.8 ≈ 40.8 m.',ro:'La 20 m/s: R = 400 / 9,8 ≈ 40,8 m.'},
@@ -110,7 +113,7 @@ render:function(el,ctx){
       if(first)mem.stars[LV.i]=stars;else if(stars>mem.stars[LV.i])mem.stars[LV.i]=stars;save();
       ctx.report({qd:qd(),ok:LV.miss?0:1});if(paid)ctx.award(paid);
       LV.res={kind:'hit',stars:stars,paid:paid};setTimeout(function(){if(cv.isConnected){fx.ok();fx.burst(140)}},rm.matches?0:Math.min(1600,path.T*350))}
-    else{LV.hearts--;LV.miss++;inp.value='';fx.bad();ctx.report({bad:1});LV.res={kind:LV.hearts<=0?'lost':'miss',x:predict!=null?predict:path.X}}
+    else{LV.hearts--;LV.miss++;inp.value='';fx.bad();ctx.report({bad:1});LV.res={kind:LV.hearts<=0?'lost':'miss',x:predict!=null?predict:path.X,k:Lv.ask==='R'?'lv_miss_r':Lv.h&&path.yEnd?'lv_miss_h':'lv_miss'}}
     lvRender('res');if(loop)loop.redraw()}
   // f: 'res' = focus the result action (or the field after a miss), 'in' = the field, else keep focus on the level dot
   function lvRender(f){
@@ -124,13 +127,13 @@ render:function(el,ctx){
     hs.innerHTML=HEART+HEART+HEART;for(var j=0;j<h;j++)hs.children[j].classList.add('on');hs.append(h+' / 3');
     lt.replaceChildren(E('h3',t('lv_n',{n:LV.i+1})),hs);
     lq.textContent=loc(Lv.q);
-    lg.textContent=[Lv.ask!=='a'&&Lv.a!=null?'θ = '+Lv.a+'°':'',Lv.ask!=='v'&&Lv.v!=null?'v = '+Lv.v+' m/s':'',Lv.ask!=='R'&&Lv.R!=null?'R = '+Lv.R+' m':'',Lv.h?'h = '+Lv.h+' m':'','g = 9'+dec+'8 m/s²'].filter(Boolean).join(' · ');
+    lg.textContent=[Lv.ask!=='a'&&Lv.a!=null?'θ = '+Lv.a+'°':'',Lv.ask!=='v'&&Lv.v!=null?'v = '+Lv.v+' m/s':'',Lv.ask!=='R'&&Lv.R!=null?'R = '+Lv.R+' m':'',Lv.h?'h = '+Lv.h+' m':'','g = 9'+dec+'8 m/s²',t('tol')].filter(Boolean).join(' · ');
     unit.textContent=Lv.unit;inp.disabled=fire.disabled=shut;
     var act=null;res.replaceChildren();res.hidden=!r;
     if(r&&r.kind==='hit'){var sp=E('p',null,'lv-st');if(L.spk)sp.append(L.spk(r.stars));sp.append(E('span',t('lv_stars',{n:r.stars})));
       res.append(E('p',t('lv_hit'),'fb ok'),sp,E('p',r.paid?t('lv_reward',{n:r.paid}):t('lv_replay'),r.paid?'lum':'rep'));
       if(LV.i<LVL.length-1){act=E('button',t('lv_next'),'btn-primary');act.onclick=function(){lvGo(LV.i+1,'in')}}else res.append(E('p',t('lv_all'),'lv-all'))}
-    else if(r&&r.kind==='miss')res.append(E('p',t('lv_miss',{x:(Math.round(r.x*10)/10).toString().replace('.',dec)}),'fb no'));
+    else if(r&&r.kind==='miss')res.append(E('p',t(r.k||'lv_miss',{x:(Math.round(r.x*10)/10).toString().replace('.',dec)}),'fb no'));
     else if(r&&r.kind==='lost'){res.append(E('p',t('lv_lost'),'fb no'));act=E('button',t('lv_retry'),'btn-primary');act.onclick=function(){lvGo(LV.i,'in')}}
     if(act){act.type='button';res.append(act)}
     // Show me how: formula, worked example, hints one at a time (a hint opens the disclosure, as v1)
