@@ -4,3 +4,5 @@ key.pem
 cert.pem
 *.pfx
 .DS_Store
+tools/deck/*.png
+tools/deck/*.pdf

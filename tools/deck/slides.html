@@ -31,11 +31,11 @@ li b,p b{color:var(--tan);font-weight:500}
 /* KPI table, same style as the competitor table (slide 5) */
 table{width:100%;border-collapse:collapse;border:1pt solid #494745}
 th,td{border:.75pt solid #494745;padding:6pt 10pt;text-align:left;vertical-align:top;font-size:13pt;line-height:1.35}
-th{background:#292725;color:var(--tan);font:600 10pt/1.3 var(--ui);text-transform:uppercase;letter-spacing:.02em;padding:7pt 10pt}
+th{background:#292725;color:var(--tan);font:600 11pt/1.3 var(--ui);text-transform:uppercase;letter-spacing:.02em;padding:7pt 10pt}
 td:first-child{color:var(--ink)}td{color:var(--muted)}
 .kpi .grp td{background:var(--card);color:var(--tan);font:500 10pt/1.2 var(--mono);text-transform:uppercase;padding:4pt 10pt}
 .nums span{float:right;color:var(--ink)}
-.src{font:400 10pt/1.4 var(--ui);color:var(--muted);margin-top:8pt}
+.src{font:400 11pt/1.4 var(--ui);color:var(--muted);margin-top:8pt}
 .scn td,.scn th{padding:4pt 10pt}.scn td{color:var(--ink)}.scn td+td{text-align:right}.scn th+th{text-align:right}
 #team .mono{width:46pt;height:46pt;border-radius:50%;border:1pt solid var(--tan);display:grid;place-items:center;font:400 26pt/1 var(--head);color:var(--tan);margin-bottom:14pt}
 #team .tile p{font-size:15pt}
@@ -49,7 +49,7 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
  <div class="row c3" style="min-height:252pt">
   <div class="tile"><h3>Done</h3><p>Anonymous student survey, 13 responses. 5 students tried the live app; 4 of 5 would use it again next week.</p><div class="f">Survey + live test, 2026</div></div>
   <div class="tile"><h3>Honest limits</h3><p>Small sample, one town. No paying customer yet. Testers were friends of the team. <span class="tag">Assumption: who the 5 testers were</span></p><div class="f">What we do not claim</div></div>
-  <div class="tile"><h3>Pilot plan</h3><p>One real class in Suceava, 4 weeks, 2 lessons a week. The teacher keeps anonymous codes (Student 1 to N) on paper; app data stays on each device.</p><p class="mt muted" style="font-size:13pt">Pilot class being agreed. <span class="tag">Assumption: school, teacher, size, date</span></p><div class="f">See KPI slide</div></div>
+  <div class="tile"><h3>Pilot plan</h3><p>One real class in Suceava, 4 weeks, 2 lessons a week. The teacher keeps anonymous codes (Student 1 to N) on paper; app data stays on each device.</p><p class="mt muted" style="font-size:13pt">We are looking for one pilot class. <span class="tag">Assumption: school, teacher, size, date</span></p><div class="f">See KPI slide</div></div>
  </div>
  <div class="strip">Pilot rules · written parental consent for <span class="nw">under-18s</span> · anonymous codes · data stays on the device</div>
 </section>
@@ -66,11 +66,11 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
    <li><b>Phone as controller.</b> QR code on the local network; sliders and tilt drive the lab. Needs Lumio.cmd (Node.js) on the laptop.</li></ul>
    <div class="f">Demo in this video = v1</div></div>
   <div class="tile"><h3>What v2 adds for the user</h3><ul class="tiles4">
-   <li><b>Live on the web:</b> edunguru-gitub.github.io/lumio (checked 25 Nov 2026). The web page alone only syncs two tabs; to use a phone, run Lumio.cmd on the laptop.</li>
+   <li><b>Live on the web:</b> edunguru-gitub.github.io/lumio (checked 26 Nov 2026). The web page alone only syncs two tabs; to use a phone, run Lumio.cmd on the laptop.</li>
    <li><b>One module per lesson.</b> A new lesson is one new file; removing one breaks nothing else.</li>
-   <li><b>5 lessons so far:</b> 4 rebuilt from v1 and checked against it; Optics is new.</li>
-   <li><b>Kept from v1:</b> handwriting pad, phone controller, Lumens, Moon, Ranks, Light and Dark.</li></ul>
-   <div class="f">Not in v2 yet: Spanish, Levels, podcast, Challenge, settings</div></div>
+   <li><b>6 lessons so far:</b> 5 rebuilt from v1 and checked against it; Optics is new.</li>
+   <li><b>Kept from v1:</b> handwriting pad, phone controller, Levels, Challenge, Lumens, Moon, Ranks, Settings, Light and Dark.</li></ul>
+   <div class="f">Not in v2 yet: Spanish, compound interest, podcast, 6 colour themes</div></div>
  </div>
 </section>
 
@@ -93,7 +93,7 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
  <h1 style="margin-bottom:16pt">Free to learn. Schools and parents pay.</h1>
  <div class="bmc">
   <div class="tile"><h3>Key partners, activities, resources</h3><p>Teachers and schools for the pilot; no signed partners yet. <span class="tag">Assumption: no partner yet</span> We build lessons and learn from teacher feedback, with an AI-assisted build.</p></div>
-  <div class="tile t"><h3>Value proposition</h3><p>Learn by doing: 3 minute hands-on labs, instant feedback, EN and RO. Unlike PhET, Brilliant or Khan Academy, your phone controls the experiment (as far as we found).</p></div>
+  <div class="tile t"><h3>Value proposition</h3><p>Learn by doing: 3-minute labs, EN and RO. Today: YouTube, tutors, textbooks. Unlike PhET, Brilliant or Khan Academy, your phone controls the experiment (as far as we found).</p></div>
   <div class="tile"><h3>Channels, relationships</h3><p>Students and parents: social media and teachers; free, self-serve. Schools: direct, warm introduction, onboarding call.</p></div>
   <div class="tile"><h3>Customer segments</h3><p><b>Uses:</b> high school students, grades 9 to 12 first.<br><b>Pays:</b> private schools (client) and parents of <span class="nw">under-18s.</span></p></div>
   <div class="tile wide"><h3>Cost structure</h3><p>AI tools, domains, small server, accountant, content time, support: about 511 RON a month (plan), slide 19.</p></div>
@@ -107,7 +107,7 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
  <div class="k">Go to market</div>
  <h1 style="margin-bottom:18pt">Start where we can reach: Suceava, then Romania.</h1>
  <div class="row c3" style="min-height:0">
-  <div class="tile"><h3>Students</h3><p><b>Message:</b> “Try it, don’t read it. 3 minutes, on your phone.”</p><p class="mt"><b>Channel:</b> social media: school Instagram and TikTok clips, class challenge links.</p></div>
+  <div class="tile"><h3>Students</h3><p><b>Message:</b> “Try it, don’t read it. 3 minutes, on your phone.”</p><p class="mt"><b>Channel:</b> social media (school Instagram and TikTok clips), class challenge links.</p></div>
   <div class="tile"><h3>Parents</h3><p><b>Message:</b> “Short sessions, visible progress.”</p><p class="mt"><b>Channel:</b> social media and parent WhatsApp groups via the teacher.</p></div>
   <div class="tile"><h3>Private schools</h3><p><b>Message:</b> “Hands-on practice your students enjoy.”</p><p class="mt"><b>Channel:</b> direct, with a warm introduction; a 4-week pilot first (symbolic fee in our plan). We will find who decides; the person who adopts it needs a benefit too.</p><div class="f" style="margin-top:8pt;padding-top:8pt">To validate in the pilot</div></div>
  </div>
@@ -125,18 +125,18 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
   <div class="tile"><h3>Revenue (plan, excl. VAT)</h3><p>Students: free.<br>Class licence: <b>1,200 RON a year</b> (range 900 to 1,800).<br>4-week pilot: 300 RON, a symbolic fee.<br>Parents’ premium: about 100 RON a year, under 5% of year-1 revenue.</p></div>
  </div>
  <div class="calc">
-  <div class="tile"><h3>Running a year</h3><p>511 × 12 = 6,130 RON</p></div><i>÷</i>
+  <div class="tile"><h3>Running a year</h3><p>About 6,130 RON</p></div><i>÷</i>
   <div class="tile"><h3>Left per class a year</h3><p>1,200 − 228 to serve = 972 RON</p></div><i>=</i>
   <div class="tile"><h3>Break-even</h3><p>6.3, so <b>7 classes</b></p></div>
  </div>
- <div class="strip">With the 3,000 RON start-up: about 10 classes · to serve = AI, voice, tax, our time</div>
- <p class="src">Hosting: free for the prototype; the paid version moves to static hosting plus a small server (about 35 RON a month, included in the 511). Prices from public pages (Bono, Hetzner, RoTLD), 26 Nov 2026.</p>
+ <div class="strip">With the 3,000 RON start-up: about 10 classes · school licences fund the free tier</div>
+ <p class="src">Hosting: free for the prototype; the paid version moves to static hosting plus a small server (about 35 RON a month, included in the 511). Estimates from public price lists (Bono, Hetzner, RoTLD), to be verified.</p>
 </section>
 
 <!-- NEW 19b · Year 1 and first quarter side by side (same plan) -->
 <section class="slide" id="s19b">
  <div class="k">Revenue plan · no paying client yet</div>
- <h1 style="margin-bottom:12pt">Year 1 proves that schools pay.</h1>
+ <h1 style="margin-bottom:12pt">Year 1 goal: our first paying schools.</h1>
  <div class="row c2 sm" style="min-height:0">
   <div class="tile"><h3>First quarter (Jan to Mar 2027), base, RON</h3><ul class="tiles4">
    <li><b>Revenue</b> 1 four-week pilot × 300 = <b>300</b></li>
@@ -154,7 +154,7 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
   <tr><td>Paying classes, year 1 (licence)</td><td>2 at 900</td><td>6 at 1,200</td><td>16 at 1,800</td></tr>
   <tr><td>Revenue, year 1</td><td>1,845 RON</td><td>7,856 RON</td><td>32,370 RON</td></tr>
  </table>
- <p class="src">Full-price licences start with the school year, Sep 2027. Market: 631,500 high school students in Romania, 2025/26 (INS, via Edupedu); private schools first.</p>
+ <p class="src">Full-price licences start with the school year, Sep 2027. Market: 631,500 high school students in Romania (INS, 2025/26, as reported); private schools first.</p>
 </section>
 
 <!-- NEW 20 · KPIs and impact (learning + business), pilot data rule: anonymous codes, teacher sheet -->
@@ -166,7 +166,7 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
   <tr class="grp"><td colspan="4">Learning</td></tr>
   <tr><td>Weekly active students</td><td>Teacher’s weekly count, by code</td><td>5 testers tried it once</td><td><span class="tag">Assumption: Eduard sets target</span></td></tr>
   <tr><td>Lessons completed</td><td>Teacher notes it from the screen</td><td>Not measured</td><td>2 a week (the pilot plan)</td></tr>
-  <tr><td>Return rate</td><td>Share of the class active again next week</td><td>4 of 5 testers: yes</td><td>60% of the class</td></tr>
+  <tr><td>Return rate</td><td>Share of the class active again next week</td><td>4 of 5 testers said they would use it again</td><td>60% of the class</td></tr>
   <tr><td>Education impact</td><td>5-question quiz, before and after</td><td>Not measured</td><td>+20% score</td></tr>
   <tr class="grp"><td colspan="4">Business</td></tr>
   <tr><td>User acquisition cost</td><td>Our time and travel ÷ schools signed</td><td>Not measured</td><td>≤ 1,500 RON a school</td></tr>
