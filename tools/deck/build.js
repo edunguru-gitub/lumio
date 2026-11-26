@@ -9,12 +9,11 @@ if(!orig||!out){console.error('usage: node build.js <original.pdf> <out.pdf> [--
 const DIR=__dirname,SCRIPT=path.join(DIR,'../../docs/pitch-stage2.md'),BAD=/__|\[|\]/,BADS=/__|\[|\]|ASSUMPTION|TO VERIFY/;
 const SHOT=process.env.RANKS_PNG||path.join(DIR,'ranks.png'); // live v2 Ranks screenshot (dark, Sample rows, You row); never committed
 
-// Final order (24 of max 25): o = page of the original 18-page PDF, n = page of slides.html. Old team pages o15-o17 -> one 'Why us' slide n9 (Eduard OK, 26 Nov)
-const ORDER=['o1','o2','o3','o4','o5','o6','o7','n1','o8','o9','o10','o11','o12','o13','n2','n3','n4','n5','n6','n7','n8','o14','n9','o18'];
+// Final order (25 of max 25; n10 = 'Limits today' slide, deck-final-4): o = page of the original 18-page PDF, n = page of slides.html. Old team pages o15-o17 -> one 'Why us' slide n9 (Eduard OK, 26 Nov)
+const ORDER=['o1','o2','o3','o4','o5','o6','o7','n1','o8','o9','o10','o11','o12','o13','n2','n3','n4','n5','n6','n7','n8','n10','o14','n9','o18'];
 const BG='#171513',CARD='#211E1A',MUTED='#A89F8E',TAN='#D9C3A0',ORANGE='#FF6A13';
 // Text ops are sized from a reference text measured in the original page (pt, 960x540): ref=[text, left, capTop, right].
 const MONO='500 Deck Mono',INTER='400 Inter',SERIF='400 Deck Serif',INK='#EDE3D0',TILE='#211E1A';
-const COUNTS='Assumption - Eduard gives counts';
 const FOOT={font:MONO,ref:['LUMIO · 02 / 17',65,494.5,171.25]};
 // fill 'auto' = colour sampled from the original page at the patch corner (pages are images, bg varies by 1-2 levels); o18 had no footer, so no patch
 const footer=(n,o)=>[o==='o18'?{}:{patch:[60,489,200,510],fill:'auto'},{...FOOT,text:`LUMIO · ${String(n).padStart(2,'0')} / ${ORDER.length}`,color:o==='o4'?'#2B2018':MUTED}];
@@ -24,19 +23,16 @@ const body=(x,ref,r,lines)=>lines.map((t,i)=>({font:INTER,ref:[ref,x,242,r],y:24
 const EDITS={
   o1:[{patch:[60,300,362,346],fill:'auto'},{font:SERIF,ref:['Light up how you learn.',65,305,351],text:'3-minute hands-on labs for high school students.',color:TAN},{patch:[60,456,420,476],fill:BG},{font:MONO,ref:['EDUARD · DARIUS · STEFAN',65,460.75,264.5],text:'EDUARD · DARIUS · STEFAN · TEAM FLOW · SUCEAVA',color:TAN}],
   o5:[...notFound(410.25),...notFound(576.5),...notFound(742.75),
-      {...FOOT,ref:['LUMIO · 02 / 17',65,470,171.25],text:'BASED ON PUBLIC PAGES, CHECKED',color:MUTED,tag:'Assumption: check date'}],
+      {...FOOT,ref:['LUMIO · 02 / 17',65,470,171.25],text:'BASED ON PUBLIC PAGES, AS FAR AS WE FOUND',color:MUTED}],
   o6:[{patch:[648,375,882,393],fill:CARD},{font:MONO,ref:['POSSIBLE PARTNERS',652.75,379.5,783.75],text:'NO PARTNERS YET, PILOT NEXT',color:ORANGE}],
-  // survey statistics as counts of 13 (Eduard OK 26 Nov): only counts in docs stay; the rest is tagged until Eduard gives counts
+  // survey statistics (Eduard OK 26 Nov): only the counts in docs stay (10 of 13, 13, 4 of 5); DRAFT5 default: no other numbers
   o2:[{patch:[362,238,607,441],fill:'auto'},
       ...body(368,'One in seven loses focus in',565,['Some lose focus in under ten','minutes, more by twenty. A long','lesson loses them before the','idea clicks.']),
-      {font:INTER,ref:['One in seven loses focus in',368,242,565],x:362,y:338,text:'',color:INK,tag:COUNTS,tagScale:.72},
       {font:MONO,ref:['1 IN 7 DRIFT UNDER 10 MIN',368,427,546],text:'DRIFT UNDER 10 MIN',color:ORANGE},
       {patch:[645,238,891,441],fill:'auto'},
       ...body(651,'When they get stuck, one in',852,['When they get stuck, some give','up and others just re-read the','same page. Nothing tells them','what to try next.']),
-      {font:INTER,ref:['When they get stuck, one in',651,242,852],x:645,y:338,text:'',color:INK,tag:COUNTS,tagScale:.72},
       {font:MONO,ref:['1 IN 7 QUIT · 3 IN 10 RE-READ',651,427,859],text:'QUIT OR RE-READ',color:ORANGE}],
-  o7:[{patch:[60,106,806,166],fill:'auto'},{font:SERIF,ref:['Seven in ten want to try it. Testers come back.',66,113,795],text:'Students want to try it. Testers come back.',color:INK},
-      {font:MONO,ref:['VALIDATION',64,68,147],x:150,text:'',color:TAN,tag:COUNTS}],
+  o7:[{patch:[60,106,806,166],fill:'auto'},{font:SERIF,ref:['Seven in ten want to try it. Testers come back.',66,113,795],text:'Students want to try it. Testers come back.',color:INK}],
   // Ranks screenshot retaken from live v2 (dark, Sample rows, You row, no real names), same box as the original
   o13:[{patch:[414,79,901,447],fill:'auto'},{image:SHOT,box:[417.5,82.5,480,361],r:8,stroke:'#3A352E'},
        {...FOOT,ref:['LUMIO · 02 / 17',65,62,171.25],text:'SAMPLE PLAYERS · NO REAL USERS YET',color:MUTED,anchor:'end',x:897}],
