@@ -93,3 +93,9 @@ Romanian to check with Eduard (native speaker): "Luna gibboasă" and "Primul pă
 3. OK for the thresholds 1015 / 1050 / 1100 / 1160 / 1250, or does he want different numbers?
 4. Romanian wording for tiers 3 and 4.
 Until answered: no tier names are shown (as in spec-port-wave2.md B6).
+
+## ADDENDUM 27 Nov (Eduard's idea, Manager proposal): the tier changes the Moon violet shade
+Idea: each Moon tier gets its own shade of the Moon violet, from muted (New Moon) to luminous (Blue Moon), so rank is felt before it is read. Still the Moon family only (violet only for Moon; no new hue; orange untouched). Contrast checked on bg #171513 and card #211E1A (WCAG ratio; all AA for text >= 4.5:1):
+Dark: New Moon #9B87C9 (5.8) · Crescent #A38BDA (6.3) · First Quarter #A68BE9 (6.5) · Gibbous #AA90F4 (6.9) · Full Moon #B097FC (7.5) · Blue Moon #BBA8FF (8.8). The existing Moon token #A78BFA (6.7) sits between First Quarter and Gibbous: keep it as the neutral/default for Moon elements that are not tier-specific.
+Light (on card #FFFBF3): New Moon #5E4983 (7.4) · Crescent #573C86 · First Quarter #503088 · Gibbous #492489 · Full Moon #431A89 · Blue Moon #3C0F8A (12.5): in Light the ramp goes from soft to deep (more saturated = higher tier). Re-check with tools/contrast.py before shipping.
+Where: tier name text and the Moon number on the Home tile, Ranks row headline (tier), Challenge result toast, the explainer; a soft glow only on Blue Moon (no extra colour). Implementation: CSS custom properties --moon-t1..t6 set from the tier index in moon.js; fallback to the current Moon violet if the tier block is absent. Differences must not be the only signal (the tier NAME always shown). Not before the HSIC upload (Sat 28 Nov 14:00); then with the premium pass.
