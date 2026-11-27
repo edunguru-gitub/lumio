@@ -6,3 +6,4 @@ cert.pem
 .DS_Store
 tools/deck/*.png
 tools/deck/*.pdf
+__pycache__/
