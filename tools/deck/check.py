@@ -2,7 +2,8 @@
 Prints page count, the footer read on every page (LUMIO · NN / total), and for each original page the box (pt) of
 pixels that differ from the original outside the footer patch and the approved edit boxes (EXPECTED, pt).
 'identical outside approved edits' = only the new footer and the approved edits changed; anything else is printed as UNEXPECTED.
-DRAFT6: old o3 o4 o5 o8-o13 are rebuilt HTML pages (n11-n19); their screenshots come from SHOTS_DIR (tools/deck/shots.js + tools/qr/styled.js, never committed)."""
+DRAFT6: old o3 o4 o5 o8-o13 are rebuilt HTML pages (n11-n19); their screenshots come from SHOTS_DIR (tools/deck/shots.js + tools/qr/styled.js, never committed).
+DRAFT7: o14 (Next steps) is replaced by the rebuilt phase table n20; old pages left: o1 o2 o6 o7 o18."""
 import re, subprocess, sys, tempfile
 from PIL import Image, ImageChops
 from pypdf import PdfReader

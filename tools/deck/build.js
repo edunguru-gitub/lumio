@@ -11,7 +11,8 @@ const SHOTS=process.env.SHOTS_DIR||path.join(DIR,'shots'); // live v2 screenshot
 
 // Final order (25 of max 25; n10 = 'Limits today' slide, deck-final-4): o = page of the original 18-page PDF, n = page of slides.html. Old team pages o15-o17 -> one 'Why us' slide n9 (Eduard OK, 26 Nov)
 // DRAFT6 (Eduard OK 27 Nov): old o3 o4 o5 o8 o9 o10 o12 o13 rebuilt as n11-n16, n18, n19 (true for v2); o11 (six themes) -> n17 'Try Lumio now' QR
-const ORDER=['o1','o2','n11','n12','n13','o6','o7','n1','n14','n15','n16','n17','n18','n19','n2','n3','n4','n5','n6','n7','n8','n10','o14','n9','o18'];
+const ORDER=['o1','o2','n11','n12','n13','o6','o7','n1','n14','n15','n16','n17','n18','n19','n2','n3','n4','n5','n6','n7','n8','n10','n20','n9','o18'];
+// DRAFT7 (Eduard 27 Nov): o14 'Next steps' -> n20 phase table (o14 items kept inside it); n9 Why us with sourced numbers; n4-n8 new business model (setup fee + subscription, X = 2 schools)
 const BG='#171513',CARD='#211E1A',MUTED='#A89F8E',TAN='#D9C3A0',ORANGE='#FF6A13';
 // Text ops are sized from a reference text measured in the original page (pt, 960x540): ref=[text, left, capTop, right].
 const MONO='500 Deck Mono',INTER='400 Inter',SERIF='400 Deck Serif',INK='#EDE3D0',TILE='#211E1A';

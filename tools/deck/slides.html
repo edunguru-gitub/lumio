@@ -37,10 +37,17 @@ td:first-child{color:var(--ink)}td{color:var(--muted)}
 .nums span{float:right;color:var(--ink)}
 .src{font:400 11pt/1.4 var(--ui);color:var(--muted);margin-top:8pt}
 .scn td,.scn th{padding:4pt 10pt}.scn td{color:var(--ink)}.scn td+td{text-align:right}.scn th+th{text-align:right}
+#team .why .tile{padding:11pt 15pt 12pt}#team .why .big{display:block;font:400 30pt/1.1 var(--head);color:var(--ink);margin-bottom:4pt}#team .why .big span{font-size:20pt;color:var(--muted)}#team .why p{font-size:13pt;line-height:1.4;color:var(--muted)}
+#team .story{font-size:15pt;line-height:1.45;margin:12pt 0}
+#team .roles .tile{flex-direction:row;align-items:center;gap:12pt;padding:9pt 14pt}#team .roles .mono{width:34pt;height:34pt;font-size:19pt;margin:0;flex:none}#team .roles p{font-size:14pt}
 #team .mono{width:46pt;height:46pt;border-radius:50%;border:1pt solid var(--tan);display:grid;place-items:center;font:400 26pt/1 var(--head);color:var(--tan);margin-bottom:14pt}
-#team .tile p{font-size:15pt}
+.ph td{font-size:13pt!important;line-height:1.4;padding:7pt 11pt!important}.ph td b{color:var(--tan);font-weight:500}
 .lim td{font-size:14pt;padding:6.5pt 12pt}.lim td+td{color:var(--ink)}
 #s15 .tiles4 li{padding-top:4pt}#s15 li+li{margin-top:4pt}#s15 h1,#s17 h1,#s19b h1,#s20 h1{margin-bottom:8pt!important}#s17 .bmc{gap:7pt}
+#s19b .scn.x td,#s19b .scn.x th{padding:3pt 10pt}#s19b .src{margin-top:5pt}#s19b .fun div{padding:5pt 9pt}
+#s17 h1,#s18 h1{font-size:42pt}#s17 .strip{margin-top:9pt}#s17 .bmc p{line-height:1.35}#s18 .mt{margin-top:3pt}#s18 .row .tile{padding:14pt 18pt}#s15.slide,#s18.slide,#s17.slide,#s19b.slide{padding-top:58pt}#next h1{margin:14pt 0 10pt!important}#s15 h1{margin-top:14pt}
+.fun{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr;gap:5pt;align-items:stretch}.fun div{background:var(--card);border:.75pt solid var(--line);border-radius:5pt;padding:7pt 9pt;font:400 20pt/1.1 var(--head);color:var(--ink)}.fun div.t{background:var(--tan);color:#2B2018}.fun small{display:block;font:400 11pt/1.3 var(--ui);color:var(--muted);margin-top:3pt}.fun div.t small{color:#2B2018}.fun i{font:400 18pt/1 var(--head);font-style:normal;color:var(--muted);align-self:center}
+.tgt p{font-size:13pt;line-height:1.4}.tgt p+p{margin-top:4pt}.tgt h3{font-size:16pt;margin-bottom:5pt}#s18 .tile.tgt{padding:11pt 16pt}
 .sus{font:400 19pt/1.2 var(--head);color:var(--tan);margin-top:10pt}
 /* DRAFT6 rebuilt pages (old 3-5, 9-14): same look as the original pages */
 .lum{color:#FF6A13}.moon{color:#A78BFA}
@@ -69,7 +76,7 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
  <div class="row c3" style="min-height:252pt">
   <div class="tile"><h3>Done</h3><p>Anonymous student survey, 13 responses. 5 testers tried the live app; 4 of 5 would use it again next week.</p><div class="f">Survey + live test, 2026</div></div>
   <div class="tile"><h3>Honest limits</h3><p>Small sample, one town. No paying customer yet. 5 testers is not a class.</p><div class="f">What we do not claim</div></div>
-  <div class="tile"><h3>Pilot plan</h3><p>One real class in Suceava, 4 weeks, 2 lessons a week. The teacher keeps anonymous codes (Student 1 to N) on paper; app data stays on each device.</p><p class="mt muted" style="font-size:13pt">We are looking for one pilot class.</p><div class="f">See KPI slide</div></div>
+  <div class="tile"><h3>Pilot plan</h3><p>One real class, 4 weeks, 2 lessons a week. The teacher keeps anonymous codes (Student 1 to N) on paper; app data stays on each device.</p><p class="mt muted" style="font-size:13pt">We are looking for one pilot class; introduction route to Transylvania College, no commitment yet.</p><div class="f">See KPI slide</div></div>
  </div>
  <div class="strip">Pilot rules · written parental consent for <span class="nw">under-18s</span> · anonymous codes · data stays on the device</div>
 </section>
@@ -88,9 +95,9 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
   <div class="tile"><h3>What v2 adds for the user</h3><ul class="tiles4">
    <li><b>Live on the web:</b> edunguru-gitub.github.io/lumio (checked 26 Nov 2026). The web page alone only syncs two tabs; to use a phone, run Lumio.cmd on the laptop.</li>
    <li><b>One module per lesson.</b> A new lesson is one new file; removing one breaks nothing else.</li>
-   <li><b>5 lessons, all rebuilt from v1</b> and checked against it: algebra, parabola, Pythagoras, gas, projectile.</li>
+   <li><b>7 lessons, all rebuilt from v1</b> and checked against it: algebra, parabola, linear functions, Pythagoras, gas, projectile, compound interest.</li>
    <li><b>Kept from v1:</b> handwriting pad, phone controller, Levels, Challenge, Lumens, Moon ranks (New Moon to Blue Moon), Ranks, Settings, Light and Dark.</li></ul>
-   <div class="f">Not in v2 yet: Spanish verbs and vocabulary, linear functions, compound interest, podcast mode, 6 colour themes</div></div>
+   <div class="f">Not in v2 yet: Spanish verbs and vocabulary, podcast mode, 6 colour themes</div></div>
  </div>
 </section>
 
@@ -110,14 +117,14 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
 <!-- NEW 17 · Business Model Canvas (client pays, consumer uses) -->
 <section class="slide" id="s17">
  <div class="k">Business model</div>
- <h1 style="margin-bottom:16pt">Free to learn. Schools and parents pay.</h1>
+ <h1 style="margin:14pt 0 12pt">Free to learn. Private schools pay.</h1>
  <div class="bmc">
   <div class="tile"><h3>Key partners, activities, resources</h3><p>Teachers and schools for the pilot; no signed partners yet. We build lessons and learn from teacher feedback, with an AI-assisted build.</p></div>
   <div class="tile t"><h3>Value proposition</h3><p>Learn by doing: short hands-on labs, EN and RO. Today: YouTube, tutors, textbooks. Unlike PhET, Brilliant or Khan Academy, your phone controls the experiment (as far as we found).</p></div>
-  <div class="tile"><h3>Channels, relationships</h3><p>Students and parents: social media and teachers; free, self-serve. Schools: direct, warm introduction, onboarding call.</p></div>
-  <div class="tile"><h3>Customer segments</h3><p><b>Uses:</b> high school students, grades 9 to 12 first.<br><b>Pays:</b> private schools (client) and parents of <span class="nw">under-18s.</span></p></div>
-  <div class="tile wide"><h3>Cost structure</h3><p>AI tools, domains, small server, accountant, content time, support: about 511 RON a month (plan), slide 19.</p></div>
-  <div class="tile wide"><h3>Revenue streams</h3><p>Class licence (schools, plan 1,200 RON a year); pilot commitment fee, not revenue; parents’ premium, a hypothesis to test. Students free; no sponsors as revenue.</p></div>
+  <div class="tile"><h3>Channels, relationships</h3><p>Students: social media and teachers; free. Private schools: direct, an introduction, a pilot, then onboarding and teacher training.</p></div>
+  <div class="tile"><h3>Customer segments</h3><p><b>Uses:</b> high school students, grades 9 to 12 first.<br><b>Pays now:</b> private high schools (client).<br><b>Later:</b> parents, public schools (phase 2).</p></div>
+  <div class="tile wide"><h3>Cost structure</h3><p>Accountant, AI and build tools, small server, domains: 341 RON a month (plan), slide 19. Content time, support and onboarding: our time, valued in the cost to serve.</p></div>
+  <div class="tile wide"><h3>Revenue streams</h3><p>Per private school: setup fee once (plan 1,500 RON, 800 to 2,500) + 1,200 RON per class a year (100 a month). Pilot 300 RON: commitment fee, not revenue. Parents’ premium: phase 2. No sponsors.</p></div>
  </div>
  <div class="strip">The school pays, the student uses · students always free</div>
 </section>
@@ -125,56 +132,52 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
 <!-- NEW 18 · Go to market -->
 <section class="slide" id="s18">
  <div class="k">Go to market</div>
- <h1 style="margin-bottom:18pt">Start where we can reach: Suceava, then Romania.</h1>
+ <h1 style="margin:14pt 0 12pt">Private high schools first, then more.</h1>
  <div class="row c3" style="min-height:0">
-  <div class="tile"><h3>Students</h3><p><b>Message:</b> “Try it, don’t read it. A short lab, on your phone.”</p><p class="mt"><b>Channel:</b> social media (school Instagram and TikTok clips), class challenge links.</p></div>
-  <div class="tile"><h3>Parents</h3><p><b>Message:</b> “Short sessions, visible progress.”</p><p class="mt"><b>Channel:</b> social media and parent WhatsApp groups via the teacher.</p></div>
-  <div class="tile"><h3>Private schools</h3><p><b>Message:</b> “Hands-on practice your students enjoy.”</p><p class="mt"><b>Channel:</b> direct, with a warm introduction; a 4-week pilot first (a commitment fee in our plan, not revenue). We will find who decides; the person who adopts it needs a benefit too.</p><div class="f" style="margin-top:8pt;padding-top:8pt">To validate in the pilot</div></div>
+  <div class="tile"><h3>Private schools (pay)</h3><p><b>Message:</b> “Hands-on practice your students enjoy.”</p><p class="mt"><b>Channel:</b> direct, an introduction first; a 4-week pilot (300 RON commitment fee, not revenue), then setup fee and subscription.</p></div>
+  <div class="tile"><h3>Students (use, free)</h3><p><b>Message:</b> “Try it, don’t read it. A short lab, on your phone.”</p><p class="mt"><b>Channel:</b> social media (school Instagram and TikTok clips), class challenge links.</p></div>
+  <div class="tile"><h3>Parents (phase 2)</h3><p><b>Message:</b> “Short sessions, visible progress.”</p><p class="mt"><b>Channel:</b> parent WhatsApp groups via the teacher; premium only after schools pay.</p></div>
  </div>
- <div class="strip">Step 1 pilot one class · step 2 one school · step 3 school network</div>
- <p class="muted" style="font-size:13pt;margin-top:8pt">Plan: pilot class agreed by Dec 2026 · 3 schools approached by Mar 2027 · first licences Sep 2027</p>
+ <div class="tile tgt" style="margin-top:10pt"><h3>First targets · no school has agreed to anything yet</h3>
+  <p><b>Transylvania College (Cluj-Napoca):</b> English-medium high school; the founder is an alumnus and has an introduction route through the student council; no agreement yet.</p>
+  <p><b>PREMS (Brasov)</b> · three more schools on the Ministry’s 2026-27 pilot high-school list under review.</p></div>
+ <p class="muted" style="font-size:13pt;margin-top:8pt">Plan: pilot class agreed by Dec 2026 (target) · 50 private high schools contacted in 2027 · first subscriptions Sep 2027</p>
 </section>
 
 <!-- NEW 19 · Costs and revenue (Researcher base scenario, docs/research/finance-pricing.md; PLAN, not revenue) -->
 <section class="slide" id="s19">
  <div class="k">Costs and revenue · plan</div>
- <h1 style="margin-bottom:16pt">Cheap to run. Paid by schools and parents.</h1>
+ <h1 style="margin:14pt 0 10pt">Cheap to run. Paid by private schools.</h1>
  <div class="row c3 sm" style="min-height:0">
   <div class="tile"><h3>Start-up (one time, estimate)</h3><p>Company set-up, consent paperwork checked by a lawyer, pilot printing, brand check.</p><p class="mt"><b>About 3,000 RON</b> (range 2,000 to 5,000). Team time not charged.</p></div>
-  <div class="tile"><h3>Running (a month, plan)</h3><p class="nums">Accountant <span>265</span><br>AI build tools, estimate <span>200</span><br>Small server for the phone link <span>35</span><br>Domains .ro and .com <span>11</span><br><b>Total</b> <span><b>511 RON</b></span></p></div>
-  <div class="tile"><h3>Revenue (plan, excl. VAT)</h3><p>Students: free.<br>Class licence: <b>1,200 RON a year</b> (range 900 to 1,800).<br>4-week pilot: 300 RON, a commitment fee, not revenue.<br>Parents’ premium: about 100 RON a year, a hypothesis to test.</p></div>
+  <div class="tile"><h3>Running (a month, plan)</h3><p class="nums">Accountant <span>265</span><br>AI and build tools <span>30</span><br>Small server for the phone link <span>35</span><br>Domains .ro and .com <span>11</span><br><b>Total</b> <span><b>341 RON</b></span><br>A year: 341 × 12 <span><b>4,092 RON</b></span></p></div>
+  <div class="tile"><h3>Revenue (plan, excl. VAT)</h3><p>Students: free.<br>Setup fee, once per school: <b>1,500 RON</b> (800 to 2,500).<br>Subscription: <b>1,200 RON per class a year</b> = 100 a month (900 to 1,800).<br>Pilot: 300 RON commitment fee, not revenue. Parents’ premium: phase 2.</p></div>
  </div>
  <div class="calc">
-  <div class="tile"><h3>Running a year</h3><p>About 6,130 RON</p></div><i>÷</i>
+  <div class="tile"><h3>Running a year</h3><p>4,092 RON</p></div><i>÷</i>
   <div class="tile"><h3>Left per class a year</h3><p>1,200 − 228 to serve = 972 RON</p></div><i>=</i>
-  <div class="tile"><h3>Break-even</h3><p>6.3, so <b>7 classes</b></p></div>
+  <div class="tile"><h3>Break-even</h3><p>4.2, so <b>5 classes</b></p></div>
  </div>
- <div class="strip">With the 3,000 RON start-up: about 10 classes · school licences fund the free tier</div>
- <p class="src">Hosting: free for the prototype; the paid version moves to static hosting plus a small server (about 35 RON a month, included in the 511). Estimates from public price lists (Bono, Hetzner, RoTLD), to be verified.</p>
+ <div class="strip" style="margin-top:10pt">With the 3,000 start-up: 7,092 ÷ 972 = 7.3, so 8 classes</div>
+ <p class="src" style="margin-top:5pt">228 to serve = tax 12 + AI and voice 66 + support 150 (our time, valued). Per school (base): 1,500 + 3 classes × 1,200 = 5,100; 3,801 left after cost to serve and setup effort, so break-even is 2 schools, 3 with start-up and acquisition. Prototype hosting free; the paid server is in the 341. Prices: Bono, Hetzner, RoTLD.</p>
 </section>
 
 <!-- NEW 19b · Year 1 and first quarter side by side (same plan) -->
 <section class="slide" id="s19b">
  <div class="k">Revenue plan · targets · no paying client yet</div>
- <h1 style="margin-bottom:12pt">Year 1 goal: our first paying schools.</h1>
- <div class="row c2 sm" style="min-height:0">
-  <div class="tile"><h3>First quarter (Jan to Mar 2027), target, RON</h3><ul class="tiles4">
-   <li><b>Cash in</b> 1 pilot class × 300 commitment fee = <b>300</b></li>
-   <li><b>Costs</b> 3 × 511 + 3,000 start-up + 131 use = <b>4,664</b></li>
-   <li><b>Result</b> 300 − 4,664 = <b>−4,364 RON</b></li></ul></div>
-  <div class="tile"><h3>Year 1 (2027), base, RON</h3><ul class="tiles4">
-   <li><b>Cash in</b> 6 × 1,200 + 300 pilot fee + 356 premium = <b>7,856</b></li>
-   <li><b>Costs</b> 6,130 running + 2,229 variable + 3,000 = <b>11,359</b></li>
-   <li><b>Result</b> <b>−3,503 RON</b> (−503 before start-up)</li></ul></div>
- </div>
- <table class="scn" style="margin-top:10pt">
-  <tr><th style="width:34%">Scenario (plan)</th><th>Conservative</th><th>Base</th><th>Optimistic</th></tr>
-  <tr><td>Paying clients, first quarter (target)</td><td>0</td><td>1</td><td>1</td></tr>
-  <tr><td>Cash in, first quarter</td><td>0 RON</td><td>300 RON</td><td>600 RON</td></tr>
-  <tr><td>Paying classes, year 1 (licence)</td><td>2 at 900</td><td>6 at 1,200</td><td>16 at 1,800</td></tr>
-  <tr><td>Cash in, year 1</td><td>1,845 RON</td><td>7,856 RON</td><td>32,370 RON</td></tr>
+ <h1 style="margin:12pt 0 10pt;font-size:36pt">Our plan: X = 2 paying schools in year 1 <span class="muted">(range 1 to 4)</span>.</h1>
+ <div class="fun"><div>About 100<small>private high schools in Romania</small></div><i>→</i><div>50<small>contacted in 12 months</small></div><i>→</i><div>6<small>start a pilot (12%)</small></div><i>→</i><div>2<small>pay (one in three)</small></div><i>→</i><div class="t">6 classes<small>2 schools × 3 classes</small></div></div>
+ <table class="scn x" style="margin-top:8pt">
+  <tr><th style="width:40%">Plan, RON</th><th>Conservative</th><th>Base</th><th>Optimistic</th></tr>
+  <tr><td>Contacted · start a pilot · pilot to paid</td><td>30 · 8% · 17%</td><td>50 · 12% · 33%</td><td>80 · 15% · 48%</td></tr>
+  <tr><td>Paying schools X / paying classes, year 1</td><td>1 / 2</td><td>2 / 6</td><td>4 / 16</td></tr>
+  <tr><td>Estimated revenue, year 1 (setup + subscriptions)</td><td>2,600</td><td>10,200</td><td>38,800</td></tr>
+  <tr><td>Estimated costs, year 1</td><td>8,441</td><td>10,788</td><td>17,350</td></tr>
+  <tr><td><b>Result, year 1</b></td><td>−5,841</td><td>−588</td><td>+21,450</td></tr>
+  <tr><td>First quarter: commitment fees (not revenue) / estimated costs</td><td>0 / 4,059</td><td>300 / 4,118</td><td>600 / 4,374</td></tr>
  </table>
- <p class="src">Variable 2,229 = 6 classes × 228 to serve (support, AI and voice, tax) = 1,368, + 861 (AI and voice for free learners and the pilot class, premium tax, card fees). Full-price licences from Sep 2027. Market: 631,500 high school students in Romania (INS, 2025/26); private schools first.</p>
+ <p class="src">Base: revenue 2 × 1,500 setup + 6 × 1,200 = 10,200. Costs 4,092 running + 3,000 start-up + 3,696 variable = 10,788; variable = 6 classes × 228 (1,368) + setup effort 2 × 600 (1,200) + pilot AI 198 + free-learner AI 900 + 1% tax on setup fees 30. Pilot fees are credited to the first invoice. Conservative shows 1 school (expected 0.34); no customer at all = −7,092.</p>
+ <p class="src" style="color:var(--tan);margin-top:4pt">Risk: cold-outreach benchmarks are lower than our assumption (0.2% to 1% contact to customer vs our 4%); the first 10 contacts are the test. This is a plan, not a forecast.</p>
 </section>
 
 <!-- NEW 20 · KPIs and impact (learning + business), pilot data rule: anonymous codes, teacher sheet -->
@@ -190,21 +193,27 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
   <tr><td>Education impact</td><td>5-question quiz, before and after</td><td>Not measured</td><td>+20% score</td></tr>
   <tr class="grp"><td colspan="4">Business</td></tr>
   <tr><td>User acquisition cost</td><td>Our time and travel ÷ schools signed</td><td>Not measured</td><td>≤ 1,500 RON a school</td></tr>
-  <tr><td>Free-to-paid conversion</td><td>Paying pilots ÷ pilots; premium ÷ free</td><td>0, no paying customer</td><td>1 of 2 pilots; 2% premium, a hypothesis</td></tr>
+  <tr><td>Free-to-paid conversion</td><td>Paying pilots ÷ pilots; premium ÷ free</td><td>0, no paying customer</td><td>1 in 3 pilots pays (the plan); parents’ premium: phase 2</td></tr>
  </table>
- <div class="strip" style="margin-top:10pt">Targets, not results · anonymous codes · 2% = consumer-app median 2.1% (RevenueCat), not from schools</div>
+ <div class="strip" style="margin-top:10pt">Targets, not results · anonymous codes · the same 1 in 3 as our year-1 plan, slide 20</div>
 </section>
 
-<!-- NEW · Why us (replaces the three team pages; roles only, initials, no photos; Eduard OK 26 Nov) -->
+<!-- NEW · Why us: founder story with OPENED sourced numbers only (docs/research/why-us-and-finance-update.md A1, A4; Eduard 27 Nov); roles, initials, no photos -->
 <section class="slide" id="team">
  <div class="k">Why us · the team</div>
- <h1 style="margin-bottom:22pt">Three roles. We build, test and ask ourselves.</h1>
- <div class="row c3" style="min-height:0">
-  <div class="tile"><div class="mono">E</div><h3>Eduard</h3><p>Design and the app: how Lumio looks and works, screen by screen.</p><div class="f">Head of design and app</div></div>
-  <div class="tile"><div class="mono">D</div><h3>Darius</h3><p>Team lead: the student survey and outreach to schools for the pilot.</p><div class="f">Survey and outreach</div></div>
-  <div class="tile"><div class="mono">S</div><h3>Stefan</h3><p>The technical side of Lumio and the debugging.</p><div class="f">Lead technical and debugging</div></div>
+ <h1 style="margin:14pt 0 12pt;font-size:40pt">We live the problem: tutors cost, phones distract.</h1>
+ <div class="row c3 why" style="min-height:0">
+  <div class="tile"><b class="big">6,234 RON</b><p>per child per school year on tutoring, in families who pay for it</p></div>
+  <div class="tile"><b class="big">About 1 in 3</b><p>students in grades 5 to 12 take tutoring, at about 300 RON a month</p></div>
+  <div class="tile"><b class="big">35% <span>vs 30%</span></b><p>of Romanian students distracted by their own devices in maths lessons, vs the OECD average</p></div>
  </div>
- <div class="strip">Team Flow · Suceava · stage I: 93 points · we review every change ourselves</div>
+ <p class="story">We are students, and we face this ourselves: tutors are expensive and the phone steals our focus. Banning phones teaches nothing. Lumio turns the phone from the enemy into a learning tool: lessons you play and touch.</p>
+ <div class="row c3 roles" style="min-height:0">
+  <div class="tile"><div class="mono">E</div><p><b>Eduard</b> · design and the app</p></div>
+  <div class="tile"><div class="mono">D</div><p><b>Darius</b> · team lead, survey and outreach</p></div>
+  <div class="tile"><div class="mono">S</div><p><b>Stefan</b> · technical and debugging</p></div>
+ </div>
+ <p class="src" style="margin-top:7pt">Sources: Save the Children Romania, survey of 683 parents, 2024-25 · IRES/SAR, 2019-20 · OECD PISA 2022, Romania note. Team Flow · Suceava · stage I: 93 points.</p>
 </section>
 <!-- NEW · Limits today (deck-final-4; only facts from the repo, docs/professor/lesson-audit.md section 7) -->
 <section class="slide" id="limits">
@@ -212,7 +221,7 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
  <h1 style="margin-bottom:14pt">Limits today, and what we do about them.</h1>
  <table class="lim">
   <tr><th style="width:47%">Limit today</th><th>What we do about it</th></tr>
-  <tr><td>Few lessons: 5 live in v2. By design, depth over breadth.</td><td>Next lessons chosen from teacher and pilot feedback.</td></tr>
+  <tr><td>Few lessons: 7 live in v2. By design, depth over breadth.</td><td>Next lessons chosen from teacher and pilot feedback.</td></tr>
   <tr><td>Learning gain not measured yet.</td><td>4-week class pilot with a 5-question quiz, before and after.</td></tr>
   <tr><td>Small validation: 13 survey answers, 5 testers.</td><td>One real class, with parental consent and anonymous codes.</td></tr>
   <tr><td>No paying client yet.</td><td>Pilot first, with a commitment fee; first full-price sale Sep 2027.</td></tr>
@@ -242,7 +251,7 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
  <h1 class="big">Meet Lumio.</h1>
  <p class="lead">A tutor you play with. Every lesson is a hands-on lab.</p>
  <div class="row c4">
-  <div class="tile"><h3>Experiment</h3><p>Hands-on labs in Physics and Math. More subjects next.</p></div>
+  <div class="tile"><h3>Experiment</h3><p>Hands-on labs in Physics, Math and Life skills. More subjects next.</p></div>
   <div class="tile"><h3>Level up</h3><p><span class="lum">Lumens</span> that never reset, plus a monthly <span class="moon">Moon</span> rating from <span class="moon">New Moon</span> to <span class="moon">Blue Moon</span>.</p></div>
   <div class="tile"><h3>Compete</h3><p>Challenges and a leaderboard. Sample players until classmates join.</p></div>
   <div class="tile"><h3>Phone as controller</h3><p>Sliders and tilt drive the lab, on the local network via Lumio.cmd on the laptop.</p></div>
@@ -287,12 +296,12 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
   <div class="k">The app · 1 of 4</div>
   <h1>Start in one tap.</h1>
   <ul class="bl">
-   <li>Five lessons: algebra, parabola, Pythagoras, piston, projectile</li>
+   <li>Seven lessons: algebra, parabola, linear functions, Pythagoras, piston, projectile, compound interest</li>
    <li>English and Romanian, Light and Dark</li>
    <li>In Algebra, write the answer by hand or type it</li></ul>
  </div>
  <img class="shot" data-shot="galaxy.png" style="left:417pt;top:96pt;width:480pt" alt="">
- <div class="cap" style="left:417pt;top:372pt">Live v2 · galaxy view · Spanish and Life skills: coming soon</div>
+ <div class="cap" style="left:417pt;top:372pt">Live v2 · galaxy view · counts include coming-soon lessons</div>
 </section>
 
 <!-- REBUILT o10 · The app 2 of 4 (projectile Levels; Lumens = 10 + 5 x (sparkles - 1) on the first clear, projectile.js lvFire) -->
@@ -315,7 +324,7 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
   <div class="k">Try Lumio now</div>
   <h1>Try it yourself.</h1>
   <p class="lead2" style="font-size:20pt">Scan it: Lumio opens in your browser, nothing to install.</p>
-  <p class="muted" style="font-size:13pt;margin-top:20pt">Five lessons, English and Romanian. The phone controller needs Lumio.cmd on a laptop on the same network.</p>
+  <p class="muted" style="font-size:13pt;margin-top:20pt">Seven lessons, English and Romanian. The phone controller needs Lumio.cmd on a laptop on the same network.</p>
  </div>
  <img data-shot="qr.png" style="position:absolute;left:560pt;top:96pt;width:320pt" alt="QR code for edunguru-gitub.github.io/lumio">
  <div class="url" style="position:absolute;left:520pt;top:428pt;width:400pt;text-align:center;margin:0">edunguru-gitub.github.io/lumio</div>
@@ -347,5 +356,17 @@ ul.bl li{font-size:16pt;line-height:1.4}ul.bl li+li{margin-top:16pt}
  </div>
  <div class="cap" style="left:417pt;top:74pt;width:480pt;text-align:right">Sample players · no real users yet</div>
  <img class="shot" data-shot="ranks.png" style="left:417pt;top:96pt;width:480pt" alt="">
+</section>
+<!-- NEW n20 (replaces o14 Next steps; Eduard 27 Nov): phases with entry conditions, docs/research/why-us-and-finance-update.md B8; old o14 items kept in phase 1 and 2 -->
+<section class="slide" id="next">
+ <div class="k">Next steps</div>
+ <h1 style="margin-bottom:12pt">From one pilot class to many schools.</h1>
+ <table class="lim ph">
+  <tr><th style="width:21%">Phase</th><th style="width:43%">What we do</th><th>We move on when (our targets)</th></tr>
+  <tr><td><b>1 · Private schools</b><br>now, 2027</td><td>1 to 4 pilots, setup fee plus 1,200 RON per class a year; no parents’ premium. Test with real classes; equations that look like a textbook, in every lesson.</td><td>Now. A pilot class by Dec 2026 is a target, not a fact.</td></tr>
+  <tr><td><b>2 · After the first customers</b></td><td>Adjust pricing from what we learn (900 to 1,800 RON); public schools via grants (not researched yet); test parents’ premium, a hypothesis; more subjects on the same lesson template: chemistry and biology, Romanian literature for the BAC exam.</td><td>3 paying schools; 70% of classes renew or plan to; 60% of a pilot class active each week; teacher NPS of +30 or more, from at least 10 teachers; result before start-up above 0.</td></tr>
+  <tr><td><b>3 · Scale</b></td><td>Many schools, public-school procurement and projects; a first hire at about 75 paying classes.</td><td>10 paying schools; two renewal cycles at 70% or more; invoicing set up with our accountant; one signed public or grant-funded project.</td></tr>
+ </table>
+ <div class="strip" style="margin-top:12pt">The prototype works · next, we prove it in classrooms</div>
 </section>
 </body></html>

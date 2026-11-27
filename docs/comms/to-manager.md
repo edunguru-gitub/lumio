@@ -107,3 +107,8 @@ Changed vs v1 (spec D / Q8, Professor accuracy): euro by UI language (RO 1.629 �
 
 ## 2026-11-27 life-name-ro: DONE (pushed with life/interest)
 'Abilități de viață' -> 'Viață practică' in v2/modules/registry.js (3 placeholders), v2/modules/life/interest.js manifest, docs/spec-port-wave3.md line 140. Grep: no other occurrence in v2/, tools/ or docs/ (shell/terminal/ranks/rating/settings take the name from the registry; deck files do not quote it). Check: RO, Subjects and Life galaxy head read 'Viață practică', 390 px no wrap/overflow.
+
+## 2026-11-27 stage2 deck DRAFT7: DONE
+PDF (not committed): scratchpad/Lumio-stage2-DRAFT7.pdf, 25 pages, --final gate passes; check.py: footers OK, old pages o1 o2 o6 o7 o18 identical outside approved edits (o14 replaced by the n20 phase table).
+Changed: slides 4, 8, 10, 12, 15, 17-24 (tools/deck/slides.html, build.js ORDER, check.py note); docs/pitch-stage2.md (4:49, money Q&A one-liners, relationship note in the header only); docs/deck-review-checklist.md.
+Not reconciled: break-even with start-up is 8 classes (7,092 / 972 = 7.3), not 7; slide 6 (old page) still says 'parents can add premium' (needs Eduard ok to patch); 2,356 not shown (B6 variable 3,696 used, the file's final table).
