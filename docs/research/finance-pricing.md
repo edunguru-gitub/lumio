@@ -1,6 +1,8 @@
 # Finance and pricing research (HSIC stage II, criterion 5: costs, revenue, KPI, 15 pts)
 Researcher, 26 Nov 2026. Branch v2. Read first: CLAUDE.md, docs/teacher/knowledge.md, docs/teacher/lumio-jury-lens.md, docs/spec-stage2-slides.md (slides 18, 19 and the pitch lines on costs).
 
+> **UPDATE 27 Nov 2026 (Eduard's decisions).** AI/build tools now 30 RON per month (was 200): fixed running cost 341 RON per month = 4,092 per year (was 510.8 / 6,130). Business model now = one-time setup fee per private school + 1,200 RON per class per year; parent premium moved to a later phase. Sections 4.1 (AI tools line), 4.3 (break-even), 5.1 and 5.2 below show the OLD figures and are superseded by **docs/research/why-us-and-finance-update.md** (Part B). The old "2,229 = 1,368 + 861" was 127 RON too low (rebuilt 2,356).
+
 ## 0. How to read this file
 Tags on every input: **[S]** SOURCED (value + URL in section 10, accessed 26 Nov 2026), **[D]** DERIVED (arithmetic shown from [S] numbers), **[A]** ASSUMPTION (our choice, reasoning and range given). "not found" = not found, with what we would need.
 Currency RON. FX used: 1 EUR = 5.3485 RON, 1 USD = 4.8665 RON (BNR rates of 17 Nov 2026 as shown on curs-valutar-bnr.ro; not read on bnr.ro itself). All prices ex-VAT unless written "incl. VAT".
@@ -94,7 +96,7 @@ Range to show the jury: 900 (pilot-year discount) to 1,800 (when Lumio has 15+ l
 | Domain .com | about 10.46 USD per year at cost (Cloudflare Registrar; one source says Verisign raises wholesale by about 0.7 USD) | about 51 | [S]+[D] | Aggregators, medium confidence |
 | Domains budget used | both .ro and .com | **130 per year** (10.8 per month) | [D] 78 + 51 = 129 | |
 | Accounting (needed once a company invoices) | Bono online package 219 lei + VAT per month (payroll, balance, VAT returns); general range 200 to 900 lei/month; small micro-company without staff realistic 200 to 400 | **265 per month incl. VAT** | [S]+[D] 219 x 1.21 | Bono guide updated Jul 2026. If the company is VAT-registered the VAT is deductible (219) |
-| AI tools used to BUILD the app (Claude agents etc.) | **Eduard states the real subscription.** Placeholder 200 RON/month | 200 | [A] | Range 100 to 500. Not a cost to serve; it is a cost to build. Keep it in, a jury will ask |
+| AI tools used to BUILD the app (Claude agents etc.) | **Eduard's decision 27 Nov: 30 RON/month** (was placeholder 200) | 30 | [A] | Can rise or fall later. Not a cost to serve; it is a cost to build. Keep it in, a jury will ask |
 | Start-up one-time (company formation, privacy/consent paperwork reviewed by a lawyer, pilot printing, brand check) | **not found** as prices. Placeholder 3,000 RON, range 2,000 to 5,000 | 3,000 | [A] | Need: one quote from a notary/online incorporation service and one lawyer for the consent form |
 | Payment processing, card payments from parents | Stripe Romania: 1.5% + 1 RON per EEA card payment (cited from stripe.com/en-ro page via a Romanian guide; third parties disagree on non-EEA cards: 2.5% or 1.5%) | 1.5% + 1 | [S] | **VERIFY** on stripe.com. School licences paid by bank transfer on invoice: 0% [A] |
 | VAT | Standard rate 21% since 1 Aug 2025 (Law 141/2025), single reduced rate 11% | | [S] | Which rate applies to a software licence sold to a school: **not found**; assume 21%. Whether an education exemption helps a software vendor: ask the accountant |
