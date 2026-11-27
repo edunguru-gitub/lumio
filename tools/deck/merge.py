@@ -4,6 +4,7 @@ Old pages are kept as they are (same image, same size); each final page gets its
 import re
 import sys
 from pypdf import PdfReader, PdfWriter
+from pypdf.generic import ContentStream
 
 if sys.argv[1] == '--scan':  # gate helper: print original pages (final numbering) whose text has '__' or brackets
     pages = PdfReader(sys.argv[2]).pages
@@ -30,6 +31,18 @@ assert len(ovp) == len(order), f'{len(ovp)} overlays for {len(order)} pages'
 w = PdfWriter()
 for i, key in enumerate(order):
     page = w.add_page(src[key[0]][int(key[1:]) - 1])
+    if key[0] == 'o':  # drop the old invisible text layer (3 Tr) under the image, or a juror could copy/search stale text; the look is unchanged
+        cs = ContentStream(page.get_contents(), w)
+        keep, inside = [], False
+        for ops, op in cs.operations:
+            if op == b'BT':
+                inside = True
+            if not inside:
+                keep.append((ops, op))
+            if op == b'ET':
+                inside = False
+        cs.operations = keep
+        page.replace_contents(cs)
     page.merge_page(ovp[i])
 w.write(out)
 print(f'{out}: {len(order)} pages')

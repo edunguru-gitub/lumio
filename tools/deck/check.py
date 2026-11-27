@@ -38,3 +38,9 @@ for i, key in enumerate(order):
         d.paste(0, box)
     bb = d.getbbox()
     print(f'page {i + 1:2} ({key}):', f'UNEXPECTED diff {bb}' if bb else 'identical outside footer' + (' and approved edits' if key in EXPECTED else ''))
+# text-layer scan: stale or forbidden words a juror could copy or search ('Learn by doing' is intended copy on the business model slide n4)
+BADWORDS = ['/ 17', '/ 18', 'Seven in ten', 'One in seven', '3 in 10', 'Light up how', 'Learn by doing', '3-minute', 'Optics',
+            'Cash in', '2,229', '511', 'alumnus', 'accelerator', 'student council', 'XP ']
+hits = [f'page {i + 1} ({order[i]}): {b}' for i, p in enumerate(pages) for b in BADWORDS
+        if b in (p.extract_text() or '') and not (b == 'Learn by doing' and order[i] == 'n4')]
+print('text layer scan:', 'clean' if not hits else 'HITS ' + '; '.join(hits))
