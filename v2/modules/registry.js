@@ -20,5 +20,6 @@ window.LumioRegistry={
 {"id":"budgeting","subject":"life","subjectName":["Life skills","Viață practică"],"color":"--life","title":["Budgeting","Buget"],"order":1,"tags":[],"orbit":[-0.8,60]},
 {"id":"focus","subject":"life","subjectName":["Life skills","Viață practică"],"color":"--life","title":["Focus","Concentrare"],"order":2,"tags":[],"orbit":[1.5,80]},
 {"id":"sleep","subject":"life","subjectName":["Life skills","Viață practică"],"color":"--life","title":["Sleep","Somn"],"order":3,"tags":[],"orbit":[3.6,64]},
-"life/interest"
+"life/interest",
+"chemistry/atom"
 ]};
