@@ -11,6 +11,7 @@ window.LumioRegistry={
 "physics/projectile",
 "math/algebra",
 "math/parabola",
+"math/linear",
 "math/pythagoras",
 {"id":"fractions","subject":"math","subjectName":["Math","Matematică"],"color":"--math","title":["Fractions","Fracții"],"order":4,"tags":[],"orbit":[3.8,82]},
 {"id":"greetings","subject":"spanish","subjectName":["Spanish","Spaniolă"],"color":"--spanish","title":["Greetings","Salutări"],"order":1,"tags":[],"orbit":[-1,66]},
