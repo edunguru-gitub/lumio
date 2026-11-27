@@ -13,7 +13,7 @@ var ST={P:1000,r:5,n:10},K='lumio2_interest',mem={v:1,ex:[]};
 function load(){try{var o=JSON.parse(localStorage.getItem(K));if(o&&o.v===1&&Array.isArray(o.ex))mem={v:1,ex:o.ex.filter(function(x,j,a){return EX[x]&&a.indexOf(x)===j})}}catch(e){}}
 function save(){try{localStorage.setItem(K,JSON.stringify(mem))}catch(e){}}
 // manifest: shell builds subjects, planets, rows and cards from this (id = progress key part)
-(window.LumioModules=window.LumioModules||{})['life/interest']={manifest:{id:'interest',subject:'life',subjectName:['Life skills','Abilități de viață'],color:'--life',title:['Compound interest','Dobânda compusă'],order:1.5,tags:['lab','quest'],orbit:[.35,92]},
+(window.LumioModules=window.LumioModules||{})['life/interest']={manifest:{id:'interest',subject:'life',subjectName:['Life skills','Viață practică'],color:'--life',title:['Compound interest','Dobânda compusă'],order:1.5,tags:['lab','quest'],orbit:[.35,92]},
 // overview content (v1 LESSON.interest intro/take + LESSONS.ci podcast); used by the overview feature when it ships (spec-port-wave3 A), inert today
 overview:{mins:3,ex:4,intro:['Interest that earns interest. Small rates grow into big numbers when you give them time: the earlier you start, the steeper the curve.','Dobândă care produce dobândă. Ratele mici devin sume mari dacă le dai timp: cu cât începi mai devreme, cu atât curba e mai abruptă.'],
  take:[['Simple interest pays on the starting sum only: <b>P·(1 + r·n)</b>.','Dobânda simplă se aplică doar sumei inițiale: <b>P·(1 + r·n)</b>.'],['Compound interest pays on everything so far: <b>A = P·(1 + r)ⁿ</b>.','Dobânda compusă se aplică la tot ce ai acumulat: <b>A = P·(1 + r)ⁿ</b>.'],
