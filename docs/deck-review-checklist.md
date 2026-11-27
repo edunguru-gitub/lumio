@@ -1,3 +1,7 @@
+# Deck stage II, DRAFT8 (27 Nov 2026)
+DRAFT8 (deciziile lui Eduard, aplicate): PDF scratchpad/Lumio-stage2-DRAFT8.pdf, 25 pagini, --final trece. Copertă "Suceava and Oradea"; slide 6 bandă "setup fee plus yearly subscription; parents' premium later"; slide 3 cifre cu sursă (PISA 35% vs 30%, HBSC 22% "as reported"); slide 9 = telefonul ca controler (fostele 9 și 13 unite); fără nicio legătură cu școlile pe slide-uri ("launch platform", "target schools"); 18 definește cost to serve 228 și contribuția 972; 19 = X teoretic ("a theoretical scenario, not a forecast"), variable costs 3.696 definite, nota 2,4 piloți → 2; 23 "Why Lumio" (6.234 vs ~55 RON/elev, 22 elevi/clasă = ipoteza noastră, QR); 24 "The team"; acceleratorul doar în Q&A. Script 4:47, demo = v2 live, plan de filmare la final.
+Mai jos: tabelul DRAFT7 (istoric; numerele slide-urilor 9-25 s-au mutat cu una după unirea slide-urilor cu telefonul).
+
 # Deck stage II, DRAFT7: ce confirmă Eduard (27 Nov 2026)
 PDF: scratchpad/Lumio-stage2-DRAFT7.pdf (25 pagini, nu e în repo; exportul --final trece). Termen upload: sâmbătă 28 Nov 14:00 (pagina oficială), echipa țintește sâmbătă 11:00.
 Script: docs/pitch-stage2.md (4:49 cu filmul, 130 cuvinte/min, include 12 s pentru slide-ul QR; engleză, toți trei vorbesc). Cifrele: docs/research/why-us-and-finance-update.md (tabelele B2, B5, B6, B8). Tot deck-ul e în engleză.

@@ -11,7 +11,8 @@ const SHOTS=process.env.SHOTS_DIR||path.join(DIR,'shots'); // live v2 screenshot
 
 // Final order (25 of max 25; n10 = 'Limits today' slide, deck-final-4): o = page of the original 18-page PDF, n = page of slides.html. Old team pages o15-o17 -> one 'Why us' slide n9 (Eduard OK, 26 Nov)
 // DRAFT6 (Eduard OK 27 Nov): old o3 o4 o5 o8 o9 o10 o12 o13 rebuilt as n11-n16, n18, n19 (true for v2); o11 (six themes) -> n17 'Try Lumio now' QR
-const ORDER=['o1','o2','n11','n12','n13','o6','o7','n1','n14','n15','n16','n17','n18','n19','n2','n3','n4','n5','n6','n7','n8','n10','n20','n9','o18'];
+const ORDER=['o1','o2','n11','n12','n13','o6','o7','n1','n14','n15','n16','n17','n19','n2','n3','n4','n5','n6','n7','n8','n10','n20','n9','n21','o18'];
+// DRAFT8 (Eduard 27 Nov): old phone slide n18 merged into n14; n9 = 'Why Lumio' (product), n21 = 'The team'
 // DRAFT7 (Eduard 27 Nov): o14 'Next steps' -> n20 phase table (o14 items kept inside it); n9 Why us with sourced numbers; n4-n8 new business model (setup fee + subscription, X = 2 schools)
 const BG='#171513',CARD='#211E1A',MUTED='#A89F8E',TAN='#D9C3A0',ORANGE='#FF6A13';
 // Text ops are sized from a reference text measured in the original page (pt, 960x540): ref=[text, left, capTop, right].
@@ -22,8 +23,10 @@ const footer=(n,o)=>[o==='o18'?{}:{patch:[60,489,200,510],fill:'auto'},{...FOOT,
 // tile body lines on slide 2 (Inter, measured from the original first body line of each tile)
 const body=(x,ref,r,lines)=>lines.map((t,i)=>({font:INTER,ref:[ref,x,242,r],y:242+i*22.5,text:t,color:INK}));
 const EDITS={
-  o1:[{patch:[60,300,362,346],fill:'auto'},{font:SERIF,ref:['Light up how you learn.',65,305,351],text:'Short hands-on labs for high school students.',color:TAN},{patch:[60,456,420,476],fill:BG},{font:MONO,ref:['EDUARD · DARIUS · STEFAN',65,460.75,264.5],text:'EDUARD · DARIUS · STEFAN · TEAM FLOW · SUCEAVA',color:TAN}],
-  o6:[{patch:[648,375,882,393],fill:CARD},{font:MONO,ref:['POSSIBLE PARTNERS',652.75,379.5,783.75],text:'NO PARTNERS YET, PILOT NEXT',color:ORANGE}],
+  o1:[{patch:[60,300,362,346],fill:'auto'},{font:SERIF,ref:['Light up how you learn.',65,305,351],text:'Short hands-on labs for high school students.',color:TAN},{patch:[60,456,600,476],fill:BG},{font:MONO,ref:['EDUARD · DARIUS · STEFAN',65,460.75,264.5],text:'EDUARD · DARIUS · STEFAN · TEAM FLOW · SUCEAVA AND ORADEA',color:TAN}],
+  o6:[{patch:[648,375,882,393],fill:CARD},{font:MONO,ref:['POSSIBLE PARTNERS',652.75,379.5,783.75],text:'NO PARTNERS YET, PILOT NEXT',color:ORANGE},
+      // DRAFT8 (Eduard 27 Nov): band without 'class licence' / 'parents can add premium'
+      {patch:[60,440,900,460],fill:'auto'},{font:MONO,ref:['OUR PLAN: FREE FOR STUDENTS · PRIVATE SCHOOLS PAY A CLASS LICENCE · PARENTS CAN ADD PREMIUM',65,444.75,827.3],text:"OUR PLAN: SCHOOLS PAY A SETUP FEE PLUS A YEARLY SUBSCRIPTION; PARENTS' PREMIUM COMES LATER",color:TAN}],
   // survey statistics (Eduard OK 26 Nov): only the counts in docs stay (10 of 13, 13, 4 of 5); DRAFT5 default: no other numbers
   o2:[{patch:[362,238,607,441],fill:'auto'},
       ...body(368,'One in seven loses focus in',565,['Some lose focus in under ten','minutes, more by twenty. A long','lesson loses them before the','idea clicks.']),

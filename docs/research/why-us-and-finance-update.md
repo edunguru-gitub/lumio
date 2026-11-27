@@ -143,7 +143,7 @@ Arithmetic check, Base per school: revenue 1,500 + 3 x 1,200 = 5,100; variable p
 | Q1 | Conservative | Base | Optimistic |
 |---|---|---|---|
 | Pilot classes (paid 300 each) | 1 (free) | 1 (300) | 2 (600) |
-| **Estimated revenue, Q1** (cash in, commitment fees) | 0 | 300 | 600 |
+| **Commitment fees, Q1** (not revenue; credited to the first invoice) | 0 | 300 | 600 |
 | Variable: pilot AI + free-learner AI + tax | 16.5 + 19 = 36 | 16.5 + 75 + 3 = 95 | 33 + 312 + 6 = 351 |
 | **Estimated costs, Q1** (1,023 + 3,000 + variable) | **4,059** | **4,118** | **4,374** |
 | **Result, Q1** | -4,059 | -3,818 | -3,774 |

@@ -112,3 +112,6 @@ Changed vs v1 (spec D / Q8, Professor accuracy): euro by UI language (RO 1.629 â
 PDF (not committed): scratchpad/Lumio-stage2-DRAFT7.pdf, 25 pages, --final gate passes; check.py: footers OK, old pages o1 o2 o6 o7 o18 identical outside approved edits (o14 replaced by the n20 phase table).
 Changed: slides 4, 8, 10, 12, 15, 17-24 (tools/deck/slides.html, build.js ORDER, check.py note); docs/pitch-stage2.md (4:49, money Q&A one-liners, relationship note in the header only); docs/deck-review-checklist.md.
 Not reconciled: break-even with start-up is 8 classes (7,092 / 972 = 7.3), not 7; slide 6 (old page) still says 'parents can add premium' (needs Eduard ok to patch); 2,356 not shown (B6 variable 3,696 used, the file's final table).
+
+## 2026-11-27 stage2 deck DRAFT8 + deck-final-6: DONE
+PDF (not committed): scratchpad/Lumio-stage2-DRAFT8.pdf, 25 pages, --final passes, check.py OK (old pages o1 o2 o6 o7 o18 identical outside approved edits). Script 4:47 with the filming plan. No accelerator on slides; no school-connection claim on slides or spoken lines (only the Q&A note).
