@@ -115,3 +115,6 @@ Not reconciled: break-even with start-up is 8 classes (7,092 / 972 = 7.3), not 7
 
 ## 2026-11-27 stage2 deck DRAFT8 + deck-final-6: DONE
 PDF (not committed): scratchpad/Lumio-stage2-DRAFT8.pdf, 25 pages, --final passes, check.py OK (old pages o1 o2 o6 o7 o18 identical outside approved edits). Script 4:47 with the filming plan. No accelerator on slides; no school-connection claim on slides or spoken lines (only the Q&A note).
+
+## 2026-11-27 stage2 deck DRAFT10: DONE
+PDF (not committed): scratchpad/Lumio-stage2-DRAFT10.pdf, 25 pages, --final passes, check.py OK (old pages identical, text scan clean). Script 4:46. Numbers moved off slides are in docs/qa-cheatsheet.md (plus the tutoring model). Removed '9 of 13' and '7 want short lessons' from the cheat sheet (Eduard: no survey numbers beyond 10 of 13, 13, 4 of 5).

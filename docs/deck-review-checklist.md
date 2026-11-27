@@ -39,3 +39,6 @@ DRAFT7: model nou (școli private: taxă de instalare o dată + abonament pe cla
 - Q&A: legătura cu Transylvania College se spune DOAR dacă întreabă juriul (textul e în capul scriptului).
 - Site-ul edunguru-gitub.github.io/lumio rămâne public până la 5 Dec.
 - Filmul demo e v1, slide-urile 3-14 arată v2.
+
+## DRAFT10 (27 Nov): curățenie vizuală după docs/spec-deck-declutter.md
+Max 3 cifre pe slide, text minim 14pt, QR doar pe slide-ul 12. Slide 23: 5.250 RON (meditații, tariful nostru), 15.000 RON (an de BAC, estimare), circa 55 RON (Lumio). Toate cifrele scoase sunt în docs/qa-cheatsheet.md. Script 4:46.

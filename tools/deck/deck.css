@@ -13,17 +13,32 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg)}
 body{color:var(--ink);font:400 13pt/1.5 var(--ui);-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.slide{position:relative;width:960pt;height:540pt;overflow:hidden;background:var(--bg);padding:66pt 63pt 0 64pt;break-after:page}
+.slide{position:relative;width:960pt;height:540pt;overflow:hidden;background:var(--bg);padding:64pt 68pt 56pt 68pt;break-after:page}
 .k{font:500 14pt/1 var(--mono);color:var(--tan);text-transform:uppercase}
-h1{font:400 48pt/1.1 var(--head);color:var(--ink);margin:20pt 0 28pt}
-.row{display:grid;gap:16pt;min-height:277pt}
+h1{font:400 48pt/1.1 var(--head);color:var(--ink);margin:16pt 0 32pt}
+.row{display:grid;gap:16pt}
 .c3{grid-template-columns:repeat(3,1fr)}
-.tile{background:var(--card);border:.75pt solid var(--line);border-radius:6pt;padding:19pt 20pt 20pt;display:flex;flex-direction:column;min-width:0}
+.tile{background:var(--card);border:.75pt solid var(--line);border-radius:8pt;padding:24pt;display:flex;flex-direction:column;min-width:0}
 .tile h3{font:500 21.5pt/1.25 var(--ui);color:var(--tan);margin-bottom:8.5pt}
-.tile p,.tile li{font-size:15pt;line-height:1.5}
+.tile p,.tile li{font-size:20pt;line-height:1.4}
+.tile h3.m{color:var(--muted)}
+h3.sub{font:500 14pt/1.3 var(--mono);color:var(--tan);text-transform:uppercase;margin-bottom:8pt}
 .tile .f{margin-top:auto;padding-top:10pt;font:500 12pt/1.45 var(--mono);color:var(--tan);text-transform:uppercase}
 .strip{font:500 13pt/1.4 var(--mono);color:var(--tan);text-transform:uppercase;margin-top:14pt}
 .muted{color:var(--muted)}
 b{font-weight:600}
 /* ASSUMPTION tag: visible in DRAFT only; build.js --final refuses to export while any .tag exists */
 .tag{display:inline;font:500 8pt/1 var(--mono);letter-spacing:.02em;text-transform:uppercase;color:var(--bg);background:var(--tan);padding:1.5pt 4pt;border-radius:2pt;margin:0 2pt;line-height:1.6;white-space:nowrap}
+/* DRAFT10 declutter (docs/spec-deck-declutter.md) */
+.hero{font:400 160pt/1 var(--head);color:var(--tan)}.hero.m{font-size:104pt}.hero.s{font-size:88pt}
+.hero-l{font-size:24pt;color:var(--muted)}
+.tile .kl{font-size:20pt;color:var(--ink);margin-top:8pt}
+.cap{font:400 14pt/1.5 var(--ui);color:var(--muted);max-width:640pt}.cap.tan{color:var(--tan)}
+.pair{margin-top:16pt}.pair p{font-size:18pt;margin:12pt 0 8pt}
+.pair .bar{height:24pt;border-radius:4pt;background:var(--line)}.pair .bar.fix{background:var(--muted)}
+.pair .bar.cls{display:flex;gap:4pt;background:none}.pair .blk{flex:1;background:var(--tan);border-radius:4pt}
+.funnel{display:grid;gap:16pt}.funnel .step{height:56pt;background:var(--card);border:.75pt solid var(--line);border-radius:8pt;display:flex;align-items:center;padding:0 16pt;font-size:20pt;white-space:nowrap}
+.funnel .step.hi{border:1.5pt solid var(--tan)}.funnel .step b{font:400 48pt/1 var(--head);color:var(--tan);margin-right:12pt;font-weight:400}
+.mods .shell{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:.75pt solid var(--line);border-radius:8pt;padding:16pt 24pt;font-size:20pt}
+.mods .row7{display:grid;grid-template-columns:repeat(7,1fr);gap:8pt;margin-top:16pt}
+.mods .mod{height:88pt;border:.75pt solid var(--tan);border-radius:8pt;display:flex;align-items:flex-end;padding:8pt;font-size:14pt;line-height:1.25;color:var(--ink)}

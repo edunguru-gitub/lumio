@@ -34,8 +34,19 @@ Everything moved off the slides. Say "plan", "estimate" or "theoretical" for mon
 - Survey: families who pay spend **6,234** RON per child a year (Save the Children Romania, 683 parents, 2024-25, not representative, usually two subjects). About 1 in 3 pupils grades 5 to 12 take tutoring at about 300 RON a month (IRES/SAR, 2019-20, old).
 - "Replacement for a tutor?" No: a tutor works 1:1; Lumio is practice between lessons. Prices only, no claim of equal results. Effect on grades: not found, not claimed.
 
+- Tutoring cost model (docs/research/tutoring-cost-model.md; all NEW web figures are SNIPPET, not opened; 6,234 and IRES were OPENED earlier; all hours are our assumptions):
+  - Normal year, maths, 1 h a week: low 75 x 34 = **2,550** (typical sourced rate) / base 150 x 35 = **5,250** (our quoted rate) / high 200 x 36 = **7,200** (specialist rate).
+  - Exam year, BAC, three subjects, about 100 h (maths 42, Romanian 29, third subject 29): low **7,500** / base **15,000** (estimate) / high **20,000**; hours x0.5 to x1.5 gives 7,500 to 22,500 at 150.
+  - Grade 8, Evaluarea Nationala (maths + Romanian, 72.5 h x 150): **10,875** (estimate).
+  - Rate sources (SNIPPET): 80-200 RON/h (bzi.ro, Jul 2026); 75-150 face to face (brig.ro); 68.5 RON/h platform average (Revista Biz citing HomeRun, 2025); exam sessions 120-250 (bugetul.ro, undated); 150-200 for BAC prep (Edupedu quotes, 2025). School weeks 34 / 35 / 36 (OMEC 3463/2025, SNIPPET).
+  - Lumio vs tutor: 46x (low) / 95x (base) / 131x (high) normal year; 136x / 273x / 364x exam year; vs the 6,234 survey average 113x. Per hour: 55 / 35 h = 1.57 RON per student-hour (use hours assumed).
+- Removed from slide 23 in DRAFT10: 6,234 (survey), about 1 in 3 at 300 RON a month, 35% vs 30% (now on slide 3), QR (only on slide 12).
+
 ## Problem and gap (slide 3)
-PISA 2022: **35%** of Romanian students say devices distract them in maths (OECD **30%**). HBSC 2022: **22%** of Romanian 11-15 year-olds show problematic social-media use (as reported by Edupedu). Survey: **13** students, **10 of 13** mostly read or watch, **9 of 13** learn best hands-on, 7 want short lessons.
+PISA 2022: **35%** of Romanian students say devices distract them in maths (OECD **30%**). HBSC 2022: **22%** of Romanian 11-15 year-olds show problematic social-media use (as reported by Edupedu). Survey: **13** students, **10 of 13** mostly read or watch (Eduard: no other survey numbers; the survey was not detailed).
+
+## Removed in DRAFT10 (declutter), kept here
+- Slide 3: HBSC 2022 22% (as reported by Edupedu). Slide 16: 341 a month, ranges 800 to 2,500 and 900 to 1,800, 100 a month, pilot fee 300 (not revenue), parents' premium phase 2, no sponsors. Slide 17: three more target schools under review, 50 schools contacted in 2027, first subscriptions Sep 2027. Slide 18: 341, 1,200, 228, 4.2, start-up 3,000, 8 classes with start-up, per school 5,100. Slide 19: about 100 schools, 12%, one in three, range 1 to 4, scenario table, first quarter, cold-outreach risk. Slide 20: lessons completed 2 a week, return rate 60%, acquisition cost at most 1,500 a school, baselines. Slide 22: all phase entry conditions. Slide 24: stage I 93 points.
 
 ## Validation and pilot (slide 8)
 13 survey answers, 5 testers, **4 of 5** would use it again; small sample, one town. Pilot: one class, **4 weeks**, 2 lessons a week, anonymous codes Student 1 to N on paper, written parental consent for under-18s, data on each device. Stage I: **93** points, rank 18.
