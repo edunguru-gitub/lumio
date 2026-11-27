@@ -7,23 +7,21 @@ const {chromium}=require('playwright'),{execFileSync}=require('child_process'),p
 const [orig,out]=process.argv.slice(2).filter(a=>!a.startsWith('--')),FINAL=process.argv.includes('--final');
 if(!orig||!out){console.error('usage: node build.js <original.pdf> <out.pdf> [--final]');process.exit(2)}
 const DIR=__dirname,SCRIPT=path.join(DIR,'../../docs/pitch-stage2.md'),BAD=/__|\[|\]/,BADS=/__|\[|\]|ASSUMPTION|TO VERIFY/;
-const SHOT=process.env.RANKS_PNG||path.join(DIR,'ranks.png'); // live v2 Ranks screenshot (dark, Sample rows, You row); never committed
+const SHOTS=process.env.SHOTS_DIR||path.join(DIR,'shots'); // live v2 screenshots (node tools/deck/shots.js) + qr.png (node tools/qr/styled.js); never committed
 
 // Final order (25 of max 25; n10 = 'Limits today' slide, deck-final-4): o = page of the original 18-page PDF, n = page of slides.html. Old team pages o15-o17 -> one 'Why us' slide n9 (Eduard OK, 26 Nov)
-const ORDER=['o1','o2','o3','o4','o5','o6','o7','n1','o8','o9','o10','o11','o12','o13','n2','n3','n4','n5','n6','n7','n8','n10','o14','n9','o18'];
+// DRAFT6 (Eduard OK 27 Nov): old o3 o4 o5 o8 o9 o10 o12 o13 rebuilt as n11-n16, n18, n19 (true for v2); o11 (six themes) -> n17 'Try Lumio now' QR
+const ORDER=['o1','o2','n11','n12','n13','o6','o7','n1','n14','n15','n16','n17','n18','n19','n2','n3','n4','n5','n6','n7','n8','n10','o14','n9','o18'];
 const BG='#171513',CARD='#211E1A',MUTED='#A89F8E',TAN='#D9C3A0',ORANGE='#FF6A13';
 // Text ops are sized from a reference text measured in the original page (pt, 960x540): ref=[text, left, capTop, right].
 const MONO='500 Deck Mono',INTER='400 Inter',SERIF='400 Deck Serif',INK='#EDE3D0',TILE='#211E1A';
 const FOOT={font:MONO,ref:['LUMIO · 02 / 17',65,494.5,171.25]};
 // fill 'auto' = colour sampled from the original page at the patch corner (pages are images, bg varies by 1-2 levels); o18 had no footer, so no patch
-const footer=(n,o)=>[o==='o18'?{}:{patch:[60,489,200,510],fill:'auto'},{...FOOT,text:`LUMIO · ${String(n).padStart(2,'0')} / ${ORDER.length}`,color:o==='o4'?'#2B2018':MUTED}];
-const notFound=x=>[{patch:[x-4,331,x+146,349],fill:BG},{font:INTER,ref:['Not found',x,335.25,x+54.25],text:'Not in public docs',color:MUTED}];
+const footer=(n,o)=>[o==='o18'?{}:{patch:[60,489,200,510],fill:'auto'},{...FOOT,text:`LUMIO · ${String(n).padStart(2,'0')} / ${ORDER.length}`,color:o==='n12'?'#2B2018':MUTED}];
 // tile body lines on slide 2 (Inter, measured from the original first body line of each tile)
 const body=(x,ref,r,lines)=>lines.map((t,i)=>({font:INTER,ref:[ref,x,242,r],y:242+i*22.5,text:t,color:INK}));
 const EDITS={
-  o1:[{patch:[60,300,362,346],fill:'auto'},{font:SERIF,ref:['Light up how you learn.',65,305,351],text:'3-minute hands-on labs for high school students.',color:TAN},{patch:[60,456,420,476],fill:BG},{font:MONO,ref:['EDUARD · DARIUS · STEFAN',65,460.75,264.5],text:'EDUARD · DARIUS · STEFAN · TEAM FLOW · SUCEAVA',color:TAN}],
-  o5:[...notFound(410.25),...notFound(576.5),...notFound(742.75),
-      {...FOOT,ref:['LUMIO · 02 / 17',65,470,171.25],text:'BASED ON PUBLIC PAGES, AS FAR AS WE FOUND',color:MUTED}],
+  o1:[{patch:[60,300,362,346],fill:'auto'},{font:SERIF,ref:['Light up how you learn.',65,305,351],text:'Short hands-on labs for high school students.',color:TAN},{patch:[60,456,420,476],fill:BG},{font:MONO,ref:['EDUARD · DARIUS · STEFAN',65,460.75,264.5],text:'EDUARD · DARIUS · STEFAN · TEAM FLOW · SUCEAVA',color:TAN}],
   o6:[{patch:[648,375,882,393],fill:CARD},{font:MONO,ref:['POSSIBLE PARTNERS',652.75,379.5,783.75],text:'NO PARTNERS YET, PILOT NEXT',color:ORANGE}],
   // survey statistics (Eduard OK 26 Nov): only the counts in docs stay (10 of 13, 13, 4 of 5); DRAFT5 default: no other numbers
   o2:[{patch:[362,238,607,441],fill:'auto'},
@@ -33,9 +31,6 @@ const EDITS={
       ...body(651,'When they get stuck, one in',852,['When they get stuck, some give','up and others just re-read the','same page. Nothing tells them','what to try next.']),
       {font:MONO,ref:['1 IN 7 QUIT · 3 IN 10 RE-READ',651,427,859],text:'QUIT OR RE-READ',color:ORANGE}],
   o7:[{patch:[60,106,806,166],fill:'auto'},{font:SERIF,ref:['Seven in ten want to try it. Testers come back.',66,113,795],text:'Students want to try it. Testers come back.',color:INK}],
-  // Ranks screenshot retaken from live v2 (dark, Sample rows, You row, no real names), same box as the original
-  o13:[{patch:[414,79,901,447],fill:'auto'},{image:SHOT,box:[417.5,82.5,480,361],r:8,stroke:'#3A352E'},
-       {...FOOT,ref:['LUMIO · 02 / 17',65,62,171.25],text:'SAMPLE PLAYERS · NO REAL USERS YET',color:MUTED,anchor:'end',x:897}],
   // the ask on the last slide (Manager fix list); a new line on an original slide, approved by Eduard 26 Nov
   o18:[{patch:[60,168,890,340],fill:'auto'},
        {font:SERIF,ref:['Learn by doing. Rank by',65,174,728],text:'Free labs for students.',color:INK},
@@ -49,11 +44,13 @@ const EDITS={
   const auto=[];pages.forEach((ops,i)=>ops.forEach(o=>{if(o.fill==='auto')auto.push([ORDER[i],o])}));
   const px=JSON.parse(execFileSync('python3',[path.join(DIR,'merge.py'),'--px',orig,JSON.stringify(auto.map(([k,o])=>[+k.slice(1),o.patch[0],o.patch[1]]))]).toString());
   auto.forEach(([,o],j)=>o.fill=px[j]);
-  if(pages.some(ops=>ops.some(o=>o.image))&&!fs.existsSync(SHOT)){console.error('missing Ranks screenshot '+SHOT+' (see tools/deck/check.py header)');process.exit(2)}
-  pages.forEach(ops=>ops.forEach(o=>{if(o.image)o.href='data:image/png;base64,'+fs.readFileSync(o.image).toString('base64')}));
   const pg=id=>'page '+(ORDER.indexOf(id)+1);
   // gate: tags and '__' / brackets on every page (new slides, overlay text, original pages) and in the script
-  await p.goto('file://'+path.join(DIR,'slides.html'));await p.evaluate(()=>document.fonts.ready);
+  await p.goto('file://'+path.join(DIR,'slides.html'));
+  const need=await p.$$eval('img[data-shot]',e=>e.map(i=>i.dataset.shot)),miss=need.filter(f=>!fs.existsSync(path.join(SHOTS,f)));
+  if(miss.length){console.error('missing screenshots in '+SHOTS+': '+miss.join(', ')+' (node tools/deck/shots.js <dir>; node tools/qr/styled.js <dir>/qr.png)');await b.close();process.exit(2)}
+  await p.$$eval('img[data-shot]',(e,d)=>Promise.all(e.map(i=>new Promise(r=>{i.onload=i.onerror=r;i.src='file://'+d+'/'+i.dataset.shot}))),SHOTS);
+  await p.evaluate(()=>document.fonts.ready);
   const secs=await p.$$eval('section',e=>e.map(s=>[[...s.querySelectorAll('.tag')].map(t=>t.textContent),s.innerText]));
   const tags=[],bad=[];
   secs.forEach(([t,txt],i)=>{t.forEach(x=>tags.push(pg('n'+(i+1))+': '+x));if(BAD.test(txt))bad.push(pg('n'+(i+1))+': '+txt.split('\n').find(l=>BAD.test(l)))});
@@ -79,9 +76,6 @@ const EDITS={
     pages.forEach((ops,i)=>{const s=el('svg',{viewBox:'0 0 960 540'});
       for(const o of ops){
         if(o.patch){const[a,b,c,d]=o.patch;s.append(el('rect',{x:a,y:b,width:c-a,height:d-b,fill:o.fill}));continue}
-        if(o.href){const[x,y,w,h]=o.box,id='c'+i;const cp=el('clipPath',{id});cp.append(el('rect',{x,y,width:w,height:h,rx:o.r}));s.append(cp);
-          s.append(el('image',{href:o.href,x,y,width:w,height:h,'clip-path':`url(#${id})`,preserveAspectRatio:'xMidYMin slice'}));
-          s.append(el('rect',{x,y,width:w,height:h,rx:o.r,fill:'none',stroke:o.stroke,'stroke-width':.75}));continue}
         if(!o.font)continue;
         const[rt,l,top,r]=o.ref,rm=m(o.font,rt),size=(r-l)/(rm.actualBoundingBoxLeft+rm.actualBoundingBoxRight)*100;
         const base=o.ybase?o.ybase[1]+m(o.font,o.ybase[0]).actualBoundingBoxAscent*size/100:(o.y??top)+rm.actualBoundingBoxAscent*size/100,[w,fam]=o.font.split(/ (.+)/);

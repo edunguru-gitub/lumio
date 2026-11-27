@@ -2,20 +2,18 @@
 Prints page count, the footer read on every page (LUMIO · NN / total), and for each original page the box (pt) of
 pixels that differ from the original outside the footer patch and the approved edit boxes (EXPECTED, pt).
 'identical outside approved edits' = only the new footer and the approved edits changed; anything else is printed as UNEXPECTED.
-Ranks screenshot for page 14: live v2 Ranks, dark theme, 1060x798 viewport at 2x, saved as tools/deck/ranks.png or RANKS_PNG (never committed)."""
+DRAFT6: old o3 o4 o5 o8-o13 are rebuilt HTML pages (n11-n19); their screenshots come from SHOTS_DIR (tools/deck/shots.js + tools/qr/styled.js, never committed)."""
 import re, subprocess, sys, tempfile
 from PIL import Image, ImageChops
 from pypdf import PdfReader
 
 orig, out, order = sys.argv[1], sys.argv[2], sys.argv[3].split(',')
-# approved edits per original page (keep in step with EDITS in build.js); Eduard OK 26 Nov for o1 slogan, o2/o7 counts, o13 screenshot, o18 slogan + ask
+# approved edits per original page (keep in step with EDITS in build.js); Eduard OK 26 Nov for o1 slogan, o2/o7 counts, o18 slogan + ask; 27 Nov o1 'Short hands-on labs'
 EXPECTED = {
     'o1': [(60, 300, 700, 346), (60, 456, 460, 476)],        # factual cover line; TEAM FLOW · SUCEAVA
     'o2': [(362, 238, 607, 441), (645, 238, 897, 441)],      # survey counts tagged
-    'o5': [(406, 331, 900, 349), (60, 465, 700, 485)],       # Not in public docs; check-date line
     'o6': [(648, 375, 882, 393)],                            # NO PARTNERS YET, PILOT NEXT
     'o7': [(60, 62, 420, 82), (60, 106, 806, 166)],          # counts tag; headline without 'Seven in ten'
-    'o13': [(414, 40, 901, 447)],                            # retaken v2 Ranks screenshot + SAMPLE PLAYERS label
     'o18': [(60, 168, 890, 340), (60, 420, 560, 440)],       # factual closing line; ask stamp
 }
 pages = PdfReader(out).pages
