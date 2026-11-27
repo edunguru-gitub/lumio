@@ -687,3 +687,28 @@ body[data-level=planet] #bar #gview{display:none}
 @media (min-width:1200px) and (max-width:1279px) and (pointer:fine){html[lang=ro] #back span{display:none}html[lang=ro] #back{padding:0 var(--s1)}}
 /* lesson names in the zoomed galaxy (js/galaxy.js llabel): name + sparkles */
 .glab.ll{height:40px}
+/* chemistry atom puzzle (modules/chemistry/atom.js): piece tray, drop places, equation sides, atom counter; reuses the projectile .proj/.lv-* layer */
+.chem [hidden]{display:none!important}
+.chem>.left{position:static;grid-row:1/span 3}.chem>.ch-top{grid-column:9/13;grid-row:1;display:flex;flex-direction:column;gap:var(--s3);min-width:0}.chem>.panel{grid-row:2;margin-top:var(--s3)}
+.chem .lab-cv{height:320px}
+.ch-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1)}
+.ch-row>.k{flex-basis:100%;font:400 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.ch-b{min-height:44px;padding:0 12px;background:var(--card);border:1px solid var(--edge);border-radius:var(--r2);color:var(--ink);font:500 14px var(--ui);cursor:pointer}
+.ch-b[aria-pressed=true]{border:2px solid var(--c);color:var(--c);box-shadow:var(--press)}
+.ch-b:disabled{opacity:.45;cursor:not-allowed}
+.ch-b:focus-visible{outline:2px solid var(--tan);outline-offset:2px}
+.ch-pc{touch-action:none;cursor:grab}
+.ch-ghost{position:fixed;z-index:1000;pointer-events:none;transform:translate(-50%,-50%);padding:8px 12px;background:var(--card);border:2px solid var(--c);border-radius:var(--r2);color:var(--ink);font:500 14px var(--ui);box-shadow:var(--raise)}
+.ch-row .btn-primary{margin-left:auto}
+.ch-eq{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1)}
+.ch-side{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1);min-height:64px;padding:var(--s1);border:1px dashed var(--edge);border-radius:var(--r2)}
+.ch-term{display:inline-flex;align-items:center;gap:4px}
+.ch-st{min-width:44px;padding:0;font:500 18px var(--mono)}
+.ch-k{min-width:1.4em;text-align:center;font:500 20px var(--mono);color:var(--c)}
+.ch-f{font:500 20px var(--ui);padding-left:2px}
+.ch-op{font:400 20px var(--mono);color:var(--muted)}
+.ch-ct{width:100%;border-collapse:collapse;font:400 14px var(--mono)}
+.ch-ct th{text-align:left;font:400 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:6px 4px}
+.ch-ct td{padding:8px 4px;border-top:1px solid var(--line);color:var(--ink);font:500 15px var(--mono)}.ch-ct tr.eq td:last-child{color:var(--good)}
+@media (max-width:899px){.chem>.ch-top,.chem>.left,.chem>.panel{grid-column:auto;grid-row:auto}.chem>.left{margin-top:var(--s3)}}
+@media (max-width:699px){.chem .lab-cv{height:260px}.ch-row .btn-primary{margin-left:0;width:100%}.ch-ar{flex-basis:100%;text-align:center}}
