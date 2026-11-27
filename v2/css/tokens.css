@@ -636,3 +636,54 @@ body[data-level=planet] #bar #gview{display:none}
 @media (hover:hover){.glab:hover{background:color-mix(in srgb,var(--ink) 6%,transparent);border-color:var(--line)}.slink:hover{color:var(--ink);text-decoration-color:var(--tan)}}
 @media (pointer:coarse){.slink{display:inline-flex;align-items:center;min-height:44px}}
 @media (prefers-reduced-motion:no-preference){.glab,.slink{transition:background-color var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease),color var(--dur-1) var(--ease),text-decoration-color var(--dur-1) var(--ease)}}
+/* ux wave (Boyle review, to-david.md 26 Nov): CTA as button, lesson subtitle + answer tip, compact phone lesson header, soon cards, meter one-liners. Revert = delete this block */
+.ccard{min-height:0;padding:var(--s2) var(--s3);border:1px solid var(--c);border-radius:var(--r2);background:color-mix(in srgb,var(--c) 10%,var(--card));cursor:pointer;transition:background-color var(--dur-1) var(--ease),transform 160ms var(--ease)}
+.ccard h3{margin:var(--s1) 0 2px}
+.ccard:active{transform:translateY(1px)}.ccard:focus-visible{outline:2px solid var(--tan);outline-offset:2px}
+@media (hover:hover){.ccard:hover{background:color-mix(in srgb,var(--c) 18%,var(--card))}}
+.lesson-in>h1 small{display:block;margin-top:4px;font:400 13px/1.4 var(--ui);color:var(--muted)}
+.io-tip{padding:0 0 var(--s2);font:400 13px/1.4 var(--ui);color:var(--muted)}
+.thi{display:none;width:16px;height:16px;vertical-align:middle}
+.meter .mdef{margin-top:4px;font-size:12px;line-height:1.4;color:var(--muted)}
+.ranks.no-ovr :is(th,td):nth-child(3),.ranks.no-wk :is(th,td):nth-child(6){display:none}
+.lcard.lock{background:transparent;border-style:dashed}.lcard.lock canvas{opacity:.4}
+.proj .lv-sub{margin-top:calc(-1*var(--s1))}
+@media (max-width:699px){.proj.lv-on .lab-cv{height:160px}.proj.lv-on>.left,.proj.lv-on>.panel{gap:var(--s2)}.proj.lv-on>.panel{margin-top:0}.proj.lv-on .lv-t{padding-top:var(--s2)}}
+/* phone lesson header: one row; Light/Dark as icons (name kept as title + accessible text), RO/EN and Phone link icon unchanged */
+@media (max-width:599px){
+ #bar{column-gap:4px;padding-inline:10px}.word{margin-right:0}body[data-level=planet] #bar{flex-wrap:nowrap}
+ body[data-level=planet] #gtheme .thi{display:inline-block}body[data-level=planet] #gtheme span{display:none}
+}
+@media (max-width:379px){body[data-level=planet] #bar{padding-inline:8px}}
+/* 'Phone link' text on the phone Home bar only where it fits one row (EN); narrower = dot + accessible name, as in lessons */
+@media (min-width:370px) and (max-width:389px){body:not([data-level=planet]) #plink{width:44px;padding:0}body:not([data-level=planet]) #plink span{display:none}}
+/* 'Phone link' is longer than 'Link': keep the 56 px bar where it was one row. 700-1199 tighter pill; 700-899 dot only (name kept in aria-label + title) */
+@media (min-width:700px) and (max-width:1199px){#plink{padding:0 8px;margin-right:var(--s0)}#plink::after{right:-5px}}
+@media (min-width:700px) and (max-width:899px){#plink{width:32px;padding:0;justify-content:center}#plink span{display:none}}
+/* Tester notes on 260d340 (Manager 26 Nov): (13) galaxy controls readable at idle, Light .72; disabled Back not faded to .19 */
+#ctl button:disabled{opacity:.8}
+@media (pointer:fine) and (prefers-color-scheme:light){:root:not([data-theme=dark]) #ctl{opacity:.72}}
+@media (pointer:fine){:root[data-theme=light] #ctl{opacity:.72}}
+:root #ctl:is(:hover,:focus-within),:root body[data-level=galaxy] #ctl{opacity:1}
+/* (14) Galaxy/List slot reserved on Home / Ranks / Settings (hidden, not focusable) so the nav keeps its place */
+@media (min-width:700px){body:not([data-level=planet]) #bar #gview{display:grid;visibility:hidden}body[data-tab=subjects]:not([data-level=planet]) #bar #gview{visibility:visible}}
+/* (15) 700-1099 px, mouse: slightly tighter bar so RO Subjects (and the reserved slot) stay one row where they fit */
+@media (min-width:700px) and (max-width:1099px) and (pointer:fine){#bar{column-gap:var(--s0);padding-inline:var(--s2)}.word{margin-right:var(--s1)}#top button{padding:0 12px}#bar .grp button{padding:0 8px}}
+/* (16) coarse pointers: segment buttons get a 44 px tall hit area; look unchanged */
+@media (pointer:coarse){:is(#top,#bar .grp,#tabbar) button::after{content:'';position:absolute;left:0;right:0;top:50%;height:44px;margin-top:-22px}}
+/* stable nav (Eduard 27 Nov): every bar item keeps its box in every view, so the nav never moves (mouse >=1000 px, touch >=1280 px, where it fits one row).
+   Hidden Back / Galaxy-List = visibility (slot kept, not focusable); crumb + spacer share the free space; the bold current tab reserves its width (data-l, js/shell.js);
+   1000-1199 (RO to 1279) Back = arrow (name stays in aria-label); lessons keep the same one-row bar there */
+#top button::before{content:attr(data-l);display:block;height:0;overflow:hidden;visibility:hidden;font-weight:600}
+@media (min-width:1000px) and (pointer:fine),(min-width:1280px){
+ #bar #back[hidden],body[data-view=galaxy]:not([data-level=planet]) #bar #back{display:inline-block;visibility:hidden}
+ body[data-level=planet] #bar #gview{display:grid;visibility:hidden}
+}
+@media (min-width:1280px){#crumb,#bar .sp{display:block;flex:1 1 0;min-width:0}#crumb:empty::before{content:'\a0'}}
+@media (min-width:1000px) and (max-width:1199px) and (pointer:fine){
+ #back span{display:none}#back{padding:0 var(--s1)}html[lang=ro] #top button{padding:0 8px}
+ body[data-level=planet] #bar::after{display:none}html:root body[data-level=planet] #bar>:not(.word):not(#top){order:0}body[data-level=planet] #bar #back{margin-right:0}
+}
+@media (min-width:1200px) and (max-width:1279px) and (pointer:fine){html[lang=ro] #back span{display:none}html[lang=ro] #back{padding:0 var(--s1)}}
+/* lesson names in the zoomed galaxy (js/galaxy.js llabel): name + sparkles */
+.glab.ll{height:40px}

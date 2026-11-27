@@ -19,7 +19,8 @@ L.boot(function(){
   var into=function(h){if(h)L.into(h.sid,h.lid)};
   cv.addEventListener('click',function(e){var p=pos(e);into(G.hit(p[0],p[1]))});
   document.getElementById('zin').onclick=function(){into(G.hit(cv.clientWidth/2,cv.clientHeight/2,true))};
-  cv.addEventListener('mousemove',function(e){var p=pos(e),h=G.hit(p[0],p[1]);G.setHover(h&&h.lid?h:null);cv.style.cursor=h?'pointer':'default'});
+  cv.addEventListener('mousemove',function(e){var p=pos(e),h=G.hit(p[0],p[1]);G.setHover(h&&h.lid?h:null);G.hold=!!h;cv.style.cursor=h?'pointer':'default'});
+  cv.addEventListener('mouseleave',function(){G.hold=false});
   main.addEventListener('contextmenu',function(e){if(!L.gal())return;e.preventDefault();L.out()});
   main.addEventListener('wheel',function(e){
     var le=document.getElementById('lesson');if(!L.gal()||le.contains(e.target)&&le.scrollHeight>le.clientHeight)return;

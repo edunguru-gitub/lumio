@@ -11,7 +11,8 @@ var S={title:['Projectile Motion','Mișcarea proiectilului'],cv:['Launch lab: gr
  lv_lost:['Out of hearts. Try the level again.','Nu mai ai inimi. Încearcă nivelul din nou.'],lv_retry:['Try again','Încearcă din nou'],lv_next:['Next level','Nivelul următor'],
  lv_locked:['Finish the level before to unlock','Termină nivelul anterior ca să-l deblochezi'],lv_reward:['+{n} Lumens','+{n} Lumeni'],lv_replay:['Replay: no Lumens','Reluare: fără Lumeni'],
  lv_all:['All levels complete!','Toate nivelurile terminate!'],lv_ans:['Your answer','Răspunsul tău'],lv_nophone:['Phone controls work in Free play.','Controlul de pe telefon funcționează în Joc liber.'],
- lv_hearts:['{n} hearts left','{n} inimi rămase'],lv_stars:['{n} of 3 sparkles','{n} din 3 scântei'],lv_dot:['Level {n}, {s} of 3 sparkles','Nivelul {n}, {s} din 3 scântei'],lv_dlock:['Level {n}, locked','Nivelul {n}, blocat']};
+ lv_hearts:['{n} hearts left','{n} inimi rămase'],lv_heart_t:['3 hearts: each miss costs one','3 inimi: fiecare greșeală costă una'],
+ lv_sub:['Free play = no score · Levels = questions with hearts and Lumens','Joc liber = fără scor · Niveluri = întrebări cu inimi și Lumeni'],lv_stars:['{n} of 3 sparkles','{n} din 3 scântei'],lv_dot:['Level {n}, {s} of 3 sparkles','Nivelul {n}, {s} din 3 scântei'],lv_dlock:['Level {n}, locked','Nivelul {n}, blocat']};
 var GRV=9.81,G=9.8,rad=function(a){return a*Math.PI/180};
 var prj=function(s){var th=rad(s.a),vx=s.v*Math.cos(th),vy=s.v*Math.sin(th),T=2*vy/GRV;return{vx:vx,vy:vy,T:T,R:vx*T,H:vy*vy/(2*GRV)}};
 var EX=[{q:{en:'Land beyond 40 m',ro:'Aterizează dincolo de 40 m'},hint:{en:'More speed means more range. At 45°, any v above 19.8 m/s lands beyond 40 m (R = v² / g).',ro:'Mai multă viteză înseamnă bătaie mai mare. La 45°, orice v peste 19,8 m/s aterizează dincolo de 40 m (R = v² / g).'},ok:function(s){return prj(s).R>40}},
@@ -76,7 +77,7 @@ render:function(el,ctx){
   // mode capsule: Free play | Levels (v1 seg data-lvm)
   mode.setAttribute('role','group');mode.setAttribute('aria-label',t('mode'));
   [['free','lv_free'],['lv','lv_lv']].forEach(function(m){var b=E('button',t(m[1]));b.type='button';b.dataset.m=m[0];b.onclick=function(){if((m[0]==='lv')!==LV.on){fx.tick();setLv(m[0]==='lv')}};mode.append(b)});
-  left.append(mode,cv);
+  left.append(mode,E('p',t('lv_sub'),'note lv-sub'),cv);
   exl.setAttribute('aria-label',t('exl'));hi.setAttribute('aria-live','polite');
   fr.append(sa,sv,ti,exl,hi,U.cont(ctx));
   // Levels panel: persistent nodes (input keeps value + focus), contents refreshed by lvRender
@@ -123,7 +124,7 @@ render:function(el,ctx){
       b.setAttribute('aria-label',!unl(i)?t('lv_dlock',{n:i+1}):s?t('lv_dot',{n:i+1,s:s}):t('lv_n',{n:i+1}));if(i===LV.i)b.setAttribute('aria-current','step');
       b.onclick=function(){fx.tick();lvGo(i)};return b}));
     if(onDot)dots.children[LV.i].focus();
-    var hs=E('span',null,'hearts'),h=Math.max(0,LV.hearts);hs.setAttribute('role','img');hs.setAttribute('aria-label',t('lv_hearts',{n:h}));
+    var hs=E('span',null,'hearts'),h=Math.max(0,LV.hearts);hs.setAttribute('role','img');hs.setAttribute('aria-label',t('lv_hearts',{n:h})+'. '+t('lv_heart_t'));hs.title=t('lv_heart_t');
     hs.innerHTML=HEART+HEART+HEART;for(var j=0;j<h;j++)hs.children[j].classList.add('on');hs.append(h+' / 3');
     lt.replaceChildren(E('h3',t('lv_n',{n:LV.i+1})),hs);
     lq.textContent=loc(Lv.q);

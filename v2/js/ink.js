@@ -4,6 +4,8 @@
 var L=Lumio,pads=new Set(),
 S={write:['Write','Scrie'],type:['Type','Tastează'],mode:['Answer by','Răspunde prin'],here:['Write your answer by hand…','Scrie răspunsul de mână…'],pad:['Handwriting pad','Zonă de scris de mână'],
  pen:['Pen','Creion'],eraser:['Eraser','Radieră'],undo:['Undo','Anulează'],clear:['Clear','Șterge'],size:['size','grosime'],strokes:['strokes','trăsături'],conf:['Read confidence','Încredere la citire'],
+ tip_type:['Type the answer, or press Write to use your finger or mouse','Tastează răspunsul sau apasă Scrie ca să folosești degetul sau mouse-ul'],
+ tip_ink:['Write the answer with your finger or mouse, or press Type','Scrie răspunsul cu degetul sau cu mouse-ul, sau apasă Tastează'],
  auto:['Auto colour','Culoare auto'],red:['Red','Roșu'],green:['Green','Verde'],steel:['Steel','Oțel']};
 function tok(k){return getComputedStyle(document.documentElement).getPropertyValue(k).trim()}
 /* recognizer (v1 REC, verbatim; 'Patrick Hand' not shipped in v2, falls back silently) */
@@ -46,11 +48,13 @@ tail(s){const p=s.pts,n=p.length;if(n<2)return;const a=n===2?p[0]:this.mid(p[n-2
 redraw(){this.cm={};this.ctx.clearRect(0,0,this.cv.width,this.cv.height);for(const s of this.strokes){const n=s.pts.length;if(!n)continue;if(n===1){this.dot(s);continue}for(let i=2;i<n;i++)this.seg(s,i);this.tail(s)}}
 undo(){this.strokes.pop();this.redraw();this.on('end')}clear(){this.strokes=[];this.redraw();this.on('clear')}
 setTool(t){this.tool=t}}
+// one-time migration (Manager 26 Nov): 'ink' auto-saved before the Type default shipped -> Type; flag lumio2_io_v set once, later clicks saved as before
+if(!L.pref('lumio2_io_v')){if(L.pref('lumio2_io')==='ink')L.pref('lumio2_io',null);L.pref('lumio2_io_v','1')}
 // theme change: recolour 'auto' strokes on every live pad
 L.on(function(s,kind){if(kind==='skin')pads.forEach(function(p){if(p.wrap.isConnected)p.redraw();else pads.delete(p)})});
 function mount(ctx,inp){
   var U=ctx.ui,t=function(k){return ctx.n(S[k])},el=U.el('div',null,'ink'),io=U.el('div',null,'ink-io'),pad=U.el('div',null,'ink-pad'),hint=U.el('span',t('here'),'ink-hint'),
-      tools=U.el('div',null,'ink-tools'),stat=U.el('span',null,'ink-stat'),conf=U.el('small',null,'ink-conf'),tm=0,ink;
+      tools=U.el('div',null,'ink-tools'),stat=U.el('span',null,'ink-stat'),conf=U.el('small',null,'ink-conf'),tip=U.el('div',null,'io-tip'),tm=0,ink;
   function btn(txt,cls,on){var b=U.el('button',txt,cls);b.type='button';b.onclick=on;return b}
   function press(list,b){list.forEach(function(x){x.setAttribute('aria-pressed',x===b)})}
   function st(){stat.textContent=t(ink.tool)+' · '+t('size')+' '+(ink.w<=3?'S':ink.w>=10?'L':'M')+' · '+ink.strokes.length+' '+t('strokes')}
@@ -69,10 +73,10 @@ function mount(ctx,inp){
   tools.append(pen,er,btn(t('undo'),'chip',function(){ink.undo()}),btn(t('clear'),'chip',function(){ink.clear()}),cw,sw,stat);
   // Write / Type (v1 iotog); default Type (Eduard 26 Nov); only a click saves lumio2_io, so a saved choice wins; typing works in both modes
   var iob=['ink','type'].map(function(m){return btn(t(m==='ink'?'write':'type'),'',function(){L.pref('lumio2_io',m);set(m)})});
-  function set(m){pad.hidden=tools.hidden=m==='type';iob.forEach(function(b,i){b.setAttribute('aria-pressed',(i===1)===(m==='type'))});L.seg(io)}
+  function set(m){pad.hidden=tools.hidden=m==='type';tip.textContent=t(m==='type'?'tip_type':'tip_ink');iob.forEach(function(b,i){b.setAttribute('aria-pressed',(i===1)===(m==='type'))});L.seg(io)}
   io.setAttribute('role','group');io.setAttribute('aria-label',t('mode'));io.append.apply(io,iob);
   conf.title=t('conf');el.append(io,pad,tools);set(L.pref('lumio2_io')==='ink'?'ink':'type');st();
-  return{el:el,conf:conf,clear:function(){clearTimeout(tm);ink.clear()}};
+  return{el:el,conf:conf,tip:tip,clear:function(){clearTimeout(tm);ink.clear()}};
 }
 window.LumioInk={REC:REC,Ink:Ink,mount:mount};
 (window.LumioFeatures=window.LumioFeatures||{}).ink=window.LumioInk;

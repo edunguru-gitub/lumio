@@ -5,7 +5,7 @@
 // Lessons call ctx.controls(def) with the v1 LAB shape {knob,sliders,tilt,params:{k:{min,max,step,label,fmt}},get,set,ro}. Absent = no controller, no Link pill.
 var L=Lumio,U=L.ui,F=window.LumioFeatures=window.LumioFeatures||{},TAB=Math.random().toString(36).slice(2,10),
 q=new URLSearchParams(location.search),role=q.get('role')==='phone',http=/^https?:/.test(location.protocol),rm=matchMedia('(prefers-reduced-motion: reduce)'),
-S={link:['Link','Link'],cd_t:['Connect your phone','Conectează telefonul'],cd_s:['Scan with the camera. No app, no typing.','Scanează cu camera. Fără aplicație, fără tastat.'],
+S={link:['Phone link','Legătură telefon'],link_t:['Use your phone as a remote control','Folosește telefonul ca telecomandă'],cd_t:['Connect your phone','Conectează telefonul'],cd_s:['Scan with the camera. No app, no typing.','Scanează cu camera. Fără aplicație, fără tastat.'],
  cd_1:['Scan the code with your phone camera','Scanează codul cu camera telefonului'],cd_2:['If the phone shows a warning, tap Advanced → Continue','Dacă telefonul arată un avertisment, apasă Avansat → Continuă'],
  cd_2c:['this is your own computer','este propriul tău calculator'],cd_3:['Wait for the check mark','Așteaptă bifa'],cd_wait:['Waiting for your phone…','Se așteaptă telefonul…'],cd_ok:['Phone connected','Telefon conectat'],
  cd_copy:['Copy','Copiază'],cd_copied:['Copied','Copiat'],cd_other:['Other address','Altă adresă'],cd_help:['Having trouble?','Ai probleme?'],
@@ -160,7 +160,7 @@ function onRemote(m){if(!m||typeof m!=='object'||typeof m.type!=='string')return
 /* ---- Link pill + Connect dialog (v1 netUI, openConnect/cdRender, drawQR, Quit) ---- */
 var pl,dlg;
 function lamp(){if(Ctl.live)Ctl.live.classList.toggle('on',Net.on||!!BC)}
-function pill(){lamp();if(!pl)return;var txt=t('link'),st='',tip=t('cd_t');
+function pill(){lamp();if(!pl)return;var txt=t('link'),st='',tip=t('link_t');
   if(phoneSide()&&http){if(Net.on){txt=t('ch_conn');st='on';tip=t('cn_to',{h:Net.host||'Lumio'})}else if(Net.old){txt=t('ch_not');st='err';tip=t('cn_old')}else if(Net.err){txt=t('ch_not');st='err';tip=t('cn_err')}else if(Net.info){txt=t('ch_re');tip=t('cn_off')}}
   else if(Net.phones>0){txt=t('ch_phone');st='on';tip=t('ch_full',{h:Net.host||'Lumio'})}else if(CD.re){txt=t('ch_re');tip=txt}else if(Net.on){txt='LAN · '+Math.max(1,Net.peers);st='on'}
   pl.lastChild.textContent=txt;pl.className=st;pl.title=tip;pl.setAttribute('aria-label',txt===tip?tip:txt+', '+tip)} // visible word first in the accessible name (also when only the dot shows)

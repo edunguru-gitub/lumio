@@ -5,10 +5,12 @@ var K='lumio2_progress';
 L.pref=function(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}};
 var ro=/^ro/i.test(L.pref('lumio2_lang')||navigator.language||''),pv=L.pref('lumio2_view')==='tabs'?'tabs':'galaxy',sysL=matchMedia('(prefers-color-scheme: light)');
 L.n=function(a){return a[ro?1:0]};
-L.S={back:['Back','Înapoi'],lum:['Lumens','Lumeni'],light:['Light','Luminos'],dark:['Dark','Întunecat'],galaxy:['Galaxy','Galaxie'],tabs:['Tabs','Taburi'],cont:['Continue','Continuă'],subjects:['Subjects','Materii'],
- hint:['Click: go in. Right click: go out','Click: intri. Click dreapta: ieși'],soon:['Coming soon','În curând'],of:['{a} of {b} lessons','{a} din {b} lecții'],subject:['Subject','Materie'],now:['Now','Acum'],
+L.S={back:['Back','Înapoi'],lum:['Lumens','Lumeni'],light:['Light','Luminos'],dark:['Dark','Întunecat'],galaxy:['Galaxy','Galaxie'],tabs:['List','Listă'],galaxy_t:['Galaxy (map)','Galaxie (hartă)'],tabs_t:['List of subjects and lessons','Listă cu materii și lecții'],
+ vtip:['Galaxy = map of subjects · List = all lessons in a list','Galaxie = harta materiilor · Listă = toate lecțiile într-o listă'],avail:['{n} available','{n} disponibile'],
+ soon_try:['Coming soon. Meanwhile, try {name}.','În curând. Până atunci, încearcă {name}.'],start:['Start {name}','Începe {name}'],cont:['Continue','Continuă'],subjects:['Subjects','Materii'],
+ hint:['Click a galaxy to go in · Back = go out','Click pe o galaxie ca să intri · Înapoi = ieși'],soon:['Coming soon','În curând'],of:['{a} of {b} done','{a} din {b} terminate'],subject:['Subject','Materie'],now:['Now','Acum'],
  home:['Home','Acasă'],missions:['Missions','Misiuni'],ranks:['Ranks','Clasament'],zin:['Go in','Intră'],zout:['Go out','Ieși'],settings:['Settings','Setări'],
- alt:['Lumio galaxies. Use Tabs for keyboard navigation.','Galaxiile Lumio. Folosește Taburi pentru tastatură.']};
+ alt:['Lumio galaxies. Use List for keyboard navigation.','Galaxiile Lumio. Folosește Lista pentru tastatură.']};
 L.t=function(k,o){var s=L.n(L.S[k]);for(var p in o)s=s.replace('{'+p+'}',o[p]);return s};
 // features (js/<id>.js) register in window.LumioFeatures; missing = skipped
 L.has=function(id){return !!(window.LumioFeatures||{})[id]};
@@ -58,12 +60,13 @@ L.key=function(s,l){return s.id+'/'+l.id};
 L.getP=function(k){return Math.max(0,Math.min(1,+prog[k]||0))};
 L.setP=function(k,v){prog[k]=v;try{localStorage.setItem(K,JSON.stringify(prog))}catch(e){}emit('progress')};
 L.done=function(s){return s.lessons.filter(function(l){return L.getP(L.key(s,l))>=1}).length};
-L.count=function(s){return L.n(L.S.of).replace('{a}',L.done(s)).replace('{b}',s.lessons.length)};
+// count text: only playable lessons count ('N available', then 'a of N done'); none playable = Coming soon
+L.count=function(s){var n=s.lessons.filter(function(l){return l.mod}).length,d=L.done(s);return !n?L.n(L.S.soon):d?L.t('of',{a:d,b:n}):L.t('avail',{n:n})};
 L.cur=function(s){return s.lessons.filter(function(l){return l.mod&&L.getP(L.key(s,l))<1})[0]};
 // subject header: eyebrow, tinted title, progress bar, count
 L.head=function(s,eye){
   var U=L.ui,d=U.el('div',null,'head'),bar=U.el('div',null,'pbar'),b=U.el('i');
-  d.style.setProperty('--c',s.color);b.style.width=L.done(s)/s.lessons.length*100+'%';bar.appendChild(b);
+  d.style.setProperty('--c',s.color);b.style.width=L.done(s)/(s.lessons.filter(function(l){return l.mod}).length||1)*100+'%';bar.appendChild(b);
   d.append(U.el('small',eye),U.el('h2',L.n(s.name)),bar,U.el('p',L.count(s),'cnt'));return d;
 };
 L.contBtn=function(s){
@@ -102,7 +105,11 @@ function lesson(){
       controls:function(d){return L.controls?L.controls(key,d,ctx):nop}}; // js/phone.js: lab controls (v1 LAB shape), returns unregister
     el.innerHTML='';
     var box=document.createElement('div');box.className='lesson-in';el.appendChild(box);
-    var soon=function(){var h=document.createElement('h1');h.textContent=L.n(l.name);var p=document.createElement('p');p.textContent=L.n(L.S.soon);box.append(h,p)};
+    // placeholder: Coming soon + one button to a playable lesson (same subject first, else the 'first' lesson, else any unfinished)
+    var soon=function(){var h=document.createElement('h1'),p=document.createElement('p'),rs=s,rl=L.cur(s);h.textContent=L.n(l.name);
+      var all=L.subjects.filter(L.cur).map(function(x){return[x,L.cur(x)]}),f=all.filter(function(x){return x[1].tags.indexOf('first')>=0})[0]||all[0];if(!rl&&f){rs=f[0];rl=f[1]}
+      p.textContent=rl?L.t('soon_try',{name:L.n(rl.name)}):L.n(L.S.soon);box.append(h,p);
+      if(rl){var b=L.ui.el('button',L.t('start',{name:L.n(rl.name)})+' →','btn-primary soon-go');b.type='button';b.style.setProperty('--c',rs.color);b.onclick=function(){L.go('planet',rs.id,rl.id)};box.append(b)}};
     if(!l.mod)soon();else L.Loader.load(l.mod).then(function(m){if(t===tok)m.render(box,ctx)},function(){if(t===tok)soon()});
     el.classList.add('on');el.scrollTop=0;
   },L.gal()&&!L.reduced()?600:0);
@@ -132,16 +139,20 @@ function chrome(){
 // segmented control: --i/--n place the raised thumb under the pressed/current segment (CSS)
 L.seg=function(el){var b=[].filter.call(el.children,function(x){return !x.hidden}),i=b.findIndex(function(x){return x.matches('[aria-pressed=true],[aria-current=page]')});
   el.style.setProperty('--n',b.length||1);el.style.setProperty('--i',Math.max(0,i));el.classList.toggle('noth',i<0)};
+var TI={light:'<svg class="thi" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="currentColor"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>',
+ dark:'<svg class="thi" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="currentColor"/></svg>'};
 function labels(){
   document.documentElement.lang=ro?'ro':'en';
   var bk=$('back');bk.replaceChildren('← ',L.ui.el('span',L.n(L.S.back)));bk.setAttribute('aria-label',L.n(L.S.back));$('cback').textContent=L.n(L.S.back);
   $('zin').setAttribute('aria-label',L.n(L.S.zin));$('zout').setAttribute('aria-label',L.n(L.S.zout));
-  document.querySelectorAll('#gview button').forEach(function(b){b.textContent=L.n(L.S[b.dataset.v])});
-  document.querySelectorAll('#gtheme button').forEach(function(b){b.textContent=L.n(L.S[b.dataset.th])});
-  document.querySelectorAll('#top button').forEach(function(b){b.textContent=L.n(L.S[b.dataset.t])});
+  document.querySelectorAll('#gview button').forEach(function(b){b.textContent=L.n(L.S[b.dataset.v]);b.title=L.n(L.S[b.dataset.v+'_t'])});
+  // theme segments: text + icon (icon shown only in the compact phone lesson header, CSS); name stays the word
+  document.querySelectorAll('#gtheme button').forEach(function(b){var w=L.n(L.S[b.dataset.th]);b.replaceChildren(L.ui.el('span',w));b.insertAdjacentHTML('afterbegin',TI[b.dataset.th]);b.title=w;b.setAttribute('aria-label',w)});
+  document.querySelectorAll('#top button').forEach(function(b){b.textContent=b.dataset.l=L.n(L.S[b.dataset.t])});
   $('cv').setAttribute('aria-label',L.n(L.S.alt));
 }
-L.on(function(s,kind){if(kind==='stats')return;if(kind!=='progress'&&kind!=='view')lesson();chrome()});
+var vt=false;function vtip(){if(vt||L.state.tab!=='subjects'||L.state.level==='planet'||!$('gview').offsetParent)return;vt=true;if(L.pref('lumio2_vtip'))return;L.pref('lumio2_vtip','1');L.toast(L.n(L.S.vtip))}
+L.on(function(s,kind){if(kind==='stats')return;if(kind!=='progress'&&kind!=='view')lesson();chrome();vtip()});
 L.boot(function(){
   L.build();if(!L.tabOk(st.tab))st.tab='subjects';
   document.querySelectorAll('#top button').forEach(function(b){b.hidden=!L.tabOk(b.dataset.t)});

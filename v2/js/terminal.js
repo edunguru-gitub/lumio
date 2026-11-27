@@ -3,7 +3,8 @@
 var L=Lumio,E=function(t,x,c){return L.ui.el(t,x,c)},st=L.stats,FT=window.LumioFeatures;if(!st)return;FT.terminal={};
 Object.assign(L.S,{rated:['{a} of {b} rated','{a} din {b} evaluate'],goal_p:['Goal: finish a lesson to get your rating','Obiectiv: termină o lecție ca să primești nota'],goal_l:['Finish to get rated','Termină ca să primești nota'],
  first:['Play your first lesson','Joacă prima lecție'],lum_s:['All time','În total'],streak:['Streak','Serie'],best:['Best {n}','Record {n}'],
- lessons:['Lessons','Lecții'],ch_moon:['Win Challenges to raise Moon','Câștigă provocări ca să crești Moon'],contl:['Continue learning','Continuă să înveți'],all:['See all','Vezi tot']});
+ lessons:['Lessons','Lecții'],ch_moon:['Win Challenges to raise Moon','Câștigă provocări ca să crești Moon'],contl:['Continue learning','Continuă să înveți'],all:['See all','Vezi tot'],
+ lum_def:['Lumens = points for lessons','Lumeni = puncte pentru lecții'],moon_def:['Moon = monthly rank, changes only in Challenges','Moon = rang lunar, se schimbă doar în provocări']});
 var t=L.t;
 function num(r){return r==null?'--':String(r)}
 function big(r){return r==null?E('b',t('new'),'new'):E('b',String(r))}
@@ -21,10 +22,11 @@ function lcard(x){
   var s=x.s,l=x.l,k=x.k,r=l.mod?L.rate(k):null,v=st.les[k]||{},n=(v.ok||0)+(v.bad||0),
       b=E('button',null,'card lcard'+(l.mod?'':' lock')),top=E('div',null,'ctop'),ov=E('div',null,'ov'),mc=E('canvas');
   b.type='button';b.dataset.k=k;tier(b,r,s.color);b.onclick=function(){L.go('planet',s.id,l.id)};
-  ov.append(l.mod?big(r):E('b','--'),E('small',l.name[0].slice(0,3).toUpperCase()));top.append(ov,L.spk(r==null?0:Math.round(r/33)));
+  ov.append(l.mod?big(r):E('b','--'),E('small',l.name[0].slice(0,3).toUpperCase()));top.append(ov);if(l.mod)top.append(L.spk(r==null?0:Math.round(r/33)));
   mc.setAttribute('aria-hidden','true');L.Galaxy.mini(mc,s);
-  b.append(top,mc,E('h3',L.n(l.name)),E('p',!l.mod?L.n(L.S.soon):r==null?t('goal_l'):' ','csub'),
-    stats([['PRG',num(l.mod&&r!=null?Math.round(L.getP(k)*99):null)],['QST',num(v.qt&&r!=null?Math.round(v.qd/v.qt*99):null)],['ACC',num(n?Math.round(v.ok/n*99):null)]]));
+  b.append(top,mc,E('h3',L.n(l.name)),E('p',!l.mod?L.n(L.S.soon):r==null?t('goal_l'):' ','csub'));
+  // Coming soon cards: no PRG / QST / ACC, no sparkles (dimmed by .lock)
+  if(l.mod)b.append(stats([['PRG',num(l.mod&&r!=null?Math.round(L.getP(k)*99):null)],['QST',num(v.qt&&r!=null?Math.round(v.qd/v.qt*99):null)],['ACC',num(n?Math.round(v.ok/n*99):null)]]));
   b.setAttribute('aria-label',L.n(l.name)+', '+(l.mod?(r==null?t('new'):r):L.n(L.S.soon)));
   return b;
 }
@@ -38,6 +40,7 @@ function mtile(k,lab,val,on,html,p,sub,lines){
   if(html)v.insertAdjacentHTML('afterbegin',html);i.style.width=p+'%';bar.append(i);bar.setAttribute('aria-hidden','true');
   b.append(E('small',lab),v,bar,E('span',sub,'msub'));lines.forEach(function(l){x.append(E('p',l))});
   b.onclick=function(){ex[k]=!ex[k];x.hidden=!ex[k];b.setAttribute('aria-expanded',ex[k])};d.append(b,x);
+  d.append(E('p',t(k+'_def'),'mdef'));
   if(k==='moon'&&L.has('challenge')&&L.tabOk('ranks')){var a=E('button',t('ch_moon'),'see');a.type='button';a.onclick=function(){L.setTab('ranks')};d.append(a)}
   return d;
 }
@@ -63,7 +66,7 @@ function render(){
       fx=first&&L.lessons().filter(function(x){return x.l.mod&&x.l.tags.indexOf('first')>=0})[0],
       cs=fx?fx.s:L.subjects.filter(function(x){return L.cur(x)})[0],cl=fx?fx.l:cs&&L.cur(cs);
   if(cl){var cc=E('button',null,'card ccard');cc.type='button';cc.style.setProperty('--c',cs.color);
-    cc.append(E('small',t(first?'first':'contl')),E('h3',L.n(cl.name)+' →'),E('p',first?'+10 '+t('lum'):L.n(cs.name),first?'csub lum':'csub'));
+    cc.append(E('small',t(first?'first':'contl')),E('h3',(first?L.t('start',{name:L.n(cl.name)}):L.n(L.S.cont)+' '+L.n(cl.name))+' →'),E('p',first?'+10 '+t('lum'):L.n(cs.name),first?'csub lum':'csub'));
     cc.onclick=function(){L.go('planet',cs.id,cl.id)};rt.appendChild(cc)}
   all.type='button';all.onclick=function(){L.setTab('ranks')};
   rt.append(me);if(tm)rt.appendChild(tm);if(FT.ranks){var mt=FT.ranks.mini&&FT.ranks.mini();rt.append(E('h2',L.n(L.S.ranks)));if(mt)rt.append(mt);rt.append(all)}o.append(player(),rt); // Ranks preview (spec P7): only with 3+ rows, else compact (title + See all)

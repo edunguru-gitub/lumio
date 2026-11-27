@@ -1,8 +1,8 @@
 (function(){
 var L=Lumio,G=L.Galaxy={},cv,cx,W=0,H=0,dpr=1,raf=0,run=false,hover=null,C={},PR=13,N=650,seed=7,TL=-.26;
-var cam=L.cam={x:0,y:0,z:1};
+var cam=L.cam={x:0,y:0,z:1},ang=0,lt=0;G.hold=false;
 function rnd(){seed=seed*16807%2147483647;return seed/2147483647}
-var dust=[],sky=[],lab=[];
+var dust=[],sky=[],lab=[],llab=[];
 // spiral dust (y-squash .5, tilt TL) + glowing ink core; z keeps specks/core a fixed screen size
 function spiral(c,x,y,i,rd,rot,a,z,cs,col,tl){
   tl=tl==null?TL:tl;var TC=Math.cos(tl),TS=Math.sin(tl);c.fillStyle=col;
@@ -53,14 +53,16 @@ G.setHover=function(h){var k=h&&h.sid+'/'+h.lid,o=hover;hover=h;if(o!==h&&(o&&o.
 G.draw=function(){
   if(!cx||!W)return;
   cx.setTransform(dpr,0,0,dpr,0,0);cx.clearRect(0,0,W,H);cx.fillStyle=C.sky;var ds=C.skyA>1?1.5:1;sky.forEach(function(p){cx.globalAlpha=Math.min(.6,p.al*C.skyA);cx.fillRect(p.x*W,p.y*H,ds,ds)});
-  var z=cam.z,f=cl((z/G.homeZ()-1)/1.2),rot=L.reduced()?0:performance.now()%240000/240000*6.2832,near=null,nd=1e9;
+  var z=cam.z,f=cl((z/G.homeZ()-1)/1.2),now=performance.now(),near=null,nd=1e9;
+  // dust angle accumulates (one turn / 4 min); holds still while a galaxy or planet is hovered / focused (G.hold), no jump on release
+  if(!G.hold&&!L.reduced())ang=(ang+Math.min(100,now-(lt||now))/240000*6.2832)%6.2832;lt=now;var rot=L.reduced()?0:ang;
   L.subjects.forEach(function(s){var d=Math.hypot(cam.x-s.x,cam.y-s.y);if(d<nd){nd=d;near=s}});
   cx.translate(W/2,H/2);cx.scale(z,z);cx.translate(-cam.x,-cam.y);
   cx.textBaseline='middle';
   L.subjects.forEach(function(s,i){
     var rd=G.rad(s),a=s===near?1:1-.7*f,cur=L.cur(s);
     spiral(cx,s.x,s.y,i,rd,rot,a,z,14,s.color,s.tl);
-    s.lessons.forEach(function(l){
+    s.lessons.forEach(function(l,li){
       var p=G.ppos(s,l),pr=PR*(.45+.55*f),k=L.getP(L.key(s,l)),hv=hover&&hover.sid===s.id&&hover.lid===l.id,lk=!l.mod,now=l===cur,ia=a*(lk?.35:1),lx=p.x+pr+10/z;
       cx.globalAlpha=ia;cx.fillStyle=cx.strokeStyle=s.color;cx.lineWidth=1.5/z;cx.beginPath();cx.arc(p.x,p.y,pr,0,6.2832);
       // Light planets: filled = shadow + darker 1px edge, current = 2px ring, locked = solid outline (>=3:1)
@@ -71,6 +73,7 @@ G.draw=function(){
         cx.globalAlpha=f*(lk?.35:1);cx.textAlign='left';cx.fillStyle=C.ink;cx.font='500 '+17/z+'px '+C.ui;cx.fillText(L.n(l.name),lx,p.y-2/z);
         if(!lk){cx.fillStyle=cx.strokeStyle=C.tan;cx.lineWidth=1/z;for(var j=0;j<3;j++)spark(cx,lx+4.5/z+j*12/z,p.y+16/z,4.5/z,j<Math.min(3,Math.round(k*3)))}
       }
+      llabel(llab[i]&&llab[i][li],s,l,lx,p.y,f>.5&&s===near&&s===L.subject(),lk);
     });
     if(f<1){
       cx.textAlign='center';cx.globalAlpha=(1-f)*(s===near?1:a);cx.fillStyle=C.ink;cx.font='400 '+22/z+'px '+C.head;cx.fillText(L.n(s.name),s.x,s.y+rd*.6+30/z);
@@ -87,6 +90,13 @@ function label(b,s,rd,f){
   cx.font='400 22px '+C.head;var w=cx.measureText(nm).width;cx.font='400 12px '+C.ui;w=Math.max(w,cx.measureText(ct).width)+16;
   var st=b.style;st.left=(W/2+(s.x-cam.x)*z-w/2)+'px';st.top=(H/2+(s.y+rd*.6-cam.y)*z+14)+'px';st.width=w+'px';
 }
+// lesson name (+ sparkles) = real button over the canvas label: click, Enter, Space open it like the planet; galaxy level only
+function llabel(b,s,l,x,y,on,lk){
+  if(!b)return;on=on&&L.state.level==='galaxy';b.hidden=!on;if(!on)return;
+  var nm=L.n(l.name),z=cam.z;if(b.dataset.t!==nm+lk){b.dataset.t=nm+lk;b.setAttribute('aria-label',lk?nm+', '+L.n(L.S.soon):nm)}
+  cx.save();cx.setTransform(1,0,0,1,0,0);cx.font='500 17px '+C.ui;var w=Math.max(cx.measureText(nm).width,lk?0:34)+12;cx.restore();
+  var st=b.style,bx=W/2+(x-cam.x)*z-6;st.left=bx+'px';st.top=(H/2+(y-cam.y)*z-14)+'px';st.width=Math.max(24,Math.min(w,W-bx))+'px'; // clipped to the stage
+}
 function tick(){raf=0;if(document.hidden)return;G.draw();if(run)G.requestDraw()}
 G.requestDraw=function(){if(!raf)raf=requestAnimationFrame(tick)};
 G.sync=function(){run=L.gal()&&!document.hidden&&!L.reduced()&&L.state.level!=='planet';G.requestDraw()};
@@ -100,7 +110,12 @@ L.boot(function(){
   dust=L.subjects.map(function(){var a=[];for(var k=0;k<N;k++)a.push({u:Math.sqrt(rnd()),a:k%3*2.094+(rnd()-.5)*.9,s:.6+rnd()*.7,al:.15+rnd()*.55});return a});
   for(var k=0;k<120;k++)sky.push({x:rnd(),y:rnd(),al:.15+rnd()*.35});
   cv=document.getElementById('cv');cx=cv.getContext('2d');
-  lab=L.subjects.map(function(s){var b=document.createElement('button');b.type='button';b.className='glab';b.hidden=true;b.onclick=function(){L.go('galaxy',s.id)};return b});cv.after.apply(cv,lab);
+  lab=L.subjects.map(function(s){var b=document.createElement('button');b.type='button';b.className='glab';b.hidden=true;b.onclick=function(){L.go('galaxy',s.id)};
+    b.onfocus=b.onmouseenter=function(){G.hold=true};b.onblur=b.onmouseleave=function(){G.hold=false};return b});
+  llab=L.subjects.map(function(s){return s.lessons.map(function(l){var b=document.createElement('button'),h={sid:s.id,lid:l.id};b.type='button';b.className='glab ll';b.hidden=true;
+    // a pointer click that lands on another planet (labels can cross planets on small screens) opens that planet; keys open this label's lesson
+    b.onclick=function(e){var r=cv.getBoundingClientRect(),q=e.detail?G.hit(e.clientX-r.left,e.clientY-r.top):null;L.go('planet',s.id,q&&q.lid||l.id)};
+    b.onfocus=b.onmouseenter=function(){G.hold=true;G.setHover(h)};b.onblur=b.onmouseleave=function(){G.hold=false;G.setHover(null)};lab.push(b);return b})});cv.after.apply(cv,lab);
   // canvas colours from tokens; re-read on theme change ('skin')
   var read=function(){var cs=getComputedStyle(document.documentElement),g=function(n){return cs.getPropertyValue(n).trim()};
     C={ink:g('--ink'),muted:g('--muted'),tan:g('--tan'),ui:g('--ui'),head:g('--head'),mono:g('--mono'),sky:g('--sky'),skyA:+g('--sky-a')||1,glow:g('--core-glow'),coreA:g('--core-a'),coreB:g('--core-b'),coreC:g('--core-c'),psh:g('--planet-sh'),pedge:g('--planet-edge'),locked:g('--locked')}};
@@ -109,7 +124,7 @@ L.boot(function(){
   if(document.fonts)document.fonts.ready.then(function(){hc={};resize()});
   document.addEventListener('visibilitychange',G.sync);
   matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',G.sync);
-  L.on(function(s,kind){if(kind==='stats')return;if(kind==='skin'){read();hc={}}if(kind==='progress'||kind==='skin')G.requestDraw();else G.sync()});
+  L.on(function(s,kind){if(kind==='stats')return;if(kind==='nav')G.hold=false;if(kind==='skin'){read();hc={}}if(kind==='progress'||kind==='skin')G.requestDraw();else G.sync()});
   G.sync();
 });
 })();

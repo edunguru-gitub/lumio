@@ -30,7 +30,9 @@ U.gridMap=function(c,w,h,o){var pl=34,pr=12,pt=12,pb=26,x,y,mu=U.col('--muted'),
   c.textAlign='right';c.textBaseline='middle';for(y=Math.ceil(o.y0/o.sy)*o.sy;y<=o.y1+1e-9;y+=o.sy){c.beginPath();c.moveTo(X(o.x0),Y(y));c.lineTo(X(o.x1),Y(y));c.stroke();c.fillText(o.fy?o.fy(y):y,pl-6,Y(y))}
   c.strokeStyle=mu;c.lineWidth=1.5;c.beginPath();if(o.y0<=0&&o.y1>=0){c.moveTo(X(o.x0),Y(0));c.lineTo(X(o.x1),Y(0))}if(o.x0<=0&&o.x1>=0){c.moveTo(X(0),Y(o.y0));c.lineTo(X(0),Y(o.y1))}c.stroke();return{X:X,Y:Y}};
 U.mdot=function(c,x,y,r,fill,stroke){c.beginPath();c.arc(x,y,r,0,7);c.fillStyle=fill;c.fill();if(stroke){c.strokeStyle=stroke;c.lineWidth=2;c.stroke()}};
-U.cont=function(ctx){var b=U.el('button',ctx.n(ctx.S.cont)+' →','btn-primary');b.type='button';b.style.setProperty('--c',ctx.color);b.onclick=ctx.done;return b};
+// lesson end button: says what it does (marks the lesson finished, back to the galaxy; pays no Lumens itself)
+Object.assign(Lumio.S,{fin:['Finish lesson','Termină lecția']});
+U.cont=function(ctx){var b=U.el('button',ctx.n(ctx.S.fin)+' →','btn-primary');b.type='button';b.style.setProperty('--c',ctx.color);b.onclick=ctx.done;return b};
 // modal dialog: native <dialog> (focus kept inside, Esc closes, focus returns to opener), backdrop click closes, removed on close
 var dn=0;Object.assign(Lumio.S,{close:['Close','Închide']});
 U.dialog=function(title,nodes){

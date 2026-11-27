@@ -5,7 +5,7 @@ var L=Lumio,st=L.stats,t=L.t;if(!st)return;
 Object.assign(L.S,{lum_to:['{p}% to {n}','{p}% până la {n}'],lum_ex:['Lumens grow every time you learn. They never reset.','Lumenii cresc de fiecare dată când înveți. Nu se resetează niciodată.'],
  moon_ex:['Your Moon rating changes when you win or lose Challenges. It resets each month.','Ratingul Moon se schimbă când câștigi sau pierzi provocări. Se resetează în fiecare lună.'],
  days_left:['{n} days left','{n} zile rămase'],ends_today:['Ends today','Se încheie azi'],of_n:['#{a} of {b}','#{a} din {b}'],top_p:['Top {p}%','Top {p}%'],
- best_moon:['Best Moon','Cel mai bun Moon'],last_month:['Last month','Luna trecută'],sample:['Sample','Exemplu'],lum_ms:['{n} Lumens reached','{n} lumeni atinși'],
+ prov:['New: provisional place','Nou: loc provizoriu'],best_moon:['Best Moon','Cel mai bun Moon'],last_month:['Last month','Luna trecută'],sample:['Sample','Exemplu'],lum_ms:['{n} Lumens reached','{n} lumeni atinși'],
  moon_up:['Moon +{d}','Moon +{d}'],moon_dn:['Moon {d}','Moon {d}']});
 // Sample players (v1 SAMPLE_P, seeded rng 4242). Names live only in this constant; every Sample row carries the Sample tag.
 var SAMPLE_NAMES=['Andrei Popescu','Maria Ionescu','Ioana Stan','Vlad Marin','Elena Rusu','Matei Toma'];
@@ -37,6 +37,8 @@ M.fmt=function(n){return Math.round(n).toLocaleString(L.n(['en-US','ro-RO']))};
 // players pool: You + Sample players (v1 friends are off while Friends is Coming soon)
 M.pool=function(){var m=M.m;return[{id:'me',name:t('you'),me:true,r:m.r,wk:m.r-m.wk.base,lum:st.lum}].concat(SP)};
 M.sub=function(){var pl=M.pool(),s=pl.slice().sort(function(a,b){return b.r-a.r}),n=s.findIndex(function(x){return x.me})+1,real=pl.filter(function(x){return !x.sample}).length,dl=daysLeft();
+  // place shown only after the first activity (a lesson answer or a Challenge); before that: provisional
+  if(!st.log.length&&!M.played())return t('prov')+' · '+(dl===1?t('ends_today'):t('days_left',{n:dl}));
   return(real>=20?t('top_p',{p:Math.max(1,Math.round(n/pl.length*100))}):t('of_n',{a:n,b:pl.length})+(real<pl.length?' · '+t('sample'):''))+' · '+(dl===1?t('ends_today'):t('days_left',{n:dl}))};
 // Moon tiers (Manager 26 Nov, docs/spec-moon-tiers.md). ONE table: Eduard edits names / thresholds here. Display only, Elo unchanged.
 // [from Moon points, EN, RO]; no tier below the first. Remove this block = the app shows numbers only.

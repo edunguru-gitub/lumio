@@ -10,7 +10,7 @@ var S={q_delta:['Compute Δ = b² − 4ac','Calculează Δ = b² − 4ac'],q_xv:
  ok1:['Yes.','Da.'],ok2:['Nailed it.','Perfect.'],ok3:['Sharp.','Excelent.'],no1:['Not quite. The answer was {ans}','Nu e corect. Răspunsul era {ans}'],
  write_first:['Write an answer first','Scrie mai întâi un răspuns'],round_done:['Round done: {s}/5 correct','Rundă încheiată: {s}/5 corecte'],
  new_round:['New round','Rundă nouă'],check:['Check','Verifică'],hint:['Hint','Indiciu'],ans:['Your answer','Răspunsul tău'],enter:['Enter to check','Enter pentru verificare'],
- title:['Ink Practice','Exersare cu scris de mână'],read:['Read aloud','Citește'],sp_abc:['a equals {a}, b equals {b}, c equals {c}','a egal {a}, b egal {b}, c egal {c}']};
+ title:['Ink practice','Exersare cu scris de mână'],read:['Read aloud','Citește'],sp_abc:['a equals {a}, b equals {b}, c equals {c}','a egal {a}, b egal {b}, c egal {c}']};
 function poly(a,b,c){var ps=[],add=function(co,v){if(co===0)return;var ab=Math.abs(co);ps.push({neg:co<0,body:(ab===1&&v)?v:String(ab)+v})};add(a,'x²');add(b,'x');add(c,'');if(!ps.length)return'0';return ps.map(function(p,i){return(i===0?(p.neg?'−':''):(p.neg?' − ':' + '))+p.body}).join('')}
 var ri=function(a,b){return a+Math.floor(Math.random()*(b-a+1))},pk=function(a){return a[Math.floor(Math.random()*a.length)]};
 function genQ(){var k=pk(['delta','xv','f0','f1','root','delta']),a,b,c,ans,x,r1,r2;
@@ -32,7 +32,7 @@ render:function(el,ctx){
   // v1 Read aloud: question + a b c (+ the hint once shown)
   var said=function(){var q=Q.cur;return t('q_'+q.k)+'. '+ctx.n(S.sp_abc).replace(/\{(\w)\}/g,function(m,p){return q[p]})+(hint?'. '+hint:'')};
   rd.onclick=function(){fx.say(said())};fb.setAttribute('aria-live','polite');
-  row.append(inp,ck);if(ink)inp.after(ink.conf);fld.append(lb,row,U.el('p',t('enter'),'k'));el.append(U.el('h1',t('title')),eq,dots);if(ink)el.append(ink.el);el.append(fld,tl,fb,U.cont(ctx));
+  row.append(inp,ck);if(ink)inp.after(ink.conf);fld.append(lb,row,U.el('p',t('enter'),'k'));var h1=U.el('h1',ctx.n(ctx.lesson.name));h1.append(U.el('small',t('title')));el.append(h1,eq);if(ink)el.append(ink.tip);el.append(dots);if(ink)el.append(ink.el);el.append(fld,tl,fb,U.cont(ctx));
   function render(){var q=Q.cur;eq.textContent='f(x) = '+poly(q.a,q.b,q.c);eq.appendChild(U.el('small',t('q_'+q.k)));
     dots.replaceChildren.apply(dots,[0,1,2,3,4].map(function(i){return U.el('i',null,Q.res[i]===true?'ok':Q.res[i]===false?'no':i===Q.i?'cur':'')}).concat(U.el('span',Math.min(Q.i+1,5)+' / 5')))}
   function next(){Q.cur=genQ();hint='';fb.textContent='';fb.className='fb';fld.className='fld';inp.value='';if(ink)ink.clear();render();fx.auto&&fx.auto(said())} // v1 auto(): Settings 'Read aloud automatically'
