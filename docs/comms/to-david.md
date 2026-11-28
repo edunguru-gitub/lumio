@@ -87,3 +87,5 @@ Add to the 'deck-chemistry' task above:
 (C) Chemistry count as before (8 lessons; the galaxy screenshot with the Chemistry galaxy; module row).
 
 ## 2026-11-28 deck-chemistry addendum (Eduard): competitors slide 5 and script row 'Competitors': show the full name 'PhET Interactive Simulations (University of Colorado Boulder)' and say it in one short line; keep 'none lets your phone control the experiment'. Part of the same ONE held pass.
+
+## 2026-11-28 correction (Eduard): slide 5 and script: write the name as 'PhET (Physics Education Technology)' only. No 'Interactive Simulations', no university name. Same ONE held pass.
