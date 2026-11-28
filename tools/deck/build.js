@@ -11,7 +11,8 @@ const SHOTS=process.env.SHOTS_DIR||path.join(DIR,'shots'); // live v2 screenshot
 
 // Final order (25 of max 25; n10 = 'Limits today' slide, deck-final-4): o = page of the original 18-page PDF, n = page of slides.html. Old team pages o15-o17 -> one 'Why us' slide n9 (Eduard OK, 26 Nov)
 // DRAFT6 (Eduard OK 27 Nov): old o3 o4 o5 o8 o9 o10 o12 o13 rebuilt as n11-n16, n18, n19 (true for v2); o11 (six themes) -> n17 'Try Lumio now' QR
-const ORDER=['o1','o2','n11','n12','n13','o6','o7','n1','n14','n15','n16','n17','n19','n2','n3','n4','n5','n6','n7','n8','n10','n20','n9','n21','o18'];
+// DRAFT11 (Eduard 28 Nov): old final page o18 -> n22 'Try it yourself' tutorial + QR
+const ORDER=['o1','o2','n11','n12','n13','o6','o7','n1','n14','n15','n16','n17','n19','n2','n3','n4','n5','n6','n7','n8','n10','n20','n9','n21','n22'];
 // DRAFT8 (Eduard 27 Nov): old phone slide n18 merged into n14; n9 = 'Why Lumio' (product), n21 = 'The team'
 // DRAFT7 (Eduard 27 Nov): o14 'Next steps' -> n20 phase table (o14 items kept inside it); n9 Why us with sourced numbers; n4-n8 new business model (setup fee + subscription, X = 2 schools)
 const BG='#171513',CARD='#211E1A',MUTED='#A89F8E',TAN='#D9C3A0',ORANGE='#FF6A13';
@@ -35,11 +36,6 @@ const EDITS={
       ...body(651,'When they get stuck, one in',852,['When they get stuck, some give','up and others just re-read the','same page. Nothing tells them','what to try next.']),
       {font:MONO,ref:['1 IN 7 QUIT · 3 IN 10 RE-READ',651,427,859],text:'QUIT OR RE-READ',color:ORANGE}],
   o7:[{patch:[60,106,806,166],fill:'auto'},{font:SERIF,ref:['Seven in ten want to try it. Testers come back.',66,113,795],text:'Students want to try it. Testers come back.',color:INK}],
-  // the ask on the last slide (Manager fix list); a new line on an original slide, approved by Eduard 26 Nov
-  o18:[{patch:[60,168,890,340],fill:'auto'},
-       {font:SERIF,ref:['Learn by doing. Rank by',65,174,728],text:'Free labs for students.',color:INK},
-       {font:SERIF,ref:['Learn by doing. Rank by',65,174,728],ybase:['growing.',258],text:'Give us one pilot class.',color:INK},
-       {font:MONO,ref:['LUMIO · EDUARD · DARIUS · STEFAN',65.5,461,332],y:426,text:'OUR ASK · ONE CLASS FOR A 4-WEEK PILOT',color:TAN}],
 };
 
 (async()=>{

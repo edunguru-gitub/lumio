@@ -7,7 +7,7 @@ const srv=http.createServer((q,r)=>{const f=path.join(ROOT,decodeURIComponent(q.
   fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);r.end();return}r.writeHead(200,{'content-type':TYPES[path.extname(f)]||'application/octet-stream'});r.end(d)})});
 // name, theme, phone mode, query, size, steps run in the page after load
 const SHOTS=[
-  ['galaxy','dark','desktop','',[1273,716],"L.go('home')"],
+  ['galaxy','dark','desktop','',[1273,716],"L.go('home');await w(7000)"],
   ['home-dark','dark','desktop','',[1273,716],"L.setTab('home')"],
   ['home-light','light','desktop','',[1273,716],"L.setTab('home')"],
   ['gas','dark','desktop','',[1273,716],"L.go('planet','physics','gas')"],

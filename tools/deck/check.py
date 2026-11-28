@@ -16,7 +16,6 @@ EXPECTED = {
     'o2': [(362, 238, 607, 441), (645, 238, 897, 441)],      # survey counts tagged
     'o6': [(648, 375, 882, 393), (60, 440, 900, 460)],      # NO PARTNERS YET, PILOT NEXT; DRAFT8 plan band
     'o7': [(60, 62, 420, 82), (60, 106, 806, 166)],          # counts tag; headline without 'Seven in ten'
-    'o18': [(60, 168, 890, 340), (60, 420, 560, 440)],       # factual closing line; ask stamp
 }
 pages = PdfReader(out).pages
 print(f'{len(pages)} pages (order has {len(order)})')
@@ -40,7 +39,7 @@ for i, key in enumerate(order):
     print(f'page {i + 1:2} ({key}):', f'UNEXPECTED diff {bb}' if bb else 'identical outside footer' + (' and approved edits' if key in EXPECTED else ''))
 # text-layer scan: stale or forbidden words a juror could copy or search ('Learn by doing' is intended copy on the business model slide n4)
 BADWORDS = ['/ 17', '/ 18', 'Seven in ten', 'One in seven', '3 in 10', 'Light up how', 'Learn by doing', '3-minute', 'Optics',
-            'Cash in', '2,229', '511', 'alumnus', 'accelerator', 'student council', 'XP ']
+            'Cash in', '2,229', '511', 'alumnus', 'accelerator', 'student council', 'XP ', 'Seven lessons', 'seven lessons', 'Fixed costs']
 hits = [f'page {i + 1} ({order[i]}): {b}' for i, p in enumerate(pages) for b in BADWORDS
         if b in (p.extract_text() or '') and not (b == 'Learn by doing' and order[i] == 'n4')]
 print('text layer scan:', 'clean' if not hits else 'HITS ' + '; '.join(hits))

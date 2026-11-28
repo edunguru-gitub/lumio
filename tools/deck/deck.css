@@ -40,5 +40,8 @@ b{font-weight:600}
 .funnel{display:grid;gap:16pt}.funnel .step{height:56pt;background:var(--card);border:.75pt solid var(--line);border-radius:8pt;display:flex;align-items:center;padding:0 16pt;font-size:20pt;white-space:nowrap}
 .funnel .step.hi{border:1.5pt solid var(--tan)}.funnel .step b{font:400 48pt/1 var(--head);color:var(--tan);margin-right:12pt;font-weight:400}
 .mods .shell{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:.75pt solid var(--line);border-radius:8pt;padding:16pt 24pt;font-size:20pt}
-.mods .row7{display:grid;grid-template-columns:repeat(7,1fr);gap:8pt;margin-top:16pt}
+.mods .row7{display:grid;grid-template-columns:repeat(8,1fr);gap:8pt;margin-top:16pt}
 .mods .mod{height:88pt;border:.75pt solid var(--tan);border-radius:8pt;display:flex;align-items:flex-end;padding:8pt;font-size:14pt;line-height:1.25;color:var(--ink)}
+/* DRAFT11 tutorial slide */
+.steps{list-style:none;display:grid;gap:6pt}.steps li{display:grid;grid-template-columns:28pt 1fr;gap:8pt;font-size:16pt;line-height:1.3}
+.steps b{font:400 28pt/1 var(--head);color:var(--tan)}
