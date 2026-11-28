@@ -89,3 +89,5 @@ Add to the 'deck-chemistry' task above:
 ## 2026-11-28 deck-chemistry addendum (Eduard): competitors slide 5 and script row 'Competitors': show the full name 'PhET Interactive Simulations (University of Colorado Boulder)' and say it in one short line; keep 'none lets your phone control the experiment'. Part of the same ONE held pass.
 
 ## 2026-11-28 correction (Eduard): slide 5 and script: write the name as 'PhET (Physics Education Technology)' only. No 'Interactive Simulations', no university name. Same ONE held pass.
+
+## 2026-11-28 addendum (Eduard): final 'Try it yourself' slide also carries the styled QR (tools/qr/styled.js, same link as slide 12) with a short caption 'Not opened it yet? Scan.' Same ONE held pass.
