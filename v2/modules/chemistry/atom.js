@@ -7,7 +7,7 @@ var S={title:['Atom puzzle','Puzzle cu atomi'],cv:['Puzzle board','Tabla puzzle-
  lv_n:['Level {n}: {name}','Nivelul {n}: {name}'],step:['Puzzle {a} of {b}','Puzzle-ul {a} din {b}'],
  hearts:['{n} hearts left','{n} inimi rămase'],heart_t:['3 hearts: each wrong Check costs one','3 inimi: fiecare Verificare greșită costă una'],
  check:['Check','Verifică'],clear:['Clear board','Golește tabla'],back1:['Take back','Ia înapoi'],ans:['Your answer','Răspunsul tău'],
- tray:['Pieces','Piese'],to:['Put it on','Pune-o pe'],out:['Take out','Scoate'],pick_t:['Pick a piece (drag it onto the board, or click it and then click a place).','Alege o piesă (trage-o pe tablă sau apas-o și apoi apasă un loc).'],
+ tray:['Pieces','Piese'],to:['Put it on','Pune-o pe'],out:['Take out','Scoate'],pick_t:['Pick a piece (drag it onto the board, or click it and then click a place).','Alege o piesă (trage-o pe tablă sau apasă-o și apoi apasă un loc).'],
  pick:['Pick a piece first.','Alege mai întâi o piesă.'],
  how:['Hints','Indicii'],hint:['Hint {n}','Indiciul {n}'],hint_cost:['Each hint costs one sparkle.','Fiecare indiciu costă o scânteie.'],
  hit:['Level complete','Nivel terminat'],stars:['{n} of 3 sparkles','{n} din 3 scântei'],reward:['+{n} Lumens','+{n} Lumeni'],replay:['Replay: no Lumens','Reluare: fără Lumeni'],

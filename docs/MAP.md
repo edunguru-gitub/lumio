@@ -80,3 +80,4 @@ Spanish verbs+vocab, podcast, Lumens/Moon+XP, ink practice, settings, sounds/TTS
 - 2026-11-27 david: stage2 deck DRAFT9 = DRAFT8 + old invisible text layer stripped from original pages (merge.py) + text-layer scan in check.py (commit 'stage2 deck draft9: strip stale text layer')
 - 2026-11-27 david: stage2 deck DRAFT10 (declutter per spec-deck-declutter: hero numbers, funnel, paired bars, modules row, 3-step path; QR only on 12; Why Lumio 5,250 / 15,000 estimate / about 55; script 4:46; qa-cheatsheet + tutoring model) (commit 'stage2 deck draft10')
 - 2026-11-27 david: v2 ux wave (Boyle 1-16) pushed + stable nav (reserved Back/Galaxy-List slots, bold tab width reserved, arrow Back 1000-1199) + lesson labels in the zoomed galaxy are buttons (commit 'v2 ux wave, stable nav, lesson labels clickable')
+- 2026-11-28 david: fix RO typo apas-o -> apasă-o in v2/modules/chemistry/atom.js pick_t (commit 'fix RO typo apasă-o')
